@@ -1,0 +1,16 @@
+{
+  "name": "CartaoFidelidade.Ionic",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/v1",
+      "proxyUrl": "http://localhost:3000/api/"
+    }
+  ]
+ 
+}
+
+

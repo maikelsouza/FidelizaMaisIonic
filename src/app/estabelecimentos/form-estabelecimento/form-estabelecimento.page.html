@@ -1,0 +1,33 @@
+<ion-content padding class="backImage">
+ 
+  <ion-list no-lines>
+    <ion-item>
+      <ion-input [(ngModel)]="estabelecimento.nome" type="text" placeholder="Nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="estabelecimento.cnpj" type="text" placeholder="CNPJ"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="estabelecimento.email" type="text" placeholder="E-mail"></ion-input>
+    </ion-item>   
+    <ion-item>
+      <ion-label>Tipo Estabelecimento</ion-label>
+      <ion-select [(ngModel)]="estabelecimento.tipoEstabelecimentoId" placeholder="Selecione um Tipo" okText="OK" cancelText="Cancelar">
+        <ion-select-option value="{{item.id}}" *ngFor="let item of tipoEstabelecimentos">{{item.nome}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <button ion-button block round color="secondary" (click)="cadastrar()">
+        Cadastrar
+      </button>
+    </ion-row>
+    <ion-row>
+      <button ion-button block outline round color="secondary" (click)="cancelar()">
+        Cancelar
+      </button>
+    </ion-row>
+  </ion-grid>
+</ion-content>
