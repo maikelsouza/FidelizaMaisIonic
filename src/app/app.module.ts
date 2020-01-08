@@ -1,5 +1,3 @@
-import { TipoEstabelecimentoService } from './tipoEstabelecimento/shared/tipo-estabelecimento.service';
-import { EstabelecimentoService } from './estabelecimentos/shared/estabelecimento.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -27,8 +25,6 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
-    EstabelecimentoService,    
-    TipoEstabelecimentoService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

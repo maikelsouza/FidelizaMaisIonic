@@ -1,3 +1,4 @@
+//import { UsuarioService } from './../../usuarios/shared/services/usuario.service';
 import { AlertaService } from './alerta.service';
 import { HttpResultModel } from './../model/HttpResultModel';
 import { NetworkService } from './../network/network.service';
@@ -25,12 +26,14 @@ export class HttpService {
     if (!header) {
       header = new HttpHeaders();
     }
+    
+
     header = header.append('Content-Type', 'application/json');
     header = header.append('Accept', 'application/json');
     
 
-    // let token = UsuarioProvider.GetTokenAccess;
-    const token = false;
+    //let token = UsuarioService.GetTokenAccess;
+    let token = 'cartaoFidelidade.token';
     if (token) {
       header = header.append('x-access-token', token);
     }
@@ -48,7 +51,7 @@ export class HttpService {
             resolve({ success: true, data: res, err: undefined });
           }, err => {
               this.spinner.hide();
-            this.alertSrv.toast('Não foi possível consultar os dados, verifique sua conexão e tente novamente');
+             this.alertSrv.toast('Não foi possível consultar os dados, verifique sua conexão e tente novamente');
             resolve({ success: false, data: undefined, err });
           });
       } else {
@@ -59,7 +62,7 @@ export class HttpService {
   }
 
   public post(url: string, model: any): Promise<HttpResultModel> { 
-    this.spinner.show();    
+    this.spinner.show();        
     const header = this.createHeader();
     return new Promise((resolve) => { 
       if (this.networkSrv.IsOnline) {

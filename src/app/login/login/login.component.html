@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>    
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+      <ion-list no-lines>            
+          <ion-item>        
+            <ion-label position="stacked">Login</ion-label>
+            <ion-input formControlName="login" type="text"></ion-input>
+         </ion-item>
+         <ion-item>
+            <ion-label position="stacked">Senha</ion-label>         
+            <ion-input formControlName="senha" type="password" ></ion-input>
+         </ion-item>
+      </ion-list>       
+        
+      <ion-button ion-button type="submit" block>Login</ion-button >
+  </form>
+  </ion-content>
+  

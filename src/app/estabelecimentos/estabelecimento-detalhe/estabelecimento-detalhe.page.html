@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>estabelecimento-detalhe</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <ion-list no-lines>    
+        <ion-item>        
+          <ion-label position="stacked">Nome</ion-label>
+          <ion-input formControlName="nome" type="text"></ion-input>
+       </ion-item>
+       <ion-item>
+          <ion-label position="stacked">CNPJ</ion-label>
+         <ion-input formControlName="cnpj" type="text"></ion-input>
+       </ion-item>      
+       <ion-item>
+          <ion-label position="stacked">E-mail</ion-label>         
+         <ion-input formControlName="email" type="text" ></ion-input>
+       </ion-item>   
+       <ion-item>
+         <ion-label position="stacked">Ativo</ion-label>  
+         <ion-select  formControlName="ativo"  okText="OK" cancelText="Cancelar">
+            <ion-select-option [value]="true">Ativo</ion-select-option>
+            <ion-select-option [value]="false">Inativo</ion-select-option>
+         </ion-select>               
+        </ion-item>        
+      <div formGroupName="EnderecoEstabelecimentos" >
+          <ion-item>
+              <ion-label for="rua" position="stacked">Rua</ion-label>
+              <ion-input formControlName="rua" type="text" ></ion-input>
+          </ion-item>          
+          <ion-item>
+            <ion-label for="numero" position="stacked">Número</ion-label>
+            <ion-input formControlName="numero" type="text" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label for="complemento" position="stacked">Complemento</ion-label>
+          <ion-input formControlName="complemento" type="text" ></ion-input>
+        </ion-item>
+         <ion-item>
+          <ion-label for="cep" position="stacked">Cep</ion-label>
+          <ion-input formControlName="cep" type="text" ></ion-input>
+        </ion-item> 
+        <ion-item>
+          <ion-label for="bairro" position="stacked">Bairro</ion-label>
+          <ion-input formControlName="bairro" type="text" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label for="cidade" position="stacked">Cidade</ion-label>
+          <ion-input formControlName="cidade" type="text" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label for="uf" position="stacked">UF</ion-label>
+          <ion-input formControlName="uf" type="text" ></ion-input>
+        </ion-item>      
+      </div>      
+      
+        <ion-item>
+            <ion-label for="tipoEstabelecimentoId">Tipo Estabelecimento</ion-label>
+            <ion-select  formControlName="tipoEstabelecimentoId"  okText="OK" cancelText="Cancelar">
+              <ion-select-option [value]="tipoEstabelecimento.id" *ngFor="let tipoEstabelecimento of tipoEstabelecimentos">{{tipoEstabelecimento.nome}}</ion-select-option>                 
+            </ion-select>
+        </ion-item>
+      
+     <div formGroupName="telefone">
+        <ion-item>
+          <ion-label for="telefoneNumero1" position="stacked">Telefone 1</ion-label>
+          <ion-input formControlName="telefoneNumero1" type="text" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Selecione um Tipo</ion-label>
+          <ion-select formControlName="telefoneTipo1"  okText="OK" cancelText="Cancelar">
+            <ion-select-option [value]="tipoTelefone" *ngFor="let tipoTelefone of tiposTelefone">{{tipoTelefone}}</ion-select-option>                 
+          </ion-select>    
+        </ion-item>
+       <!--  <ion-item>
+          <ion-label for="telefoneNumero2" position="stacked">Telefone 2</ion-label>
+          <ion-input formControlName="telefoneNumero2" type="text" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Selecione um Tipo</ion-label>
+          <ion-select formControlName="telefoneTipo2"  okText="OK" cancelText="Cancelar">
+            <ion-select-option [value]="tipoTelefone" *ngFor="let tipoTelefone of tiposTelefone">{{tipoTelefone}}</ion-select-option>                 
+          </ion-select>    
+        </ion-item>
+        <ion-item>
+          <ion-label for="telefoneNumero3" position="stacked">Telefone 3</ion-label>
+          <ion-input formControlName="telefoneNumero3" type="text" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Selecione um Tipo</ion-label>
+          <ion-select formControlName="telefoneTipo3"  okText="OK" cancelText="Cancelar">
+            <ion-select-option [value]="tipoTelefone" *ngFor="let tipoTelefone of tiposTelefone">{{tipoTelefone}}</ion-select-option>                 
+          </ion-select>    
+        </ion-item> -->
+      </div>
+      <div formGroupName="midiaSocial">
+        <ion-item>
+          <ion-label for="midiaSocialNome1" position="stacked">Midia Social 1</ion-label>
+          <ion-input formControlName="midiaSocialNome1" type="text" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label for="midiaSocialUrl1" position="stacked">Midia Social Url 1</ion-label>
+          <ion-input formControlName="midiaSocialUrl1" type="text" ></ion-input>
+        </ion-item>
+      <!--   <ion-item>
+          <ion-label for="midiaSocialNome2" position="stacked">Midia Social 2</ion-label>
+          <ion-input formControlName="midiaSocialNome2" type="text" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label for="midiaSocialUrl2" position="stacked">Midia Social Url 2</ion-label>
+          <ion-input formControlName="midiaSocialUrl2" type="text" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label for="midiaSocialNome3" position="stacked">Midia Social 3</ion-label>
+          <ion-input formControlName="midiaSocialNome3" type="text" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label for="midiaSocialUrl3" position="stacked">Midia Social Url 3</ion-label>
+          <ion-input formControlName="midiaSocialUrl3" type="text" ></ion-input>
+        </ion-item>  -->       
+      </div>         
+    </ion-list>   
+    <ion-button ion-button type="submit" block>Atualizar</ion-button >
+  </form>
+</ion-content>

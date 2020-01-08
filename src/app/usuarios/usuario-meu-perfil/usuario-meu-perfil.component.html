@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Meu Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <ion-list no-lines>    
+       <ion-item>
+        <ion-label for="senha" position="stacked">Nova Senha</ion-label>         
+        <ion-input formControlName="senha" type="password" ></ion-input>
+       </ion-item>
+       <ion-item>
+        <ion-label for="confirmarSenha" position="stacked">Confirmar Senha</ion-label>         
+        <ion-input formControlName="confirmarSenha" type="password" ></ion-input>
+       </ion-item>  
+    </ion-list> 
+      
+      
+    <ion-button ion-button type="submit" block>Salvar</ion-button >
+</form>
+</ion-content>

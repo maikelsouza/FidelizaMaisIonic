@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Programa Fidelidade</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <ion-list no-lines>    
+        <ion-item>        
+          <ion-label position="stacked">Nome</ion-label>
+          <ion-input formControlName="nome" type="text"></ion-input>
+       </ion-item>
+       <ion-item>
+          <ion-label position="stacked">Descrição</ion-label>
+          <ion-input formControlName="descricao" ></ion-input>         
+       </ion-item>             
+   <!--     <ion-item>
+        <ion-label for="dataExpiracao" position="stacked">Data Expirar</ion-label>        
+        <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
+          formControlName="dataExpiracao"  placeholder="Selecione uma Data"></ion-datetime>    
+       </ion-item> -->
+       <ion-item>
+          <button type="button" (click)="adicionarItemProgramaFidelidade()">Adicionar Item</button> 
+      </ion-item>
+          
+        <div formArrayName="CampoItemProgramaFidelidades" *ngFor="let item of formulario.get('CampoItemProgramaFidelidades').controls; let i = index;">
+          <div [formGroupName]="i" >
+              <ion-item>
+                <ion-label for="nome" position="stacked">Nome</ion-label>
+                <ion-input formControlName="nome" type="text" ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label for="descricao" position="stacked">Descrição</ion-label>
+                <ion-input formControlName="descricao" type="text" ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label for="quantidadePontos" position="stacked">Quantidade Pontos</ion-label>
+                <ion-input formControlName="quantidadePontos" type="text" ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label for="dataExpiracao" position="stacked">Data Expirar</ion-label>        
+                <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
+                  formControlName="dataExpiracao"  placeholder="Selecione uma Data"></ion-datetime>    
+               </ion-item>
+            <button (click)="removerItemProgramaFidelidade(i)">Remover Item</button>  
+            </div>       
+          </div>                           
+    </ion-list> 
+      
+      
+    <ion-button ion-button type="submit" block>Salvar</ion-button >
+</form>
+</ion-content>

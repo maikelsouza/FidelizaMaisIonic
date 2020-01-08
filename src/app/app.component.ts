@@ -11,19 +11,35 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
+      title: 'Meu Perfil',
+      url: '/usuarios/meuPerfil',
+      icon: 'home'      
     },
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    },
+    
     {
       title: 'Estabelecimento',
-      url: '/form-estabelecimento',
-      icon: 'Estabelecimento'
+      url: '/estabelecimentos',
+      icon: 'home'
+    },
+     {
+      title: 'Usuário',
+      url: '/usuarios',
+      icon: 'home'     
+    },
+    {
+      title: 'Login',
+      url: '/login',
+      icon: 'home'     
+    },
+    {
+      title: 'Cartão Fidelidade',
+      url: '/cartaoFidelidade',
+      icon: 'home'     
+    },
+    {
+      title: 'Programa Fidelidade',
+      url: '/programaFidelidade',
+      icon: 'home'     
     }
   ];
 

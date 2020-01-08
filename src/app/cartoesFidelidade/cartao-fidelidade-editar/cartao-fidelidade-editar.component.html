@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Atualizar Cartão Fidelidade</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <ion-list no-lines>    
+        <ion-item>        
+          <ion-label position="stacked">Nome</ion-label>
+          <ion-input formControlName="nome" type="text"></ion-input>
+       </ion-item>
+       <ion-item>
+          <ion-label position="stacked">Descrição</ion-label>
+          <ion-textarea formControlName="descricao"></ion-textarea>         
+       </ion-item>      
+       <ion-item>
+          <ion-label position="stacked">Quantidade de Marcação</ion-label>         
+         <ion-input formControlName="quantidadeMarcacao" type="number" ></ion-input>
+       </ion-item>
+       <ion-item>
+        <ion-label for="dataExpiracao" position="stacked">Data Expirar</ion-label>        
+        <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
+          formControlName="dataExpiracao"  placeholder="Selecione uma Data"></ion-datetime>    
+       </ion-item>   
+       <ion-item>
+          <ion-label position="stacked">Prêmio</ion-label>
+          <ion-textarea formControlName="premio"></ion-textarea>         
+       </ion-item>  
+       <ion-item>
+        <ion-label position="stacked">Ativo</ion-label>  
+        <ion-select  formControlName="ativo"  okText="OK" cancelText="Cancelar">
+           <ion-select-option [value]="true">Ativo</ion-select-option>
+           <ion-select-option [value]="false">Inativo</ion-select-option>
+        </ion-select>               
+       </ion-item>          
+
+         
+     <div formArrayName="CampoRegistroCartaoFidelidades"  
+      *ngFor="let item of formulario.get('CampoRegistroCartaoFidelidades').controls; let i = index">
+      <div [formGroupName]="i">                                                             
+        <ion-label  position="stacked">Marcado</ion-label>      
+        <input type="checkbox" formControlName="marcado"> 
+        <ion-label  position="stacked">Data</ion-label>      
+        <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY HH:mm"
+          formControlName="data"  placeholder="Selecione uma Data"></ion-datetime>  
+        <ion-label  position="stacked">ID</ion-label>    
+        <ion-input formControlName="id" type="text" ></ion-input>  
+
+          
+        </div>       
+      </div>  
+       
+
+
+    
+        
+      
+    </ion-list>
+
+    
+
+      
+      
+    <ion-button ion-button type="submit" block>Atualizar</ion-button >
+</form>
+</ion-content>
