@@ -30,7 +30,7 @@ export class ProgramaFidelidadeListaUsuarioComponent implements OnInit {
         this.programasFidelidade = <Array<ProgramaFidelidade>>resultado.data;        
       }
     } catch (error) {
-      console.log('Erro ao carregar os programa fidelidade ', error);
+      console.log('Erro ao carregar os programa fidelidade', error);
     }
   }
 

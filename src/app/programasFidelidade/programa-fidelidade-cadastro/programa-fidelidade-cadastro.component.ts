@@ -64,7 +64,7 @@ console.log("campo item: " +programaFidelidade.CampoItemProgramaFidelidades);
           this.alertService.toast('Programa Fidelidade salvo com sucesso!');
       }      
     } catch (error) {
-        console.log('Erro ao salvar um Programa Fidelidade', error);    
+        console.log('Erro ao salvar / alterar um Programa Fidelidade', error);    
     }
   }
 
