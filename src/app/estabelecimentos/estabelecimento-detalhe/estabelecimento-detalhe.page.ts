@@ -58,7 +58,7 @@ export class EstabelecimentoDetalhePage implements OnInit {
       telefone: this.formBuilder.group({
         telefoneId1: [null], telefoneNumero1: [null], telefoneTipo1: [null],
         //telefoneId2: [null], telefoneNumero2: [null], telefoneTipo2: [null],
-        //telefoneId3: [null], telefoneNumero3: [null], telefoneTipo3: [null]
+        
       }),
       midiaSocial: this.formBuilder.group({
         midiaSocialNome1: [null], midiaSocialUrl1: [null],
