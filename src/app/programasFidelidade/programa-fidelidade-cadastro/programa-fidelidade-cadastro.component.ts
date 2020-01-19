@@ -32,24 +32,33 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
     this.inscricao = this.route.params.subscribe(
       (params: any) => { 
         let id = params.id;         
-        if(id){
+        if(id){ // Condição que descobre se é uma edição ou cadastro
           this.buscarPorId(id);
         }
       })     
   }
 
-  private montarCamposTela(programaFidelidade: ProgramaFidelidade) {
-console.log("campo item: " +programaFidelidade.CampoItemProgramaFidelidades);
-    programaFidelidade.CampoItemProgramaFidelidades = <Array<CampoItemProgramaFidelidade>>programaFidelidade.CampoItemProgramaFidelidades;    
-    console.log("campo item depois: " +<Array<CampoItemProgramaFidelidade>>programaFidelidade.CampoItemProgramaFidelidades);
+  private montarCamposTela(programaFidelidade: ProgramaFidelidade) { 
     this.formulario = this.formBuilder.group({
       id: [programaFidelidade.id], nome: [programaFidelidade.nome], ativo: [true],
       descricao: [programaFidelidade.descricao], dataExpiracao: [null],
       //regra: [programaFidelidade.regra], 
       regra: [1], usuarioId: [1],
       estabelecimentoId: [31],
-      CampoItemProgramaFidelidades: this.formBuilder.array([ this.criarItemProgramaFidelidade(programaFidelidade.CampoItemProgramaFidelidades) ])
+      CampoItemProgramaFidelidades: this.formBuilder.array([this.criarItemProgramaFidelidade(programaFidelidade.CampoItemProgramaFidelidades)])
+    });    
+  }
+
+  private montarCamposTelaEditar(programaFidelidade: ProgramaFidelidade) { 
+    this.formulario = this.formBuilder.group({
+      id: [programaFidelidade.id], nome: [programaFidelidade.nome], ativo: [true],
+      descricao: [programaFidelidade.descricao], dataExpiracao: [null],
+      //regra: [programaFidelidade.regra], 
+      regra: [1], usuarioId: [1],
+      estabelecimentoId: [31],
+      CampoItemProgramaFidelidades: this.formBuilder.array([])
     });
+    this.criarItensProgramaFidelidade(programaFidelidade.CampoItemProgramaFidelidades)
   }
 
   async onSubmit(): Promise<void>{
@@ -68,23 +77,27 @@ console.log("campo item: " +programaFidelidade.CampoItemProgramaFidelidades);
     }
   }
 
+  criarItensProgramaFidelidade(campoItemProgramaFidelidadess: Array<CampoItemProgramaFidelidade>){
+    this.campoItemProgramaFidelidades = this.formulario.get('CampoItemProgramaFidelidades') as FormArray;      
+    campoItemProgramaFidelidadess.forEach(element => {
+      this.campoItemProgramaFidelidades.push(this.criarItem(element));        
+      });   
+  }
+
+  criarItem(campoRegistroCartaoFidelidades: CampoItemProgramaFidelidade): FormGroup {
+    return this.formBuilder.group({
+      nome: campoRegistroCartaoFidelidades.nome,
+          descricao: campoRegistroCartaoFidelidades.descricao,
+          ativo: true,
+          quantidadePontos: campoRegistroCartaoFidelidades.quantidadePontos,
+          dataExpiracao: campoRegistroCartaoFidelidades.dataExpiracao   
+    });
+  }
+
   criarItemProgramaFidelidade(campoItemProgramaFidelidades: Array<CampoItemProgramaFidelidade>): FormGroup {
     let campoItemProgramaFidelidade: FormGroup;
-    if (campoItemProgramaFidelidades){
-      this.campoItemProgramaFidelidades = this.formulario.get('CampoItemProgramaFidelidades') as FormArray;      
-      campoItemProgramaFidelidades.forEach(element => {
-        campoItemProgramaFidelidade = this.formBuilder.group({
-          nome: element.nome,
-          descricao: element.descricao,
-          ativo: true,
-          quantidadePontos: element.quantidadePontos,
-          dataExpiracao: element.dataExpiracao     
-        });   
-        this.campoItemProgramaFidelidades.push(campoItemProgramaFidelidade);        
-   });
-    }else{
-      let campoItemProgramaFidelidade: FormGroup;
       campoItemProgramaFidelidade = this.formBuilder.group({
+        id: "",
         nome: '',
         descricao: '',
         ativo: true,
@@ -92,8 +105,6 @@ console.log("campo item: " +programaFidelidade.CampoItemProgramaFidelidades);
         dataExpiracao: ''     
       });
       return campoItemProgramaFidelidade;
-    }
-   
   }
 
   adicionarItemProgramaFidelidade(): void {
@@ -114,7 +125,7 @@ console.log("campo item: " +programaFidelidade.CampoItemProgramaFidelidades);
       const resultado = await this.programaFidelidadeService.buscarPorId(id);      
       if (resultado.success) {        
         console.log(resultado.data);
-        this.montarCamposTela(resultado.data);
+        this.montarCamposTelaEditar(resultado.data);
       }
     } catch (error) {
       console.log('Erro ao carregar o cartão fidelidade', error);

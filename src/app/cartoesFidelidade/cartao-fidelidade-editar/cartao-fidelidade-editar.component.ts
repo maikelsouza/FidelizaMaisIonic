@@ -64,7 +64,7 @@ export class CartaoFidelidadeEditarComponent implements OnInit, OnDestroy {
   popularCamposRegristroCartaoFidelidade(campoRegistroCartaoFidelidades: CampoRegistroCartaoFidelidade): FormGroup {
     this.CampoRegistroCartaoFidelidades = this.formulario.get('CampoRegistroCartaoFidelidades') as FormArray;
     this.cartaoFidelidade.CampoRegistroCartaoFidelidades.forEach(element => {
-      this.CampoRegistroCartaoFidelidades.push(this.createItem(element));
+    this.CampoRegistroCartaoFidelidades.push(this.createItem(element));
     });    
     return null;
   }
