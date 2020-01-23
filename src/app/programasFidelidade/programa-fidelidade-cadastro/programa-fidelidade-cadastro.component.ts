@@ -65,13 +65,16 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
     try {                  
       let resultado = null;  
       if (this.formulario.get('id').value) {        
-        resultado = await this.programaFidelidadeService.atualizar(this.formulario.get('id').value,this.formulario.value);  
+        resultado = await this.programaFidelidadeService.atualizar(this.formulario.get('id').value,this.formulario.value);
+        if (resultado.success){
+          this.alertService.toast('Programa Fidelidade atualizado com sucesso!');
+        }      
       } else {
         resultado = await this.programaFidelidadeService.salvar(this.formulario.value); 
+        if (resultado.success){
+            this.alertService.toast('Programa Fidelidade salvo com sucesso!');
+        }      
       }  
-      if (resultado.success){
-          this.alertService.toast('Programa Fidelidade salvo com sucesso!');
-      }      
     } catch (error) {
         console.log('Erro ao salvar / alterar um Programa Fidelidade', error);    
     }
