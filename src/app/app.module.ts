@@ -11,18 +11,23 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './login/shared/services/login.service';
+import { LoginComponent } from './login/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,LoginComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
     HttpClientModule,    
     NgxSpinnerModule, 
+    ReactiveFormsModule,
     IonicModule.forRoot(),
     AppRoutingModule
   ],
   providers: [
+    LoginService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

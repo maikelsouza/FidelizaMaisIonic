@@ -37,12 +37,10 @@ export class LoginComponent implements OnInit {
     try {       
         let login = this.formulario.get("login").value;
         let senha = this.formulario.get("senha").value;
-        let resultado = await this.loginService.autenticar(login,senha);  
-        console.log(resultado);
+        let resultado = await this.loginService.autenticar(login,senha);          
         if (resultado.success){
           UsuarioService.RegistrarLogin(resultado.data);    
-          this.route.navigate(['/estabelecimentos']);
-          
+          this.route.navigate(['/home']);          
         }      
     } catch (error) {
         console.log('Erro ao logar um Usuário', error);    
