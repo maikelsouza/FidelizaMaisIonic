@@ -1,13 +1,12 @@
-//import { UsuarioService } from './../../usuarios/shared/services/usuario.service';
+
 import { AlertaService } from './alerta.service';
 import { HttpResultModel } from './../model/HttpResultModel';
 import { NetworkService } from './../network/network.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { UsuarioService } from 'src/app/usuarios/shared/services/usuario.service';
-
-
+import { AutenticadorService } from './autenticador.service';
+//import { UsuarioService } from 'src/';
 
 
 @Injectable({
@@ -33,8 +32,7 @@ export class HttpService {
     header = header.append('Accept', 'application/json');
     
 
-    let token = UsuarioService.GetTokenAccess;
-    //let token = 'cartaoFidelidade.token';
+    let token = AutenticadorService.GetTokenAccess;    
     if (token) {
       header = header.append('x-access-token', token);
     }

@@ -8,8 +8,7 @@ export abstract class ServiceBase<T> {
         public http: HttpService) {
     }
 
-    get(): Promise<HttpResultModel> {
-        console.log(this.url);
+    get(): Promise<HttpResultModel> {        
         return this.http.get(this.url);
     }
 

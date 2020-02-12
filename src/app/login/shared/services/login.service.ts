@@ -16,6 +16,7 @@ export class LoginService extends ServiceBase<Usuario> {
   url: string = `${ConfigHelper.Url}usuario`;
 
   mostrarMenuEmitter = new EventEmitter<boolean>();
+  mostrarItemMenuEmitter = new EventEmitter<Usuario>();
 
   constructor(public httpService: HttpService) { 
     super(`${ConfigHelper.Url}usuario`, httpService);
@@ -25,6 +26,7 @@ export class LoginService extends ServiceBase<Usuario> {
     let resultado = await this.http.post(`${this.url}/autenticar`, { email: login, senha: senha });   
     if (resultado.success){
       this.mostrarMenuEmitter.emit(true);
+      this.mostrarItemMenuEmitter.emit(resultado.data);
     }else{
       this.mostrarMenuEmitter.emit(false);
     }

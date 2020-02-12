@@ -3,15 +3,37 @@
     <ion-menu *ngIf="mostrarMenu">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Menus</ion-title>
+          <ion-title>Menu</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">             
+            <ion-item *ngIf="p.exibir === 'true'" [routerDirection]="'root'" [routerLink]="[p.url]">             
               <ion-label>
                 {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item  [routerDirection]="'root'" [routerLink]="'/usuarios/meuPerfil'">             
+              <ion-label>
+                Meu Perfil
+              </ion-label>
+            </ion-item>
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ESTABELECIMENTOS' || usuarioLogado.usuario[0].GrupoUsuario.nome === 'ADMINISTRADOR' " [routerDirection]="'root'" [routerLink]="'/estabelecimentos'">             
+              <ion-label>
+                Estabelecimento
+              </ion-label>
+            </ion-item>
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'CLIENTES' || usuarioLogado.usuario[0].GrupoUsuario.nome === 'ADMINISTRADORs' " [routerDirection]="'root'" [routerLink]="'/usuarios'">             
+              <ion-label>
+                Usuário
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
