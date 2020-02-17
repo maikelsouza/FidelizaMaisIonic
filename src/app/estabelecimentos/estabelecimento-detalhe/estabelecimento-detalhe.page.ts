@@ -2,7 +2,7 @@ import { Estabelecimento } from './../shared/models/estabelecimento';
 import { AlertaService } from './../../common/service/alerta.service';
 import { TipoEstabelecimento } from 'src/app/tipoEstabelecimento/shared/models/tipo-estabelecimento';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EstabelecimentoService } from '../shared/services/estabelecimento.service';
 import {FormBuilder, FormGroup } from '@angular/forms';
@@ -18,6 +18,7 @@ import { TipoEstabelecimentoService } from 'src/app/tipoEstabelecimento/shared/s
 export class EstabelecimentoDetalhePage implements OnInit {
 
   private id : number;
+  private tipoUsuario : string;
   private inscricao : Subscription;
   private estabelecimento : Estabelecimento = new Estabelecimento();
   private formulario : FormGroup;  
@@ -26,12 +27,13 @@ export class EstabelecimentoDetalhePage implements OnInit {
  
 
   constructor(private route: ActivatedRoute,
+    private router: Router,
     private estabelecimentoService: EstabelecimentoService,
     private formBuilder: FormBuilder,
     private tipoEstabelecimentoSrv: TipoEstabelecimentoService,
     private alertSrv: AlertaService) {
 
-    this.id = this.route.snapshot.params['id'];
+    
   }
 
   ngOnInit() {
@@ -75,7 +77,7 @@ export class EstabelecimentoDetalhePage implements OnInit {
   public async buscarPorId(): Promise<void> {
     try {
       let estabelecimentoResultado = await this.estabelecimentoService.buscarPorId(this.id);
-      if (estabelecimentoResultado.success) {
+      if (estabelecimentoResultado.success) {        
         this.estabelecimento = estabelecimentoResultado.data;        
         this.formulario = this.formBuilder.group({
           id: [this.estabelecimento.id],
@@ -140,6 +142,7 @@ export class EstabelecimentoDetalhePage implements OnInit {
        let resultado = await this.estabelecimentoService.atualizar(this.formulario.get("id").value,this.formulario.value);
        if (resultado.success){
           this.alertSrv.toast('Estabelecimento atualizado com sucesso!');
+          this.router.navigate(['/estabelecimentos']);       
        }
     } catch (error) {
       console.log('Erro ao atualizar o estabelecimento', error);

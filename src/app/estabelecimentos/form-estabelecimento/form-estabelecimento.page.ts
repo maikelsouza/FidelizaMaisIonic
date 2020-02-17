@@ -9,6 +9,7 @@ import { NavController } from '@ionic/angular';
 import { EstabelecimentoService } from '../shared/services/estabelecimento.service';
 import { TipoEstabelecimento } from 'src/app/tipoEstabelecimento/shared/models/tipo-estabelecimento';
 import { Telefone } from '../shared/models/telefone';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-estabelecimento',
@@ -34,7 +35,8 @@ export class FormEstabelecimentoPage implements OnInit {
     private estabelecimentoSrv: EstabelecimentoService,
     private tipoEstabelecimentoSrv: TipoEstabelecimentoService,
     private formBuilder: FormBuilder,
-    private alertSrv: AlertaService
+    private alertSrv: AlertaService,
+    private router: Router,
    ) {
      this.estabelecimento.EnderecoEstabelecimento = this.enderecoEstabelecimento;
      this.estabelecimento.Telefones = new Array();  
@@ -52,9 +54,11 @@ export class FormEstabelecimentoPage implements OnInit {
 
   async onSubmit(): Promise<void>{
     try { 
+      console.log(this.formulario.value);
       let resultado = await this.estabelecimentoSrv.salvar(this.formulario.value);  
       if (resultado.success){
         this.alertSrv.toast('Estabelecimento salvo com sucesso!');
+        this.router.navigate(['/estabelecimentos']);  
       }
     } catch (error) {
         console.log('Erro ao salvar um Estabelecimento', error);    
@@ -76,10 +80,11 @@ export class FormEstabelecimentoPage implements OnInit {
  
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
-      nome: [null], cnpj: [null], email: [null],tipoEstabelecimentoId: [null], ativo: [true],
+      nome: [null], cnpj: [null], email: [null],tipoEstabelecimentoId: [null], ativo: [true], usuarioId: ['1'],
       EnderecoEstabelecimento: this.formBuilder.group({       
         rua: [null], numero: [null], complemento: [null],
         cep: [null], 
+                     
         bairro: [null], cidade: [null],
         uf: [null], pais: ["Brasil"]
       }),           
