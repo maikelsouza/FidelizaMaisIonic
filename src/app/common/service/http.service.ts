@@ -6,8 +6,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AutenticadorService } from './autenticador.service';
-//import { UsuarioService } from 'src/';
-
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +25,8 @@ export class HttpService {
       header = new HttpHeaders();
     }
     
-
     header = header.append('Content-Type', 'application/json');
-    header = header.append('Accept', 'application/json');
-    
+    header = header.append('Accept', 'application/json');    
 
     let token = AutenticadorService.GetTokenAccess;    
     if (token) {
@@ -46,7 +42,7 @@ export class HttpService {
       if (this.networkSrv.IsOnline) {
         this.http.get(url, { headers: header })
           .subscribe(res => {
-            this.spinner.hide();
+            this.spinner.hide();            
             resolve({ success: true, data: res, err: undefined });
           }, err => {
               this.spinner.hide();
@@ -70,12 +66,10 @@ export class HttpService {
             this.spinner.hide();
             resolve({ success: true, data: res, err: undefined });
           }, err => {
-            console.log('testar erro');
             this.spinner.hide();            
             if (err.status == 400) {
               let msg = '';
-              console.log('Erro 404 ' + err.error.message);
-              // tslint:disable-next-line:no-shadowed-variable
+              console.log('Erro 404 ' + err.error.message);              
               err.error.validation.forEach(err => {
                 msg += `<li>${err.message}</li>`;
               });
@@ -138,12 +132,11 @@ export class HttpService {
           resolve({ success: true, data: _res, err: undefined });
         }, err => {
            this.spinner.hide();
-          // this.alertSrv.toast('Não foi possível realizar a exclusão do registro!', 'bottom');
+           this.alertSrv.toast('Não foi possível realizar a exclusão do registro!');
           resolve({ success: true, data: undefined, err });
         });
-      } else {
-        console.log('res');
-       // this.alertSrv.toast('Você está Offline, e infelizmente não pode ser enviado os dados!', 'bottom');
+      } else {      
+        this.alertSrv.toast('Você está Offline, e infelizmente não pode ser enviado os dados!');
       }
       resolve({ success: true, data: [], err: undefined });
     });
