@@ -11,22 +11,14 @@
 
 <ion-content>
   <ion-list>
-      
-
     <ion-item *ngFor="let item of estabelecimentos">
-     
-      
       <div class="item-note" slot="end">
-          <ion-button [routerLink]="['/estabelecimentos',item.id]">Atualizar</ion-button>
+          <ion-button [routerLink]="['/estabelecimentos',item.id]">Editar</ion-button>
         {{item.nome}}
       </div>
     </ion-item>
   </ion-list>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
-  <ion-button [routerLink]="['novo']">Novo</ion-button>
+
+<ion-button *ngIf="tipoUsuario == 'ADMINISTRADOR'" [routerLink]="['novo']">Novo</ion-button>
 <router-outlet></router-outlet>
 </ion-content>

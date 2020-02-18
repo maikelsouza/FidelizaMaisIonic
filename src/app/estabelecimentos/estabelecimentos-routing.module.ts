@@ -8,8 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const estabelecimentosRoutes: Routes = [
-    { path: '', component: ListaEstabelecimentoPage },
-    { path: 'estabelecimentos', component: ListaEstabelecimentoPage },
+    { path: '', component: ListaEstabelecimentoPage },    
     { path: 'novo', component: FormEstabelecimentoPage },
     { path: ':id', component: EstabelecimentoDetalhePage }
 ];

@@ -31,8 +31,7 @@ export class EstabelecimentoService  extends ServiceBase<Estabelecimento>
   } 
 
   async buscarPorId(id: number): Promise<HttpResultModel> {        
-    let respotas = this.httpService.get(`${this.url}/${id}`);
-    return respotas;
+    return this.httpService.get(`${this.url}/${id}`);    
   }
 
   async atualizar (id :string, estabelecimento: Estabelecimento){
@@ -43,6 +42,11 @@ export class EstabelecimentoService  extends ServiceBase<Estabelecimento>
   async delete (id :string){
     let respotas = this.httpService.delete(`${this.url}/${id}`);  
     return respotas; 
+  }
+
+  async buscarPorIdUsuario(id: number): Promise<HttpResultModel> {        
+    let respotas = this.httpService.get(`${this.url}/buscarPorUsuario/${id}`);        
+    return respotas;
   }
 
 

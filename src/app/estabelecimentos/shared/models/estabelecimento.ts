@@ -9,6 +9,7 @@ export class Estabelecimento {
     cnpj: string;
     ativo: boolean;
     email: string;
+    usuarioId: any;
     EnderecoEstabelecimento: EnderecoEstabelecimento;    
     TipoEstabelecimento: TipoEstabelecimento;    
     Telefones: Array<Telefone>;
