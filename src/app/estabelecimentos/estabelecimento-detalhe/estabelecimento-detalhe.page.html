@@ -10,7 +10,7 @@
           <ion-label position="stacked">Nome</ion-label>
           <ion-input formControlName="nome" type="text"></ion-input>
        </ion-item>
-       <ion-item>
+      <ion-item>
           <ion-label position="stacked">CNPJ</ion-label>
          <ion-input formControlName="cnpj" type="text"></ion-input>
        </ion-item>      
@@ -54,7 +54,7 @@
           <ion-label for="uf" position="stacked">UF</ion-label>
           <ion-input formControlName="uf" type="text" ></ion-input>
         </ion-item>      
-      </div>      
+      </div>     
       
         <ion-item>
             <ion-label for="tipoEstabelecimentoId">Tipo Estabelecimento</ion-label>
@@ -74,26 +74,6 @@
             <ion-select-option [value]="tipoTelefone" *ngFor="let tipoTelefone of tiposTelefone">{{tipoTelefone}}</ion-select-option>                 
           </ion-select>    
         </ion-item>
-       <!--  <ion-item>
-          <ion-label for="telefoneNumero2" position="stacked">Telefone 2</ion-label>
-          <ion-input formControlName="telefoneNumero2" type="text" ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Selecione um Tipo</ion-label>
-          <ion-select formControlName="telefoneTipo2"  okText="OK" cancelText="Cancelar">
-            <ion-select-option [value]="tipoTelefone" *ngFor="let tipoTelefone of tiposTelefone">{{tipoTelefone}}</ion-select-option>                 
-          </ion-select>    
-        </ion-item>
-        <ion-item>
-          <ion-label for="telefoneNumero3" position="stacked">Telefone 3</ion-label>
-          <ion-input formControlName="telefoneNumero3" type="text" ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Selecione um Tipo</ion-label>
-          <ion-select formControlName="telefoneTipo3"  okText="OK" cancelText="Cancelar">
-            <ion-select-option [value]="tipoTelefone" *ngFor="let tipoTelefone of tiposTelefone">{{tipoTelefone}}</ion-select-option>                 
-          </ion-select>    
-        </ion-item> -->
       </div>
       <div formGroupName="midiaSocial">
         <ion-item>
@@ -104,24 +84,9 @@
           <ion-label for="midiaSocialUrl1" position="stacked">Midia Social Url 1</ion-label>
           <ion-input formControlName="midiaSocialUrl1" type="text" ></ion-input>
         </ion-item>
-      <!--   <ion-item>
-          <ion-label for="midiaSocialNome2" position="stacked">Midia Social 2</ion-label>
-          <ion-input formControlName="midiaSocialNome2" type="text" ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label for="midiaSocialUrl2" position="stacked">Midia Social Url 2</ion-label>
-          <ion-input formControlName="midiaSocialUrl2" type="text" ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label for="midiaSocialNome3" position="stacked">Midia Social 3</ion-label>
-          <ion-input formControlName="midiaSocialNome3" type="text" ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label for="midiaSocialUrl3" position="stacked">Midia Social Url 3</ion-label>
-          <ion-input formControlName="midiaSocialUrl3" type="text" ></ion-input>
-        </ion-item>  -->       
       </div>         
     </ion-list>   
     <ion-button ion-button type="submit" block>Atualizar</ion-button >
+    <ion-button ion-button [routerLink]="'/estabelecimentos'" block>Cancelar</ion-button >
   </form>
 </ion-content>
