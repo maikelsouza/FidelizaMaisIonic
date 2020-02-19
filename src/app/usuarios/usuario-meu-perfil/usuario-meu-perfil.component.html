@@ -7,16 +7,33 @@
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <ion-list no-lines>    
        <ion-item>
-        <ion-label for="senha" position="stacked">Nova Senha</ion-label>         
-        <ion-input formControlName="senha" type="password" ></ion-input>
+          <ion-label for="nome" position="stacked">Nome</ion-label>         
+          <ion-input formControlName="nome" type="text" ></ion-input>
        </ion-item>
        <ion-item>
-        <ion-label for="confirmarSenha" position="stacked">Confirmar Senha</ion-label>         
-        <ion-input formControlName="confirmarSenha" type="password" ></ion-input>
-       </ion-item>  
+          <ion-label position="stacked">E-mail</ion-label>         
+          <ion-input formControlName="email" type="text" ></ion-input>
+       </ion-item>
+       <ion-item>
+         <ion-label for="sexo">Sexo</ion-label>
+         <ion-select  formControlName="sexo"  okText="OK" cancelText="Cancelar">
+            <ion-select-option [value]="masculino">Masculino</ion-select-option>
+            <ion-select-option [value]="feminino">Feminino</ion-select-option>
+         </ion-select>
+      </ion-item> 
+     <ion-item>
+        <ion-label for="dataNascimento" position="stacked" >Data de Nascimento</ion-label>         
+        <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
+          formControlName="dataNascimento"  placeholder="Selecione uma Data"></ion-datetime>
+     </ion-item>
+     <ion-item>
+      <ion-label for="cpf" position="stacked">CPF</ion-label>         
+      <ion-input formControlName="cpf" type="text" ></ion-input>
+     </ion-item>
     </ion-list> 
       
       
-    <ion-button ion-button type="submit" block>Salvar</ion-button >
+    <ion-button ion-button type="submit" block>Atualizar</ion-button >
+      <ion-button ion-button [routerLink]="'/home'" block>Cancelar</ion-button >
 </form>
 </ion-content>

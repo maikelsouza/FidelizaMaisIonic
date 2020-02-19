@@ -3,6 +3,9 @@ import { UsuarioService } from './../shared/services/usuario.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../shared/models/usuario';
+import { AutenticadorService } from 'src/app/common/service/autenticador.service';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/login/shared/services/login.service';
 
 @Component({
   selector: 'app-usuario-meu-perfil',
@@ -14,13 +17,36 @@ export class UsuarioMeuPerfilComponent implements OnInit {
   private formulario : FormGroup;  
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
-    private alertService: AlertaService) { }
+    private alertService: AlertaService,
+    private loginService : LoginService,
+    private router: Router) { }
 
   ngOnInit() {
     this.montarCamposTela();
+    this.carregarDadosUsuario();
   }
 
   private montarCamposTela() {
+    this.formulario = this.formBuilder.group({
+      id : [null], nome: [null], cpf: [null], email: [null],sexo: [null],
+      dataNascimento: [null]
+    });
+  }
+
+  private async carregarDadosUsuario(): Promise<void> {
+    try {             
+        let resultado = await this.usuarioService.buscarPorId( AutenticadorService.UsuarioLogado[0].id);       
+        let usuarioLogado = resultado.data;
+        this.formulario = this.formBuilder.group({
+          id : [usuarioLogado.id], nome: [usuarioLogado.nome], cpf: [usuarioLogado.cpf], 
+          email: [usuarioLogado.email], sexo: [usuarioLogado.sexo], dataNascimento: [usuarioLogado.dataNascimento]
+        });
+    } catch (error) {
+      console.log('Erro ao carregar os dados do usuário logado', error);
+    }
+  }
+
+  private montarCamposTela2() {
     this.formulario = this.formBuilder.group({
       id : [null], senha: [null], confirmarSenha: [null]
     });
@@ -35,6 +61,19 @@ export class UsuarioMeuPerfilComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void>{
+    try {        
+        let resultado = await this.usuarioService.atualizar(this.formulario.get("id").value,this.formulario.value);  
+        if (resultado.success){       
+          this.router.navigate(['/home']);          
+          this.alertService.toast('Usuário atualizado com sucesso!');
+        }
+    } catch (error) {
+        console.log('Erro ao atualizar o usuário', error);    
+    }
+  } 
+  
+  
+  async onSubmit2(): Promise<void>{
     try { 
       if (this.validarSenha()){
         let usuario : Usuario = new Usuario();
