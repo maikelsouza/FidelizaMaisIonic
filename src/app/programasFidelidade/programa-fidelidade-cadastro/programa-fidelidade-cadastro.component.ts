@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { AlertaService } from 'src/app/common/service/alerta.service';
 import { ProgramaFidelidadeService } from '../shared/services/programa-fidelidade.service';
 import { ProgramaFidelidade } from '../shared/models/programa-fidelidade';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CampoItemProgramaFidelidade } from '../shared/models/campo-item-programa-fidelidade';
 
@@ -16,6 +16,7 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
 
   private formulario : FormGroup;  
   private inscricao: Subscription;
+  private idEstabelecimento : number;
   private programaFidelidade : ProgramaFidelidade;
   private campoItemProgramaFidelidades: FormArray;
   
@@ -24,14 +25,16 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
     private formBuilder: FormBuilder,
     private programaFidelidadeService: ProgramaFidelidadeService,
     private alertService: AlertaService,
-    private route: ActivatedRoute    
+    private route: ActivatedRoute,
+    private router: Router,    
   ) { }
 
   ngOnInit() {    
-    this.montarCamposTela(new ProgramaFidelidade())
     this.inscricao = this.route.params.subscribe(
       (params: any) => { 
-        let id = params.id;         
+        let id = params.id;    
+        this.idEstabelecimento = params.idEstabelecimento;           
+        this.montarCamposTela(new ProgramaFidelidade())
         if(id){ // Condição que descobre se é uma edição ou cadastro
           this.buscarPorId(id);
         }
@@ -42,9 +45,9 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
     this.formulario = this.formBuilder.group({
       id: [programaFidelidade.id], nome: [programaFidelidade.nome], ativo: [true],
       descricao: [programaFidelidade.descricao], dataExpiracao: [null],
-      //regra: [programaFidelidade.regra], 
-      regra: [1], usuarioId: [1],
-      estabelecimentoId: [31],
+      regra: [programaFidelidade.regra], 
+      usuarioId: [null],
+      estabelecimentoId: [this.idEstabelecimento],
       CampoItemProgramaFidelidades: this.formBuilder.array([this.criarItemProgramaFidelidade(programaFidelidade.CampoItemProgramaFidelidades)])
     });    
   }
@@ -52,10 +55,9 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
   private montarCamposTelaEditar(programaFidelidade: ProgramaFidelidade) { 
     this.formulario = this.formBuilder.group({
       id: [programaFidelidade.id], nome: [programaFidelidade.nome], ativo: [true],
-      descricao: [programaFidelidade.descricao], dataExpiracao: [null],
-      //regra: [programaFidelidade.regra], 
-      regra: [1], usuarioId: [1],
-      estabelecimentoId: [31],
+      descricao: [programaFidelidade.descricao], dataExpiracao: [null],      
+      regra: [programaFidelidade.regra], usuarioId: [null],
+      estabelecimentoId: [programaFidelidade.estabelecimentoId],
       CampoItemProgramaFidelidades: this.formBuilder.array([])
     });
     this.criarItensProgramaFidelidade(programaFidelidade.CampoItemProgramaFidelidades)
@@ -74,7 +76,8 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
         if (resultado.success){
             this.alertService.toast('Programa Fidelidade salvo com sucesso!');
         }      
-      }  
+      }
+      this.router.navigate(['/programaFidelidade/listaEstabelecimento',this.idEstabelecimento]);      
     } catch (error) {
         console.log('Erro ao salvar / alterar um Programa Fidelidade', error);    
     }
@@ -126,8 +129,7 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
   public async buscarPorId(id: number): Promise<void> {
     try {
       const resultado = await this.programaFidelidadeService.buscarPorId(id);      
-      if (resultado.success) {        
-        console.log(resultado.data);
+      if (resultado.success) {                
         this.montarCamposTelaEditar(resultado.data);
       }
     } catch (error) {

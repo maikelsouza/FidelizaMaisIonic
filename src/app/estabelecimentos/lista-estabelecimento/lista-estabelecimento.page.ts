@@ -33,9 +33,7 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
       (queryParams: any) => {
         this.tipoUsuario = queryParams['tipoUsuario'];
       }
-    );
-
-    
+    );   
    
     this.carregarListaEstabelecimento();
   }

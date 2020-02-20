@@ -8,8 +8,8 @@ import { ProgramaFidelidadeListaUsuarioComponent } from './programa-fidelidade-l
 
 const programasFidelidadeRoutes: Routes = [
     { path: 'listaUsuario', component: ProgramaFidelidadeListaUsuarioComponent },   
-    { path: 'listaEstabelecimento', component: ProgramaFidelidadeListaEstabelecimentoComponent },   
-    { path: 'novo', component: ProgramaFidelidadeCadastroComponent }, 
+    { path: 'listaEstabelecimento/:id', component: ProgramaFidelidadeListaEstabelecimentoComponent },   
+    { path: 'novo/:idEstabelecimento', component: ProgramaFidelidadeCadastroComponent }, 
     { path: 'editar/:id', component: ProgramaFidelidadeCadastroComponent }
 ];
 

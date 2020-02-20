@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { CartaoFidelidadeService } from './../shared/services/cartao-fidelidade.service';
 import { CartaoFidelidade } from './../shared/models/cartao-fidelidade';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cartao-fidelidade-lista-estabelecimento',
@@ -11,16 +13,29 @@ import { CartaoFidelidade } from './../shared/models/cartao-fidelidade';
 export class CartaoFidelidadeListaEstabelecimentoComponent implements OnInit {
 
   private cartoesFidelidade: Array<CartaoFidelidade> = new Array<CartaoFidelidade>(); 
+  private id : number;
+  private inscricao : Subscription;
 
-  constructor(private cartaoFidelidadeService : CartaoFidelidadeService) { }
+  constructor(
+    private cartaoFidelidadeService : CartaoFidelidadeService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.inscricao = this.route.params.subscribe(
+      (params: any) => {
+        this.id = params['id'];        
+      }
+    );
     this.carregarListaPorEstabelecimento();
+  }
+
+  ngOnDestroy() {
+    this.inscricao.unsubscribe;
   }
 
   async carregarListaPorEstabelecimento(): Promise<void> {
     try {       
-      let resultado = await this.cartaoFidelidadeService.buscarPorIdEstabelecimento(31);
+      let resultado = await this.cartaoFidelidadeService.buscarPorIdEstabelecimento(this.id);
       if (resultado.success) {
         this.cartoesFidelidade = <Array<CartaoFidelidade>>resultado.data;        
       }

@@ -8,5 +8,6 @@ export class ProgramaFidelidade {
     ativo: boolean;
     dataExpiracao: Date;
     regra: number;    
+    estabelecimentoId: number;
     CampoItemProgramaFidelidades: Array<CampoItemProgramaFidelidade>;
 }

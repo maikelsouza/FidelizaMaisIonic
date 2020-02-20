@@ -13,12 +13,16 @@
        <ion-item>
           <ion-label position="stacked">Descrição</ion-label>
           <ion-input formControlName="descricao" ></ion-input>         
-       </ion-item>             
-   <!--     <ion-item>
-        <ion-label for="dataExpiracao" position="stacked">Data Expirar</ion-label>        
-        <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
-          formControlName="dataExpiracao"  placeholder="Selecione uma Data"></ion-datetime>    
-       </ion-item> -->
+       </ion-item>
+       <ion-item>
+        <ion-label position="stacked">Quantidade de Pontos Necessários</ion-label>
+        <ion-input formControlName="regra" ></ion-input>         
+     </ion-item>             
+       <ion-item>
+           <ion-label for="dataExpiracao" position="stacked">Data Expirar</ion-label>        
+           <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
+            formControlName="dataExpiracao"  placeholder="Selecione uma Data"></ion-datetime>    
+       </ion-item> 
        <ion-item>
           <button type="button" (click)="adicionarItemProgramaFidelidade()">Adicionar Item</button> 
       </ion-item>
