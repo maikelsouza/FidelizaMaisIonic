@@ -10,8 +10,8 @@ import { CartaoFidelidadeCadastroComponent } from './cartao-fidelidade-cadastro/
 
 const cartoesFidelidadeRoutes: Routes = [
     { path: 'listaUsuario', component: CartaoFidelidadeListaUsuarioComponent },   
-    { path: 'listaEstabelecimento', component: CartaoFidelidadeListaEstabelecimentoComponent },   
-    { path: 'novo', component: CartaoFidelidadeCadastroComponent }, 
+    { path: 'listaEstabelecimento/:id', component: CartaoFidelidadeListaEstabelecimentoComponent },   
+    { path: 'novo/:estabelecimentoId', component: CartaoFidelidadeCadastroComponent }, 
     { path: ':id', component: CartaoFidelidadeEditarComponent }
 ];
 
