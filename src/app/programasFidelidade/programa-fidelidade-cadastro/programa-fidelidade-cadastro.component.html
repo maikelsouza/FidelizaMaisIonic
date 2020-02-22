@@ -17,7 +17,14 @@
        <ion-item>
         <ion-label position="stacked">Quantidade de Pontos Necessários</ion-label>
         <ion-input formControlName="regra" ></ion-input>         
-     </ion-item>             
+     </ion-item>  
+     <ion-item>
+      <ion-label position="stacked">Ativo</ion-label>  
+      <ion-select  formControlName="ativo"  okText="OK" cancelText="Cancelar">
+         <ion-select-option [value]="true">Ativo</ion-select-option>
+         <ion-select-option [value]="false">Inativo</ion-select-option>
+      </ion-select>               
+     </ion-item>            
        <ion-item>
            <ion-label for="dataExpiracao" position="stacked">Data Expirar</ion-label>        
            <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
@@ -50,8 +57,6 @@
             </div>       
           </div>                           
     </ion-list> 
-      
-      
     <ion-button ion-button type="submit" block>Salvar</ion-button >
 </form>
 </ion-content>

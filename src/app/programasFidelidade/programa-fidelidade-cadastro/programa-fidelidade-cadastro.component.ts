@@ -16,9 +16,12 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
 
   private formulario : FormGroup;  
   private inscricao: Subscription;
-  private idEstabelecimento : number;
+  private estabelecimentoId : number;
   private programaFidelidade : ProgramaFidelidade;
   private campoItemProgramaFidelidades: FormArray;
+  mostrarCancelarEdicao : boolean = false;
+  id : number;
+  
   
 
   constructor(
@@ -32,11 +35,12 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
   ngOnInit() {    
     this.inscricao = this.route.params.subscribe(
       (params: any) => { 
-        let id = params.id;    
-        this.idEstabelecimento = params.idEstabelecimento;           
+        this.id = params.id;    
+        this.estabelecimentoId = params.idEstabelecimento;           
         this.montarCamposTela(new ProgramaFidelidade())
-        if(id){ // Condição que descobre se é uma edição ou cadastro
-          this.buscarPorId(id);
+        if(this.id){ // Condição que descobre se é uma edição ou cadastro
+          this.mostrarCancelarEdicao = true;
+          this.buscarPorId();
         }
       })     
   }
@@ -44,10 +48,10 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
   private montarCamposTela(programaFidelidade: ProgramaFidelidade) { 
     this.formulario = this.formBuilder.group({
       id: [programaFidelidade.id], nome: [programaFidelidade.nome], ativo: [true],
-      descricao: [programaFidelidade.descricao], dataExpiracao: [null],
+      descricao: [programaFidelidade.descricao], dataExpiracao: [programaFidelidade.dataExpiracao],
       regra: [programaFidelidade.regra], 
       usuarioId: [null],
-      estabelecimentoId: [this.idEstabelecimento],
+      estabelecimentoId: [this.estabelecimentoId],
       CampoItemProgramaFidelidades: this.formBuilder.array([this.criarItemProgramaFidelidade(programaFidelidade.CampoItemProgramaFidelidades)])
     });    
   }
@@ -55,7 +59,7 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
   private montarCamposTelaEditar(programaFidelidade: ProgramaFidelidade) { 
     this.formulario = this.formBuilder.group({
       id: [programaFidelidade.id], nome: [programaFidelidade.nome], ativo: [true],
-      descricao: [programaFidelidade.descricao], dataExpiracao: [null],      
+      descricao: [programaFidelidade.descricao], dataExpiracao: [programaFidelidade.dataExpiracao],      
       regra: [programaFidelidade.regra], usuarioId: [null],
       estabelecimentoId: [programaFidelidade.estabelecimentoId],
       CampoItemProgramaFidelidades: this.formBuilder.array([])
@@ -77,7 +81,8 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
             this.alertService.toast('Programa Fidelidade salvo com sucesso!');
         }      
       }
-      this.router.navigate(['/programaFidelidade/listaEstabelecimento',this.idEstabelecimento]);      
+      let estabelecimentoId =  this.estabelecimentoId == undefined ? this.formulario.get("estabelecimentoId").value : this.estabelecimentoId;
+      this.router.navigate(['/programaFidelidade/listaEstabelecimento',estabelecimentoId]);      
     } catch (error) {
         console.log('Erro ao salvar / alterar um Programa Fidelidade', error);    
     }
@@ -126,9 +131,9 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
     this.inscricao.unsubscribe;
   }
 
-  public async buscarPorId(id: number): Promise<void> {
+  public async buscarPorId(): Promise<void> {
     try {
-      const resultado = await this.programaFidelidadeService.buscarPorId(id);      
+      const resultado = await this.programaFidelidadeService.buscarPorId(this.id);      
       if (resultado.success) {                
         this.montarCamposTelaEditar(resultado.data);
       }
