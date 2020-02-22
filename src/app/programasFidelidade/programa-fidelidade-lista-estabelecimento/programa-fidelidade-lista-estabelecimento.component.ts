@@ -23,10 +23,7 @@ export class ProgramaFidelidadeListaEstabelecimentoComponent implements OnInit, 
     private programaFidelidadeService: ProgramaFidelidadeService,
     private alertService: AlertaService,
     private route: ActivatedRoute  
-  ) { 
-
-    console.log("CONSTRUTOR");
-  }
+  ) { }
 
   ngOnInit() {
     this.inscricao = this.route.params.subscribe(
@@ -34,8 +31,7 @@ export class ProgramaFidelidadeListaEstabelecimentoComponent implements OnInit, 
         this.id = params['id'];        
       }
     );
-    this.carregarListaPorEstabelecimento();
-    console.log("ngOnInit");
+    this.carregarListaPorEstabelecimento();    
   }
 
   ngOnDestroy(): void {
