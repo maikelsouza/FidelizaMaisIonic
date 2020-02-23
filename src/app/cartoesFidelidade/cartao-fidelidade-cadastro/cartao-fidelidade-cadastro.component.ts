@@ -35,7 +35,6 @@ export class CartaoFidelidadeCadastroComponent implements OnInit, OnDestroy {
         this.estabelecimentoId = params.estabelecimentoId;           
       })  
     this.montarCamposTela();
-    
   } 
 
   ngOnDestroy() {
@@ -56,8 +55,9 @@ export class CartaoFidelidadeCadastroComponent implements OnInit, OnDestroy {
         let resultado = await this.cartaoFidelidadeService.salvar(this.formulario.value);  
         if (resultado.success){
           this.alertService.toast('Cartão Fidelidade salvo com sucesso!');
-          this.router.navigate(['/cartaoFidelidade/listaEstabelecimento',this.estabelecimentoId]);      
-        }      
+          await this.cartaoFidelidadeService.notificarCartaoFidelidadeSalvo();
+        }     
+        this.router.navigate(['/cartaoFidelidade/listaEstabelecimento',this.estabelecimentoId]);      
     } catch (error) {
         console.log('Erro ao salvar um Cartão Fidelidade', error);    
     }

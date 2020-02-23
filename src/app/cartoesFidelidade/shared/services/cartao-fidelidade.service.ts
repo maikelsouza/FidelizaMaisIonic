@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter  } from '@angular/core';
 
 import { ConfigHelper } from 'src/app/common/helpers/configHelper';
 import { HttpService } from 'src/app/common/service/http.service';
 import { ServiceBase } from 'src/app/base/serviceBase';
 import { CartaoFidelidade } from '../models/cartao-fidelidade';
 import { HttpResultModel } from 'src/app/common/model/HttpResultModel';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,15 @@ export class CartaoFidelidadeService extends ServiceBase<CartaoFidelidade> {
 
   url: string = `${ConfigHelper.Url}cartaoFidelidade`;
 
+  emitirCartaoFidelidadeCriado = new EventEmitter();
   
   constructor(public httpService: HttpService) {    
-    super(`${ConfigHelper.Url}cartaoFidelidade`, httpService);
+    super(`${ConfigHelper.Url}cartaoFidelidade`, httpService);    
   }
 
 
-  async salvar(cartaoFidelidade: CartaoFidelidade): Promise<HttpResultModel> {                  
-    let respotas = this.httpService.post(`${this.url}`,cartaoFidelidade);
+  async salvar(cartaoFidelidade: CartaoFidelidade): Promise<HttpResultModel> {     
+    let respotas = this.httpService.post(`${this.url}`,cartaoFidelidade);    
     return respotas;
   } 
 
@@ -42,5 +44,9 @@ export class CartaoFidelidadeService extends ServiceBase<CartaoFidelidade> {
   async buscarPorIdEstabelecimento(id: number): Promise<HttpResultModel> {        
     let respotas = this.httpService.get(`${this.url}/buscarPorEstabelecimento/${id}`);    
     return respotas;
+  }
+  
+  async notificarCartaoFidelidadeSalvo(){    
+    this.emitirCartaoFidelidadeCriado.emit();
   }
 }

@@ -10,6 +10,8 @@ import { TipoEstabelecimentoService } from '../tipoEstabelecimento/shared/servic
 import { EstabelecimentoService } from './shared/services/estabelecimento.service';
 import { EstabelecimentosRoutesModule } from './estabelecimentos-routing.module';
 import { FormEstabelecimentoPage } from './form-estabelecimento/form-estabelecimento.page';
+import { EstabelecimentoMeuEstabelecimentoComponent } from './estabelecimento-meu-estabelecimento/estabelecimento-meu-estabelecimento.component';
+import { LoginService } from '../login/shared/services/login.service';
 
 
 
@@ -30,7 +32,8 @@ import { FormEstabelecimentoPage } from './form-estabelecimento/form-estabelecim
   declarations: [
     FormEstabelecimentoPage,
     ListaEstabelecimentoPage,
-    EstabelecimentoDetalhePage  
+    EstabelecimentoDetalhePage,
+    EstabelecimentoMeuEstabelecimentoComponent  
   ]
 })
 

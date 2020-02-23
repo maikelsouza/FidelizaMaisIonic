@@ -39,6 +39,7 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
+    console.log("Lista Estabelecimentos ngOnDestroy")
     this.inscricao.unsubscribe();
   }
 
