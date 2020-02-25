@@ -82,6 +82,7 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
         }      
       }
       let estabelecimentoId =  this.estabelecimentoId == undefined ? this.formulario.get("estabelecimentoId").value : this.estabelecimentoId;
+      await this.programaFidelidadeService.notificarProgramaFidelidadeSalvo();
       this.router.navigate(['/programaFidelidade/listaEstabelecimento',estabelecimentoId]);      
     } catch (error) {
         console.log('Erro ao salvar / alterar um Programa Fidelidade', error);    

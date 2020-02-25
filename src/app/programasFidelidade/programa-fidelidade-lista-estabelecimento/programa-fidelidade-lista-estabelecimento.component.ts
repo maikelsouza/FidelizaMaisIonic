@@ -31,6 +31,12 @@ export class ProgramaFidelidadeListaEstabelecimentoComponent implements OnInit, 
         this.id = params['id'];        
       }
     );
+    
+    this.programaFidelidadeService.emitirCartaoFidelidadeCriado.subscribe(
+      () => {
+        this.carregarListaPorEstabelecimento();
+      }
+    );
     this.carregarListaPorEstabelecimento();    
   }
 

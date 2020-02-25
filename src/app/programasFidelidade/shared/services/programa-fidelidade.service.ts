@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import { ConfigHelper } from 'src/app/common/helpers/configHelper';
 import { HttpService } from 'src/app/common/service/http.service';
 import { ServiceBase } from 'src/app/base/serviceBase';
 import { ProgramaFidelidade } from '../models/programa-fidelidade';
 import { HttpResultModel } from 'src/app/common/model/HttpResultModel';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ import { HttpResultModel } from 'src/app/common/model/HttpResultModel';
 export class ProgramaFidelidadeService  extends ServiceBase<ProgramaFidelidade>{
 
   url: string = `${ConfigHelper.Url}programaFidelidade`;
+
+  emitirCartaoFidelidadeCriado = new EventEmitter();
 
   constructor(public httpService: HttpService) {
     super(`${ConfigHelper.Url}programaFidelidade`, httpService);
@@ -39,5 +42,9 @@ export class ProgramaFidelidadeService  extends ServiceBase<ProgramaFidelidade>{
   async buscarPorIdEstabelecimento(id: number): Promise<HttpResultModel> {        
     let respotas = this.httpService.get(`${this.url}/buscarPorEstabelecimento/${id}`);    
     return respotas;
+  }
+  
+  async notificarProgramaFidelidadeSalvo(){    
+    this.emitirCartaoFidelidadeCriado.emit();
   }
 }
