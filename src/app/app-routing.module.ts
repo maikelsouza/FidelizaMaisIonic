@@ -5,6 +5,9 @@ import { CartaoFidelidadeListaUsuarioComponent } from './cartoesFidelidade/carta
 import { CartaoFidelidadeListaEstabelecimentoComponent } from './cartoesFidelidade/cartao-fidelidade-lista-estabelecimento/cartao-fidelidade-lista-estabelecimento.component';
 import { CartaoFidelidadeCadastroComponent } from './cartoesFidelidade/cartao-fidelidade-cadastro/cartao-fidelidade-cadastro.component';
 import { CartaoFidelidadeEditarComponent } from './cartoesFidelidade/cartao-fidelidade-editar/cartao-fidelidade-editar.component';
+import { ProgramaFidelidadeCadastroComponent } from './programasFidelidade/programa-fidelidade-cadastro/programa-fidelidade-cadastro.component';
+import { ProgramaFidelidadeListaEstabelecimentoComponent } from './programasFidelidade/programa-fidelidade-lista-estabelecimento/programa-fidelidade-lista-estabelecimento.component';
+import { ProgramaFidelidadeListaUsuarioComponent } from './programasFidelidade/programa-fidelidade-lista-usuario/programa-fidelidade-lista-usuario.component';
 
 
 const routes: Routes = [
@@ -16,7 +19,11 @@ const routes: Routes = [
   { path: 'cartaoFidelidade/listaEstabelecimento/:id', component: CartaoFidelidadeListaEstabelecimentoComponent },     
   { path: 'cartaoFidelidade/novo/:estabelecimentoId', component: CartaoFidelidadeCadastroComponent },   
   { path: 'cartaoFidelidade/:id', component: CartaoFidelidadeEditarComponent },
-  { path: 'programaFidelidade', loadChildren: './programasFidelidade/programasFidelidade.module#ProgramasFidelidadeModule'},    
+  // Programa Fidelidade
+  { path: 'programaFidelidade/listaUsuario', component: ProgramaFidelidadeListaUsuarioComponent },   
+  { path: 'programaFidelidade/listaEstabelecimento/:id', component: ProgramaFidelidadeListaEstabelecimentoComponent },   
+  { path: 'programaFidelidade/novo/:idEstabelecimento', component: ProgramaFidelidadeCadastroComponent }, 
+  { path: 'programaFidelidade/editar/:id', component: ProgramaFidelidadeCadastroComponent },  
   { path: 'home', loadChildren: './home/home.module#HomePageModule'},  
   { path: '', redirectTo: 'login', pathMatch: 'full'},
 ];
