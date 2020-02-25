@@ -8,18 +8,6 @@
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item *ngIf="p.exibir === 'true'" [routerDirection]="'root'" [routerLink]="[p.url]">             
-              <ion-label>
-                {{p.title}}
-              </ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
-
-      <ion-content>
-        <ion-list>
           <ion-menu-toggle auto-hide="false">
             <ion-item  [routerDirection]="'root'" [routerLink]="'/usuarios/meuPerfil'">             
               <ion-label>
@@ -30,13 +18,18 @@
               <ion-label>
                 Meus Estabelecimentos
               </ion-label>
+            </ion-item>   
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'CLIENTES' " [routerDirection]="'root'" [routerLink]="'/estabelecimentos'"  [queryParams]="{tipoUsuario:'CLIENTES'}">                                                                                                                 
+              <ion-label>
+                Meus Estabelecimentos
+              </ion-label>
             </ion-item>            
             <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ADMINISTRADOR' " [routerDirection]="'root'" [routerLink]="'/estabelecimentos'"  [queryParams]="{tipoUsuario:'ADMINISTRADOR'}">                                                                                                                 
               <ion-label>
                 Estabelecimentos
               </ion-label>
             </ion-item>
-            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'CLIENTES' || usuarioLogado.usuario[0].GrupoUsuario.nome === 'ADMINISTRADORs' " [routerDirection]="'root'" [routerLink]="'/usuarios'">             
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ADMINISTRADOR' " [routerDirection]="'root'" [routerLink]="'/usuarios'">             
               <ion-label>
                 Usuário
               </ion-label>
