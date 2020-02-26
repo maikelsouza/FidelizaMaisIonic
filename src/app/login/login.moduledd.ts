@@ -17,7 +17,7 @@ import { LoginService } from './shared/services/login.service';
   ],
 
   providers: [    
-    LoginService
+    
   ],
   declarations: [    
     LoginComponent
