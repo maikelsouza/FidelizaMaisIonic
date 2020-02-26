@@ -21,7 +21,7 @@ import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.co
     UsuariosRoutesModule   
   ],
   providers: [
-    UsuarioService,        
+   
   ],
     
   declarations: [
