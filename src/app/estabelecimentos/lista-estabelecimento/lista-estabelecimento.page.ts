@@ -7,6 +7,7 @@ import { AutenticadorService } from 'src/app/common/service/autenticador.service
 import { Usuario } from 'src/app/usuarios/shared/models/usuario';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/login/shared/services/login.service';
+import { ClienteEstabelecimentoService } from '../shared/services/cliente-estabelecimento.service';
 
 @Component({
   selector: 'app-lista-estabelecimento',
@@ -20,12 +21,12 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
   inscricao: Subscription;
   usuarioLogado: Usuario;
   
-  constructor(private estabelecimentoSrv: EstabelecimentoService,
-    private route: ActivatedRoute,
-    private loginService: LoginService) { 
-    
-    
-  }
+  constructor(
+      private estabelecimentoSrv: EstabelecimentoService,
+      private clienteEstabelecimentoService: ClienteEstabelecimentoService,
+      private route: ActivatedRoute
+      ) 
+      { }
 
   ngOnInit() {
     
@@ -38,17 +39,16 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
     this.carregarListaEstabelecimento();
   }
 
-  ngOnDestroy(){
-    console.log("Lista Estabelecimentos ngOnDestroy")
+  ngOnDestroy(){    
     this.inscricao.unsubscribe();
   }
 
   async carregarListaEstabelecimento(): Promise<void> {
     try {      
       let estabelecimentoResultado = undefined; 
+      let usuarioLogado : Usuario =  AutenticadorService.UsuarioLogado;      
       if (this.tipoUsuario == "ESTABELECIMENTOS"){
-        let usuarioLogado : Usuario =  AutenticadorService.UsuarioLogado;      
-        estabelecimentoResultado = await this.estabelecimentoSrv.buscarPorIdUsuario(usuarioLogado[0].id);        
+        estabelecimentoResultado = await this.estabelecimentoSrv.buscarPorIdUsuario(usuarioLogado[0].id);           
       }else{
         estabelecimentoResultado = await this.estabelecimentoSrv.buscarTodos();
       } 

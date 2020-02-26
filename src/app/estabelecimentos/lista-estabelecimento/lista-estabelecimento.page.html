@@ -10,10 +10,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of estabelecimentos">
+  <ion-list >
+    <ion-item *ngFor="let item of estabelecimentos" >
       <div class="item-note" slot="end">
-          <ion-button [routerLink]="['/estabelecimentos',item.id]">Editar</ion-button>
+          <ion-button *ngIf="tipoUsuario == 'ADMINISTRADOR' || tipoUsuario == 'ESTABELECIMENTOS'" [routerLink]="['/estabelecimentos',item.id]">Editar</ion-button>
         {{item.nome}}
       </div>
     </ion-item>
