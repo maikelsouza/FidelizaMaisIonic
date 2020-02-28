@@ -49,6 +49,8 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
       let usuarioLogado : Usuario =  AutenticadorService.UsuarioLogado;      
       if (this.tipoUsuario == "ESTABELECIMENTOS"){
         estabelecimentoResultado = await this.estabelecimentoSrv.buscarPorIdUsuario(usuarioLogado[0].id);           
+      }else if (this.tipoUsuario == "CLIENTES"){
+          estabelecimentoResultado = await this.estabelecimentoSrv.buscarComProgramaFidelidadeOuCartaoFidelidade();
       }else{
         estabelecimentoResultado = await this.estabelecimentoSrv.buscarTodos();
       } 

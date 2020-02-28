@@ -49,5 +49,10 @@ export class EstabelecimentoService  extends ServiceBase<Estabelecimento>
     return respotas;
   }
 
+  async buscarComProgramaFidelidadeOuCartaoFidelidade(): Promise<HttpResultModel> {        
+    return this.httpService.get(`${this.url}/buscarComProgramaFidelidadeOuCartaoFidelidade`);        
+  }
+
+
 
 }
