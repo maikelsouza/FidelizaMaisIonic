@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { EstabelecimentoService } from '../shared/services/estabelecimento.service';
 import {FormBuilder, FormGroup } from '@angular/forms';
 import { TipoEstabelecimentoService } from 'src/app/tipoEstabelecimento/shared/services/tipo-estabelecimento.service';
+import { AutenticadorService } from 'src/app/common/service/autenticador.service';
+import { Usuario } from 'src/app/usuarios/shared/models/usuario';
 
 
 
@@ -44,6 +46,7 @@ export class EstabelecimentoDetalhePage implements OnInit {
         this.buscarPorId();
       }
     );
+    
     this.carregarTipoEstabelecimento();   
   }
 
@@ -139,11 +142,12 @@ export class EstabelecimentoDetalhePage implements OnInit {
 
   async  onSubmit():  Promise<void> {     
     try {    
+      let usuarioLogado : Usuario =  AutenticadorService.UsuarioLogado; 
        let resultado = await this.estabelecimentoService.atualizar(this.formulario.get("id").value,this.formulario.value);
        if (resultado.success){
           this.alertSrv.toast('Estabelecimento atualizado com sucesso!');
-          this.router.navigate(['/estabelecimentos']);       
-       }
+          this.router.navigate(['/estabelecimentos'],{ queryParams: { tipoUsuario: usuarioLogado[0].GrupoUsuario.nome } });             
+        }
     } catch (error) {
       console.log('Erro ao atualizar o estabelecimento', error);
     }
