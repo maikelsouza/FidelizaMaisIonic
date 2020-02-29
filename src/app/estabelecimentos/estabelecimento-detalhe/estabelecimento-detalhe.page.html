@@ -89,6 +89,7 @@
     <ion-button ion-button type="submit" block>Atualizar</ion-button >
     <ion-button ion-button [routerLink]="['/programaFidelidade/listaEstabelecimento',id]"block>Programa Fidelidade</ion-button >
       <ion-button ion-button [routerLink]="['/cartaoFidelidade/listaEstabelecimento',id]"block>Cartão Fidelidade</ion-button >
-    <ion-button ion-button [routerLink]="'/estabelecimentos'" block>Cancelar</ion-button >      
+    <ion-button ion-button [routerLink]="'/estabelecimentos'" [queryParams]="{tipoUsuario:usuarioLogado[0].GrupoUsuario.nome}"   block>Cancelar</ion-button >      
+    
   </form>
 </ion-content>

@@ -26,6 +26,7 @@ export class EstabelecimentoDetalhePage implements OnInit {
   private formulario : FormGroup;  
   private tipoEstabelecimentos: Array<TipoEstabelecimento> = new Array<TipoEstabelecimento>(); 
   private tiposTelefone = ['Celular', 'Fixo']; 
+  usuarioLogado: Usuario;
  
 
   constructor(private route: ActivatedRoute,
@@ -39,6 +40,7 @@ export class EstabelecimentoDetalhePage implements OnInit {
   }
 
   ngOnInit() {
+    this.usuarioLogado =  AutenticadorService.UsuarioLogado; 
     this.montarCamposTela();
     this.inscricao = this.route.params.subscribe(
       (params: any) => {
@@ -141,12 +143,11 @@ export class EstabelecimentoDetalhePage implements OnInit {
   }
 
   async  onSubmit():  Promise<void> {     
-    try {    
-      let usuarioLogado : Usuario =  AutenticadorService.UsuarioLogado; 
+    try {          
        let resultado = await this.estabelecimentoService.atualizar(this.formulario.get("id").value,this.formulario.value);
        if (resultado.success){
           this.alertSrv.toast('Estabelecimento atualizado com sucesso!');
-          this.router.navigate(['/estabelecimentos'],{ queryParams: { tipoUsuario: usuarioLogado[0].GrupoUsuario.nome } });             
+          this.router.navigate(['/estabelecimentos'],{ queryParams: { tipoUsuario: this.usuarioLogado[0].GrupoUsuario.nome } });             
         }
     } catch (error) {
       console.log('Erro ao atualizar o estabelecimento', error);
