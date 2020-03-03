@@ -4,5 +4,6 @@ export class ClienteEstabelecimento {
         id: number;
         dataCriacao: Date;
         ativo: boolean;
-        Estabelecimentos: Array<Estabelecimento>;
+        usuarioId: number;
+        estabelecimentoId: number;
 }

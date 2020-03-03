@@ -20,4 +20,13 @@ export class ClienteEstabelecimentoService extends ServiceBase<ClienteEstabeleci
     return this.httpService.get(`${this.url}/buscarPorUsuario/${id}`);        
   }
 
+  async salvar(clienteEstabelecimento: ClienteEstabelecimento): Promise<HttpResultModel> {          
+    return this.httpService.post(`${this.url}`,clienteEstabelecimento);    
+  } 
+
+  async deletePorUsuarioEEstabelecimento(usuarioId :number, estabelecimentoId :number): Promise<HttpResultModel> {             
+    return this.httpService.delete(`${this.url}/${usuarioId}/${estabelecimentoId}`);    
+  } 
+
+
 }
