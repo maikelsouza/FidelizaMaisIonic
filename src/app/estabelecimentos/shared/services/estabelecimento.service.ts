@@ -2,7 +2,7 @@ import { HttpResultModel } from './../../../common/model/HttpResultModel';
 import { ConfigHelper } from '../../../common/helpers/configHelper';
 import { HttpService } from '../../../common/service/http.service';
 import { Estabelecimento } from '../models/estabelecimento';
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import { ServiceBase } from 'src/app/base/serviceBase';
 
 @Injectable({
@@ -13,6 +13,8 @@ export class EstabelecimentoService  extends ServiceBase<Estabelecimento>
 {
    
    url: string = `${ConfigHelper.Url}estabelecimento`;
+
+   emitirListarEstabelecimento = new EventEmitter();
 
   constructor(public httpService: HttpService) {    
     super(`${ConfigHelper.Url}estabelecimento`, httpService);
@@ -51,6 +53,10 @@ export class EstabelecimentoService  extends ServiceBase<Estabelecimento>
 
   async buscarComProgramaFidelidadeOuCartaoFidelidade(): Promise<HttpResultModel> {        
     return this.httpService.get(`${this.url}/buscarComProgramaFidelidadeOuCartaoFidelidade`);        
+  }
+
+  async notificarListaEstabelecimento(){    
+    this.emitirListarEstabelecimento.emit();
   }
 
 
