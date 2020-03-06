@@ -53,8 +53,7 @@ export class FormEstabelecimentoPage implements OnInit {
 
 
   async onSubmit(): Promise<void>{
-    try { 
-      console.log(this.formulario.value);
+    try {       
       let resultado = await this.estabelecimentoSrv.salvar(this.formulario.value);  
       if (resultado.success){
         this.alertSrv.toast('Estabelecimento salvo com sucesso!');
