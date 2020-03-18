@@ -8,6 +8,7 @@ import { CartaoFidelidadeEditarComponent } from './cartoesFidelidade/cartao-fide
 import { ProgramaFidelidadeCadastroComponent } from './programasFidelidade/programa-fidelidade-cadastro/programa-fidelidade-cadastro.component';
 import { ProgramaFidelidadeListaEstabelecimentoComponent } from './programasFidelidade/programa-fidelidade-lista-estabelecimento/programa-fidelidade-lista-estabelecimento.component';
 import { ProgramaFidelidadeListaUsuarioComponent } from './programasFidelidade/programa-fidelidade-lista-usuario/programa-fidelidade-lista-usuario.component';
+import { PontuarClienteCadastroComponent } from './pontuarClientes/pontuar-cliente/pontuar-cliente-cadastro/pontuar-cliente-cadastro.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path: 'programaFidelidade/listaEstabelecimento/:id', component: ProgramaFidelidadeListaEstabelecimentoComponent },   
   { path: 'programaFidelidade/novo/:idEstabelecimento', component: ProgramaFidelidadeCadastroComponent }, 
   { path: 'programaFidelidade/editar/:id', component: ProgramaFidelidadeCadastroComponent },  
+  // Pontuar Clientes
+  { path: 'pontuarCliente', component: PontuarClienteCadastroComponent },   
   { path: 'home', loadChildren: './home/home.module#HomePageModule'},  
   { path: '', redirectTo: 'login', pathMatch: 'full'},
 ];

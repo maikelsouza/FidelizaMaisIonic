@@ -19,11 +19,16 @@
                 Estabelecimentos
               </ion-label>
             </ion-item>                       
-            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ADMINISTRADOR' " [routerDirection]="'root'" [routerLink]="'/usuarios'">             
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ADMINISTRADOR'" [routerDirection]="'root'" [routerLink]="'/usuarios'">             
               <ion-label>
                 Usuário
               </ion-label>
             </ion-item>
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'" [routerDirection]="'root'" [routerLink]="'/pontuarCliente'" >                                                                                                                 
+              <ion-label>
+                Pontuar Clientes
+              </ion-label>
+            </ion-item>                       
           </ion-menu-toggle>
         </ion-list>
       </ion-content>

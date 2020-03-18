@@ -55,6 +55,10 @@ export class EstabelecimentoService  extends ServiceBase<Estabelecimento>
     return this.httpService.get(`${this.url}/buscarComProgramaFidelidadeOuCartaoFidelidade`);        
   }
 
+  async buscarPorIdEstabelecimentoEEmail(id: number, email: string): Promise<HttpResultModel> {        
+    return this.httpService.get(`${this.url}/buscarPorEstabelecimentoEEmailCliente/${id}/${email}`);
+  }
+
   async notificarListaEstabelecimento(){    
     this.emitirListarEstabelecimento.emit();
   }

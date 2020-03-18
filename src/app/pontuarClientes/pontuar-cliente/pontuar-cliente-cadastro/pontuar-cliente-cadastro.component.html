@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pontuar Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <ion-list no-lines>    
+        <ion-item>        
+          <ion-label position="stacked">E-mail</ion-label>
+          <ion-input formControlName="email" type="text"></ion-input>
+       </ion-item>            
+    </ion-list>     
+    <ion-button (click)="pesquisarUsuario()">pesquisar</ion-button>  
+</form>
+</ion-content>
