@@ -9,7 +9,7 @@ import { HttpResultModel } from 'src/app/common/model/HttpResultModel';
 @Injectable({
   providedIn: 'root'
 })
-export class ProgramaFidelidadeService  extends ServiceBase<ProgramaFidelidade>{
+export class ProgramaFidelidadeService extends ServiceBase<ProgramaFidelidade>{
 
   url: string = `${ConfigHelper.Url}programaFidelidade`;
 
