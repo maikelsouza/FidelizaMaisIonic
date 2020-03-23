@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { ClienteEstabelecimentoService } from '../shared/services/cliente-estabelecimento.service';
 import { AlertaService } from 'src/app/common/service/alerta.service';
 import { EstabelecimentoVO } from '../shared/vos/estabelecimento-vo';
+import { UsuarioService } from 'src/app/usuarios/shared/services/usuario.service';
 
 @Component({
   selector: 'app-lista-estabelecimento',
@@ -28,6 +29,7 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
   constructor(
       private estabelecimentoSrv: EstabelecimentoService,
       private clienteEstabelecimentoService: ClienteEstabelecimentoService,
+      private usuarioService : UsuarioService,
       private route: ActivatedRoute,
       private alertSrv: AlertaService,
       private router: Router
@@ -61,12 +63,12 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
       if (this.tipoUsuario == "ESTABELECIMENTOS"){
         estabelecimentoResultado = await this.estabelecimentoSrv.buscarPorIdUsuario(this.usuarioLogado[0].id);           
         if (estabelecimentoResultado.success) {
-          this.estabelecimentos = <Array<Estabelecimento>>estabelecimentoResultado.data;        
+          this.estabelecimentos = <Array<Estabelecimento>>estabelecimentoResultado.data;                  
         }
       }else if (this.tipoUsuario == "CLIENTES"){
           estabelecimentoResultado = await this.estabelecimentoSrv.buscarComProgramaFidelidadeOuCartaoFidelidade();
           if(estabelecimentoResultado.success){
-            this.estabelecimentoVos =  <Array<EstabelecimentoVO>>estabelecimentoResultado.data;        
+            this.estabelecimentoVos =  <Array<EstabelecimentoVO>>estabelecimentoResultado.data;                 
             clienteEstabelecimentoResultado = await this.clienteEstabelecimentoService.buscarPorIdUsuario(this.usuarioLogado[0].id);
             this.clienteEstabelecimento = <Array<ClienteEstabelecimento>>clienteEstabelecimentoResultado.data;        
             this.descobrirClientesAssociadosEstabelecimentos();
