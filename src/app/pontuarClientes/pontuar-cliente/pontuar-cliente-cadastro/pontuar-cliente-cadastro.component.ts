@@ -5,11 +5,13 @@ import { AutenticadorService } from 'src/app/common/service/autenticador.service
 import { Usuario } from 'src/app/usuarios/shared/models/usuario';
 import { Estabelecimento } from 'src/app/estabelecimentos/shared/models/estabelecimento';
 import { EstabelecimentoService } from 'src/app/estabelecimentos/shared/services/estabelecimento.service';
-import { PontosClientesProgramaFidelidade } from '../../shared/models/pontos-clientes-programa-fidelidade';
+import { PontosClienteProgramaFidelidade } from '../../shared/models/pontos-cliente-programa-fidelidade';
 import { ProgramaFidelidadeService } from 'src/app/programasFidelidade/shared/services/programa-fidelidade.service';
 import { ProgramaFidelidade } from 'src/app/programasFidelidade/shared/models/programa-fidelidade';
 import { PontosClienteProgramaFidelidadeService } from '../../shared/services/pontos-cliente-programa-fidelidade.service';
 import { AlertaService } from 'src/app/common/service/alerta.service';
+import { TotalPontosClienteProgramaFidelidadeService } from '../../shared/services/total-pontos-cliente-programa-fidelidade.service';
+import { TotalPontosClienteProgramaFidelidade } from '../../shared/models/total-pontos-cliente-programa-fidelidade';
 
 @Component({
   selector: 'app-pontuar-cliente-cadastro',
@@ -29,6 +31,7 @@ export class PontuarClienteCadastroComponent implements OnInit {
     private estabelecimentoService : EstabelecimentoService,
     private programaFidelidadeService: ProgramaFidelidadeService,
     private pontosClienteProgramaFidelidadeService: PontosClienteProgramaFidelidadeService,
+    private totalPontosClienteProgramaFidelidadeService : TotalPontosClienteProgramaFidelidadeService,
     private alertSrv: AlertaService,
     
   ) { }
@@ -85,17 +88,34 @@ export class PontuarClienteCadastroComponent implements OnInit {
 
 
   async onSubmit(): Promise<void>{
-    try {       
-      let pontosClieteProgramaFidelidade : PontosClientesProgramaFidelidade = new PontosClientesProgramaFidelidade();
-      pontosClieteProgramaFidelidade.dataPontuacao = new Date();
-      pontosClieteProgramaFidelidade.pontos = this.formulario.get("quantidadePontos").value;
-      pontosClieteProgramaFidelidade.usuarioId = this.formulario.get("clienteId").value;
-      pontosClieteProgramaFidelidade.programaFidelidadeId = this.formulario.get("programaFidelidadeId").value;      
-      let pontosClieteProgramaFidelidadeResultado = await this.pontosClienteProgramaFidelidadeService.salvar(pontosClieteProgramaFidelidade);                                                        
-      if (pontosClieteProgramaFidelidadeResultado.success) {
-        this.alertSrv.toast('Pontuação realizada com sucesso!');
-      } 
-      
+    try {             
+      let clienteId =  this.formulario.get("clienteId").value;
+      let quantidadePontos = this.formulario.get("quantidadePontos").value;      
+      let totalPontosClienteProgramaFidelidade : TotalPontosClienteProgramaFidelidade = new TotalPontosClienteProgramaFidelidade();
+      totalPontosClienteProgramaFidelidade.programaFidelidadeId = this.formulario.get("programaFidelidadeId").value;
+      totalPontosClienteProgramaFidelidade.usuarioId = clienteId;
+      let PontosClientesProgramaFidelidades : PontosClienteProgramaFidelidade = new PontosClienteProgramaFidelidade();
+      PontosClientesProgramaFidelidades.dataPontuacao = new Date();
+      PontosClientesProgramaFidelidades.pontos = quantidadePontos;
+
+      let totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.getUsuarioIdAtivo(clienteId);
+      if (totalPontosClieteProgramaFidelidadeResultado.data == null){ // Caso não exista um regristo de pontos então cria o primeiro
+        totalPontosClienteProgramaFidelidade.totalPontos = quantidadePontos
+        let listaPontosClienteProgramaFidelidade = new Array<PontosClienteProgramaFidelidade>();
+        listaPontosClienteProgramaFidelidade.push(PontosClientesProgramaFidelidades);
+        totalPontosClienteProgramaFidelidade.PontosClienteProgramaFidelidades = listaPontosClienteProgramaFidelidade;
+        totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.salvar(totalPontosClienteProgramaFidelidade);
+      }else{ // Caso exista um regristo de pontos então atualiza a pontuação total
+        let totalPontosClienteProgramaFidelidadeId = totalPontosClieteProgramaFidelidadeResultado.data.id;
+        PontosClientesProgramaFidelidades.totalPontosClienteProgramaFidelidadeId = totalPontosClienteProgramaFidelidadeId
+        await this.pontosClienteProgramaFidelidadeService.salvar(PontosClientesProgramaFidelidades);
+        let somatorioPontosProgramaFidelidadeResultado = await this.pontosClienteProgramaFidelidadeService.buscarSomatorioPontosProgramaFidelidade(totalPontosClienteProgramaFidelidadeId);        
+        totalPontosClienteProgramaFidelidade.totalPontos = somatorioPontosProgramaFidelidadeResultado.data.pontos;        
+        totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.atualizar(totalPontosClienteProgramaFidelidadeId,totalPontosClienteProgramaFidelidade);
+      }
+      if (totalPontosClieteProgramaFidelidadeResultado.success) {
+          this.alertSrv.toast('Pontuação realizada com sucesso!');
+      }
     } catch (error) {
         console.log('Erro ao pontuar um cliente', error);    
     }

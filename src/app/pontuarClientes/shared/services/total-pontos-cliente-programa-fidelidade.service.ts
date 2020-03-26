@@ -20,9 +20,9 @@ export class TotalPontosClienteProgramaFidelidadeService extends ServiceBase<Tot
     return this.httpService.post(`${this.url}`,totalPontosClienteProgramaFidelidade);    
   } 
 
-  async countUsuariotivo(usuarioId: number): Promise<HttpResultModel> {                  
-    return this.httpService.get(`${this.url}/countUsuarioIdAtivo/${usuarioId}`);                                                 
-  } 
+  async atualizar(id: number, totalPontosClienteProgramaFidelidade: TotalPontosClienteProgramaFidelidade): Promise<HttpResultModel> {                  
+    return this.httpService.put(`${this.url}/${id}`,totalPontosClienteProgramaFidelidade);  
+  }     
 
   async getUsuarioIdAtivo(usuarioId: number): Promise<HttpResultModel> {                  
     return this.httpService.get(`${this.url}/getUsuarioIdAtivo/${usuarioId}`);                                                 
