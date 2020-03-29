@@ -1,8 +1,7 @@
 export class PontosClienteProgramaFidelidade {
 
     id: number;
-    pontos: number;    
-    dataPontuacao: Date; 
+    pontos: number;        
     ativo: boolean;    
     totalPontosClienteProgramaFidelidadeId: number;
 }
