@@ -24,9 +24,14 @@
                 Usuário
               </ion-label>
             </ion-item>
-            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'" [routerDirection]="'root'" [routerLink]="'/pontuarCliente'" >                                                                                                                 
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'" [routerDirection]="'root'" [routerLink]="'/pontuarClienteCadastro'" >                                                                                                                 
               <ion-label>
                 Pontuar Clientes
+              </ion-label>
+            </ion-item>                       
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'CLIENTES'" [routerDirection]="'root'" [routerLink]="'/resgatarPontosClienteRestate'" >                                                                                                                 
+              <ion-label>
+                Resgatar Pontos
               </ion-label>
             </ion-item>                       
           </ion-menu-toggle>
