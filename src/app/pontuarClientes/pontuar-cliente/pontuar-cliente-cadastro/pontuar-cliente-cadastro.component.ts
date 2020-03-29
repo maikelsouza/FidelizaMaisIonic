@@ -44,7 +44,7 @@ export class PontuarClienteCadastroComponent implements OnInit {
 
   private montarCamposTela() {  
     this.formulario = this.formBuilder.group({
-      email: [null], clienteId: [null], quantidadePontos: [null], programaFidelidadeId: [null]
+      email: [null], clienteId: [null], valorGasto: [null], programaFidelidadeId: [null]
     });    
   } 
 
@@ -89,13 +89,12 @@ export class PontuarClienteCadastroComponent implements OnInit {
 
   async onSubmit(): Promise<void>{
     try {             
-      let clienteId =  this.formulario.get("clienteId").value;
-      let quantidadePontos = this.formulario.get("quantidadePontos").value;      
+      const clienteId =  this.formulario.get("clienteId").value;
+      const quantidadePontos = this.calcularPontos(this.formulario.get("valorGasto").value);      
       let totalPontosClienteProgramaFidelidade : TotalPontosClienteProgramaFidelidade = new TotalPontosClienteProgramaFidelidade();
       totalPontosClienteProgramaFidelidade.programaFidelidadeId = this.formulario.get("programaFidelidadeId").value;
       totalPontosClienteProgramaFidelidade.usuarioId = clienteId;
-      let PontosClientesProgramaFidelidades : PontosClienteProgramaFidelidade = new PontosClienteProgramaFidelidade();
-      PontosClientesProgramaFidelidades.dataPontuacao = new Date();
+      let PontosClientesProgramaFidelidades : PontosClienteProgramaFidelidade = new PontosClienteProgramaFidelidade();      
       PontosClientesProgramaFidelidades.pontos = quantidadePontos;
 
       let totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.getUsuarioIdAtivo(clienteId);
@@ -119,7 +118,16 @@ export class PontuarClienteCadastroComponent implements OnInit {
     } catch (error) {
         console.log('Erro ao pontuar um cliente', error);    
     }
-  }   
+  }  
+
+ 
+  private calcularPontos(valorGasto : any) :number{
+    const regra = this.programasFidelidade[0].regra;
+    const posicaoVirgura = valorGasto.indexOf(",");
+    const valorGastoSemDecimais = valorGasto.substr(0,posicaoVirgura);
+    const valorGastoSemDecimaisEPontos  = valorGastoSemDecimais.replace(/\D+/g, '');
+    return valorGastoSemDecimaisEPontos / regra;
+  }  
 
 
   
