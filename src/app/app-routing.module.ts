@@ -8,8 +8,10 @@ import { CartaoFidelidadeEditarComponent } from './cartoesFidelidade/cartao-fide
 import { ProgramaFidelidadeCadastroComponent } from './programasFidelidade/programa-fidelidade-cadastro/programa-fidelidade-cadastro.component';
 import { ProgramaFidelidadeListaEstabelecimentoComponent } from './programasFidelidade/programa-fidelidade-lista-estabelecimento/programa-fidelidade-lista-estabelecimento.component';
 import { ProgramaFidelidadeListaUsuarioComponent } from './programasFidelidade/programa-fidelidade-lista-usuario/programa-fidelidade-lista-usuario.component';
-import { PontuarClienteCadastroComponent } from './pontuarClientes/pontuar-cliente-cadastro/pontuar-cliente-cadastro.component';
-import { ResgatarPontosClienteResgateComponent } from './resgatarPontosClientes/resgatar-pontos-cliente-resgate/resgatar-pontos-cliente-resgate.component';
+import { PontosClientePontuarComponent } from './pontosClientes/pontos-cliente-pontuar/pontos-cliente-pontuar.component';
+import { PontosClienteResgatarComponent } from './pontosClientes/pontos-cliente-resgatar/pontos-cliente-resgatar.component';
+
+
 
 
 const routes: Routes = [
@@ -26,10 +28,11 @@ const routes: Routes = [
   { path: 'programaFidelidade/listaEstabelecimento/:id', component: ProgramaFidelidadeListaEstabelecimentoComponent },   
   { path: 'programaFidelidade/novo/:idEstabelecimento', component: ProgramaFidelidadeCadastroComponent }, 
   { path: 'programaFidelidade/editar/:id', component: ProgramaFidelidadeCadastroComponent },  
-  // Pontuar Clientes  
-  { path: 'pontuarClienteCadastro', component: PontuarClienteCadastroComponent },   
-  // Resgatar Pontos Clientes  
-  { path: 'resgatarPontosClienteRestate', component: ResgatarPontosClienteResgateComponent },   
+  // Pontos Clientes    
+  { path: 'pontosClientePontuar', component: PontosClientePontuarComponent }, 
+  { path: 'pontosClienteResgatar', component: PontosClienteResgatarComponent },     
+  
+  
   { path: 'home', loadChildren: './home/home.module#HomePageModule'},  
   { path: '', redirectTo: 'login', pathMatch: 'full'},
 ];

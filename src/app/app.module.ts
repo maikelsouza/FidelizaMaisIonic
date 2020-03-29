@@ -22,9 +22,10 @@ import { ProgramaFidelidadeCadastroComponent } from './programasFidelidade/progr
 import { ProgramaFidelidadeListaUsuarioComponent } from './programasFidelidade/programa-fidelidade-lista-usuario/programa-fidelidade-lista-usuario.component';
 import { ProgramaFidelidadeListaEstabelecimentoComponent } from './programasFidelidade/programa-fidelidade-lista-estabelecimento/programa-fidelidade-lista-estabelecimento.component';
 import { ProgramaFidelidadeService } from './programasFidelidade/shared/services/programa-fidelidade.service';
-import { PontuarClienteCadastroComponent } from './pontuarClientes/pontuar-cliente-cadastro/pontuar-cliente-cadastro.component';
 import { UsuarioService } from './usuarios/shared/services/usuario.service';
-import { ResgatarPontosClienteResgateComponent } from './resgatarPontosClientes/resgatar-pontos-cliente-resgate/resgatar-pontos-cliente-resgate.component';
+import { PontosClientePontuarComponent } from './pontosClientes/pontos-cliente-pontuar/pontos-cliente-pontuar.component';
+import { PontosClienteResgatarComponent } from './pontosClientes/pontos-cliente-resgatar/pontos-cliente-resgatar.component';
+
 
 @NgModule({
   declarations: [
@@ -37,8 +38,9 @@ import { ResgatarPontosClienteResgateComponent } from './resgatarPontosClientes/
     ProgramaFidelidadeCadastroComponent,
     ProgramaFidelidadeListaEstabelecimentoComponent,
     ProgramaFidelidadeListaUsuarioComponent,
-    PontuarClienteCadastroComponent,
-    ResgatarPontosClienteResgateComponent
+    PontosClientePontuarComponent,
+    PontosClienteResgatarComponent   
+    
   ],
   entryComponents: [],
   imports: [
