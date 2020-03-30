@@ -20,14 +20,14 @@
       <ion-list>
         <ion-item>
           <ion-label>Selecione um Tipo </ion-label>
-          <ion-select formControlName="programaFidelidadeId"  okText="OK" cancelText="Cancelar"  (ionChange)="maikel($event)" >
+          <ion-select formControlName="programaFidelidadeId"  okText="OK" cancelText="Cancelar"  (ionChange)="carregarCamposItensProgramaFidelidade($event)" >
             <ion-select-option [value]="programaFidelidade.id" *ngFor="let programaFidelidade of programasFidelidade">{{programaFidelidade.nome}}</ion-select-option>                 
           </ion-select> 
         </ion-item>
         <ion-item>
           <ion-label>Selecione um Tipo </ion-label>
-          <ion-select formControlName="programaFidelidadeId"  okText="OK" cancelText="Cancelar">
-            <ion-select-option [value]="programaFidelidade.id" *ngFor="let programaFidelidade of programasFidelidade">{{programaFidelidade.nome}}</ion-select-option>                 
+          <ion-select formControlName="campoItemProgramaFidelidadeId"  okText="OK" cancelText="Cancelar">
+            <ion-select-option [value]="campoItemProgramaFidelidade.id" *ngFor="let campoItemProgramaFidelidade of campoItemProgramaFidelidades">{{campoItemProgramaFidelidade.nome}}</ion-select-option>                 
           </ion-select> 
         </ion-item>
       <ion-radio-group formControlName="clienteId">        

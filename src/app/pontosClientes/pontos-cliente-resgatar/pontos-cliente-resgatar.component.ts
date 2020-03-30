@@ -7,6 +7,7 @@ import { EstabelecimentoService } from 'src/app/estabelecimentos/shared/services
 import { Usuario } from 'src/app/usuarios/shared/models/usuario';
 import { Estabelecimento } from 'src/app/estabelecimentos/shared/models/estabelecimento';
 import { ProgramaFidelidadeService } from 'src/app/programasFidelidade/shared/services/programa-fidelidade.service';
+import { CampoItemProgramaFidelidade } from 'src/app/programasFidelidade/shared/models/campo-item-programa-fidelidade';
 
 @Component({
   selector: 'app-pontos-cliente-resgatar',
@@ -19,6 +20,7 @@ export class PontosClienteResgatarComponent implements OnInit {
   private usuarioLogado: Usuario;
   programasFidelidade: Array<ProgramaFidelidade> = new Array<ProgramaFidelidade>();
   estabelecimentos: Array<Estabelecimento> = new Array<Estabelecimento>();
+  campoItemProgramaFidelidades: Array<CampoItemProgramaFidelidade> = new Array<CampoItemProgramaFidelidade>();
   usuarios: Array<Usuario> = new Array<Usuario>();
 
   constructor(private formBuilder: FormBuilder,
@@ -34,7 +36,8 @@ export class PontosClienteResgatarComponent implements OnInit {
 
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
-      email: [null], clienteId: [null], programaFidelidadeId: [null]
+      email: [null], clienteId: [null], programaFidelidadeId: [null], 
+      campoItemProgramaFidelidadeId: [null]
     });
   }
 
@@ -64,9 +67,13 @@ export class PontosClienteResgatarComponent implements OnInit {
     }
   }
   
-  async maikel(): Promise<void> {
-    
-      console.log('makel maikel');
+  async carregarCamposItensProgramaFidelidade(event): Promise<void> {
+    const programaFidelidadeId =  this.formulario.get("programaFidelidadeId").value;
+    this.programasFidelidade.forEach(element => {
+      if (element.id == programaFidelidadeId){
+        this.campoItemProgramaFidelidades = element.CampoItemProgramaFidelidades;
+      }
+    });
     
   }
 
