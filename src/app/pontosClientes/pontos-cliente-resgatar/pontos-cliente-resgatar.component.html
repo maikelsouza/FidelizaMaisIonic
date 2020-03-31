@@ -16,20 +16,6 @@
          <ion-button (click)="pesquisarUsuario()">pesquisar</ion-button>  
         </ion-item>            
       </ion-list>
-
-      <ion-list>
-        <ion-item>
-          <ion-label>Selecione um Tipo </ion-label>
-          <ion-select formControlName="programaFidelidadeId"  okText="OK" cancelText="Cancelar"  (ionChange)="carregarCamposItensProgramaFidelidade($event)" >
-            <ion-select-option [value]="programaFidelidade.id" *ngFor="let programaFidelidade of programasFidelidade">{{programaFidelidade.nome}}</ion-select-option>                 
-          </ion-select> 
-        </ion-item>
-        <ion-item>
-          <ion-label>Selecione um Tipo </ion-label>
-          <ion-select formControlName="campoItemProgramaFidelidadeId"  okText="OK" cancelText="Cancelar">
-            <ion-select-option [value]="campoItemProgramaFidelidade.id" *ngFor="let campoItemProgramaFidelidade of campoItemProgramaFidelidades">{{campoItemProgramaFidelidade.nome}}</ion-select-option>                 
-          </ion-select> 
-        </ion-item>
       <ion-radio-group formControlName="clienteId">        
         <ion-list-header>
           <ion-label>Clientes</ion-label>
@@ -39,7 +25,23 @@
           <ion-radio slot="start"  value={{item.id}}></ion-radio>
         </ion-item> 
       </ion-radio-group>
-       
+
+      <ion-list>
+        <ion-item>
+          <ion-label>Selecione um Tipo </ion-label>
+          <ion-select formControlName="programaFidelidadeId"  okText="OK" cancelText="Cancelar"  (ionChange)="carregarCamposItensProgramaFidelidade($event)" >
+            <ion-select-option [value]="programaFidelidade.id" *ngFor="let programaFidelidade of programasFidelidade">{{programaFidelidade.nome}}</ion-select-option>                 
+          </ion-select> 
+        </ion-item>
+        <ion-radio-group formControlName="campoItemProgramaFidelidadeId">        
+          <ion-list-header>
+            <ion-label>Campo Item Programa Fidelidade</ion-label>
+          </ion-list-header>
+          <ion-item *ngFor="let campoItemProgramaFidelidade of campoItemProgramaFidelidades" >          
+            <ion-label>Nome:{{campoItemProgramaFidelidade.nome}}  Pontos:{{campoItemProgramaFidelidade.quantidadePontos}}</ion-label>
+            <ion-radio slot="start"  value={{campoItemProgramaFidelidade.id}}></ion-radio>
+          </ion-item> 
+        </ion-radio-group>
     </ion-list>
 
     <ion-button ion-button type="submit" block>Resgatar</ion-button >

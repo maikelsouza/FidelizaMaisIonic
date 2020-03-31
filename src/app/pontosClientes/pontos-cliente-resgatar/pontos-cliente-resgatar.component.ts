@@ -8,6 +8,9 @@ import { Usuario } from 'src/app/usuarios/shared/models/usuario';
 import { Estabelecimento } from 'src/app/estabelecimentos/shared/models/estabelecimento';
 import { ProgramaFidelidadeService } from 'src/app/programasFidelidade/shared/services/programa-fidelidade.service';
 import { CampoItemProgramaFidelidade } from 'src/app/programasFidelidade/shared/models/campo-item-programa-fidelidade';
+import { TotalPontosClienteProgramaFidelidadeService } from '../shared/services/total-pontos-cliente-programa-fidelidade.service';
+import { PontosClienteProgramaFidelidade } from '../shared/models/pontos-cliente-programa-fidelidade';
+import { TotalPontosClienteProgramaFidelidade } from '../shared/models/total-pontos-cliente-programa-fidelidade';
 
 @Component({
   selector: 'app-pontos-cliente-resgatar',
@@ -26,6 +29,7 @@ export class PontosClienteResgatarComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private estabelecimentoService: EstabelecimentoService, 
     private programaFidelidadeService: ProgramaFidelidadeService,
+    private totalPontosClienteProgramaFidelidadeService: TotalPontosClienteProgramaFidelidadeService,
     private alertSrv: AlertaService) { }
 
   ngOnInit() {
@@ -90,6 +94,59 @@ export class PontosClienteResgatarComponent implements OnInit {
     }
   }
 
-  
+  async onSubmit(): Promise<void> {
+    // Código precisa de um refactory!!!
+    try { 
+      const clienteId = this.formulario.get("clienteId").value;
+      const campoItemProgramaFidelidadeId = this.formulario.get("campoItemProgramaFidelidadeId").value;
+      let totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.getUsuarioIdAtivo(clienteId);
+      if (totalPontosClieteProgramaFidelidadeResultado.data != null){
+        const totalPontos = totalPontosClieteProgramaFidelidadeResultado.data.totalPontos;
+        let quantidadePontos = null;
+        let pontosSuficiente: boolean = true ;
+        this.campoItemProgramaFidelidades.forEach(element => {
+          if (element.id == campoItemProgramaFidelidadeId){
+            quantidadePontos = element.quantidadePontos; 
+            if (element.quantidadePontos > totalPontos){
+              pontosSuficiente = false;
+              this.alertSrv.alert('Pontuação Insuficiente',
+              `O Cliente não possue pontos para esse item. Total pontos do cliente: ${totalPontos}`);
+            } 
+          }
+        });
+        if (pontosSuficiente){
+          const diferencaPontos = totalPontos - quantidadePontos;
+          totalPontosClieteProgramaFidelidadeResultado.data.totalPontos = diferencaPontos;
+          totalPontosClieteProgramaFidelidadeResultado.data.dataResgate = new Date();
+          totalPontosClieteProgramaFidelidadeResultado.data.ativo = false;
+          if (diferencaPontos > 0){
+            let totalPontosClienteProgramaFidelidade: TotalPontosClienteProgramaFidelidade = new TotalPontosClienteProgramaFidelidade();
+            let PontosClientesProgramaFidelidades: PontosClienteProgramaFidelidade = new PontosClienteProgramaFidelidade();
+            let listaPontosClienteProgramaFidelidade = new Array<PontosClienteProgramaFidelidade>();
+            totalPontosClieteProgramaFidelidadeResultado.data.totalPontos = 0;
+            PontosClientesProgramaFidelidades.pontos = diferencaPontos;          
+            listaPontosClienteProgramaFidelidade.push(PontosClientesProgramaFidelidades);
+            totalPontosClienteProgramaFidelidade.PontosClienteProgramaFidelidades = listaPontosClienteProgramaFidelidade;  
+            totalPontosClienteProgramaFidelidade.usuarioId = clienteId;
+            totalPontosClienteProgramaFidelidade.programaFidelidadeId = this.formulario.get("programaFidelidadeId").value;
+            totalPontosClienteProgramaFidelidade.totalPontos = diferencaPontos;
+            await this.totalPontosClienteProgramaFidelidadeService.salvar(totalPontosClienteProgramaFidelidade);
+          }          
+          totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.atualizar(totalPontosClieteProgramaFidelidadeResultado.data.id, totalPontosClieteProgramaFidelidadeResultado.data);
+          if (totalPontosClieteProgramaFidelidadeResultado.success) {        
+            this.alertSrv.toast('Resgate realizado com sucesso!');
+          }
+        }
+      }else{
+        this.alertSrv.alert('Pontuação Insuficiente',
+        `O Cliente não possue pontos para esse item. Total pontos do cliente: 0`);
+      }
+
+    }
+    catch (error) {
+      console.log('Erro ao pontuar um cliente', error);
+    }
+
+  }
 
 }
