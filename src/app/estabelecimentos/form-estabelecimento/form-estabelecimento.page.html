@@ -80,6 +80,12 @@
                 </ion-item>
             </div>       
           </div> 
+          <ion-item>
+            <ion-label for="usuarioId">Usuário Responsável</ion-label>
+              <ion-select  formControlName="usuarioId"  okText="OK" cancelText="Cancelar">
+                <ion-select-option [value]="usuarioSemEstabelecimento.id" *ngFor="let usuarioSemEstabelecimento of usuariosSemEstabelecimento">{{usuarioSemEstabelecimento.nome}}</ion-select-option>                 
+              </ion-select>
+          </ion-item>    
       </ion-list> 
         
         

@@ -27,6 +27,10 @@ export class UsuarioService extends ServiceBase<Usuario> {
     return respotas;
   } 
 
+  async buscarSemEstabelecimentosAssociados(): Promise<HttpResultModel> {        
+    return this.httpService.get(`${this.url}/buscarSemEstabelecimentosAssociados`);    
+  } 
+
   async buscarPorId(id: number): Promise<HttpResultModel> {        
     let respotas = this.httpService.get(`${this.url}/${id}`);
     return respotas;

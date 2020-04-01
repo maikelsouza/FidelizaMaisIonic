@@ -10,6 +10,8 @@ import { EstabelecimentoService } from '../shared/services/estabelecimento.servi
 import { TipoEstabelecimento } from 'src/app/tipoEstabelecimento/shared/models/tipo-estabelecimento';
 import { Telefone } from '../shared/models/telefone';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/usuarios/shared/services/usuario.service';
+import { Usuario } from 'src/app/usuarios/shared/models/usuario';
 
 @Component({
   selector: 'app-form-estabelecimento',
@@ -26,6 +28,7 @@ export class FormEstabelecimentoPage implements OnInit {
   enderecoEstabelecimento: EnderecoEstabelecimento = new EnderecoEstabelecimento();
   estabelecimento: Estabelecimento = new Estabelecimento();  
   tipoEstabelecimentos: Array<TipoEstabelecimento> = new Array<TipoEstabelecimento>(); 
+  usuariosSemEstabelecimento: Array<Usuario> = new Array<Usuario>(); 
   
   private Telefones : FormArray;
   private MidiaSocials : FormArray;
@@ -37,6 +40,7 @@ export class FormEstabelecimentoPage implements OnInit {
     private formBuilder: FormBuilder,
     private alertSrv: AlertaService,
     private router: Router,
+    private usuarioService: UsuarioService
    ) {
      this.estabelecimento.EnderecoEstabelecimento = this.enderecoEstabelecimento;
      this.estabelecimento.Telefones = new Array();  
@@ -67,19 +71,30 @@ export class FormEstabelecimentoPage implements OnInit {
 
   async carregarTipoEstabelecimento(): Promise<void> {
     try {       
-      let tipoEstabelecimentoResulta = await this.tipoEstabelecimentoSrv.buscarTodosAtivos();
-      if (tipoEstabelecimentoResulta.success) {
-        this.tipoEstabelecimentos = <Array<TipoEstabelecimento>>tipoEstabelecimentoResulta.data;
+      let tipoEstabelecimentoResultado = await this.tipoEstabelecimentoSrv.buscarTodosAtivos();
+      if (tipoEstabelecimentoResultado.success) {
+        this.tipoEstabelecimentos = <Array<TipoEstabelecimento>>tipoEstabelecimentoResultado.data;
       }
     } catch (error) {
       console.log('Erro ao carregar os tipos de estabelecimentos', error);
     }
   } 
 
+
+  async carregarUsuariosSemEstabelecimentos(): Promise<void> {
+    try {       
+      const usuariosSemEstabelecimentosResultado = await this.usuarioService.buscarSemEstabelecimentosAssociados();
+      if (usuariosSemEstabelecimentosResultado.success) {
+        this.usuariosSemEstabelecimento = <Array<Usuario>>usuariosSemEstabelecimentosResultado.data;
+      }
+    } catch (error) {
+      console.log('Erro ao carregar os usuários sem estabelecimento', error);
+    }
+  } 
  
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
-      nome: [null], cnpj: [null], email: [null],tipoEstabelecimentoId: [null], ativo: [true], usuarioId: ['1'],
+      nome: [null], cnpj: [null], email: [null],tipoEstabelecimentoId: [null], ativo: [true], usuarioId: [null],
       EnderecoEstabelecimento: this.formBuilder.group({       
         rua: [null], numero: [null], complemento: [null],
         cep: [null], 
@@ -92,7 +107,9 @@ export class FormEstabelecimentoPage implements OnInit {
     });    
   } 
 
-ngOnInit() {}
+ngOnInit() {
+  this.carregarUsuariosSemEstabelecimentos();
+}
 
 criarItemTelefone(): FormGroup {  
     return this.formBuilder.group({
