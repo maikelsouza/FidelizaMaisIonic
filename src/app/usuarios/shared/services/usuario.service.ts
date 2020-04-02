@@ -29,7 +29,11 @@ export class UsuarioService extends ServiceBase<Usuario> {
 
   async buscarSemEstabelecimentosAssociados(): Promise<HttpResultModel> {        
     return this.httpService.get(`${this.url}/buscarSemEstabelecimentosAssociados`);    
-  } 
+  }
+  
+  async buscarPorEmail(email: string): Promise<HttpResultModel> {        
+    return this.httpService.get(`${this.url}/buscarPorEmail/${email}`);                                                     
+  }
 
   async buscarPorId(id: number): Promise<HttpResultModel> {        
     let respotas = this.httpService.get(`${this.url}/${id}`);

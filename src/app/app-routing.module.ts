@@ -10,6 +10,7 @@ import { ProgramaFidelidadeListaEstabelecimentoComponent } from './programasFide
 import { ProgramaFidelidadeListaUsuarioComponent } from './programasFidelidade/programa-fidelidade-lista-usuario/programa-fidelidade-lista-usuario.component';
 import { PontosClientePontuarComponent } from './pontosClientes/pontos-cliente-pontuar/pontos-cliente-pontuar.component';
 import { PontosClienteResgatarComponent } from './pontosClientes/pontos-cliente-resgatar/pontos-cliente-resgatar.component';
+import { EsqueciMinhaSenhaCadastroComponent } from './esqueciMinhaSenha/esqueci-minha-senha-cadastro/esqueci-minha-senha-cadastro.component';
 
 
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'estabelecimentos', loadChildren: './estabelecimentos/estabelecimentos.module#EstabelecimentosModule'},  
   { path: 'usuarios', loadChildren: './usuarios/usuarios.module#UsuariosModule'},    
   { path: 'login', component: LoginComponent},    
+  { path: 'esqueciMinhaSenha', component: EsqueciMinhaSenhaCadastroComponent},    
   // Cartão Fidelidade
   { path: 'cartaoFidelidade/listaUsuario', component: CartaoFidelidadeListaUsuarioComponent },   
   { path: 'cartaoFidelidade/listaEstabelecimento/:id', component: CartaoFidelidadeListaEstabelecimentoComponent },     

@@ -25,6 +25,7 @@ import { ProgramaFidelidadeService } from './programasFidelidade/shared/services
 import { UsuarioService } from './usuarios/shared/services/usuario.service';
 import { PontosClientePontuarComponent } from './pontosClientes/pontos-cliente-pontuar/pontos-cliente-pontuar.component';
 import { PontosClienteResgatarComponent } from './pontosClientes/pontos-cliente-resgatar/pontos-cliente-resgatar.component';
+import { EsqueciMinhaSenhaCadastroComponent } from './esqueciMinhaSenha/esqueci-minha-senha-cadastro/esqueci-minha-senha-cadastro.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { PontosClienteResgatarComponent } from './pontosClientes/pontos-cliente-
     ProgramaFidelidadeListaEstabelecimentoComponent,
     ProgramaFidelidadeListaUsuarioComponent,
     PontosClientePontuarComponent,
-    PontosClienteResgatarComponent   
+    PontosClienteResgatarComponent,
+    EsqueciMinhaSenhaCadastroComponent   
     
   ],
   entryComponents: [],
