@@ -1,7 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Meu Perfil</ion-title>
-  </ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title>Meu Perfil</ion-title>
+  </ion-toolbar>  
 </ion-header>
 <ion-content>
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
