@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Esqueci Minha Senha</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <ion-list no-lines>    
+    <ion-list no-lines >    
        <ion-item>
           <ion-label position="stacked">E-mail</ion-label>         
          <ion-input formControlName="email" type="text" ></ion-input>
