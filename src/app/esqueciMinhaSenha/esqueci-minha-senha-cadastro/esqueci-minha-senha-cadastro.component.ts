@@ -40,6 +40,7 @@ export class EsqueciMinhaSenhaCadastroComponent implements OnInit {
         }else{
           usuarioResultado.data.senha = this.gerarNovaSenha();          
           this.usuarioService.atualizar(usuarioResultado.data.id,usuarioResultado.data);
+          // IMPLEMENTAR ENVIO DE EMAIL
           this.alertSrv.toast('Você recebera um e-mail com a nova senha');        
         }
       }
