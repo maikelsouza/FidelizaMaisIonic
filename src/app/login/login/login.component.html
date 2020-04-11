@@ -6,17 +6,24 @@
   <ion-content>    
     <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
       <ion-list no-lines>            
-          <ion-item>        
+        <ion-item>        
             <ion-label position="stacked">Login</ion-label>
-            <ion-input formControlName="login" type="text"></ion-input>
+            <ion-input formControlName="login" type="text" ></ion-input>
          </ion-item>
+         <ion-item  *ngIf="login.invalid && (login.dirty || login.touched)" >      
+            <ion-label color="danger" *ngIf="login.errors.required">Campo obrigatório.</ion-label>           
+            <ion-label color="danger" *ngIf="login.errors.email">Formato de e-mail inválido.</ion-label>
+        </ion-item>       
          <ion-item>
             <ion-label position="stacked">Senha</ion-label>         
-            <ion-input formControlName="senha" type="password" ></ion-input>
+            <ion-input formControlName="senha" type="password"></ion-input>
          </ion-item>
+         <ion-item  *ngIf="senha.invalid && (senha.dirty || senha.touched)" >
+          <ion-label color="danger" *ngIf="senha.errors.required">Campo obrigatório</ion-label>           
+        </ion-item>
       </ion-list>       
         
-      <ion-button ion-button type="submit" block>Login</ion-button >
+      <ion-button ion-button type="submit" [disabled]="!formulario.valid" block>Login</ion-button >
         
       </form>
       <ion-button [routerLink]="['/esqueciMinhaSenha']">Esqueci Minha Senha</ion-button>                

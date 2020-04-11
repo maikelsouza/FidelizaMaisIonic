@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { LoginService } from './../shared/services/login.service';
 import { AlertaService } from './../../common/service/alerta.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -29,9 +29,15 @@ export class LoginComponent implements OnInit {
 
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
-      login: [null], senha: [null]
+      login: [null, [Validators.required, Validators.email]], 
+      senha: [null, Validators.required]
     });
   }
+
+  
+  public get login() {return this.formulario.get('login')}
+  public get senha() {return this.formulario.get('senha')}
+  
 
   async onSubmit(): Promise<void>{
     try {       

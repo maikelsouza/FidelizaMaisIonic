@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from 'src/app/usuarios/shared/services/usuario.service';
 import { AlertaService } from 'src/app/common/service/alerta.service';
 //const md5 = require('md5');
@@ -25,7 +25,7 @@ export class EsqueciMinhaSenhaCadastroComponent implements OnInit {
 
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
-      email: [null]
+      email: [null,[Validators.required, Validators.email]]
     });
   }
   
@@ -48,6 +48,8 @@ export class EsqueciMinhaSenhaCadastroComponent implements OnInit {
         console.log('Erro ao buscar um usuário por email', error);    
     }
   }   
+
+  public get email() {return this.formulario.get('email')}
   
   private gerarNovaSenha() : string{        
     const novaSenhaStr = new String(Math.random());    

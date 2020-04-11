@@ -13,7 +13,11 @@
           <ion-label position="stacked">E-mail</ion-label>         
          <ion-input formControlName="email" type="text" ></ion-input>
        </ion-item>   
+       <ion-item  *ngIf="email.invalid && (email.dirty || email.touched)" >      
+        <ion-label color="danger" *ngIf="email.errors.required">Campo obrigatório.</ion-label>           
+        <ion-label color="danger" *ngIf="email.errors.email">Formato de e-mail inválido.</ion-label>
+       </ion-item>       
     </ion-list> 
-  <ion-button ion-button type="submit" block>Gerar Senha</ion-button >
+  <ion-button ion-button type="submit" [disabled]="!formulario.valid" block>Gerar Senha</ion-button >
 </form>
 </ion-content>
