@@ -28,7 +28,7 @@ export class UsuarioCadastroComponent implements OnInit {
       dataNascimento: [null], 
       senha: [null,Validators.required], 
       confirmarSenha: [null, Validators.required], 
-      grupoUsuarioId: [3]
+      grupoUsuarioId: [2]
     });
   }
 
