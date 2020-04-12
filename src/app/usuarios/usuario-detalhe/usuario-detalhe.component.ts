@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuarioService } from './../shared/services/usuario.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertaService } from './../../common/service/alerta.service';
@@ -43,11 +43,11 @@ export class UsuarioDetalheComponent implements OnInit {
         this.usuario = usuarioResultado.data;        
         this.formulario = this.formBuilder.group({
           id: [this.usuario.id],
-          nome: [this.usuario.nome],
+          nome: [this.usuario.nome,Validators.required],
           cpf: [this.usuario.cpf],
-          email: [this.usuario.email],       
-          ativo: [this.usuario.ativo],  
-          sexo: [this.usuario.sexo],  
+          email: [this.usuario.email,[Validators.required, Validators.email]],       
+          ativo: [this.usuario.ativo,Validators.required],  
+          sexo: [this.usuario.sexo,Validators.required],  
           dataNascimento: [this.usuario.dataNascimento],  
         })
       }      
@@ -55,6 +55,10 @@ export class UsuarioDetalheComponent implements OnInit {
       console.log('Erro ao carregar o Usuário', error);
     }
   }
+  public get nome() {return this.formulario.get('nome')}
+  public get email() {return this.formulario.get('email')}
+  public get ativo() {return this.formulario.get('ativo')}
+  public get sexo() {return this.formulario.get('sexo')}
 
   async  onSubmit():  Promise<void> {     
     try {    
