@@ -1,6 +1,6 @@
 import { AlertaService } from './../../common/service/alerta.service';
 import { UsuarioService } from './../shared/services/usuario.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../shared/models/usuario';
 import { AutenticadorService } from 'src/app/common/service/autenticador.service';
@@ -28,18 +28,25 @@ export class UsuarioMeuPerfilComponent implements OnInit {
 
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
-      id : [null], nome: [null], cpf: [null], email: [null],sexo: [null],
+      id : [null], nome: [null, Validators.required], 
+      cpf: [null], email: [null,[Validators.required, Validators.email]],
+      sexo: [null,Validators.required],
       dataNascimento: [null]
     });
   }
+
+  public get nome() {return this.formulario.get('nome')}
+  public get email() {return this.formulario.get('email')}
+  public get sexo() {return this.formulario.get('sexo')}
 
   private async carregarDadosUsuario(): Promise<void> {
     try {             
         let resultado = await this.usuarioService.buscarPorId( AutenticadorService.UsuarioLogado[0].id);       
         let usuarioLogado = resultado.data;
         this.formulario = this.formBuilder.group({
-          id : [usuarioLogado.id], nome: [usuarioLogado.nome], cpf: [usuarioLogado.cpf], 
-          email: [usuarioLogado.email], sexo: [usuarioLogado.sexo], dataNascimento: [usuarioLogado.dataNascimento]
+          id : [usuarioLogado.id], nome: [usuarioLogado.nome, Validators.required], cpf: [usuarioLogado.cpf], 
+          email: [usuarioLogado.email,[Validators.required, Validators.email]],
+           sexo: [usuarioLogado.sexo, Validators.required], dataNascimento: [usuarioLogado.dataNascimento]
         });
     } catch (error) {
       console.log('Erro ao carregar os dados do usuário logado', error);

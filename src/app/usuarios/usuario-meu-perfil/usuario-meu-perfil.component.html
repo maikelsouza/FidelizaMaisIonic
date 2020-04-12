@@ -13,10 +13,17 @@
           <ion-label for="nome" position="stacked">Nome</ion-label>         
           <ion-input formControlName="nome" type="text" ></ion-input>
        </ion-item>
+       <ion-item  *ngIf="nome.invalid && (nome.dirty || nome.touched)" >      
+          <ion-label color="danger" *ngIf="nome.errors.required">Campo obrigatório.</ion-label>                   
+       </ion-item>      
        <ion-item>
           <ion-label position="stacked">E-mail</ion-label>         
           <ion-input formControlName="email" type="text" ></ion-input>
        </ion-item>
+       <ion-item  *ngIf="email.invalid && (email.dirty || email.touched)" >      
+          <ion-label color="danger" *ngIf="email.errors.required">Campo obrigatório.</ion-label>           
+          <ion-label color="danger" *ngIf="email.errors.email">Formato de e-mail inválido.</ion-label>
+      </ion-item>  
        <ion-item>
          <ion-label for="sexo">Sexo</ion-label>
          <ion-select  formControlName="sexo"  okText="OK" cancelText="Cancelar">
@@ -24,6 +31,9 @@
             <ion-select-option [value]="feminino">Feminino</ion-select-option>
          </ion-select>
       </ion-item> 
+      <ion-item  *ngIf="sexo.invalid && (sexo.dirty || sexo.touched)" >      
+        <ion-label color="danger" *ngIf="sexo.errors.required">Campo obrigatório.</ion-label>                   
+     </ion-item>      
      <ion-item>
         <ion-label for="dataNascimento" position="stacked" >Data de Nascimento</ion-label>         
         <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
@@ -36,7 +46,7 @@
     </ion-list> 
       
       
-    <ion-button ion-button type="submit" block>Atualizar</ion-button >
+    <ion-button ion-button type="submit" block [disabled]="!formulario.valid">Atualizar</ion-button >
       <ion-button ion-button [routerLink]="'/home'" block>Cancelar</ion-button >
 </form>
 </ion-content>
