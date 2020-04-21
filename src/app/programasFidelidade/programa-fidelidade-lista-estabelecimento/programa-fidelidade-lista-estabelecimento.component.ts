@@ -32,7 +32,7 @@ export class ProgramaFidelidadeListaEstabelecimentoComponent implements OnInit, 
       }
     );
     
-    this.programaFidelidadeService.emitirCartaoFidelidadeCriado.subscribe(
+    this.programaFidelidadeService.emitirProgramaFidelidadeCriado.subscribe(
       () => {
         this.carregarListaPorEstabelecimento();
       }
