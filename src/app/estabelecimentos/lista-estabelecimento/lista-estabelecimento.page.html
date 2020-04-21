@@ -9,11 +9,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list *ngIf="tipoUsuario == 'ADMINISTRADOR' || tipoUsuario == 'ESTABELECIMENTOS'" >
+<ion-content>     
+    <ion-list *ngIf="tipoUsuario == 'ADMINISTRADOR' || tipoUsuario == 'ESTABELECIMENTOS'" >
     <ion-item *ngFor="let item of estabelecimentos" >
       <div class="item-note" slot="end">
-          <ion-button [routerLink]="['/estabelecimentos',item.id]">Editar</ion-button>          
+          <ion-button [routerLink]="['/estabelecimento',item.id]">Editar</ion-button>          
         {{item.nome}}
       </div>
     </ion-item>
@@ -28,8 +28,8 @@
       </div>
     </ion-item>
   </ion-list>
+ 
 
-
-<ion-button *ngIf="tipoUsuario == 'ADMINISTRADOR'" [routerLink]="['novo']">Novo</ion-button>
+<ion-button *ngIf="tipoUsuario == 'ADMINISTRADOR'" [routerLink]="['/estabelecimento/novo']">Novo</ion-button>
 <router-outlet></router-outlet>
 </ion-content>

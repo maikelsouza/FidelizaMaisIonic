@@ -44,11 +44,10 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
       }
     ); 
     this.estabelecimentoSrv.emitirListarEstabelecimento.subscribe(
-      () => {
+      () => {       
         this.carregarListaEstabelecimento();
       }
     );  
-   
     this.carregarListaEstabelecimento();
   }
 
@@ -58,7 +57,7 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
 
   async carregarListaEstabelecimento(): Promise<void> {
     try {      
-      let estabelecimentoResultado = undefined;     
+       let estabelecimentoResultado = undefined;     
       let clienteEstabelecimentoResultado;  
       if (this.tipoUsuario == "ESTABELECIMENTOS"){
         estabelecimentoResultado = await this.estabelecimentoSrv.buscarPorIdUsuario(this.usuarioLogado[0].id);           
@@ -73,7 +72,7 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
             this.clienteEstabelecimento = <Array<ClienteEstabelecimento>>clienteEstabelecimentoResultado.data;        
             this.descobrirClientesAssociadosEstabelecimentos();
           }          
-      }else{
+      }else{ 
         estabelecimentoResultado = await this.estabelecimentoSrv.buscarTodos();
         if (estabelecimentoResultado.success) {
           this.estabelecimentos = <Array<Estabelecimento>>estabelecimentoResultado.data;        
@@ -94,7 +93,7 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
       if (resultado.success){
         this.alertSrv.toast('Cliente associado com sucesso!');        
         await this.estabelecimentoSrv.notificarListaEstabelecimento();
-        this.router.navigate(['/estabelecimentos'],{ queryParams: { tipoUsuario: this.usuarioLogado[0].GrupoUsuario.nome } });             
+        this.router.navigate(['/estabelecimento'],{ queryParams: { tipoUsuario: this.usuarioLogado[0].GrupoUsuario.nome } });             
       }
     } catch (error) {
         console.log('Erro ao associar um cliente a um estabelecimento', error);    
@@ -111,7 +110,7 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
       if (resultado.success) {
         this.alertSrv.toast('Cliente desassociar com sucesso!');
         await this.estabelecimentoSrv.notificarListaEstabelecimento();
-        this.router.navigate(['/estabelecimentos'],{ queryParams: { tipoUsuario: this.usuarioLogado[0].GrupoUsuario.nome } });             
+        this.router.navigate(['/estabelecimento'],{ queryParams: { tipoUsuario: this.usuarioLogado[0].GrupoUsuario.nome } });             
       }
     } catch (error) {
       console.log('Erro ao desassociar um cliente a um estabelecimento', error);
