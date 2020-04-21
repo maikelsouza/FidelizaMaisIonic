@@ -114,7 +114,8 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
         descricao: '',
         ativo: true,
         quantidadePontos: '',
-        dataExpiracao: ''     
+        dataExpiracao: ''        
+        
       });
       return campoItemProgramaFidelidade;
   }
