@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>estabelecimento-detalhe</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -89,7 +92,7 @@
     <ion-button ion-button type="submit" block>Atualizar</ion-button >
     <ion-button ion-button [routerLink]="['/programaFidelidade/listaEstabelecimento',id]"block>Programa Fidelidade</ion-button >
       <ion-button ion-button [routerLink]="['/cartaoFidelidade/listaEstabelecimento',id]"block>Cartão Fidelidade</ion-button >
-    <ion-button ion-button [routerLink]="'/estabelecimentos'" [queryParams]="{tipoUsuario:usuarioLogado[0].GrupoUsuario.nome}"   block>Cancelar</ion-button >      
+    <ion-button ion-button [routerLink]="'/estabelecimento'" [queryParams]="{tipoUsuario:usuarioLogado[0].GrupoUsuario.nome}"   block>Cancelar</ion-button >      
     
   </form>
 </ion-content>

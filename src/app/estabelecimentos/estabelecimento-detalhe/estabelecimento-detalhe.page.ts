@@ -33,7 +33,7 @@ export class EstabelecimentoDetalhePage implements OnInit {
     private router: Router,
     private estabelecimentoService: EstabelecimentoService,
     private formBuilder: FormBuilder,
-    private tipoEstabelecimentoSrv: TipoEstabelecimentoService,
+    private tipoEstabelecimentoSrv: TipoEstabelecimentoService,    
     private alertSrv: AlertaService) {
 
     
@@ -147,7 +147,8 @@ export class EstabelecimentoDetalhePage implements OnInit {
        let resultado = await this.estabelecimentoService.atualizar(this.formulario.get("id").value,this.formulario.value);
        if (resultado.success){
           this.alertSrv.toast('Estabelecimento atualizado com sucesso!');
-          this.router.navigate(['/estabelecimentos'],{ queryParams: { tipoUsuario: this.usuarioLogado[0].GrupoUsuario.nome } });             
+          await this.estabelecimentoService.notificarListaEstabelecimento();            
+          this.router.navigate(['/estabelecimento/lista'],{ queryParams: { tipoUsuario: this.usuarioLogado[0].GrupoUsuario.nome } });                      
         }
     } catch (error) {
       console.log('Erro ao atualizar o estabelecimento', error);
