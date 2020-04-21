@@ -13,10 +13,10 @@ export class ProgramaFidelidadeService extends ServiceBase<ProgramaFidelidade>{
 
   url: string = `${ConfigHelper.Url}programaFidelidade`;
 
-  emitirCartaoFidelidadeCriado = new EventEmitter();
+  emitirProgramaFidelidadeCriado = new EventEmitter();
 
   constructor(public httpService: HttpService) {
-    super(`${ConfigHelper.Url}programaFidelidade`, httpService);
+    super(`${ConfigHelper.Url}programaFidelidade`, httpService);    
    }
 
    async salvar(programaFidelidade: ProgramaFidelidade): Promise<HttpResultModel> {                  
@@ -45,6 +45,6 @@ export class ProgramaFidelidadeService extends ServiceBase<ProgramaFidelidade>{
   }
   
   async notificarProgramaFidelidadeSalvo(){    
-    this.emitirCartaoFidelidadeCriado.emit();
+    this.emitirProgramaFidelidadeCriado.emit();
   }
 }
