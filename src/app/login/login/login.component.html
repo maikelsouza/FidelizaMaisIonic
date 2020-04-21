@@ -8,7 +8,7 @@
       <ion-list no-lines>            
         <ion-item>        
             <ion-label position="stacked">Login</ion-label>
-            <ion-input formControlName="login" type="text" ></ion-input>
+            <ion-input formControlName="login" type="email" ></ion-input>
          </ion-item>
          <ion-item  *ngIf="login.invalid && (login.dirty || login.touched)" >      
             <ion-label color="danger" *ngIf="login.errors.required">Campo obrigatório.</ion-label>           
