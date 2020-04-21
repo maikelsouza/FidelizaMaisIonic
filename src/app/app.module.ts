@@ -26,6 +26,10 @@ import { UsuarioService } from './usuarios/shared/services/usuario.service';
 import { PontosClientePontuarComponent } from './pontosClientes/pontos-cliente-pontuar/pontos-cliente-pontuar.component';
 import { PontosClienteResgatarComponent } from './pontosClientes/pontos-cliente-resgatar/pontos-cliente-resgatar.component';
 import { EsqueciMinhaSenhaCadastroComponent } from './esqueciMinhaSenha/esqueci-minha-senha-cadastro/esqueci-minha-senha-cadastro.component';
+import { FormEstabelecimentoPage } from './estabelecimentos/form-estabelecimento/form-estabelecimento.page';
+import { ListaEstabelecimentoPage } from './estabelecimentos/lista-estabelecimento/lista-estabelecimento.page';
+import { EstabelecimentoDetalhePage } from './estabelecimentos/estabelecimento-detalhe/estabelecimento-detalhe.page';
+import { EstabelecimentoService } from './estabelecimentos/shared/services/estabelecimento.service';
 
 
 @NgModule({
@@ -34,14 +38,17 @@ import { EsqueciMinhaSenhaCadastroComponent } from './esqueciMinhaSenha/esqueci-
     LoginComponent,
     CartaoFidelidadeCadastroComponent,
     CartaoFidelidadeListaUsuarioComponent,
-    CartaoFidelidadeListaEstabelecimentoComponent,
     CartaoFidelidadeEditarComponent,
+    CartaoFidelidadeListaEstabelecimentoComponent,
+    ProgramaFidelidadeListaUsuarioComponent,    
     ProgramaFidelidadeCadastroComponent,
     ProgramaFidelidadeListaEstabelecimentoComponent,
-    ProgramaFidelidadeListaUsuarioComponent,
     PontosClientePontuarComponent,
     PontosClienteResgatarComponent,
-    EsqueciMinhaSenhaCadastroComponent   
+    EsqueciMinhaSenhaCadastroComponent,
+    FormEstabelecimentoPage,
+    ListaEstabelecimentoPage,
+    EstabelecimentoDetalhePage      
     
   ],
   entryComponents: [],
@@ -61,6 +68,7 @@ import { EsqueciMinhaSenhaCadastroComponent } from './esqueciMinhaSenha/esqueci-
     CartaoFidelidadeService,
     ProgramaFidelidadeService,
     UsuarioService,
+    EstabelecimentoService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
