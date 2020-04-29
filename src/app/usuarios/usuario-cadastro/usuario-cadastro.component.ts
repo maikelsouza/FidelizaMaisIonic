@@ -2,6 +2,8 @@ import { AlertaService } from './../../common/service/alerta.service';
 import { UsuarioService } from './../shared/services/usuario.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-usuario-cadastro',
@@ -11,12 +13,16 @@ import { Component, OnInit } from '@angular/core';
 export class UsuarioCadastroComponent implements OnInit {
 
   private formulario : FormGroup;  
+  private tipoUsuario : string;
+  inscricao: Subscription;
   
 
   constructor(
     private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
-    private alertService: AlertaService
+    private alertService: AlertaService,
+    private route: ActivatedRoute
+    
   ) { }
 
   private montarCamposTela() {
@@ -28,7 +34,7 @@ export class UsuarioCadastroComponent implements OnInit {
       dataNascimento: [null], 
       senha: [null,Validators.required], 
       confirmarSenha: [null, Validators.required], 
-      grupoUsuarioId: [2]
+      grupoUsuarioId: [null]
     });
   }
 
@@ -47,12 +53,18 @@ export class UsuarioCadastroComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inscricao = this.route.queryParams.subscribe(
+      (queryParams: any) => {
+        this.tipoUsuario = queryParams['tipoUsuario'];
+      }
+    ); 
     this.montarCamposTela();
   }
 
   async onSubmit(): Promise<void>{
     try { 
       if (this.validarSenha()){
+        this.formulario.value.grupoUsuarioId = this.tipoUsuario;
         let resultado = await this.usuarioService.salvar(this.formulario.value);  
         if (resultado.success){
           this.alertService.toast('Usuário salvo com sucesso!');

@@ -18,6 +18,7 @@
       </div>
     </ion-item>
   </ion-list>  
-  <ion-button [routerLink]="['novo']">Novo</ion-button>
+  <!-- Necessário realizar um refactory para colocar não o ID da tabela de grupousuario, mas sim um código referente ao grupo e depois realizar a consulta -->
+  <ion-button [routerLink]="['novo']" [queryParams]="{tipoUsuario:2}">Novo</ion-button>
 <router-outlet></router-outlet>
 </ion-content>
