@@ -194,9 +194,7 @@ export class FormEstabelecimentoPage implements OnInit {
         });
       }
       return resultado; 
-  }
-
-  
+  } 
 
   public get nome() {return this.formulario.get('nome')}
   public get email() {return this.formulario.get('email')}
