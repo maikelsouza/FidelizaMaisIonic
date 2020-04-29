@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProgramaFidelidade } from 'src/app/programasFidelidade/shared/models/programa-fidelidade';
 import { AlertaService } from 'src/app/common/service/alerta.service';
 import { AutenticadorService } from 'src/app/common/service/autenticador.service';
@@ -40,10 +40,18 @@ export class PontosClienteResgatarComponent implements OnInit {
 
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
-      email: [null], clienteId: [null], programaFidelidadeId: [null], 
-      campoItemProgramaFidelidadeId: [null]
+      email: [null,Validators.required],
+      clienteId: [null, Validators.required],
+      programaFidelidadeId: [null, Validators.required], 
+      campoItemProgramaFidelidadeId: [null, Validators.required]
     });
   }
+
+  public get email() {return this.formulario.get('email')}
+  public get clienteId() {return this.formulario.get('clienteId')}
+  public get programaFidelidadeId() {return this.formulario.get('programaFidelidadeId')}
+  public get campoItemProgramaFidelidadeId() {return this.formulario.get('campoItemProgramaFidelidadeId')}
+ 
 
   async pesquisarUsuario(): Promise<void> {
     try {

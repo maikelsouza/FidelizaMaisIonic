@@ -13,8 +13,11 @@
     <ion-list no-lines>    
         <ion-item>        
           <ion-label position="stacked">E-mail</ion-label>
-          <ion-input formControlName="email" type="text"></ion-input>
-       </ion-item>            
+          <ion-input formControlName="email" type="email"></ion-input>
+       </ion-item>   
+       <ion-item  *ngIf="email.invalid && (email.dirty || email.touched)" >      
+         <ion-label color="danger" *ngIf="email.errors.required">Campo obrigatório.</ion-label>                    
+       </ion-item>           
        <ion-item>        
          <ion-button (click)="pesquisarUsuario()">pesquisar</ion-button>  
         </ion-item>            
@@ -27,15 +30,17 @@
           <ion-label>{{item.nome}}</ion-label>
           <ion-radio slot="start"  value={{item.id}}></ion-radio>
         </ion-item> 
-      </ion-radio-group>
-
+      </ion-radio-group>     
       <ion-list>
         <ion-item>
-          <ion-label>Selecione um Tipo </ion-label>
+          <ion-label>Selecione um Programa de fidelidade </ion-label>
           <ion-select formControlName="programaFidelidadeId"  okText="OK" cancelText="Cancelar"  (ionChange)="carregarCamposItensProgramaFidelidade($event)" >
             <ion-select-option [value]="programaFidelidade.id" *ngFor="let programaFidelidade of programasFidelidade">{{programaFidelidade.nome}}</ion-select-option>                 
           </ion-select> 
         </ion-item>
+        <ion-item  *ngIf="programaFidelidadeId.invalid && (programaFidelidadeId.dirty || programaFidelidadeId.touched)" >      
+          <ion-label color="danger" *ngIf="programaFidelidadeId.errors.required">Campo obrigatório.</ion-label>                    
+        </ion-item> 
         <ion-radio-group formControlName="campoItemProgramaFidelidadeId">        
           <ion-list-header>
             <ion-label>Campo Item Programa Fidelidade</ion-label>
@@ -43,10 +48,10 @@
           <ion-item *ngFor="let campoItemProgramaFidelidade of campoItemProgramaFidelidades" >          
             <ion-label>Nome:{{campoItemProgramaFidelidade.nome}}  Pontos:{{campoItemProgramaFidelidade.quantidadePontos}}</ion-label>
             <ion-radio slot="start"  value={{campoItemProgramaFidelidade.id}}></ion-radio>
-          </ion-item> 
+          </ion-item>          
         </ion-radio-group>
     </ion-list>
 
-    <ion-button ion-button type="submit" block>Resgatar</ion-button >
+    <ion-button ion-button type="submit" [disabled]="!formulario.valid" block>Resgatar</ion-button >
 </form>
 </ion-content>
