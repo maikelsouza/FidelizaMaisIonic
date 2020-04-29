@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { CartaoFidelidadeService } from './../shared/services/cartao-fidelidade.service';
@@ -43,11 +43,19 @@ export class CartaoFidelidadeCadastroComponent implements OnInit, OnDestroy {
 
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
-      nome: [null], ativo: [true], descricao: [null], quantidadeMarcacao: [null], dataExpiracao: [null],
-      estabelecimentoId: [this.estabelecimentoId], premio: [null],    
+      nome: [null, Validators.required], ativo: [true, Validators.required],
+      descricao: [null], quantidadeMarcacao: [null, Validators.required],
+      dataExpiracao: [null],estabelecimentoId: [this.estabelecimentoId],
+      premio: [null, Validators.required],    
       CampoRegistroCartaoFidelidades : this.formBuilder.array([this.criarCampoRegistroCartaoFidelidade()])
     });
   }
+
+  public get nome() {return this.formulario.get('nome')}  
+  public get ativo() {return this.formulario.get('ativo')}
+  public get quantidadeMarcacao() {return this.formulario.get('quantidadeMarcacao')}
+  public get premio() {return this.formulario.get('premio')}
+  
   
   async onSubmit(): Promise<void>{
     try {            

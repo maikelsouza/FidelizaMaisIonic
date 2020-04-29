@@ -10,6 +10,9 @@
           <ion-label position="stacked">Nome</ion-label>
           <ion-input formControlName="nome" type="text"></ion-input>
        </ion-item>
+       <ion-item  *ngIf="nome.invalid && (nome.dirty || nome.touched)" >      
+          <ion-label color="danger" *ngIf="nome.errors.required">Campo obrigatório.</ion-label>                   
+       </ion-item>
        <ion-item>
           <ion-label position="stacked">Descrição</ion-label>
           <ion-textarea formControlName="descricao"></ion-textarea>         
@@ -18,6 +21,9 @@
           <ion-label position="stacked">Quantidade de Marcação</ion-label>         
          <ion-input formControlName="quantidadeMarcacao" type="number" ></ion-input>
        </ion-item>
+       <ion-item  *ngIf="quantidadeMarcacao.invalid && (quantidadeMarcacao.dirty || quantidadeMarcacao.touched)" >      
+          <ion-label color="danger" *ngIf="quantidadeMarcacao.errors.required">Campo obrigatório.</ion-label>                   
+      </ion-item>
        <ion-item>
         <ion-label for="dataExpiracao" position="stacked">Data Expirar</ion-label>        
         <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
@@ -26,7 +32,10 @@
        <ion-item>
           <ion-label position="stacked">Prêmio</ion-label>
           <ion-textarea formControlName="premio"></ion-textarea>         
-       </ion-item>  
+       </ion-item> 
+       <ion-item  *ngIf="premio.invalid && (premio.dirty || premio.touched)" >      
+         <ion-label color="danger" *ngIf="premio.errors.required">Campo obrigatório.</ion-label>                   
+       </ion-item> 
        <ion-item>
         <ion-label position="stacked">Ativo</ion-label>  
         <ion-select  formControlName="ativo"  okText="OK" cancelText="Cancelar">
@@ -34,34 +43,23 @@
            <ion-select-option [value]="false">Inativo</ion-select-option>
         </ion-select>               
        </ion-item>          
-
+       <ion-item  *ngIf="ativo.invalid && (ativo.dirty || ativo.touched)" >      
+          <ion-label color="danger" *ngIf="ativo.errors.required">Campo obrigatório.</ion-label>                   
+       </ion-item>
          
      <div formArrayName="CampoRegistroCartaoFidelidades"  
       *ngFor="let item of formulario.get('CampoRegistroCartaoFidelidades').controls; let i = index">
-      <div [formGroupName]="i">                                                             
-        <ion-label  position="stacked">Marcado</ion-label>      
-        <input type="checkbox" formControlName="marcado"> 
-        <ion-label  position="stacked">Data</ion-label>      
-        <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY HH:mm"
-          formControlName="data"  placeholder="Selecione uma Data"></ion-datetime>  
-        <ion-label  position="stacked">ID</ion-label>    
-        <ion-input formControlName="id" type="text" ></ion-input>  
-
-          
+       <div [formGroupName]="i">                                                             
+          <ion-label  position="stacked">Marcado</ion-label>      
+          <input type="checkbox" formControlName="marcado"> 
+          <ion-label  position="stacked">Data</ion-label>      
+          <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY HH:mm"
+            formControlName="data"  placeholder="Selecione uma Data"></ion-datetime>  
+          <ion-label  position="stacked">ID</ion-label>    
+          <ion-input formControlName="id" type="text" ></ion-input> 
         </div>       
-      </div>  
-       
-
-
-    
-        
-      
+      </div> 
     </ion-list>
-
-    
-
-      
-      
-    <ion-button ion-button type="submit" block>Atualizar</ion-button >
+    <ion-button ion-button type="submit" [disabled]="!formulario.valid" block>Atualizar</ion-button >
 </form>
 </ion-content>

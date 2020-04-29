@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 
 import { AlertaService } from './../../common/service/alerta.service';
 import { CartaoFidelidadeService } from './../shared/services/cartao-fidelidade.service';
@@ -45,11 +45,11 @@ export class CartaoFidelidadeEditarComponent implements OnInit, OnDestroy {
         this.cartaoFidelidade = resultado.data;
         this.formulario = this.formBuilder.group({
           id: [this.cartaoFidelidade.id],
-          nome: [this.cartaoFidelidade.nome],
+          nome: [this.cartaoFidelidade.nome, Validators.required],
           descricao: [this.cartaoFidelidade.descricao],
-          premio: [this.cartaoFidelidade.premio],
-          ativo: [this.cartaoFidelidade.ativo],
-          quantidadeMarcacao: [this.cartaoFidelidade.quantidadeMarcacao],
+          premio: [this.cartaoFidelidade.premio, Validators.required],
+          ativo: [this.cartaoFidelidade.ativo, Validators.required],
+          quantidadeMarcacao: [this.cartaoFidelidade.quantidadeMarcacao, Validators.required],
           dataExpiracao: [this.cartaoFidelidade.dataExpiracao],
           CampoRegistroCartaoFidelidades: this.formBuilder.array([])
         });
@@ -84,11 +84,17 @@ export class CartaoFidelidadeEditarComponent implements OnInit, OnDestroy {
 
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
-      nome: [null], ativo: [null], descricao: [null], quantidadeMarcacao: [null], dataExpiracao: [null],
-      premio: [null],
+      nome: [null, Validators.required], ativo: [null, Validators.required], 
+      descricao: [null], quantidadeMarcacao: [null, Validators.required], 
+      dataExpiracao: [null], premio: [null, Validators.required],
       CampoRegistroCartaoFidelidades: this.formBuilder.array([])
     });
   }
+
+  public get nome() {return this.formulario.get('nome')}  
+  public get ativo() {return this.formulario.get('ativo')}
+  public get quantidadeMarcacao() {return this.formulario.get('quantidadeMarcacao')}
+  public get premio() {return this.formulario.get('premio')}
 
   async onSubmit(): Promise<void> {
     try {

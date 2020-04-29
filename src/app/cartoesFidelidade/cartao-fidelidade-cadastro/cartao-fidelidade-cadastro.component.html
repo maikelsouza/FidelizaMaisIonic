@@ -10,6 +10,9 @@
           <ion-label position="stacked">Nome</ion-label>
           <ion-input formControlName="nome" type="text"></ion-input>
        </ion-item>
+       <ion-item  *ngIf="nome.invalid && (nome.dirty || nome.touched)" >      
+         <ion-label color="danger" *ngIf="nome.errors.required">Campo obrigatório.</ion-label>                   
+      </ion-item> 
        <ion-item>
           <ion-label position="stacked">Descrição</ion-label>
           <ion-textarea formControlName="descricao"></ion-textarea>         
@@ -18,16 +21,22 @@
           <ion-label position="stacked">Quantidade de Marcação</ion-label>         
          <ion-input formControlName="quantidadeMarcacao" type="number" ></ion-input>
        </ion-item>
+       <ion-item  *ngIf="quantidadeMarcacao.invalid && (quantidadeMarcacao.dirty || quantidadeMarcacao.touched)" >      
+          <ion-label color="danger" *ngIf="quantidadeMarcacao.errors.required">Campo obrigatório.</ion-label>                   
+      </ion-item> 
        <ion-item>
         <ion-label for="dataExpiracao" position="stacked">Data Expirar</ion-label>        
         <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
-          formControlName="dataExpiracao"  placeholder="Selecione uma Data"></ion-datetime>    
+           formControlName="dataExpiracao"  placeholder="Selecione uma Data"></ion-datetime>    
        </ion-item>   
        <ion-item>
           <ion-label position="stacked">Prêmio</ion-label>
           <ion-textarea formControlName="premio"></ion-textarea>         
-       </ion-item>                    
+       </ion-item>  
+       <ion-item  *ngIf="premio.invalid && (premio.dirty || premio.touched)" >      
+         <ion-label color="danger" *ngIf="premio.errors.required">Campo obrigatório.</ion-label>                   
+      </ion-item>                   
     </ion-list> 
-    <ion-button ion-button type="submit" block>Salvar</ion-button >
+    <ion-button ion-button type="submit" [disabled]="!formulario.valid" block>Salvar</ion-button >
 </form>
 </ion-content>
