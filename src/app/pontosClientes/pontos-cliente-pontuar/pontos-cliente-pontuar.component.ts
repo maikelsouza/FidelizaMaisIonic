@@ -2,7 +2,7 @@ import { UsuarioService } from 'src/app/usuarios/shared/services/usuario.service
 
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AutenticadorService } from 'src/app/common/service/autenticador.service';
 import { Usuario } from 'src/app/usuarios/shared/models/usuario';
 import { Estabelecimento } from 'src/app/estabelecimentos/shared/models/estabelecimento';
@@ -40,9 +40,18 @@ export class PontosClientePontuarComponent implements OnInit {
   }
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
-      email: [null], clienteId: [null], valorGasto: [null], programaFidelidadeId: [null]
+      email: [null,  Validators.required], 
+      clienteId: [null, Validators.required], 
+      valorGasto: [null, Validators.required],
+      programaFidelidadeId: [null, Validators.required]
     });
   }
+
+  public get valorGasto() {return this.formulario.get('valorGasto')}
+  public get email() {return this.formulario.get('email')}
+  public get programaFidelidadeId() {return this.formulario.get('programaFidelidadeId')} 
+  public get clienteId() {return this.formulario.get('clienteId')} 
+
   async pesquisarUsuario(): Promise<void> {
     try {
       let estabelecimentoId: number = Number(this.estabelecimentos[0].id);
