@@ -18,7 +18,7 @@
           <ion-input formControlName="descricao" ></ion-input>         
        </ion-item>
        <ion-item>
-        <ion-label position="stacked">Quantidade de Pontos Necessários</ion-label>
+        <ion-label position="stacked">Valor mínimo necessário para ganhar um ponto</ion-label>
           <ion-input formControlName="regra" type="numeric" ></ion-input>         
        </ion-item>  
        <ion-item  *ngIf="regra.invalid && (regra.dirty || regra.touched)" >      
@@ -36,11 +36,11 @@
      </ion-item> 
        <ion-item>
            <ion-label for="dataExpiracao" position="stacked">Data Expirar</ion-label>        
-           <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
+           <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY" max="2050-12-31"
             formControlName="dataExpiracao"  placeholder="Selecione uma Data"></ion-datetime>    
        </ion-item> 
        <ion-item>
-          <button type="button" (click)="adicionarItemProgramaFidelidade()">Adicionar Item</button> 
+          <button type="button" (click)="adicionarItemProgramaFidelidade()">Adicionar Item FILDSET ITEM RESGATADOS</button> 
       </ion-item>          
         <div formArrayName="CampoItemProgramaFidelidades" *ngFor="let item of formulario.get('CampoItemProgramaFidelidades').controls; let i = index;">
           <div [formGroupName]="i" >
@@ -58,7 +58,7 @@
               </ion-item>           
               <ion-item>
                 <ion-label for="dataExpiracao" position="stacked">Data Expirar</ion-label>        
-                <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY"
+                <ion-datetime  doneText="OK" cancelText="Cancelar" displayFormat="DD-MM-YYYY" max="2050-12-31"
                   formControlName="dataExpiracao"  placeholder="Selecione uma Data"></ion-datetime>    
                </ion-item>
             <button (click)="removerItemProgramaFidelidade(i)">Remover Item</button>  
