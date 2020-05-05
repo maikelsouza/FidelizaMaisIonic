@@ -112,9 +112,10 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
 
   criarItem(CampoItemProgramaFidelidades: CampoItemProgramaFidelidade): FormGroup {
     return this.formBuilder.group({
+          id: CampoItemProgramaFidelidades.id,
           nome: CampoItemProgramaFidelidades.nome,
           descricao: CampoItemProgramaFidelidades.descricao,
-          ativo: true,
+          ativo: CampoItemProgramaFidelidades.ativo,
           quantidadePontos: CampoItemProgramaFidelidades.quantidadePontos,
           dataExpiracao: CampoItemProgramaFidelidades.dataExpiracao         
     });
@@ -122,8 +123,7 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
 
   criarItemProgramaFidelidade(campoItemProgramaFidelidades: Array<CampoItemProgramaFidelidade>): FormGroup {
       let campoItemProgramaFidelidade: FormGroup;
-      campoItemProgramaFidelidade = this.formBuilder.group({
-        id: null,
+      campoItemProgramaFidelidade = this.formBuilder.group({        
         nome: [null],
         descricao: [null],
         ativo: [true,],
