@@ -106,8 +106,9 @@ export class PontosClienteResgatarComponent implements OnInit {
     // Código precisa de um refactory!!!
     try { 
       const clienteId = this.formulario.get("clienteId").value;
+      const programaFidelidadeId =  this.formulario.get("programaFidelidadeId").value;
       const campoItemProgramaFidelidadeId = this.formulario.get("campoItemProgramaFidelidadeId").value;
-      let totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.getUsuarioIdAtivo(clienteId);
+      let totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.getUsuarioIdProgramaFidelidadeIdAtivo(clienteId,programaFidelidadeId);
       if (totalPontosClieteProgramaFidelidadeResultado.data != null){
         const totalPontos = totalPontosClieteProgramaFidelidadeResultado.data.totalPontos;
         let quantidadePontos = null;
