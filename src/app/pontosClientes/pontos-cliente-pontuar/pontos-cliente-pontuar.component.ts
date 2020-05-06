@@ -90,6 +90,7 @@ export class PontosClientePontuarComponent implements OnInit {
   }
   async onSubmit(): Promise<void> {
     try {
+      // COLOCAR VALIDAÇÃO PARA NÃO DEIXAR PONTUAR CASO O VALOR GASTO SEJA MENOR QUE O MÍNIMO PARA GERAR UM PONTO
       const clienteId = this.formulario.get("clienteId").value;
       const programaFidelidadeId = this.formulario.get("programaFidelidadeId").value;
       const quantidadePontos = this.calcularPontos(this.formulario.get("valorGasto").value);
@@ -127,6 +128,6 @@ export class PontosClientePontuarComponent implements OnInit {
     const posicaoVirgura = valorGasto.indexOf(",");
     const valorGastoSemDecimais = valorGasto.substr(0, posicaoVirgura);
     const valorGastoSemDecimaisEPontos = valorGastoSemDecimais.replace(/\D+/g, '');
-    return valorGastoSemDecimaisEPontos / regra;
+    return Math.trunc(valorGastoSemDecimaisEPontos / regra);
   }
 }
