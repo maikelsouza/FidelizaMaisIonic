@@ -18,6 +18,6 @@
       </div>
     </ion-item>
   </ion-list>  
-  <ion-button [routerLink]="['/programaFidelidade/novo',id]">Novo</ion-button>
+  <ion-button *ngIf="exibeBotaoNovo " [routerLink]="['/programaFidelidade/novo',id]">Novo</ion-button>
 <router-outlet></router-outlet>
 </ion-content>

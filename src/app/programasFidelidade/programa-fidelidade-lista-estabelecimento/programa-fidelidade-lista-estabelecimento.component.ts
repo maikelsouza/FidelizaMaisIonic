@@ -17,6 +17,7 @@ export class ProgramaFidelidadeListaEstabelecimentoComponent implements OnInit, 
   private programasFidelidade: Array<ProgramaFidelidade> = new Array<ProgramaFidelidade>(); 
   private id : number;
   private inscricao : Subscription;
+  public exibeBotaoNovo: boolean = true; 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,7 +50,8 @@ export class ProgramaFidelidadeListaEstabelecimentoComponent implements OnInit, 
     try {       
       let resultado = await this.programaFidelidadeService.buscarPorIdEstabelecimento(this.id);
       if (resultado.success) {
-        this.programasFidelidade = <Array<ProgramaFidelidade>>resultado.data;        
+        this.programasFidelidade = <Array<ProgramaFidelidade>>resultado.data;  
+        this.exibeBotaoNovo = false;      
       }
     } catch (error) {
       console.log('Erro ao carregar os programa fidelidade', error);
