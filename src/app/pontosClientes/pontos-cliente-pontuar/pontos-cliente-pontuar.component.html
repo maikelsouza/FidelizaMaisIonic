@@ -22,16 +22,6 @@
          <ion-button (click)="pesquisarUsuario()">pesquisar</ion-button>  
         </ion-item>            
       </ion-list>
-      <ion-list>
-        <ion-item>          
-          <ion-label for="programaFidelidadeId">Programa de Fidelidade</ion-label>
-          <ion-select formControlName="programaFidelidadeId"  okText="OK" cancelText="Cancelar">
-            <ion-select-option [value]="programaFidelidade.id" *ngFor="let programaFidelidade of programasFidelidade">{{programaFidelidade.nome}}</ion-select-option>                 
-          </ion-select> 
-        </ion-item>
-        <ion-item  *ngIf="programaFidelidadeId.invalid && (programaFidelidadeId.dirty || programaFidelidadeId.touched)" >      
-          <ion-label color="danger" *ngIf="programaFidelidadeId.errors.required">Campo obrigatório.</ion-label>                     
-        </ion-item>  
       <ion-radio-group formControlName="clienteId">        
         <ion-list-header>
           <ion-label>Clientes</ion-label>
@@ -41,6 +31,16 @@
           <ion-radio slot="start"  value={{item.id}}></ion-radio>
         </ion-item> 
       </ion-radio-group>
+      <ion-list>
+        <ion-item>          
+          <ion-label for="programaFidelidadeId">Programa de Fidelidade</ion-label>
+          <ion-select formControlName="programaFidelidadeId"  okText="OK" cancelText="Cancelar">
+            <ion-select-option [value]="programaFidelidade.id" *ngFor="let programaFidelidade of programasFidelidade">{{programaFidelidade.nome}}</ion-select-option>                 
+          </ion-select> 
+        </ion-item>
+        <ion-item  *ngIf="programaFidelidadeId.invalid && (programaFidelidadeId.dirty || programaFidelidadeId.touched)" >      
+          <ion-label color="danger" *ngIf="programaFidelidadeId.errors.required">Campo obrigatório.</ion-label>                     
+        </ion-item>       
       <ion-item>        
         <ion-label position="stacked">Valor Gasto</ion-label>
         <ion-input formControlName="valorGasto" type="decimal"></ion-input>
