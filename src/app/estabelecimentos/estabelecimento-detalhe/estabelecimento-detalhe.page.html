@@ -121,8 +121,8 @@
     </ion-list>   
     <ion-button ion-button type="submit" [disabled]="!formulario.valid" block>Atualizar</ion-button >
     <ion-button ion-button [routerLink]="['/programaFidelidade/listaEstabelecimento',id]"block>Programa Fidelidade</ion-button >
-      <ion-button ion-button [routerLink]="['/cartaoFidelidade/listaEstabelecimento',id]"block>Cartão Fidelidade</ion-button >
-    <ion-button ion-button [routerLink]="'/estabelecimento'" [queryParams]="{tipoUsuario:usuarioLogado[0].GrupoUsuario.nome}"   block>Cancelar</ion-button >      
+    <!-- <ion-button ion-button [routerLink]="['/cartaoFidelidade/listaEstabelecimento',id]"block>Cartão Fidelidade</ion-button > -->
+    <ion-button ion-button [routerLink]="'/estabelecimento/lista'" [queryParams]="{tipoUsuario:usuarioLogado[0].GrupoUsuario.nome}"   block>Cancelar</ion-button >      
     
   </form>
 </ion-content>
