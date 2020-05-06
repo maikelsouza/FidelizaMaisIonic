@@ -24,8 +24,8 @@ export class TotalPontosClienteProgramaFidelidadeService extends ServiceBase<Tot
     return this.httpService.put(`${this.url}/${id}`,totalPontosClienteProgramaFidelidade);  
   }     
 
-  async getUsuarioIdAtivo(usuarioId: number): Promise<HttpResultModel> {                  
-    return this.httpService.get(`${this.url}/getUsuarioIdAtivo/${usuarioId}`);                                                 
+  async getUsuarioIdProgramaFidelidadeIdAtivo(usuarioId: number, programaFidelidadeId: number): Promise<HttpResultModel> {                  
+    return this.httpService.get(`${this.url}/getUsuarioIdProgramaFidelidadeIdAtivo/${usuarioId}/${programaFidelidadeId}`);                                                 
   } 
 
   

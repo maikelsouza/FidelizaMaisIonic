@@ -91,13 +91,14 @@ export class PontosClientePontuarComponent implements OnInit {
   async onSubmit(): Promise<void> {
     try {
       const clienteId = this.formulario.get("clienteId").value;
+      const programaFidelidadeId = this.formulario.get("programaFidelidadeId").value;
       const quantidadePontos = this.calcularPontos(this.formulario.get("valorGasto").value);
       let totalPontosClienteProgramaFidelidade: TotalPontosClienteProgramaFidelidade = new TotalPontosClienteProgramaFidelidade();
-      totalPontosClienteProgramaFidelidade.programaFidelidadeId = this.formulario.get("programaFidelidadeId").value;
+      totalPontosClienteProgramaFidelidade.programaFidelidadeId = programaFidelidadeId;
       totalPontosClienteProgramaFidelidade.usuarioId = clienteId;
       let PontosClientesProgramaFidelidades: PontosClienteProgramaFidelidade = new PontosClienteProgramaFidelidade();
       PontosClientesProgramaFidelidades.pontos = quantidadePontos;
-      let totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.getUsuarioIdAtivo(clienteId);
+      let totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.getUsuarioIdProgramaFidelidadeIdAtivo(clienteId,programaFidelidadeId);
       if (totalPontosClieteProgramaFidelidadeResultado.data == null) { // Caso não exista um regristo de pontos então cria o primeiro
         totalPontosClienteProgramaFidelidade.totalPontos = quantidadePontos;
         let listaPontosClienteProgramaFidelidade = new Array<PontosClienteProgramaFidelidade>();
