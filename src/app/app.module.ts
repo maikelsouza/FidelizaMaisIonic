@@ -30,6 +30,7 @@ import { FormEstabelecimentoPage } from './estabelecimentos/form-estabelecimento
 import { ListaEstabelecimentoPage } from './estabelecimentos/lista-estabelecimento/lista-estabelecimento.page';
 import { EstabelecimentoDetalhePage } from './estabelecimentos/estabelecimento-detalhe/estabelecimento-detalhe.page';
 import { EstabelecimentoService } from './estabelecimentos/shared/services/estabelecimento.service';
+import { LogoffComponent } from './login/logoff/logoff.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { EstabelecimentoService } from './estabelecimentos/shared/services/estab
     EsqueciMinhaSenhaCadastroComponent,
     FormEstabelecimentoPage,
     ListaEstabelecimentoPage,
-    EstabelecimentoDetalhePage      
+    EstabelecimentoDetalhePage,      
+    LogoffComponent
     
   ],
   entryComponents: [],
