@@ -21,7 +21,7 @@ import { EstabelecimentoDetalhePage } from './estabelecimentos/estabelecimento-d
 const routes: Routes = [
   { path: 'usuarios', loadChildren: './usuarios/usuarios.module#UsuariosModule'},    
   { path: 'login', component: LoginComponent},    
-  { path: 'esqueciMinhaSenha', component: EsqueciMinhaSenhaCadastroComponent},   
+  { path: 'esqueciMinhaSenha', component: EsqueciMinhaSenhaCadastroComponent},     
   // estabelecimentos  
   { path: 'estabelecimento/lista',component: ListaEstabelecimentoPage},  
   { path: 'estabelecimento/novo',component: FormEstabelecimentoPage},  
@@ -38,8 +38,7 @@ const routes: Routes = [
   { path: 'programaFidelidade/editar/:id', component: ProgramaFidelidadeCadastroComponent },  
   // Pontos Clientes    
   { path: 'pontosClientePontuar', component: PontosClientePontuarComponent }, 
-  { path: 'pontosClienteResgatar', component: PontosClienteResgatarComponent },     
-  
+  { path: 'pontosClienteResgatar', component: PontosClienteResgatarComponent },      
   
   { path: 'home', loadChildren: './home/home.module#HomePageModule'},  
   { path: '', redirectTo: 'login', pathMatch: 'full'},
