@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
 import { UsuarioListaComponent } from './usuario-lista/usuario-lista.component';
+import { UsuarioAtualizarSenhaComponent } from './usuario-atualizar-senha/usuario-atualizar-senha.component';
 
 
 
@@ -12,6 +13,7 @@ const usuariosRoutes: Routes = [
     { path: '', component: UsuarioListaComponent },   
     { path: 'novo', component: UsuarioCadastroComponent },
     { path: 'meuPerfil', component: UsuarioMeuPerfilComponent },
+    { path: 'atualizarSenha', component: UsuarioAtualizarSenhaComponent },
     { path: ':id', component: UsuarioDetalheComponent }
 ];
 

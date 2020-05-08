@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 import { UsuarioService } from './shared/services/usuario.service';
 import { UsuariosRoutesModule } from './usuarios-routing.module';
 import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
+import { UsuarioAtualizarSenhaComponent } from './usuario-atualizar-senha/usuario-atualizar-senha.component';
 
 
 
@@ -28,7 +29,8 @@ import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.co
     UsuarioCadastroComponent,
     UsuarioListaComponent,
     UsuarioDetalheComponent,
-    UsuarioMeuPerfilComponent 
+    UsuarioMeuPerfilComponent,
+    UsuarioAtualizarSenhaComponent 
   ]
 })
 

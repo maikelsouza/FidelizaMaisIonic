@@ -45,6 +45,12 @@ export class UsuarioService extends ServiceBase<Usuario> {
     return respotas; 
   }
 
+  async atualizarSenha (id :number, senha: any){
+    const ab = `${this.url}/atualizarSenha/${id}`;
+    let respotas = this.httpService.put(`${this.url}/atualizarSenha/${id}`,senha);  
+    return respotas; 
+  }
+
   static RegistrarLogin(result: any) {
     localStorage.setItem(ConfigHelper.storageKeys.token, result.token);
     localStorage.setItem(ConfigHelper.storageKeys.usuario, JSON.stringify(result.usuario));
