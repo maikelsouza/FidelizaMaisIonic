@@ -70,7 +70,7 @@ export class UsuarioCadastroComponent implements OnInit {
           this.alertService.toast('Usuário salvo com sucesso!');
         }
       }else{
-        this.alertService.toast('O campo senha e confirmar senha estão diferentes');
+        this.alertService.alert('Campos Diferentes','O campo senha e confirmar senha estão diferentes');
       }
     } catch (error) {
         console.log('Erro ao salvar um Usuario', error);    
