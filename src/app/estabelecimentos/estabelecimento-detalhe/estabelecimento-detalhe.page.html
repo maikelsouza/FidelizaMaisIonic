@@ -1,34 +1,34 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>estabelecimento-detalhe</ion-title>
+    <ion-title>Editar Estabelecimento</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <ion-list no-lines>    
         <ion-item>        
-          <ion-label position="stacked">Nome</ion-label>
+          <ion-label position="floating">Nome</ion-label>
           <ion-input formControlName="nome" type="text"></ion-input>
        </ion-item>
        <ion-item  *ngIf="nome.invalid && (nome.dirty || nome.touched)" >      
           <ion-label color="danger" *ngIf="nome.errors.required">Campo obrigatório.</ion-label>                   
        </ion-item> 
       <ion-item>
-          <ion-label position="stacked">CNPJ</ion-label>
+          <ion-label position="floating">CNPJ</ion-label>
          <ion-input formControlName="cnpj" type="text"></ion-input>
        </ion-item>      
        <ion-item>
-          <ion-label position="stacked">E-mail</ion-label>         
+          <ion-label position="floating">E-mail</ion-label>         
          <ion-input formControlName="email" type="email" ></ion-input>
        </ion-item>   
        <ion-item  *ngIf="email.invalid && (email.dirty || email.touched)" >                
           <ion-label color="danger" *ngIf="email.errors.email">Formato de e-mail inválido.</ion-label>
       </ion-item>                     
        <ion-item>
-         <ion-label position="stacked">Ativo</ion-label>  
+         <ion-label position="floating">Ativo</ion-label>  
          <ion-select  formControlName="ativo"  okText="OK" cancelText="Cancelar">
             <ion-select-option [value]="true">Ativo</ion-select-option>
             <ion-select-option [value]="false">Inativo</ion-select-option>
@@ -39,46 +39,46 @@
        </ion-item>       
       <div formGroupName="EnderecoEstabelecimentos" >
           <ion-item>
-              <ion-label for="rua" position="stacked">Rua</ion-label>
+              <ion-label for="rua" position="floating">Rua</ion-label>
               <ion-input formControlName="rua" type="text" ></ion-input>
           </ion-item>
           <ion-item  *ngIf="rua.invalid && (rua.dirty || rua.touched)" >      
             <ion-label color="danger" *ngIf="rua.errors.required">Campo obrigatório.</ion-label>                   
           </ion-item>              
           <ion-item>
-            <ion-label for="numero" position="stacked">Número</ion-label>
-            <ion-input formControlName="numero" type="text" ></ion-input>
+            <ion-label for="numero" position="floating">Número</ion-label>
+            <ion-input formControlName="numero" type="number" ></ion-input>
           </ion-item>
           <ion-item  *ngIf="numero.invalid && (numero.dirty || numero.touched)" >      
             <ion-label color="danger" *ngIf="numero.errors.required">Campo obrigatório.</ion-label>                   
           </ion-item>          
         <ion-item>
-          <ion-label for="complemento" position="stacked">Complemento</ion-label>
+          <ion-label for="complemento" position="floating">Complemento</ion-label>
           <ion-input formControlName="complemento" type="text" ></ion-input>
         </ion-item>
          <ion-item>
-          <ion-label for="cep" position="stacked">Cep</ion-label>
+          <ion-label for="cep" position="floating">Cep</ion-label>
           <ion-input formControlName="cep" type="text" ></ion-input>
         </ion-item> 
         <ion-item  *ngIf="cep.invalid && (cep.dirty || cep.touched)" >      
           <ion-label color="danger" *ngIf="cep.errors.required">Campo obrigatório.</ion-label>                   
         </ion-item>           
         <ion-item>
-          <ion-label for="bairro" position="stacked">Bairro</ion-label>
+          <ion-label for="bairro" position="floating">Bairro</ion-label>
           <ion-input formControlName="bairro" type="text" ></ion-input>
         </ion-item>
         <ion-item  *ngIf="bairro.invalid && (bairro.dirty || bairro.touched)" >      
           <ion-label color="danger" *ngIf="bairro.errors.required">Campo obrigatório.</ion-label>                   
         </ion-item>
         <ion-item>
-          <ion-label for="cidade" position="stacked">Cidade</ion-label>
+          <ion-label for="cidade" position="floating">Cidade</ion-label>
           <ion-input formControlName="cidade" type="text" ></ion-input>
         </ion-item>
         <ion-item  *ngIf="cidade.invalid && (cidade.dirty || cidade.touched)" >      
           <ion-label color="danger" *ngIf="cidade.errors.required">Campo obrigatório.</ion-label>                   
         </ion-item>           
         <ion-item>
-          <ion-label for="uf" position="stacked">UF</ion-label>
+          <ion-label for="uf" position="floating">UF</ion-label>
           <ion-input formControlName="uf" type="text" ></ion-input>
         </ion-item>      
         <ion-item  *ngIf="uf.invalid && (uf.dirty || uf.touched)" >      
@@ -87,7 +87,7 @@
       </div>     
       
       <ion-item>
-        <ion-label for="tipoEstabelecimentoId">Tipo Estabelecimento</ion-label>
+        <ion-label position="floating" for="tipoEstabelecimentoId">Tipo Estabelecimento</ion-label>
           <ion-select  formControlName="tipoEstabelecimentoId"  okText="OK" cancelText="Cancelar">
             <ion-select-option [value]="tipoEstabelecimento.id" *ngFor="let tipoEstabelecimento of tipoEstabelecimentos">{{tipoEstabelecimento.nome}}</ion-select-option>                 
         </ion-select>
@@ -98,11 +98,11 @@
 
      <div formGroupName="telefone">
         <ion-item>
-          <ion-label for="telefoneNumero1" position="stacked">Telefone 1</ion-label>
+          <ion-label for="telefoneNumero1" position="floating">Telefone 1</ion-label>
           <ion-input formControlName="telefoneNumero1" type="tel" ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Selecione um Tipo</ion-label>
+          <ion-label position="floating">Selecione um Tipo</ion-label>
           <ion-select formControlName="telefoneTipo1"  okText="OK" cancelText="Cancelar">
             <ion-select-option [value]="tipoTelefone" *ngFor="let tipoTelefone of tiposTelefone">{{tipoTelefone}}</ion-select-option>                 
           </ion-select>    
@@ -110,19 +110,18 @@
       </div>
       <div formGroupName="midiaSocial">
         <ion-item>
-          <ion-label for="midiaSocialNome1" position="stacked">Midia Social 1</ion-label>
+          <ion-label for="midiaSocialNome1" position="floating">Midia Social 1</ion-label>
           <ion-input formControlName="midiaSocialNome1" type="text" ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label for="midiaSocialUrl1" position="stacked">Midia Social Url 1</ion-label>
+          <ion-label for="midiaSocialUrl1" position="floating">Midia Social Url 1</ion-label>
           <ion-input formControlName="midiaSocialUrl1" type="url" ></ion-input>
         </ion-item>
       </div>         
     </ion-list>   
-    <ion-button ion-button type="submit" [disabled]="!formulario.valid" block>Atualizar</ion-button >
-    <ion-button ion-button [routerLink]="['/programaFidelidade/listaEstabelecimento',id]"block>Programa Fidelidade</ion-button >
-    <!-- <ion-button ion-button [routerLink]="['/cartaoFidelidade/listaEstabelecimento',id]"block>Cartão Fidelidade</ion-button > -->
-    <ion-button ion-button [routerLink]="'/estabelecimento/lista'" [queryParams]="{tipoUsuario:usuarioLogado[0].GrupoUsuario.nome}"   block>Cancelar</ion-button >      
-    
+    <ion-button color="primary" type="submit" expand="block" [disabled]="!formulario.valid" >Atualizar</ion-button >
+    <ion-button color="primary" [routerLink]="['/programaFidelidade/listaEstabelecimento',id]"  expand="block" >Programa Fidelidade</ion-button >
+    <!-- <ion-button  [routerLink]="['/cartaoFidelidade/listaEstabelecimento',id]" expand="block">Cartão Fidelidade</ion-button > -->
+    <ion-button color="primary" [routerLink]="'/estabelecimento/lista'"  expand="block" [queryParams]="{tipoUsuario:usuarioLogado[0].GrupoUsuario.nome}">Cancelar</ion-button >          
   </form>
 </ion-content>
