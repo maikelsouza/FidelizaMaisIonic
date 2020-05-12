@@ -1,40 +1,40 @@
 <ion-app>
-  <ion-split-pane>
-    <ion-menu *ngIf="mostrarMenu">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
+  <ion-split-pane contentId="main-content">
+    <ion-menu *ngIf="mostrarMenu" contentId="main-content" type="overlay">      
       <ion-content>
+        <ion-header>
+          <ion-toolbar color="primary">
+            <ion-title>Menu</ion-title>
+          </ion-toolbar>
+        </ion-header>
         <ion-list>
           <ion-menu-toggle auto-hide="false">
-            <ion-item  [routerDirection]="'root'" [routerLink]="'/usuarios/meuPerfil'">             
-              <ion-icon name="person"></ion-icon>
+            <ion-item  [routerDirection]="'root'" [routerLink]="'/usuarios/meuPerfil'" lines="none">             
+              <ion-icon slot="start" name="person"></ion-icon>
               <ion-label>Meu Perfil</ion-label>
             </ion-item>        
-            <ion-item  [routerDirection]="'root'" [routerLink]="'/usuarios/atualizarSenha'">             
-              <ion-icon name="key"></ion-icon>
+            <ion-item  [routerDirection]="'root'" [routerLink]="'/usuarios/atualizarSenha'" lines="none">             
+              <ion-icon slot="start" name="key"></ion-icon>
               <ion-label>Atualizar Senha</ion-label>
             </ion-item>        
-            <ion-item  [routerDirection]="'root'" [routerLink]="'/estabelecimento/lista'"  [queryParams]="{tipoUsuario:usuarioLogado.usuario[0].GrupoUsuario.nome}">                                                                                                                 
-              <ion-icon name="gift"></ion-icon>
+            <ion-item  [routerDirection]="'root'" [routerLink]="'/estabelecimento/lista'"  [queryParams]="{tipoUsuario:usuarioLogado.usuario[0].GrupoUsuario.nome}" lines="none">                                                                                                                 
+              <ion-icon slot="start" name="gift"></ion-icon>
               <ion-label>Estabelecimentos</ion-label>
             </ion-item>                       
-            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ADMINISTRADOR'" [routerDirection]="'root'" [routerLink]="'/usuarios'">             
-              <ion-icon name="person-add"></ion-icon>
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ADMINISTRADOR'" [routerDirection]="'root'" [routerLink]="'/usuarios'" lines="none">             
+              <ion-icon slot="start" name="person-add"></ion-icon>
               <ion-label>Usuários</ion-label>
             </ion-item>
-            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'" [routerDirection]="'root'" [routerLink]="'/pontosClientePontuar'" >                                                                                                                 
-              <ion-icon name="add"></ion-icon>
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'" [routerDirection]="'root'" [routerLink]="'/pontosClientePontuar'" lines="none">                                                                                                                 
+              <ion-icon slot="start" name="add"></ion-icon>
               <ion-label>Pontuar Clientes</ion-label>
             </ion-item>                       
-            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'" [routerDirection]="'root'" [routerLink]="'/pontosClienteResgatar'" >                                                                                                                 
-              <ion-icon name="remove"></ion-icon>
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'" [routerDirection]="'root'" [routerLink]="'/pontosClienteResgatar'" lines="none" >                                                                                                                 
+              <ion-icon slot="start" name="remove"></ion-icon>
               <ion-label>Resgatar Pontos</ion-label>
             </ion-item>
-            <ion-item  [routerDirection]="'root'" [routerLink]="'/sair'" >       
-              <ion-icon name="exit"></ion-icon>                                                                                                          
+            <ion-item  [routerDirection]="'root'" [routerLink]="'/sair'" lines="none" >       
+              <ion-icon slot="start" name="exit"></ion-icon>                                                                                                          
               <ion-label>Sair</ion-label>
             </ion-item>                       
           </ion-menu-toggle>
@@ -45,6 +45,6 @@
         color="#fff" type="ball-scale-multiple">
         <p style="font-size: 20px; color: white">Carregando...</p>
     </ngx-spinner>
-    <ion-router-outlet main></ion-router-outlet>
+    <ion-router-outlet  id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>
