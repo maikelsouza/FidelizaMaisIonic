@@ -1,11 +1,9 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      Lista de Usuários
-    </ion-title>
+    <ion-title>Usuários</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,6 +17,11 @@
     </ion-item>
   </ion-list>  
   <!-- Necessário realizar um refactory para colocar não o ID da tabela de grupousuario, mas sim um código referente ao grupo e depois realizar a consulta -->
-  <ion-button [routerLink]="['novo']" [queryParams]="{tipoUsuario:2}">Novo</ion-button>
+  <ion-fab  vertical="bottom" horizontal="end" slot="fixed" color="primary">
+    <ion-fab-button [routerLink]="['novo']" [queryParams]="{tipoUsuario:2}" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 <router-outlet></router-outlet>
 </ion-content>
