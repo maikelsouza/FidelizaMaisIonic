@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
   </ion-buttons>
@@ -12,7 +12,7 @@
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <ion-list no-lines>    
         <ion-item>        
-          <ion-label position="stacked">E-mail</ion-label>
+          <ion-label position="floating">E-mail</ion-label>
           <ion-input formControlName="email" type="email"></ion-input>
        </ion-item>   
        <ion-item  *ngIf="email.invalid && (email.dirty || email.touched)" >      
@@ -24,7 +24,7 @@
       </ion-list>
       <ion-radio-group formControlName="clienteId">        
         <ion-list-header>
-          <ion-label>Clientes</ion-label>
+          <ion-label position="floating">Clientes</ion-label>
         </ion-list-header>
         <ion-item *ngFor="let item of usuarios" >          
           <ion-label>{{item.nome}}</ion-label>
@@ -43,7 +43,7 @@
         </ion-item> 
         <ion-radio-group formControlName="campoItemProgramaFidelidadeId">        
           <ion-list-header>
-            <ion-label>Campo Item Programa Fidelidade</ion-label>
+            <ion-label position="floating">Campo Item Programa Fidelidade</ion-label>
           </ion-list-header>
           <ion-item *ngFor="let campoItemProgramaFidelidade of campoItemProgramaFidelidades" >          
             <ion-label>Nome:{{campoItemProgramaFidelidade.nome}}  Pontos:{{campoItemProgramaFidelidade.quantidadePontos}}</ion-label>
@@ -52,6 +52,6 @@
         </ion-radio-group>
     </ion-list>
 
-    <ion-button ion-button type="submit" [disabled]="!formulario.valid" block>Resgatar</ion-button >
+    <ion-button  color="primary" expand="block" type="submit" [disabled]="!formulario.valid" >Resgatar</ion-button >
 </form>
 </ion-content>
