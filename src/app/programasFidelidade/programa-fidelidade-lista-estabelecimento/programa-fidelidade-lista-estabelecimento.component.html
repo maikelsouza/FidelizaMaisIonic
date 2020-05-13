@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Lista de Programa Fidelidade Estabelecimento
+      Lista de Programa Fidelidade
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,7 +17,11 @@
             {{item.nome}}
       </div>
     </ion-item>
-  </ion-list>  
-  <ion-button *ngIf="exibeBotaoNovo " [routerLink]="['/programaFidelidade/novo',id]">Novo</ion-button>
+  </ion-list>    
+  <ion-fab *ngIf="exibeBotaoNovo"  vertical="bottom" horizontal="end" slot="fixed" color="primary">
+    <ion-fab-button [routerLink]="['/programaFidelidade/novo',id]" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 <router-outlet></router-outlet>
 </ion-content>
