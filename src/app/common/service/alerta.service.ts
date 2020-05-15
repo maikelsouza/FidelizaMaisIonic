@@ -11,7 +11,7 @@ export class AlertaService {
 
     
   async toast(title: string) {
-    const toast = await this.toastCtrl.create({ message: title, position: 'bottom', duration: 3000 });
+    const toast = await this.toastCtrl.create({ message: title, position: 'bottom', duration: 3000, color: 'success' });
     return await toast.present();
   }
   
