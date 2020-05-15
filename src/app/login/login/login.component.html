@@ -1,9 +1,9 @@
-<ion-header>
+   <ion-header>
     <ion-toolbar color="primary">
-      <ion-title>Login</ion-title>
+        <ion-title>Login</ion-title>
     </ion-toolbar>
-  </ion-header>
-  <ion-content>    
+  </ion-header>  
+  <ion-content padding>
     <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
       <ion-list no-lines>            
         <ion-item>        
@@ -20,13 +20,24 @@
          </ion-item>
          <ion-item  *ngIf="senha.invalid && (senha.dirty || senha.touched)" >
           <ion-label color="danger" *ngIf="senha.errors.required">Campo obrigatório</ion-label>           
-        </ion-item>
-      </ion-list>       
-        
-      <ion-button  color="primary" type="submit" expand="block" [disabled]="!formulario.valid" block>Login</ion-button>
-        
-      </form>
-      <ion-button [routerLink]="['/esqueciMinhaSenha']">Esqueci Minha Senha</ion-button>                
-      <ion-button [routerLink]="['/usuarios/novo']" [queryParams]="{tipoUsuario:3}">Não Tenho Cadastro</ion-button>                
-  </ion-content>
+        </ion-item>        
+      </ion-list>    
+      <ion-button  color="primary" type="submit" expand="block" [disabled]="!formulario.valid" block>Login</ion-button>        
+    </form>
+    <ion-grid class="ion-text-center" > 
+        <ion-row>
+          <ion-col>
+            <ion-router-link color="primary" [routerLink]="['/esqueciMinhaSenha']">Esqueci Minha Senha</ion-router-link>                
+          </ion-col>        
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-router-link color="primary" [routerLink]="['/usuarios/novo']" [queryParams]="{tipoUsuario:3}">Não Tenho Cadastro</ion-router-link>                
+          </ion-col>        
+        </ion-row>
+     </ion-grid>
+    </ion-content>
+
+
+  
   
