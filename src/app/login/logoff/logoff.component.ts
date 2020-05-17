@@ -14,6 +14,7 @@ export class LogoffComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // Rever se ao sair vai para uma tela diferente (um novo componente) ou fica na mesma do app.component
     UsuarioService.RemoverLogin();
     this.route.navigate(['/']);         
   }

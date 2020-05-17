@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -59,6 +59,7 @@ import { LogoffComponent } from './login/logoff/logoff.component';
     HttpClientModule,    
     NgxSpinnerModule, 
     ReactiveFormsModule,
+    
     FormsModule,   
     CommonModule,
     IonicModule.forRoot(),
@@ -78,6 +79,10 @@ import { LogoffComponent } from './login/logoff/logoff.component';
   
   
   bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
+  ]
   
 })
 export class AppModule {}
