@@ -148,9 +148,9 @@ export class EstabelecimentoDetalhePage implements OnInit {
   async  onSubmit(): Promise<void> {
     try {
       if (this.validarObrigatoriedadeTelefones()) {
-        this.alertSrv.alert('Campo Obrigatório', 'O campo telefone é obrigatório');
+        this.alertSrv.alert('Campo Obrigatório!', 'O campo telefone é obrigatório');
       } else if (this.validarObrigatoriedadeMidiaSocial()) {
-        this.alertSrv.alert('Campo Obrigatório', 'O campo mídia social é obrigatório');
+        this.alertSrv.alert('Campo Obrigatório!', 'O campo mídia social é obrigatório');
       } else {      
         let resultado = await this.estabelecimentoService.atualizar(this.formulario.get("id").value, this.formulario.value);
         if (resultado.success) {
