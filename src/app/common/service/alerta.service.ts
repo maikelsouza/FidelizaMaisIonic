@@ -6,6 +6,8 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class AlertaService {
 
+  // Rever esse service. Ver possibilidade de crirar um para Alert e um para Toast bem como rever o uso desses.
+  // Verificar também os CSS dos botões
   constructor( private alertCtrl: AlertController,
                private toastCtrl: ToastController) { }
 
@@ -17,7 +19,7 @@ export class AlertaService {
   
   async alert(title: string, message: string) {
     const alert = await this.alertCtrl.create({
-      header: 'Alert',
+      header: 'Alerta',
       subHeader: title,
       message: message,
       buttons: ['Ok']
