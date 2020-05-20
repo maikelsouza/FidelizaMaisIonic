@@ -11,44 +11,51 @@
     <ion-list *ngIf="tipoUsuario == 'ADMINISTRADOR' || tipoUsuario == 'ESTABELECIMENTOS'" >
       <!-- Estudar a possibilidade de mudar para card e colocar itens dentro do card para exibir as principais informações da empresa
       ver componente curso udemy ionic 4  -->
-    <ion-item *ngFor="let item of estabelecimentos" >
-        <ion-grid class="ion-text-center" > 
-          <ion-row>
-            <ion-col>
-              {{item.nome}}        
-            </ion-col>        
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button fill="outline" expand="block" color="secondary"
-               [routerLink]="['/estabelecimento',item.id]">
-                <ion-icon slot="icon-only" name="create"></ion-icon>
-                Editar ou Esse botão              
-              </ion-button> 
-              <ion-button expand="block" color="secondary"
-               [routerLink]="['/estabelecimento',item.id]">
-                <ion-icon slot="start" name="create"></ion-icon>
-                Editar ou Esse botão
-              </ion-button> 
-            </ion-col>        
-          </ion-row>                    
-       </ion-grid>
-      
+    <ion-item *ngFor="let item of estabelecimentos">
+      <ion-grid class="ion-text-center">
+        <ion-row>
+          <ion-col>
+            {{item.nome}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button fill="outline" expand="block" color="secondary" [routerLink]="['/estabelecimento',item.id]">
+              <ion-icon slot="icon-only" name="create"></ion-icon>
+              Editar ou Esse botão
+            </ion-button>
+            <ion-button expand="block" color="secondary" [routerLink]="['/estabelecimento',item.id]">
+              <ion-icon slot="start" name="create"></ion-icon>
+              Editar ou Esse botão
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
-  </ion-list>
+    </ion-list>
 
   <ion-list *ngIf="tipoUsuario == 'CLIENTES'">
-    <ion-item *ngFor="let item of estabelecimentoVos" >
-      <div class="item-note" slot="end">          
-          <ion-button *ngIf="item.usuarioEstahAssociado == false" (click)="associarClienteEstabelecimento(item.id)">Associar Programa</ion-button>                         
-          <ion-button *ngIf="item.usuarioEstahAssociado == true" (click)="desassociarClienteEstabelecimento(item.id)">desassociar Programa</ion-button>                         
-        {{item.nome}}        
-      </div>
+    <ion-item *ngFor="let item of estabelecimentoVos">
+      <ion-grid class="ion-text-center">
+        <ion-row>
+          <ion-col>
+            {{item.nome}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="secondary" *ngIf="item.usuarioEstahAssociado == false"
+              (click)="associarClienteEstabelecimento(item.id)">Associar Programa</ion-button>
+            <ion-button expand="block" color="secondary" *ngIf="item.usuarioEstahAssociado == true"
+              (click)="desassociarClienteEstabelecimento(item.id)">desassociar Programa</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
   </ion-list>
 
-<ion-fab *ngIf="tipoUsuario == 'ADMINISTRADOR'"  vertical="bottom" horizontal="end" slot="fixed" color="primary">
-  <ion-fab-button [routerLink]="['/estabelecimento/novo']" >
+<ion-fab *ngIf="tipoUsuario == 'ADMINISTRADOR'" vertical="bottom" horizontal="end" slot="fixed" color="primary">
+  <ion-fab-button [routerLink]="['/estabelecimento/novo']">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

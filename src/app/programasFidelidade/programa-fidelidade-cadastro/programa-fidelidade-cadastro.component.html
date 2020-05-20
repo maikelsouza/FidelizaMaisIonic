@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -18,8 +21,8 @@
           <ion-input formControlName="descricao" ></ion-input>         
        </ion-item>
        <ion-item>
-        <ion-label position="floating">Valor mínimo necessário para ganhar um ponto</ion-label>
-          <ion-input formControlName="regra" type="numeric" ></ion-input>         
+        <ion-label position="floating">Mínimo necessário para ganhar um ponto</ion-label>
+          <ion-input formControlName="regra" type="number" ></ion-input>         
        </ion-item>  
        <ion-item  *ngIf="regra.invalid && (regra.dirty || regra.touched)" >      
           <ion-label color="danger" *ngIf="regra.errors.required">Campo obrigatório.</ion-label>                   
@@ -40,7 +43,7 @@
             formControlName="dataExpiracao"  placeholder="Selecione uma data"></ion-datetime>    
        </ion-item> 
        <ion-item>
-          <button type="button" (click)="adicionarItemProgramaFidelidade()">Adicionar Item FILDSET ITEM RESGATADOS</button> 
+          <button size="large" type="button" (click)="adicionarItemProgramaFidelidade()">Adicionar Item FILDSET ITEM RESGATADOS</button> 
       </ion-item>          
         <div formArrayName="CampoItemProgramaFidelidades" *ngFor="let item of formulario.get('CampoItemProgramaFidelidades').controls; let i = index;">
           <div [formGroupName]="i" >
@@ -54,7 +57,7 @@
               </ion-item>
               <ion-item>
                 <ion-label for="quantidadePontos" position="floating">Quantidade Pontos</ion-label>
-                <ion-input formControlName="quantidadePontos" type="numeric" ></ion-input>
+                <ion-input formControlName="quantidadePontos" type="number" ></ion-input>
               </ion-item>           
               <ion-item>
                 <ion-label for="dataExpiracao" position="floating">Data Expirar</ion-label>        
