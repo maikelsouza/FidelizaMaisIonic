@@ -41,13 +41,13 @@
         </ion-item>       
       <ion-item>        
         <ion-label position="floating">Valor Gasto</ion-label>
-        <ion-input formControlName="valorGasto" type="decimal"></ion-input>
+        <ion-input formControlName="valorGasto" type="text"></ion-input>
      </ion-item>     
      <ion-item  *ngIf="valorGasto.invalid && (valorGasto.dirty || valorGasto.touched)" >      
         <ion-label color="danger" *ngIf="valorGasto.errors.required">Campo obrigatório.</ion-label>                     
     </ion-item>  
     </ion-list>
 
-    <ion-button type="submit" color="primary" expand="block" [disabled]="!formulario.valid" >Salvar</ion-button >
+    <ion-button type="submit" color="primary" expand="block" [disabled]="!formulario.valid" >Pontuar</ion-button >
 </form>
 </ion-content>
