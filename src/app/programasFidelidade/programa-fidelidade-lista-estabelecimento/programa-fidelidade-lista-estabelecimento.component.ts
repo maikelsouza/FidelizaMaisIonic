@@ -51,7 +51,7 @@ export class ProgramaFidelidadeListaEstabelecimentoComponent implements OnInit, 
       let resultado = await this.programaFidelidadeService.buscarPorIdEstabelecimento(this.id);
       if (resultado.success) {
         this.programasFidelidade = <Array<ProgramaFidelidade>>resultado.data;  
-        this.exibeBotaoNovo = false;      
+        this.exibeBotaoNovo = this.programasFidelidade.length === 0;       
       }
     } catch (error) {
       console.log('Erro ao carregar os programa fidelidade', error);
