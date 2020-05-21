@@ -45,8 +45,13 @@ export class LoginComponent implements OnInit {
         let senha = this.formulario.get("senha").value;
         let resultado = await this.loginService.autenticar(login,senha);          
         if (resultado.success){
-          UsuarioService.RegistrarLogin(resultado.data);    
-          this.route.navigate(['/home']);          
+          UsuarioService.RegistrarLogin(resultado.data);
+          const clientes = 'CLIENTES';    
+          if (resultado.data.usuario[0].GrupoUsuario.nome === clientes){            
+            this.route.navigate(['/estabelecimento/lista'], { queryParams: { tipoUsuario: clientes } });          
+          }else{
+            this.route.navigate(['/home']);          
+          }
         }      
     } catch (error) {
         console.log('Erro ao logar um Usuário', error);    
