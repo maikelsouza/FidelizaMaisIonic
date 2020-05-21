@@ -12,20 +12,15 @@
     <ion-item *ngFor="let item of programasFidelidade">
       <ion-grid class="ion-text-center">
         <ion-row>
-          <ion-col>
-            {{item.nome}}
+          <ion-col>            
+            <ion-label>{{item.nome}}</ion-label>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
-            <ion-button fill="outline" expand="block" color="secondary"
-              [routerLink]="['//programaFidelidade/editar',item.id]">
-              <ion-icon slot="icon-only" name="create"></ion-icon>
-              Editar ou Esse botão
-            </ion-button>
-            <ion-button expand="block" color="secondary" [routerLink]="['/programaFidelidade/editar',item.id]">
+          <ion-col>  
+            <ion-button expand="block" color="medium" [routerLink]="['/programaFidelidade/editar',item.id]">
               <ion-icon slot="start" name="create"></ion-icon>
-              Editar ou Esse botão
+              <ion-label>Editar</ion-label>
             </ion-button>
           </ion-col>
         </ion-row>

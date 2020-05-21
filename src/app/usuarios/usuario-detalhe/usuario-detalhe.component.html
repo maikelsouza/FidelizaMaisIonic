@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Editar Usuário</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -51,6 +54,8 @@
         <ion-input formControlName="cpf" type="text" ></ion-input>
        </ion-item>        
     </ion-list> 
-    <ion-button color="primary" type="submit" [disabled]="!formulario.valid"  expand="block">Atualizar</ion-button >
+    <ion-button color="primary" type="submit" [disabled]="!formulario.valid" expand="block">      
+      <ion-label>Atualizar</ion-label>
+    </ion-button>
 </form>
 </ion-content>

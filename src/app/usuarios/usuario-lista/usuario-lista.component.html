@@ -10,29 +10,23 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of usuarios">
-      <ion-grid class="ion-text-center" > 
+      <ion-grid class="ion-text-center">
         <ion-row>
           <ion-col>
-            {{item.nome}}        
-          </ion-col>        
+            {{item.nome}}
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button fill="outline" expand="block" color="secondary"
-             [routerLink]="['/usuarios',item.id]">
-              <ion-icon slot="icon-only" name="create"></ion-icon>
-              Editar ou Esse botão              
-            </ion-button> 
-            <ion-button expand="block" color="secondary"
-              [routerLink]="['/usuarios',item.id]">
+            <ion-button expand="block" color="medium" [routerLink]="['/usuarios',item.id]">
               <ion-icon slot="start" name="create"></ion-icon>
-              Editar ou Esse botão
-            </ion-button> 
-          </ion-col>        
-        </ion-row>                    
-     </ion-grid>
+              <ion-label>Editar</ion-label>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
-  </ion-list>  
+  </ion-list>
   <!-- Necessário realizar um refactory para colocar não o ID da tabela de grupousuario, mas sim um código referente ao grupo e depois realizar a consulta -->
   <ion-fab  vertical="bottom" horizontal="end" slot="fixed" color="primary">
     <ion-fab-button [routerLink]="['novo']" [queryParams]="{tipoUsuario:2}" >

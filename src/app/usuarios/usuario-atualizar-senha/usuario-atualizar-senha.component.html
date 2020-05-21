@@ -24,6 +24,8 @@
            <ion-label color="danger" *ngIf="confirmarSenha.errors.required">Campo obrigatório.</ion-label>                   
        </ion-item>
     </ion-list>   
-    <ion-button color="primary" type="submit" [disabled]="!formulario.valid" expand="block" >Salvar</ion-button >
+    <ion-button color="primary" type="submit" [disabled]="!formulario.valid" expand="block">
+      <ion-label>Atualizar</ion-label>
+    </ion-button>
 </form>
 </ion-content>

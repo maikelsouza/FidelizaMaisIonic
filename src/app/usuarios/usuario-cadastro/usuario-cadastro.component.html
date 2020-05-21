@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Cadastro Usuário</ion-title>
+    <ion-title>Novo Usuário</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
@@ -59,6 +59,8 @@
       </ion-item>
     </ion-list>      
       
-    <ion-button color="primary" type="submit" [disabled]="!formulario.valid" expand="block">Salvar</ion-button >
+    <ion-button color="primary" type="submit" [disabled]="!formulario.valid" expand="block">      
+      <ion-label>Salvar</ion-label>         
+    </ion-button>
 </form>
 </ion-content>
