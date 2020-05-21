@@ -23,7 +23,7 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
   mostrarCancelarEdicao : boolean = false;
   id : number;
   titulo = "Novo programa fidelidade"; 
-  labelBlSalvarAtualizar ="Salvar"; 
+  labelBtnSalvarAtualizar ="Salvar"; 
   
   
 
@@ -45,7 +45,7 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
           this.mostrarCancelarEdicao = true;
           this.buscarPorId();
           this.titulo = "Editar programa fidelidade";
-          this.labelBlSalvarAtualizar ="Atualizar"; 
+          this.labelBtnSalvarAtualizar ="Atualizar"; 
         }
       })     
   }
