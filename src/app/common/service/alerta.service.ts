@@ -13,7 +13,7 @@ export class AlertaService {
 
     
   async toast(title: string) {
-    const toast = await this.toastCtrl.create({ message: title, position: 'bottom', duration: 3000, color: 'success' });
+    const toast = await this.toastCtrl.create({ message: title, position: 'bottom', duration: 3000 });
     return await toast.present();
   }
   
