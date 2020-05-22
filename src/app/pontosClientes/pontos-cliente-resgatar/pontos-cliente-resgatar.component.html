@@ -31,7 +31,7 @@
       </ion-radio-group>     
       <ion-list>
         <ion-item>
-          <ion-label>Selecione um Programa de fidelidade </ion-label>
+          <ion-label>Programa Fidelidade</ion-label>
           <ion-select formControlName="programaFidelidadeId"  okText="OK" cancelText="Cancelar"  (ionChange)="carregarCamposItensProgramaFidelidade($event)" >
             <ion-select-option [value]="programaFidelidade.id" *ngFor="let programaFidelidade of programasFidelidade">{{programaFidelidade.nome}}</ion-select-option>                 
           </ion-select> 
@@ -39,11 +39,31 @@
         <ion-item  *ngIf="programaFidelidadeId.invalid && (programaFidelidadeId.dirty || programaFidelidadeId.touched)" >      
           <ion-label color="danger" *ngIf="programaFidelidadeId.errors.required">Campo obrigatório.</ion-label>                    
         </ion-item> 
-        <ion-radio-group formControlName="campoItemProgramaFidelidadeId">                  
-          <ion-item *ngFor="let campoItemProgramaFidelidade of campoItemProgramaFidelidades" >          
-            <ion-label>Nome:{{campoItemProgramaFidelidade.nome}}  Pontos:{{campoItemProgramaFidelidade.quantidadePontos}}</ion-label>
-            <ion-radio slot="start"  value={{campoItemProgramaFidelidade.id}}></ion-radio>
-          </ion-item>          
+        <ion-radio-group formControlName="campoItemProgramaFidelidadeId">
+          <ion-grid>
+            <ion-row  class="ion-text-center">
+              <ion-col>
+                <ion-label>Selecione</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label>Nome</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label>Pontos</ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let campoItemProgramaFidelidade of campoItemProgramaFidelidades">
+              <ion-col class="ion-text-center">
+                <ion-radio value={{campoItemProgramaFidelidade.id}}></ion-radio>
+              </ion-col>
+              <ion-col>
+                <ion-label>{{campoItemProgramaFidelidade.nome}}</ion-label>
+              </ion-col>
+              <ion-col class="ion-text-center">
+                <ion-label>{{campoItemProgramaFidelidade.quantidadePontos}}</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-radio-group>
     </ion-list>
 
