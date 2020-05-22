@@ -15,6 +15,7 @@ import { ListaEstabelecimentoPage } from './estabelecimentos/lista-estabelecimen
 import { FormEstabelecimentoPage } from './estabelecimentos/form-estabelecimento/form-estabelecimento.page';
 import { EstabelecimentoDetalhePage } from './estabelecimentos/estabelecimento-detalhe/estabelecimento-detalhe.page';
 import { LogoffComponent } from './login/logoff/logoff.component';
+import { EstabelecimentoVisualizarComponent } from './estabelecimentos/estabelecimento-visualizar/estabelecimento-visualizar.component';
 
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
   // estabelecimentos  
   { path: 'estabelecimento/lista',component: ListaEstabelecimentoPage},  
   { path: 'estabelecimento/novo',component: FormEstabelecimentoPage},  
+  { path: 'estabelecimento/visualizar/:id',component: EstabelecimentoVisualizarComponent},  
   { path: 'estabelecimento/:id',component: EstabelecimentoDetalhePage},  
   // Cartão Fidelidade
   { path: 'cartaoFidelidade/listaUsuario', component: CartaoFidelidadeListaUsuarioComponent },   

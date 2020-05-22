@@ -31,6 +31,7 @@ import { ListaEstabelecimentoPage } from './estabelecimentos/lista-estabelecimen
 import { EstabelecimentoDetalhePage } from './estabelecimentos/estabelecimento-detalhe/estabelecimento-detalhe.page';
 import { EstabelecimentoService } from './estabelecimentos/shared/services/estabelecimento.service';
 import { LogoffComponent } from './login/logoff/logoff.component';
+import { EstabelecimentoVisualizarComponent } from './estabelecimentos/estabelecimento-visualizar/estabelecimento-visualizar.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { LogoffComponent } from './login/logoff/logoff.component';
     FormEstabelecimentoPage,
     ListaEstabelecimentoPage,
     EstabelecimentoDetalhePage,      
+    EstabelecimentoVisualizarComponent,
     LogoffComponent
     
   ],
