@@ -15,4 +15,9 @@ export class Estabelecimento {
     Telefones: Array<Telefone>;
     MidiaSocials: Array<MidiaSocial>;
     tipoEstabelecimentoId: any;   
+
+    constructor() {
+        this.EnderecoEstabelecimento = new EnderecoEstabelecimento();
+        
+    }
 }
