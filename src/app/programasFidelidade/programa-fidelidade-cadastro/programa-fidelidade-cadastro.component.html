@@ -22,7 +22,7 @@
        </ion-item>
        <ion-item>
         <ion-label position="floating">Mínimo necessário para ganhar um ponto</ion-label>
-          <ion-input formControlName="regra" type="number" ></ion-input>         
+          <ion-input formControlName="regra" type="number" min="0"></ion-input>         
        </ion-item>  
        <ion-item  *ngIf="regra.invalid && (regra.dirty || regra.touched)" >      
           <ion-label color="danger" *ngIf="regra.errors.required">Campo obrigatório.</ion-label>                   
@@ -43,7 +43,7 @@
         formControlName="dataExpiracao" placeholder="Selecione uma data"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-button size="small" color="medium" (click)="adicionarItemProgramaFidelidade()">        
+      <ion-button size="small" color="tertiary" (click)="adicionarItemProgramaFidelidade()">        
         <ion-label>Adicionar Item</ion-label>  
         <ion-icon slot="start" name="add"></ion-icon>
       </ion-button>
@@ -60,7 +60,7 @@
               </ion-item>
               <ion-item>
                 <ion-label for="quantidadePontos" position="floating">Quantidade Pontos</ion-label>
-                <ion-input formControlName="quantidadePontos" type="number" ></ion-input>
+                <ion-input formControlName="quantidadePontos" type="number" min="0"></ion-input>
               </ion-item>           
               <ion-item>
                 <ion-label for="dataExpiracao" position="floating">Data Expirar</ion-label>        
@@ -68,7 +68,7 @@
                   formControlName="dataExpiracao"  placeholder="Selecione uma data"></ion-datetime>    
                </ion-item>             
                <ion-item>
-                <ion-button size="small" color="medium" (click)="removerItemProgramaFidelidade(i)">
+                <ion-button size="small" color="tertiary" (click)="removerItemProgramaFidelidade(i)">
                   <ion-label>Remover Item</ion-label>                          
                   <ion-icon slot="start" name="remove"></ion-icon>
                 </ion-button>
