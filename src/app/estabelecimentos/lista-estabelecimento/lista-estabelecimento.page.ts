@@ -66,11 +66,13 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
         }
       }else if (this.tipoUsuario == "CLIENTES"){
           estabelecimentoResultado = await this.estabelecimentoSrv.buscarComProgramaFidelidadeOuCartaoFidelidade();
-          if(estabelecimentoResultado.success){
+          if(estabelecimentoResultado.success){            
             this.estabelecimentoVos =  <Array<EstabelecimentoVO>>estabelecimentoResultado.data;                 
-            clienteEstabelecimentoResultado = await this.clienteEstabelecimentoService.buscarPorIdUsuario(this.usuarioLogado[0].id);
+            clienteEstabelecimentoResultado = await this.clienteEstabelecimentoService.buscarPorIdUsuario(this.usuarioLogado[0].id);            
             this.clienteEstabelecimento = <Array<ClienteEstabelecimento>>clienteEstabelecimentoResultado.data;        
             this.descobrirClientesAssociadosEstabelecimentos();
+            this.popularTelefoneCelular();
+            this.popularMidiaSocial();
           }          
       }else{ 
         estabelecimentoResultado = await this.estabelecimentoSrv.buscarTodos();
@@ -110,8 +112,7 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
       if (resultado.success) {
         this.alertSrv.toast('Cliente desassociar com sucesso!');
         await this.estabelecimentoSrv.notificarListaEstabelecimento();
-        this.router.navigate(['/estabelecimento/lista'],{ queryParams: { tipoUsuario: this.usuarioLogado[0].GrupoUsuario.nome } });                     
-                               
+        this.router.navigate(['/estabelecimento/lista'],{ queryParams: { tipoUsuario: this.usuarioLogado[0].GrupoUsuario.nome } });                                                    
       }
     } catch (error) {
       console.log('Erro ao desassociar um cliente a um estabelecimento', error);
@@ -123,10 +124,32 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
       estabelecimentoVo.usuarioEstahAssociado = false;
       this.clienteEstabelecimento.forEach(clienteEstabelecimento => {
         if (estabelecimentoVo.id == clienteEstabelecimento.estabelecimentoId){
-          estabelecimentoVo.usuarioEstahAssociado = true;
+          estabelecimentoVo.usuarioEstahAssociado = true;                                     
         }        
       });      
     });    
-  } 
+  }
+
+  private async popularTelefoneCelular(){
+    this.estabelecimentoVos.forEach(estabelecimentoVo => {
+      estabelecimentoVo.Telefones.forEach(telefone =>{
+        if (telefone.ativo && telefone.tipo == "Celular"){
+          estabelecimentoVo.teleneCelular = telefone.numero;
+        }
+      })
+    });    
+  }
+
+  private async popularMidiaSocial(){
+    this.estabelecimentoVos.forEach(estabelecimentoVo => {
+      estabelecimentoVo.MidiaSocials.forEach(midiaSocial =>{
+        // Realizar um refactory dessa parte, ou seja, criar um cadastro dos tipos de mídias sociais para realizar o teste
+        if (midiaSocial.ativo && midiaSocial.nome == "Instagram"){
+          estabelecimentoVo.urlMidiaSocial = midiaSocial.url; 
+        }
+      })
+    });    
+  }
+
 
 }
