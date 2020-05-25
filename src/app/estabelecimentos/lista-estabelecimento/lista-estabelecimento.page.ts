@@ -85,6 +85,13 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
     }
   }
 
+  visualizarDetalhesEstabelecimento(item : EstabelecimentoVO){
+    this.router.navigateByUrl('/estabelecimento/visualizar',{
+      state: { estabelecimentoVO: item }
+    });
+
+  }
+
   async associarClienteEstabelecimento(estabelecimentoId: number){
     try { 
       let clienteEstabelecimento : ClienteEstabelecimento = new ClienteEstabelecimento(); 

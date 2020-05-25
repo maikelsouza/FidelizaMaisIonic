@@ -27,7 +27,7 @@ const routes: Routes = [
   // estabelecimentos  
   { path: 'estabelecimento/lista',component: ListaEstabelecimentoPage},  
   { path: 'estabelecimento/novo',component: FormEstabelecimentoPage},  
-  { path: 'estabelecimento/visualizar/:id',component: EstabelecimentoVisualizarComponent},  
+  { path: 'estabelecimento/visualizar',component: EstabelecimentoVisualizarComponent},  
   { path: 'estabelecimento/:id',component: EstabelecimentoDetalhePage},  
   // Cartão Fidelidade
   { path: 'cartaoFidelidade/listaUsuario', component: CartaoFidelidadeListaUsuarioComponent },   
