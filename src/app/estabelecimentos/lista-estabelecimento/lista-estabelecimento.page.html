@@ -41,7 +41,7 @@
             <ion-card-content>
               <ion-item>
                 <ion-icon slot="start" name="home"></ion-icon>
-                <ion-label>{{item.email}}</ion-label>
+                <ion-label>{{item.site}}</ion-label>
               </ion-item>
               <ion-item >
                 <ion-icon slot="start" name="logo-whatsapp"></ion-icon>
@@ -68,7 +68,7 @@
                 </ion-button>
               </ion-item>
               <ion-item >
-                <ion-button size="small" expand="block" color="tertiary" [routerLink]="['/estabelecimento/visualizar',item.id]" >
+                <ion-button size="small" expand="block" color="tertiary" (click)="visualizarDetalhesEstabelecimento(item)"  >
                   <ion-label size="small" >Mais Detalhes</ion-label>
                   <ion-icon slot="start" name="arrow-up"></ion-icon>
                 </ion-button>
