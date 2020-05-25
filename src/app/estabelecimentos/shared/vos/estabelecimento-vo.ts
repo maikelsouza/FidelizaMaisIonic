@@ -6,6 +6,7 @@ export class EstabelecimentoVO {
     nome: string;
     ativo: boolean;
     email: string;
+    site: string;
     usuarioEstahAssociado : boolean;
     teleneCelular: string;
     urlMidiaSocial: string;
