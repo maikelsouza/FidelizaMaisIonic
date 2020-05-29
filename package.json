@@ -1,7 +1,7 @@
 {
-  "name": "CartaoFidelidade.Ionic",
+  "name": "fidelizamais",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Maikel Joel de Souza",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
