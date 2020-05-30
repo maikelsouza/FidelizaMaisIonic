@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export class SpinnerService {
 
-  //private spinner: Loadin = null;
+  
 
   constructor(//public loading: LoadingController
     ) { 
