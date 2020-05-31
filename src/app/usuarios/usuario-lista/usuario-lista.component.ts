@@ -14,7 +14,6 @@ export class UsuarioListaComponent implements OnInit {
   constructor(private usuarioService: UsuarioService) { 
     
   }
-
  
 
   ngOnInit() {
