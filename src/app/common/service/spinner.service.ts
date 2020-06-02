@@ -9,7 +9,7 @@ export class SpinnerService {
 
   
 
-  constructor(//public loading: LoadingController
+  constructor(
     ) { 
 
   }
