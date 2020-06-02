@@ -52,8 +52,7 @@ import { EstabelecimentoVisualizarComponent } from './estabelecimentos/estabelec
     ListaEstabelecimentoPage,
     EstabelecimentoDetalhePage,      
     EstabelecimentoVisualizarComponent,
-    LogoffComponent
-    
+    LogoffComponent    
   ],
   entryComponents: [],
   imports: [
