@@ -11,9 +11,7 @@ declare var Connection: any;
 
 export class NetworkService {
 
-  constructor(private plataform: Platform) {
-
-  }
+  constructor(private plataform: Platform) {}
 
   get IsOnline(): boolean {
     if (this.plataform.is('cordova')) {
