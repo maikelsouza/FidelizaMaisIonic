@@ -40,7 +40,7 @@ export class CartaoFidelidadeCadastroComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.inscricao.unsubscribe;
   }
-
+  
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required], ativo: [true, Validators.required],
