@@ -39,7 +39,7 @@ export class EsqueciMinhaSenhaCadastroComponent implements OnInit {
           this.alertSrv.alert('Email não cadastrado!',`O email: ${email} não foi encontrado no sistema.`);        
         }else{
           usuarioResultado.data.senha = this.gerarNovaSenha();          
-          this.usuarioService.atualizar(usuarioResultado.data.id,usuarioResultado.data);
+          this.usuarioService.atualizarSenha(usuarioResultado.data.id,usuarioResultado.data);
           // IMPLEMENTAR ENVIO DE EMAIL
           this.alertSrv.toast('Você recebera um e-mail com a nova senha');        
         }

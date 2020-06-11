@@ -45,10 +45,8 @@ export class UsuarioService extends ServiceBase<Usuario> {
     return respotas; 
   }
 
-  async atualizarSenha (id :number, senha: any){
-    const ab = `${this.url}/atualizarSenha/${id}`;
-    let respotas = this.httpService.put(`${this.url}/atualizarSenha/${id}`,senha);  
-    return respotas; 
+  async atualizarSenha (id :number, senha: any){    
+    return this.httpService.put(`${this.url}/atualizarSenha/${id}`,senha);      
   }
 
   static RegistrarLogin(result: any) {
