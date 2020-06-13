@@ -219,6 +219,10 @@ ngOnInit() {
   this.carregarUsuariosSemEstabelecimentos(); 
 }
 
+ngOnDestroy() {
+  this.inscricao.unsubscribe;
+}
+
 criarItemTelefone(): FormGroup {  
     return this.formBuilder.group({
           numero: '',          
