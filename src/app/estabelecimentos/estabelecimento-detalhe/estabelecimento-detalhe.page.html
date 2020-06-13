@@ -18,7 +18,7 @@
        </ion-item> 
       <ion-item>
          <ion-label position="floating">CNPJ</ion-label>
-         <ion-input formControlName="cnpj" type="text"></ion-input>
+         <ion-input formControlName="cnpj" type="number"></ion-input>
        </ion-item>      
        <ion-item>
           <ion-label position="floating">E-mail <em class="campo-obrigatorio">*</em></ion-label>         
@@ -29,7 +29,7 @@
       </ion-item>                     
        <ion-item>
          <ion-label position="floating">Ativo <em class="campo-obrigatorio">*</em></ion-label>  
-         <ion-select  formControlName="ativo"  okText="OK" cancelText="Cancelar">
+         <ion-select  formControlName="ativo"  okText="OK" cancelText="Cancelar" >
             <ion-select-option [value]="true">Ativo</ion-select-option>
             <ion-select-option [value]="false">Inativo</ion-select-option>
          </ion-select>               
@@ -58,7 +58,7 @@
         </ion-item>
          <ion-item>
           <ion-label for="cep" position="floating">Cep <em class="campo-obrigatorio">*</em></ion-label>
-          <ion-input formControlName="cep" type="text" ></ion-input>
+          <ion-input formControlName="cep" type="number" ></ion-input>
         </ion-item> 
         <ion-item  *ngIf="cep.invalid && (cep.dirty || cep.touched)" >      
           <ion-label color="danger" *ngIf="cep.errors.required">Campo obrigatório.</ion-label>                   
@@ -87,7 +87,7 @@
       </div>     
       
       <ion-item>
-        <ion-label position="floating" for="tipoEstabelecimentoId">Tipo Estabelecimento</ion-label>
+        <ion-label position="floating" for="tipoEstabelecimentoId">Tipo Estabelecimento <em class="campo-obrigatorio">*</em></ion-label>
           <ion-select  formControlName="tipoEstabelecimentoId"  okText="OK" cancelText="Cancelar">
             <ion-select-option [value]="tipoEstabelecimento.id" *ngFor="let tipoEstabelecimento of tipoEstabelecimentos">{{tipoEstabelecimento.nome}}</ion-select-option>                 
         </ion-select>

@@ -18,7 +18,7 @@
         </ion-item> 
          <ion-item>
             <ion-label position="floating">Cnpj</ion-label>
-           <ion-input formControlName="cnpj" type="text"></ion-input>
+           <ion-input formControlName="cnpj" type="number"></ion-input>
          </ion-item>      
          <ion-item>
             <ion-label position="floating">E-mail <em class="campo-obrigatorio">*</em></ion-label>         
@@ -37,7 +37,7 @@
             </ion-item>          
            <ion-item>
               <ion-label for="numero" position="floating">Número <em class="campo-obrigatorio">*</em></ion-label>
-              <ion-input formControlName="numero" type="text" ></ion-input>
+              <ion-input formControlName="numero" type="number" ></ion-input>
           </ion-item>
           <ion-item  *ngIf="numero.invalid && (numero.dirty || numero.touched)" >      
             <ion-label color="danger" *ngIf="numero.errors.required">Campo obrigatório.</ion-label>                   
@@ -48,7 +48,7 @@
           </ion-item>
            <ion-item>
             <ion-label for="cep" position="floating">Cep <em class="campo-obrigatorio">*</em></ion-label>
-            <ion-input formControlName="cep" type="text" ></ion-input>
+            <ion-input formControlName="cep" type="number" ></ion-input>
           </ion-item>
           <ion-item  *ngIf="cep.invalid && (cep.dirty || cep.touched)" >      
             <ion-label color="danger" *ngIf="cep.errors.required">Campo obrigatório.</ion-label>                   
