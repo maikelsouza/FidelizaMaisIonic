@@ -10,7 +10,7 @@
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <ion-list no-lines>    
         <ion-item>        
-          <ion-label position="floating">Nome</ion-label>
+          <ion-label position="floating">Nome <em class="campo-obrigatorio">*</em></ion-label>
           <ion-input formControlName="nome" type="text"></ion-input>
        </ion-item>
        <ion-item  *ngIf="nome.invalid && (nome.dirty || nome.touched)" >      
@@ -21,14 +21,14 @@
          <ion-input formControlName="cnpj" type="text"></ion-input>
        </ion-item>      
        <ion-item>
-          <ion-label position="floating">E-mail</ion-label>         
+          <ion-label position="floating">E-mail <em class="campo-obrigatorio">*</em></ion-label>         
          <ion-input formControlName="email" type="email" ></ion-input>
        </ion-item>   
        <ion-item  *ngIf="email.invalid && (email.dirty || email.touched)" >                
           <ion-label color="danger" *ngIf="email.errors.email">Formato de e-mail inválido.</ion-label>
       </ion-item>                     
        <ion-item>
-         <ion-label position="floating">Ativo</ion-label>  
+         <ion-label position="floating">Ativo <em class="campo-obrigatorio">*</em></ion-label>  
          <ion-select  formControlName="ativo"  okText="OK" cancelText="Cancelar">
             <ion-select-option [value]="true">Ativo</ion-select-option>
             <ion-select-option [value]="false">Inativo</ion-select-option>
@@ -39,14 +39,14 @@
        </ion-item>       
       <div formGroupName="EnderecoEstabelecimentos" >
           <ion-item>
-              <ion-label for="rua" position="floating">Rua</ion-label>
+              <ion-label for="rua" position="floating">Rua <em class="campo-obrigatorio">*</em></ion-label>
               <ion-input formControlName="rua" type="text" ></ion-input>
           </ion-item>
           <ion-item  *ngIf="rua.invalid && (rua.dirty || rua.touched)" >      
             <ion-label color="danger" *ngIf="rua.errors.required">Campo obrigatório.</ion-label>                   
           </ion-item>              
           <ion-item>
-            <ion-label for="numero" position="floating">Número</ion-label>
+            <ion-label for="numero" position="floating">Número <em class="campo-obrigatorio">*</em></ion-label>
             <ion-input formControlName="numero" type="number" ></ion-input>
           </ion-item>
           <ion-item  *ngIf="numero.invalid && (numero.dirty || numero.touched)" >      
@@ -57,28 +57,28 @@
           <ion-input formControlName="complemento" type="text" ></ion-input>
         </ion-item>
          <ion-item>
-          <ion-label for="cep" position="floating">Cep</ion-label>
+          <ion-label for="cep" position="floating">Cep <em class="campo-obrigatorio">*</em></ion-label>
           <ion-input formControlName="cep" type="text" ></ion-input>
         </ion-item> 
         <ion-item  *ngIf="cep.invalid && (cep.dirty || cep.touched)" >      
           <ion-label color="danger" *ngIf="cep.errors.required">Campo obrigatório.</ion-label>                   
         </ion-item>           
         <ion-item>
-          <ion-label for="bairro" position="floating">Bairro</ion-label>
+          <ion-label for="bairro" position="floating">Bairro <em class="campo-obrigatorio">*</em></ion-label>
           <ion-input formControlName="bairro" type="text" ></ion-input>
         </ion-item>
         <ion-item  *ngIf="bairro.invalid && (bairro.dirty || bairro.touched)" >      
           <ion-label color="danger" *ngIf="bairro.errors.required">Campo obrigatório.</ion-label>                   
         </ion-item>
         <ion-item>
-          <ion-label for="cidade" position="floating">Cidade</ion-label>
+          <ion-label for="cidade" position="floating">Cidade <em class="campo-obrigatorio">*</em></ion-label>
           <ion-input formControlName="cidade" type="text" ></ion-input>
         </ion-item>
         <ion-item  *ngIf="cidade.invalid && (cidade.dirty || cidade.touched)" >      
           <ion-label color="danger" *ngIf="cidade.errors.required">Campo obrigatório.</ion-label>                   
         </ion-item>           
         <ion-item>
-          <ion-label for="uf" position="floating">UF</ion-label>
+          <ion-label for="uf" position="floating">UF <em class="campo-obrigatorio">*</em></ion-label>
           <ion-input formControlName="uf" type="text" ></ion-input>
         </ion-item>      
         <ion-item  *ngIf="uf.invalid && (uf.dirty || uf.touched)" >      

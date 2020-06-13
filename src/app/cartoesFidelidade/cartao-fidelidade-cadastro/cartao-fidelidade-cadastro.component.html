@@ -7,7 +7,7 @@
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <ion-list no-lines>    
         <ion-item>        
-          <ion-label position="stacked">Nome</ion-label>
+          <ion-label position="stacked">Nome <em class="campo-obrigatorio">*</em></ion-label>
           <ion-input formControlName="nome" type="text"></ion-input>
        </ion-item>
        <ion-item  *ngIf="nome.invalid && (nome.dirty || nome.touched)" >      
@@ -18,7 +18,7 @@
           <ion-textarea formControlName="descricao"></ion-textarea>         
        </ion-item>      
        <ion-item>
-          <ion-label position="stacked">Quantidade de Marcação</ion-label>         
+          <ion-label position="stacked">Quantidade de Marcação <em class="campo-obrigatorio">*</em></ion-label>         
          <ion-input formControlName="quantidadeMarcacao" type="number" ></ion-input>
        </ion-item>
        <ion-item  *ngIf="quantidadeMarcacao.invalid && (quantidadeMarcacao.dirty || quantidadeMarcacao.touched)" >      
@@ -30,7 +30,7 @@
            formControlName="dataExpiracao"  placeholder="Selecione uma Data"></ion-datetime>    
        </ion-item>   
        <ion-item>
-          <ion-label position="stacked">Prêmio</ion-label>
+          <ion-label position="stacked">Prêmio <em class="campo-obrigatorio">*</em></ion-label>
           <ion-textarea formControlName="premio"></ion-textarea>         
        </ion-item>  
        <ion-item  *ngIf="premio.invalid && (premio.dirty || premio.touched)" >      
