@@ -10,7 +10,7 @@
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <ion-list no-lines>    
         <ion-item>        
-          <ion-label position="floating">E-mail</ion-label>
+          <ion-label position="floating">E-mail <em class="campo-obrigatorio">*</em></ion-label>
           <ion-input formControlName="email" type="email"></ion-input>
        </ion-item>   
        <ion-item  *ngIf="email.invalid && (email.dirty || email.touched)" >      
@@ -31,7 +31,7 @@
       </ion-radio-group>     
       <ion-list>
         <ion-item>
-          <ion-label>Programa Fidelidade</ion-label>
+          <ion-label>Programa Fidelidade <em class="campo-obrigatorio">*</em></ion-label>
           <ion-select formControlName="programaFidelidadeId"  okText="OK" cancelText="Cancelar"  (ionChange)="carregarCamposItensProgramaFidelidade($event)" >
             <ion-select-option [value]="programaFidelidade.id" *ngFor="let programaFidelidade of programasFidelidade">{{programaFidelidade.nome}}</ion-select-option>                 
           </ion-select> 

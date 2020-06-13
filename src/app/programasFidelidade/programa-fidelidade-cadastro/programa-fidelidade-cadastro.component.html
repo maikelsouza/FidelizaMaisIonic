@@ -10,7 +10,7 @@
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
     <ion-list no-lines>    
         <ion-item>        
-          <ion-label position="floating">Nome</ion-label>
+          <ion-label position="floating">Nome <em class="campo-obrigatorio">*</em></ion-label>
           <ion-input formControlName="nome" type="text"></ion-input>
        </ion-item>
        <ion-item  *ngIf="nome.invalid && (nome.dirty || nome.touched)" >      
@@ -21,14 +21,14 @@
           <ion-input formControlName="descricao" ></ion-input>         
        </ion-item>
        <ion-item>
-        <ion-label position="floating">Mínimo necessário para ganhar um ponto</ion-label>
+        <ion-label position="floating">Mínimo necessário para ganhar um ponto <em class="campo-obrigatorio">*</em></ion-label>
           <ion-input formControlName="regra" type="number" min="0"></ion-input>         
        </ion-item>  
        <ion-item  *ngIf="regra.invalid && (regra.dirty || regra.touched)" >      
           <ion-label color="danger" *ngIf="regra.errors.required">Campo obrigatório.</ion-label>                   
       </ion-item> 
      <ion-item>
-      <ion-label position="floating">Ativo</ion-label>  
+      <ion-label position="floating">Ativo <em class="campo-obrigatorio">*</em></ion-label>  
       <ion-select  formControlName="ativo"  okText="OK" cancelText="Cancelar">
          <ion-select-option [value]="true">Ativo</ion-select-option>
          <ion-select-option [value]="false">Inativo</ion-select-option>
@@ -51,7 +51,7 @@
       <div formArrayName="CampoItemProgramaFidelidades" *ngFor="let item of formulario.get('CampoItemProgramaFidelidades').controls; let i = index;">
         <div [formGroupName]="i" >
             <ion-item>
-                <ion-label for="nome" position="floating">Nome</ion-label>
+                <ion-label for="nome" position="floating">Nome  <em class="campo-obrigatorio">*</em></ion-label>
                 <ion-input formControlName="nome" type="text" ></ion-input>
               </ion-item>
               <ion-item>
@@ -59,7 +59,7 @@
                 <ion-input formControlName="descricao" type="text" ></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label for="quantidadePontos" position="floating">Quantidade Pontos</ion-label>
+                <ion-label for="quantidadePontos" position="floating">Quantidade Pontos  <em class="campo-obrigatorio">*</em></ion-label>
                 <ion-input formControlName="quantidadePontos" type="number" min="0"></ion-input>
               </ion-item>           
               <ion-item>
