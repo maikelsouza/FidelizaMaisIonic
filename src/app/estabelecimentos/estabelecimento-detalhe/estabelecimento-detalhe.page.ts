@@ -58,6 +58,7 @@ export class EstabelecimentoDetalhePage implements OnInit {
       id: [null], nome: [null, Validators.required],
       ativo: [null, Validators.required], cnpj: [null],
       email: [null, Validators.email],
+      site: [null],
       tipoEstabelecimentoId: [null, Validators.required],
       EnderecoEstabelecimentos: this.formBuilder.group({
         id: [null],
@@ -93,6 +94,7 @@ export class EstabelecimentoDetalhePage implements OnInit {
           cnpj: [this.estabelecimento.cnpj],
           email: [this.estabelecimento.email, Validators.email],
           ativo: [this.estabelecimento.ativo, Validators.required],
+          site: [this.estabelecimento.site],
           tipoEstabelecimentoId: [this.estabelecimento.tipoEstabelecimentoId, Validators.required],
           EnderecoEstabelecimentos: this.formBuilder.group({
             id: [this.estabelecimento.EnderecoEstabelecimento.id],

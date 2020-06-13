@@ -17,7 +17,7 @@
           <ion-label color="danger" *ngIf="nome.errors.required">Campo obrigatório.</ion-label>                   
        </ion-item> 
       <ion-item>
-          <ion-label position="floating">CNPJ</ion-label>
+         <ion-label position="floating">CNPJ</ion-label>
          <ion-input formControlName="cnpj" type="text"></ion-input>
        </ion-item>      
        <ion-item>
@@ -108,6 +108,10 @@
           </ion-select>    
         </ion-item>
       </div>
+      <ion-item>
+        <ion-label position="floating">Site</ion-label>
+        <ion-input formControlName="site" type="url"></ion-input>
+      </ion-item>
       <div formGroupName="midiaSocial">
         <ion-item>
           <ion-label for="midiaSocialNome1" position="floating">Midia Social 1</ion-label>

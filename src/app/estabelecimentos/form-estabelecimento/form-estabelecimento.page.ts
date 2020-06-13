@@ -121,6 +121,7 @@ export class FormEstabelecimentoPage implements OnInit {
       tipoEstabelecimentoId: [null, Validators.required],
       ativo: [true, Validators.required], 
       usuarioId: [null, Validators.required],
+      site: [null], 
       EnderecoEstabelecimento: this.formBuilder.group({       
         rua: [null,Validators.required], numero: [null,Validators.required], complemento: [null],
         cep: [null,Validators.required],                      
