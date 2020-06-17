@@ -42,7 +42,7 @@ export class PontosClientePontuarComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       email: [null,  Validators.required], 
       clienteId: [null, Validators.required], 
-      valorGasto: [null, Validators.required],
+      valorGasto: ["00,0", Validators.required],
       programaFidelidadeId: [null, Validators.required]
     });
   }
