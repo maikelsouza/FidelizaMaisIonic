@@ -10,7 +10,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { BrMaskerModule } from 'br-mask';
 import { LoginService } from './login/shared/services/login.service';
 import { LoginComponent } from './login/login/login.component';
 import { CartaoFidelidadeService } from './cartoesFidelidade/shared/services/cartao-fidelidade.service';
@@ -60,9 +60,9 @@ import { EstabelecimentoVisualizarComponent } from './estabelecimentos/estabelec
     HttpClientModule,    
     NgxSpinnerModule, 
     ReactiveFormsModule,
-    
+    BrMaskerModule,    
     FormsModule,   
-    CommonModule,
+    CommonModule,    
     IonicModule.forRoot(),
     AppRoutingModule  
 
