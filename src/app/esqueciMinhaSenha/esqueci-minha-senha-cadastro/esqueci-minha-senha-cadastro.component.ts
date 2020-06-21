@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from 'src/app/usuarios/shared/services/usuario.service';
 import { AlertaService } from 'src/app/common/service/alerta.service';
-//const md5 = require('md5');
+import { EmailModel } from 'src/app/common/model/EmailModel';
+import { Router } from '@angular/router';
+import { getMaxListeners } from 'process';
+
 
 @Component({
   selector: 'app-esqueci-minha-senha-cadastro',
@@ -17,6 +20,7 @@ export class EsqueciMinhaSenhaCadastroComponent implements OnInit {
     private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private alertSrv: AlertaService,
+    private route: Router
   ) { }
 
   ngOnInit() {
@@ -38,10 +42,12 @@ export class EsqueciMinhaSenhaCadastroComponent implements OnInit {
         if (usuarioResultado.data == null){
           this.alertSrv.alert('Email não cadastrado!',`O email: ${email} não foi encontrado no sistema.`);        
         }else{
-          usuarioResultado.data.senha = this.gerarNovaSenha();          
-          this.usuarioService.atualizarSenha(usuarioResultado.data.id,usuarioResultado.data);
-          // IMPLEMENTAR ENVIO DE EMAIL
-          this.alertSrv.toast('Você recebera um e-mail com a nova senha');        
+          let resultado = await this.usuarioService.gerarNovaSenha(usuarioResultado.data.id, this.criarEmailModel(email));
+          if (resultado.success){            
+            this.alertSrv.toast('Você recebera um e-mail com a nova senha');        
+            this.route.navigate(['/login']);     
+          }
+          
         }
       }
     } catch (error) {
@@ -51,8 +57,13 @@ export class EsqueciMinhaSenhaCadastroComponent implements OnInit {
 
   public get email() {return this.formulario.get('email')}
   
-  private gerarNovaSenha() : string{        
-    const novaSenhaStr = new String(Math.random());    
-    return novaSenhaStr.substring(2,8);
+
+
+  private criarEmailModel(to: string) : EmailModel{
+    let emailModel: EmailModel = new EmailModel();
+    emailModel.to = to;    
+    emailModel.subject = "Fideliza Mais - Esqueci Minha Senha";   
+    emailModel.text = "Sua senha foi gerada com sucesso: Senha: "    
+    return emailModel;
   }
 }

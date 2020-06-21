@@ -4,6 +4,7 @@ import { ServiceBase } from 'src/app/base/serviceBase';
 import { HttpService } from './../../../common/service/http.service';
 import { HttpResultModel } from './../../../common/model/HttpResultModel';
 import { Injectable } from '@angular/core';
+import { EmailModel } from 'src/app/common/model/EmailModel';
 
 
 @Injectable({
@@ -66,4 +67,9 @@ export class UsuarioService extends ServiceBase<Usuario> {
     localStorage.removeItem(ConfigHelper.storageKeys.token);
     localStorage.removeItem(ConfigHelper.storageKeys.usuario);
   }
+
+  async gerarNovaSenha (id :number, emailModel: EmailModel){    
+    return this.httpService.put(`${this.url}/gerarNovaSenha/${id}`,emailModel);      
+  }
+
 }
