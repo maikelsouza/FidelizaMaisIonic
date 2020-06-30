@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Fideliza Mais
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ion-text-center">
+    <ion-label>Olá {{ usuarioLogado[0].nome }}</ion-label>
+  </div>
+  <div class="ion-text-center">
+    <ion-label>seja bem-vindo ao <strong>Fideliza Mais</strong></ion-label>
+ </div>  
+ <br><br><br>
+  <ion-grid>    
+    <ion-row >
+      <ion-col [routerLink]="'/estabelecimento/lista'" [queryParams]="{tipoUsuario:usuarioLogado[0].GrupoUsuario.nome}">
+        <div style="text-align: center">      
+          <img src="/assets/images/logo.png" alt="Principal" width="100" height="100">
+        </div>
+      </ion-col>
+      <ion-col [routerLink]="'/usuarios/meuPerfil'">
+        <div style="text-align: center">      
+          <img src="/assets/images/logo.png" alt="Meu Perfil" width="100" height="100">
+        </div>
+      </ion-col>
+    </ion-row>    
+    <ion-row  *ngIf="usuarioLogado[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'" >
+      <ion-col [routerLink]="'/pontosClientePontuar'">
+        <div style="text-align: center">      
+          <img src="/assets/images/logo.png" alt="Pontuar Cliente" width="100" height="100">
+        </div>
+      </ion-col>
+      <ion-col [routerLink]="'/pontosClienteResgatar'">
+        <div style="text-align: center">      
+          <img src="/assets/images/logo.png" alt="Resgatar Pontos Cliente" width="100" height="100">
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col [routerLink]="'/sair'">
+        <div style="text-align: center">      
+          <img src="/assets/images/logo.png" alt="Sair" width="100" height="100">
+        </div>
+      </ion-col>     
+      <ion-col >        
+      </ion-col>     
+    </ion-row>
+  </ion-grid>
+</ion-content>

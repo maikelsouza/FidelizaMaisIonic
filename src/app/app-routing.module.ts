@@ -17,9 +17,6 @@ import { EstabelecimentoDetalhePage } from './estabelecimentos/estabelecimento-d
 import { LogoffComponent } from './login/logoff/logoff.component';
 import { EstabelecimentoVisualizarComponent } from './estabelecimentos/estabelecimento-visualizar/estabelecimento-visualizar.component';
 
-
-
-
 const routes: Routes = [
   { path: 'usuarios', loadChildren: './usuarios/usuarios.module#UsuariosModule'},    
   { path: 'login', component: LoginComponent},    
@@ -43,7 +40,8 @@ const routes: Routes = [
   { path: 'pontosClientePontuar', component: PontosClientePontuarComponent }, 
   { path: 'pontosClienteResgatar', component: PontosClienteResgatarComponent },      
   
-  { path: 'home', loadChildren: './home/home.module#HomePageModule'},  
+  { path: 'principal', loadChildren: './principal/principal.module#PrincipalPageModule'},  
+ // { path: 'principal', component: PrincipalPage},  
   { path: 'sair', component: LogoffComponent },      
   { path: '', redirectTo: 'login', pathMatch: 'full'},
 ];

@@ -71,7 +71,7 @@ export class UsuarioMeuPerfilComponent implements OnInit {
     try {        
         let resultado = await this.usuarioService.atualizar(this.formulario.get("id").value,this.formulario.value);  
         if (resultado.success){       
-          this.router.navigate(['/home']);          
+          this.router.navigate(['/principal']);          
           this.alertService.toast('Usuário atualizado com sucesso!');
         }
     } catch (error) {
