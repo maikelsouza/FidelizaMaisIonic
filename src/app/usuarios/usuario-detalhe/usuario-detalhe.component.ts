@@ -1,10 +1,11 @@
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UsuarioService } from './../shared/services/usuario.service';
-import { ActivatedRoute } from '@angular/router';
-import { AlertaService } from './../../common/service/alerta.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+
+import { AlertaService } from './../../common/service/alerta.service';
 import { Usuario } from '../shared/models/usuario';
+import { UsuarioService } from './../shared/services/usuario.service';
 
 @Component({
   selector: 'app-usuario-detalhe',
@@ -21,7 +22,8 @@ export class UsuarioDetalheComponent implements OnInit {
   constructor(private alertService: AlertaService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private usuarioService: UsuarioService) {
+    private usuarioService: UsuarioService,
+    private router: Router) {
 
       this.id = this.route.snapshot.params['id'];
      }
@@ -64,6 +66,7 @@ export class UsuarioDetalheComponent implements OnInit {
     try {    
        let resultado = await this.usuarioService.atualizar(this.formulario.get("id").value,this.formulario.value);
        if (resultado.success){
+          this.router.navigate(['/principal']);                         
           this.alertService.toast('Usuário atualizado com sucesso!');
        }
     } catch (error) {

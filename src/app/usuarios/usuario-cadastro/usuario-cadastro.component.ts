@@ -1,9 +1,10 @@
-import { AlertaService } from './../../common/service/alerta.service';
-import { UsuarioService } from './../shared/services/usuario.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { AlertaService } from './../../common/service/alerta.service';
+import { UsuarioService } from './../shared/services/usuario.service';
 
 @Component({
   selector: 'app-usuario-cadastro',
@@ -21,7 +22,8 @@ export class UsuarioCadastroComponent implements OnInit {
     private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private alertService: AlertaService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
     
   ) { }
 
@@ -67,6 +69,7 @@ export class UsuarioCadastroComponent implements OnInit {
         this.formulario.value.grupoUsuarioId = this.tipoUsuario;
         let resultado = await this.usuarioService.salvar(this.formulario.value);  
         if (resultado.success){
+          this.router.navigate(['/principal']);                         
           this.alertService.toast('Usuário salvo com sucesso!');
         }
       }else{
