@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 import { AlertaService } from 'src/app/common/service/alerta.service';
 import { ProgramaFidelidadeService } from '../shared/services/programa-fidelidade.service';
 import { ProgramaFidelidade } from '../shared/models/programa-fidelidade';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { CampoItemProgramaFidelidade } from '../shared/models/campo-item-programa-fidelidade';
 
 
@@ -22,7 +23,7 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
   private campoItemProgramaFidelidades: FormArray;
   mostrarCancelarEdicao : boolean = false;
   id : number;
-  titulo = "Novo programa fidelidade"; 
+  titulo = "Novo Programa Fidelidade"; 
   labelBtnSalvarAtualizar ="Salvar"; 
   
   
@@ -44,7 +45,7 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
         if(this.id){ // Condição que descobre se é uma edição ou cadastro
           this.mostrarCancelarEdicao = true;
           this.buscarPorId();
-          this.titulo = "Editar programa fidelidade";
+          this.titulo = "Editar Programa Fidelidade";
           this.labelBtnSalvarAtualizar ="Atualizar"; 
         }
       })     
