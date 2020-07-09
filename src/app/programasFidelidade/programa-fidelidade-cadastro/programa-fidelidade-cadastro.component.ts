@@ -67,9 +67,10 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
 
   private montarCamposTelaEditar(programaFidelidade: ProgramaFidelidade) { 
     this.formulario = this.formBuilder.group({
-      id: [programaFidelidade.id], nome: [programaFidelidade.nome], ativo: [true],
+      id: [programaFidelidade.id], nome: [programaFidelidade.nome,Validators.required], 
+      ativo: [programaFidelidade.ativo,Validators.required],
       descricao: [programaFidelidade.descricao], dataExpiracao: [programaFidelidade.dataExpiracao],      
-      regra: [programaFidelidade.regra], usuarioId: [null],
+      regra: [programaFidelidade.regra,Validators.required], usuarioId: [null],
       estabelecimentoId: [programaFidelidade.estabelecimentoId],
       CampoItemProgramaFidelidades: this.formBuilder.array([])
     });
@@ -131,7 +132,7 @@ export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
       campoItemProgramaFidelidade = this.formBuilder.group({        
         nome: [null],
         descricao: [null],
-        ativo: [true,],
+        ativo: [true],
         quantidadePontos: [null],
         dataExpiracao: [null],     
       });
