@@ -43,6 +43,11 @@ export class ProgramaFidelidadeService extends ServiceBase<ProgramaFidelidade>{
     let respotas = this.httpService.get(`${this.url}/buscarPorEstabelecimento/${id}`);    
     return respotas;
   }
+
+  async buscarPorIdEstabelecimentoEAtivo(id: number): Promise<HttpResultModel> {        
+    let respotas = this.httpService.get(`${this.url}/buscarPorEstabelecimentoEAtivo/${id}`);    
+    return respotas;
+  }
   
   async notificarProgramaFidelidadeSalvo(){    
     this.emitirProgramaFidelidadeCriado.emit();

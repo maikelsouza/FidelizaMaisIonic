@@ -92,7 +92,7 @@ export class PontosClienteResgatarComponent implements OnInit {
   async carregarListaProgramaFidelidade(estabelecimentos: Array<Estabelecimento>): Promise<void> {
     try {
       let estabelecimentoId: number = Number(estabelecimentos[0].id);
-      let programaFidelidadeResultado = await this.programaFidelidadeService.buscarPorIdEstabelecimento(estabelecimentoId);
+      let programaFidelidadeResultado = await this.programaFidelidadeService.buscarPorIdEstabelecimentoEAtivo(estabelecimentoId);
       if (programaFidelidadeResultado.success) {
         this.programasFidelidade = <Array<ProgramaFidelidade>>programaFidelidadeResultado.data;
       }
