@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { AlertaService } from 'src/app/common/service/alerta.service';
 import { AutenticadorService } from 'src/app/common/service/autenticador.service';
 import { Usuario } from '../shared/models/usuario';
@@ -17,7 +19,8 @@ export class UsuarioAtualizarSenhaComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private alertService: AlertaService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private router: Router
   ) { }
 
   private montarCamposTela() {
@@ -48,6 +51,7 @@ export class UsuarioAtualizarSenhaComponent implements OnInit {
         const usuarioLogado: Usuario = AutenticadorService.UsuarioLogado;              
         let resultado = await this.usuarioService.atualizarSenha(usuarioLogado[0].id,this.formulario.value);
         if (resultado.success){
+          this.router.navigate(['/principal']);          
           this.alertService.toast('Senha atualizada com sucesso!');          
         }       
       }else{
