@@ -66,8 +66,9 @@ export class UsuarioDetalheComponent implements OnInit {
     try {    
        let resultado = await this.usuarioService.atualizar(this.formulario.get("id").value,this.formulario.value);
        if (resultado.success){
-          this.router.navigate(['/principal']);                         
-          this.alertService.toast('Usuário atualizado com sucesso!');
+          await this.usuarioService.notificarUsuarioSalvo();                
+          this.alertService.toast('Usuário atualizado com sucesso!');        
+          this.router.navigate(['/usuarios']);         
        }
     } catch (error) {
       console.log('Erro ao atualizar o estabelecimento', error);

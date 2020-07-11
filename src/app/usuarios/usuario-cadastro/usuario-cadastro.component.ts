@@ -66,11 +66,13 @@ export class UsuarioCadastroComponent implements OnInit {
   async onSubmit(): Promise<void>{
     try { 
       if (this.validarSenha()){
-        this.formulario.value.grupoUsuarioId = this.tipoUsuario;
-        let resultado = await this.usuarioService.salvar(this.formulario.value);  
-        if (resultado.success){
-          this.router.navigate(['/principal']);                         
-          this.alertService.toast('Usuário salvo com sucesso!');
+        const grupoUsuarioId = this.tipoUsuario;
+        this.formulario.value.grupoUsuarioId = grupoUsuarioId;
+        if (grupoUsuarioId == '2') { // ESTABELECIMENTOS
+          this.salvarUsuarioEstabelecimento();
+        }
+        if (grupoUsuarioId == '3'){ // CLIENTES
+          this.salvarUsuarioCliente();
         }
       }else{
         this.alertService.alert('Campos Diferentes','O campo senha e confirmar senha estão diferentes');
@@ -79,5 +81,22 @@ export class UsuarioCadastroComponent implements OnInit {
         console.log('Erro ao salvar um Usuario', error);    
     }
   }   
+
+  private async salvarUsuarioEstabelecimento(){
+    const resultado = await this.usuarioService.salvar(this.formulario.value);  
+    if (resultado.success){
+      this.alertService.toast('Usuário salvo com sucesso!');      
+      await this.usuarioService.notificarUsuarioSalvo();                            
+      this.router.navigate(['/usuarios']);         
+    }  
+  }
+
+  private async salvarUsuarioCliente(){
+     const resultado = await this.usuarioService.salvarNovoCliente(this.formulario.value);      
+    if (resultado.success){
+      this.alertService.toast('Usuário salvo com sucesso!');          
+      this.router.navigate(['/login']);         
+    }                    
+  }
 
 }

@@ -1,9 +1,10 @@
+import { Injectable,EventEmitter } from '@angular/core';
+
 import { ConfigHelper } from './../../../common/helpers/configHelper';
 import { Usuario } from './../models/usuario';
 import { ServiceBase } from 'src/app/base/serviceBase';
-import { HttpService } from './../../../common/service/http.service';
 import { HttpResultModel } from './../../../common/model/HttpResultModel';
-import { Injectable } from '@angular/core';
+import { HttpService } from './../../../common/service/http.service';
 import { EmailModel } from 'src/app/common/model/EmailModel';
 
 
@@ -14,14 +15,19 @@ export class UsuarioService extends ServiceBase<Usuario> {
 
   url: string = `${ConfigHelper.Url}usuario`;
 
+  emitirUsuarioCriado = new EventEmitter();
+
   constructor(public httpService: HttpService) {
     super(`${ConfigHelper.Url}usuario`, httpService);
    }
 
   async salvar(usuario: Usuario): Promise<HttpResultModel> {       
-    let respotas = this.httpService.post(`${this.url}`,usuario);
-    return respotas;
-  } 
+    return this.httpService.post(`${this.url}`,usuario);    
+  }
+  
+  async salvarNovoCliente(usuario: Usuario): Promise<HttpResultModel> {       
+    return this.httpService.post(`${this.url}/novoCliente`,usuario);    
+  }
 
   async buscarTodos(): Promise<HttpResultModel> {        
     let respotas = this.httpService.get(`${this.url}`);
@@ -70,6 +76,10 @@ export class UsuarioService extends ServiceBase<Usuario> {
 
   async gerarNovaSenha (id :number, emailModel: EmailModel){    
     return this.httpService.put(`${this.url}/gerarNovaSenha/${id}`,emailModel);      
+  }
+
+  async notificarUsuarioSalvo(){    
+    this.emitirUsuarioCriado.emit();
   }
 
 }

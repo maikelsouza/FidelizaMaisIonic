@@ -1,25 +1,30 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
 import { UsuarioService } from './../shared/services/usuario.service';
 import { Usuario } from './../shared/models/usuario';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-usuario-lista',
   templateUrl: './usuario-lista.component.html',
   styleUrls: ['./usuario-lista.component.scss'],
 })
-export class UsuarioListaComponent implements OnInit {
+export class UsuarioListaComponent implements OnInit{
 
   private usuarios: Array<Usuario> = new Array<Usuario>(); 
 
-  constructor(private usuarioService: UsuarioService) { 
-    
-  }
+  constructor(private usuarioService: UsuarioService) { }
  
 
   ngOnInit() {
-    this.carregarListaUsuarios();
-
-  }
+    
+    this.usuarioService.emitirUsuarioCriado.subscribe(
+      () => {
+        this.carregarListaUsuarios();
+      }
+      
+      );
+      this.carregarListaUsuarios();
+  }  
 
   async carregarListaUsuarios(): Promise<void> {
     try {       
