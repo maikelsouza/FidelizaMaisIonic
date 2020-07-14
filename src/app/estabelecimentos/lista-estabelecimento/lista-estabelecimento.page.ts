@@ -1,16 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { EstabelecimentoService } from '../shared/services/estabelecimento.service';
 import { Estabelecimento } from '../shared/models/estabelecimento';
 import { ClienteEstabelecimento } from '../shared/models/cliente-estabelecimento';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AutenticadorService } from 'src/app/common/service/autenticador.service';
 import { Usuario } from 'src/app/usuarios/shared/models/usuario';
-import { Subscription } from 'rxjs';
 import { ClienteEstabelecimentoService } from '../shared/services/cliente-estabelecimento.service';
 import { AlertaService } from 'src/app/common/service/alerta.service';
 import { EstabelecimentoVO } from '../shared/vos/estabelecimento-vo';
-import { UsuarioService } from 'src/app/usuarios/shared/services/usuario.service';
 
 @Component({
   selector: 'app-lista-estabelecimento',
@@ -24,26 +23,26 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
   clienteEstabelecimento: Array<ClienteEstabelecimento> = new Array<ClienteEstabelecimento>(); 
   tipoUsuario : string;
   inscricao: Subscription;
+  inscricaoCarregarListaEstabelecimentos: Subscription;
   usuarioLogado: Usuario;
   
   constructor(
       private estabelecimentoSrv: EstabelecimentoService,
-      private clienteEstabelecimentoService: ClienteEstabelecimentoService,
-      private usuarioService : UsuarioService,
+      private clienteEstabelecimentoService: ClienteEstabelecimentoService,      
       private route: ActivatedRoute,
       private alertSrv: AlertaService,
       private router: Router
       ) 
       { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.usuarioLogado = AutenticadorService.UsuarioLogado;      
     this.inscricao = this.route.queryParams.subscribe(
       (queryParams: any) => {
         this.tipoUsuario = queryParams['tipoUsuario'];
       }
     ); 
-    this.estabelecimentoSrv.emitirListarEstabelecimento.subscribe(
+    this.inscricaoCarregarListaEstabelecimentos = this.estabelecimentoSrv.emitirListarEstabelecimento.subscribe(
       () => {       
         this.carregarListaEstabelecimento();
       }
@@ -51,13 +50,14 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
     this.carregarListaEstabelecimento();
   }
 
-  ngOnDestroy(){    
+  ngOnDestroy(){         
     this.inscricao.unsubscribe();
+    this.inscricaoCarregarListaEstabelecimentos.unsubscribe();
   }
 
   async carregarListaEstabelecimento(): Promise<void> {
     try {      
-       let estabelecimentoResultado = undefined;     
+      let estabelecimentoResultado = undefined;     
       let clienteEstabelecimentoResultado;  
       if (this.tipoUsuario == "ESTABELECIMENTOS"){
         estabelecimentoResultado = await this.estabelecimentoSrv.buscarPorIdUsuario(this.usuarioLogado[0].id);           
