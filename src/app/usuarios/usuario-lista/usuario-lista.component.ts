@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { UsuarioService } from './../shared/services/usuario.service';
 import { Usuario } from './../shared/models/usuario';
@@ -11,20 +12,24 @@ import { Usuario } from './../shared/models/usuario';
 export class UsuarioListaComponent implements OnInit{
 
   private usuarios: Array<Usuario> = new Array<Usuario>(); 
+  private inscricaoCarregarListaUsuarios : Subscription;
 
   constructor(private usuarioService: UsuarioService) { }
  
 
-  ngOnInit() {
-    
-    this.usuarioService.emitirUsuarioCriado.subscribe(
-      () => {
-        this.carregarListaUsuarios();
-      }
+  ngOnInit() {    
+    this.inscricaoCarregarListaUsuarios = this.usuarioService.emitirUsuarioCriado.subscribe(
+        () => {
+          this.carregarListaUsuarios();
+        }
       
       );
       this.carregarListaUsuarios();
   }  
+
+  ngOnDestroy(): void {    
+    this.inscricaoCarregarListaUsuarios.unsubscribe();
+  }
 
   async carregarListaUsuarios(): Promise<void> {
     try {       
