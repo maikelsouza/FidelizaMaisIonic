@@ -16,6 +16,7 @@ export class UsuarioCadastroComponent implements OnInit {
   private formulario : FormGroup;  
   private tipoUsuario : string;
   inscricao: Subscription;
+  private textoConfirmarSenha : String = "NaoSeraEnviadaServidor";
   
 
   constructor(
@@ -68,6 +69,7 @@ export class UsuarioCadastroComponent implements OnInit {
       if (this.validarSenha()){
         const grupoUsuarioId = this.tipoUsuario;
         this.formulario.value.grupoUsuarioId = grupoUsuarioId;
+        this.formulario.value.confirmarSenha = this.textoConfirmarSenha;
         if (grupoUsuarioId == '2') { // ESTABELECIMENTOS
           this.salvarUsuarioEstabelecimento();
         }
@@ -82,7 +84,7 @@ export class UsuarioCadastroComponent implements OnInit {
     }
   }   
 
-  private async salvarUsuarioEstabelecimento(){
+  private async salvarUsuarioEstabelecimento(){    
     const resultado = await this.usuarioService.salvar(this.formulario.value);  
     if (resultado.success){
       this.alertService.toast('Usuário salvo com sucesso!');      
