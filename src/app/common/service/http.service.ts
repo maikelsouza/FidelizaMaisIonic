@@ -76,7 +76,7 @@ export class HttpService {
              this.alertSrv.alert(err.error.message, msg);
             } else if (err.status == 404) {              
               this.alertSrv.alert('Informação', err.error.message);
-           console.log('Erro 404 ' + err.error.message);
+              console.log('Erro 404 ' + err.error.message);
             } else {              
                this.alertSrv.toast('Não foi possível realizar o processamento da informação, verifique sua conexão');
             }

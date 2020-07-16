@@ -26,7 +26,5 @@ export class PontosClienteProgramaFidelidadeService extends ServiceBase<PontosCl
   async buscarSomatorioPontosProgramaFidelidade(totalPontosClienteProgramaFidelidadeId: number): Promise<HttpResultModel> {                  
     return this.httpService.get(`${this.url}/buscarSomatorioPontosProgramaFidelidade/${totalPontosClienteProgramaFidelidadeId}`);                                                 
   } 
-
-
   
 }
