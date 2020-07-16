@@ -58,7 +58,7 @@ export class EsqueciMinhaSenhaCadastroComponent implements OnInit {
   public get email() {return this.formulario.get('email')}
   
 
-
+ // COLOCAR ESSA REGRA NO SERVICE
   private criarEmailModel(to: string) : EmailModel{
     let emailModel: EmailModel = new EmailModel();
     emailModel.to = to;    
