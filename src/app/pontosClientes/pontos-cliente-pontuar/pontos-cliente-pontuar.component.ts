@@ -1,8 +1,7 @@
-import { UsuarioService } from 'src/app/usuarios/shared/services/usuario.service';
-
-
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { AutenticadorService } from 'src/app/common/service/autenticador.service';
 import { Usuario } from 'src/app/usuarios/shared/models/usuario';
 import { Estabelecimento } from 'src/app/estabelecimentos/shared/models/estabelecimento';
@@ -14,6 +13,7 @@ import { PontosClienteProgramaFidelidadeService } from '../shared/services/ponto
 import { AlertaService } from 'src/app/common/service/alerta.service';
 import { TotalPontosClienteProgramaFidelidadeService } from '../shared/services/total-pontos-cliente-programa-fidelidade.service';
 import { TotalPontosClienteProgramaFidelidade } from '../shared/models/total-pontos-cliente-programa-fidelidade';
+
 @Component({
   selector: 'app-pontos-cliente-pontuar',
   templateUrl: './pontos-cliente-pontuar.component.html',
@@ -31,7 +31,8 @@ export class PontosClientePontuarComponent implements OnInit {
      private programaFidelidadeService: ProgramaFidelidadeService,
      private pontosClienteProgramaFidelidadeService: PontosClienteProgramaFidelidadeService,
      private totalPontosClienteProgramaFidelidadeService: TotalPontosClienteProgramaFidelidadeService,
-     private alertSrv: AlertaService) { }
+     private alertSrv: AlertaService,
+     private router: Router) { }
 
   ngOnInit() {
     this.usuarioLogado = AutenticadorService.UsuarioLogado;
@@ -39,24 +40,26 @@ export class PontosClientePontuarComponent implements OnInit {
     this.carregarListaEstabelecimento();
   }
   private montarCamposTela() {
-    this.formulario = this.formBuilder.group({
-      email: [null,  Validators.required], 
-      clienteId: [null, Validators.required], 
-      valorGasto: ["00,0", Validators.required],
-      programaFidelidadeId: [null, Validators.required]
+    this.formulario = this.formBuilder.group({      
+      clienteId: [null,Validators.required], 
+      valorGasto: ["00,0", Validators.required]      
     });
   }
 
   public get valorGasto() {return this.formulario.get('valorGasto')}
-  public get email() {return this.formulario.get('email')}
-  public get programaFidelidadeId() {return this.formulario.get('programaFidelidadeId')} 
   public get clienteId() {return this.formulario.get('clienteId')} 
+ 
 
-  async pesquisarUsuario(): Promise<void> {
-    try {
+  async pesquisarUsuario(event: any): Promise<void> {
+    try {            
+      this.usuarios = new Array<Usuario>();
+      const email = event.target.value.trim();
+      if (!email) {
+        return;
+      }
       let estabelecimentoId: number = Number(this.estabelecimentos[0].id);
-      let usuariosEstabelecimentoResultado = await this.estabelecimentoService.buscarPorIdEstabelecimentoEEmail(estabelecimentoId, this.formulario.get("email").value);
-      if (usuariosEstabelecimentoResultado.success) {
+      let usuariosEstabelecimentoResultado = await this.estabelecimentoService.buscarPorIdEstabelecimentoEEmail(estabelecimentoId, email);      
+      if (usuariosEstabelecimentoResultado.success && usuariosEstabelecimentoResultado.data != null) {
         this.usuarios = <Array<Usuario>>usuariosEstabelecimentoResultado.data.usuarios;
       }
     }
@@ -89,45 +92,59 @@ export class PontosClientePontuarComponent implements OnInit {
     }
   }
   async onSubmit(): Promise<void> {
-    try {
-      // COLOCAR VALIDAÇÃO PARA NÃO DEIXAR PONTUAR CASO O VALOR GASTO SEJA MENOR QUE O MÍNIMO PARA GERAR UM PONTO
-      const clienteId = this.formulario.get("clienteId").value;
-      const programaFidelidadeId = this.formulario.get("programaFidelidadeId").value;
-      const quantidadePontos = this.calcularPontos(this.formulario.get("valorGasto").value);
-      let totalPontosClienteProgramaFidelidade: TotalPontosClienteProgramaFidelidade = new TotalPontosClienteProgramaFidelidade();
-      totalPontosClienteProgramaFidelidade.programaFidelidadeId = programaFidelidadeId;
-      totalPontosClienteProgramaFidelidade.usuarioId = clienteId;
-      let PontosClientesProgramaFidelidades: PontosClienteProgramaFidelidade = new PontosClienteProgramaFidelidade();
-      PontosClientesProgramaFidelidades.pontos = quantidadePontos;
-      let totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.getUsuarioIdProgramaFidelidadeIdAtivo(clienteId,programaFidelidadeId);
-      if (totalPontosClieteProgramaFidelidadeResultado.data == null) { // Caso não exista um regristo de pontos então cria o primeiro
-        totalPontosClienteProgramaFidelidade.totalPontos = quantidadePontos;
-        let listaPontosClienteProgramaFidelidade = new Array<PontosClienteProgramaFidelidade>();
-        listaPontosClienteProgramaFidelidade.push(PontosClientesProgramaFidelidades);
-        totalPontosClienteProgramaFidelidade.PontosClienteProgramaFidelidades = listaPontosClienteProgramaFidelidade;
-        totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.salvar(totalPontosClienteProgramaFidelidade);
-      }
-      else { // Caso exista um regristo de pontos então atualiza a pontuação total
-        let totalPontosClienteProgramaFidelidadeId = totalPontosClieteProgramaFidelidadeResultado.data.id;
-        PontosClientesProgramaFidelidades.totalPontosClienteProgramaFidelidadeId = totalPontosClienteProgramaFidelidadeId;
-        await this.pontosClienteProgramaFidelidadeService.salvar(PontosClientesProgramaFidelidades);
-        let somatorioPontosProgramaFidelidadeResultado = await this.pontosClienteProgramaFidelidadeService.buscarSomatorioPontosProgramaFidelidade(totalPontosClienteProgramaFidelidadeId);
-        totalPontosClienteProgramaFidelidade.totalPontos = somatorioPontosProgramaFidelidadeResultado.data.pontos;
-        totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.atualizar(totalPontosClienteProgramaFidelidadeId, totalPontosClienteProgramaFidelidade);
-      }
-      if (totalPontosClieteProgramaFidelidadeResultado.success) {
-        this.alertSrv.toast('Pontuação realizada com sucesso!');
+    try { // Colocar essas regras no service
+      const valorGasto = this.formulario.get("valorGasto").value;
+      const regra = this.programasFidelidade[0].regra;
+      if (!this.verificarValorGastoMaiorIgualRegra(valorGasto,regra)){
+        this.alertSrv.alert('Valor Mínimo Não Alcançado!',`O valor gasto dever ser maior ou igual a R$ ${regra},00`); 
+      }else{        
+        const clienteId = this.formulario.get("clienteId").value;
+        // Pego o primeiro valor, pois atualmente o estabelecimento pode cadastrar somente um programa de fidelidade.
+        const programaFidelidadeId = this.programasFidelidade[0].id;
+        const quantidadePontos = this.calcularPontos(valorGasto,regra);
+        let totalPontosClienteProgramaFidelidade: TotalPontosClienteProgramaFidelidade = new TotalPontosClienteProgramaFidelidade();
+        totalPontosClienteProgramaFidelidade.programaFidelidadeId = programaFidelidadeId;
+        totalPontosClienteProgramaFidelidade.usuarioId = clienteId;
+        let PontosClientesProgramaFidelidades: PontosClienteProgramaFidelidade = new PontosClienteProgramaFidelidade();
+        PontosClientesProgramaFidelidades.pontos = quantidadePontos;
+        let totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.getUsuarioIdProgramaFidelidadeIdAtivo(clienteId,programaFidelidadeId);
+        if (totalPontosClieteProgramaFidelidadeResultado.data == null) { // Caso não exista um regristo de pontos então cria o primeiro
+          totalPontosClienteProgramaFidelidade.totalPontos = quantidadePontos;
+          let listaPontosClienteProgramaFidelidade = new Array<PontosClienteProgramaFidelidade>();
+          listaPontosClienteProgramaFidelidade.push(PontosClientesProgramaFidelidades);
+          totalPontosClienteProgramaFidelidade.PontosClienteProgramaFidelidades = listaPontosClienteProgramaFidelidade;
+          totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.salvar(totalPontosClienteProgramaFidelidade);
+        }
+        else { // Caso exista um regristo de pontos então atualiza a pontuação total
+          let totalPontosClienteProgramaFidelidadeId = totalPontosClieteProgramaFidelidadeResultado.data.id;
+          PontosClientesProgramaFidelidades.totalPontosClienteProgramaFidelidadeId = totalPontosClienteProgramaFidelidadeId;
+          await this.pontosClienteProgramaFidelidadeService.salvar(PontosClientesProgramaFidelidades);
+          let somatorioPontosProgramaFidelidadeResultado = await this.pontosClienteProgramaFidelidadeService.buscarSomatorioPontosProgramaFidelidade(totalPontosClienteProgramaFidelidadeId);
+          totalPontosClienteProgramaFidelidade.totalPontos = somatorioPontosProgramaFidelidadeResultado.data.pontos;
+          totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.atualizar(totalPontosClienteProgramaFidelidadeId, totalPontosClienteProgramaFidelidade);
+        }
+        if (totalPontosClieteProgramaFidelidadeResultado.success) {
+          this.router.navigate(['/principal']);    
+          // colocar regra para envio de email após pontuar      
+          this.alertSrv.toast('Pontuação realizada com sucesso!');
+        }
       }
     }
     catch (error) {
       console.log('Erro ao pontuar um cliente', error);
     }
   }
-  private calcularPontos(valorGasto: any): number {
-    const regra = this.programasFidelidade[0].regra;
+  private calcularPontos(valorGasto: any, regra: number): number {    
     const posicaoVirgura = valorGasto.indexOf(",");
     const valorGastoSemDecimais = valorGasto.substr(0, posicaoVirgura);
     const valorGastoSemDecimaisEPontos = valorGastoSemDecimais.replace(/\D+/g, '');
     return Math.trunc(valorGastoSemDecimaisEPontos / regra);
+  }
+
+  private verificarValorGastoMaiorIgualRegra(valorGasto: any, regra: number) : boolean{    
+    const posicaoVirgura = valorGasto.indexOf(",");
+    const valorGastoSemDecimais = valorGasto.substr(0, posicaoVirgura);
+    const valorGastoSemDecimaisEPontos = valorGastoSemDecimais.replace(/\D+/g, '');
+    return valorGastoSemDecimaisEPontos >= regra;
   }
 }
