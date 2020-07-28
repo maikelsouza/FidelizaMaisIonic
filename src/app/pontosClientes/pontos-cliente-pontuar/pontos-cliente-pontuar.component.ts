@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 import { AutenticadorService } from 'src/app/common/service/autenticador.service';
 import { Usuario } from 'src/app/usuarios/shared/models/usuario';
@@ -31,14 +31,15 @@ export class PontosClientePontuarComponent implements OnInit {
      private programaFidelidadeService: ProgramaFidelidadeService,
      private pontosClienteProgramaFidelidadeService: PontosClienteProgramaFidelidadeService,
      private totalPontosClienteProgramaFidelidadeService: TotalPontosClienteProgramaFidelidadeService,
-     private alertSrv: AlertaService,
-     private router: Router) { }
+     private alertSrv: AlertaService,     
+     private navController: NavController) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.usuarioLogado = AutenticadorService.UsuarioLogado;
     this.montarCamposTela();
     this.carregarListaEstabelecimento();
   }
+  
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({      
       clienteId: [null,Validators.required], 
@@ -124,7 +125,7 @@ export class PontosClientePontuarComponent implements OnInit {
           totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.atualizar(totalPontosClienteProgramaFidelidadeId, totalPontosClienteProgramaFidelidade);
         }
         if (totalPontosClieteProgramaFidelidadeResultado.success) {
-          this.router.navigate(['/principal']);    
+          this.navController.navigateRoot('/principal');
           // colocar regra para envio de email após pontuar      
           this.alertSrv.toast('Pontuação realizada com sucesso!');
         }
