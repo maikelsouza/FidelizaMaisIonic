@@ -1,27 +1,18 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-  </ion-buttons>
-  <ion-title>Regatar Pontos Cliente</ion-title>
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Regatar Pontos Cliente</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar type="text" placeholder="Pesquisar Clientes" (ionChange)="pesquisarUsuario($event)" debounce="500">
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <ion-list no-lines>    
-        <ion-item>        
-          <ion-label position="floating">E-mail <em class="campo-obrigatorio">*</em></ion-label>
-          <ion-input formControlName="email" type="email"></ion-input>
-       </ion-item>   
-       <ion-item  *ngIf="email.invalid && (email.dirty || email.touched)" >      
-         <ion-label color="danger" *ngIf="email.errors.required">Campo obrigatório.</ion-label>                    
-       </ion-item>           
-      <ion-item>
-        <ion-button color="primary" (click)="pesquisarUsuario()">
-          <ion-label>pesquisar</ion-label>
-          <ion-icon slot="start" name="search"></ion-icon>
-        </ion-button>
-      </ion-item>
+    <ion-list no-lines>       
       </ion-list>
       <ion-radio-group formControlName="clienteId">                
         <ion-item *ngFor="let item of usuarios" >          
@@ -29,16 +20,7 @@
           <ion-radio slot="start"  value={{item.id}}></ion-radio>
         </ion-item> 
       </ion-radio-group>     
-      <ion-list>
-        <ion-item>
-          <ion-label>Programa Fidelidade <em class="campo-obrigatorio">*</em></ion-label>
-          <ion-select formControlName="programaFidelidadeId"  okText="OK" cancelText="Cancelar"  (ionChange)="carregarCamposItensProgramaFidelidade($event)" >
-            <ion-select-option [value]="programaFidelidade.id" *ngFor="let programaFidelidade of programasFidelidade">{{programaFidelidade.nome}}</ion-select-option>                 
-          </ion-select> 
-        </ion-item>
-        <ion-item  *ngIf="programaFidelidadeId.invalid && (programaFidelidadeId.dirty || programaFidelidadeId.touched)" >      
-          <ion-label color="danger" *ngIf="programaFidelidadeId.errors.required">Campo obrigatório.</ion-label>                    
-        </ion-item> 
+      <ion-list>      
         <ion-radio-group formControlName="campoItemProgramaFidelidadeId">
           <ion-grid>
             <ion-row  class="ion-text-center">

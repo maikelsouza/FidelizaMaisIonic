@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NavController } from '@ionic/angular';
+
 import { ProgramaFidelidade } from 'src/app/programasFidelidade/shared/models/programa-fidelidade';
 import { AlertaService } from 'src/app/common/service/alerta.service';
 import { AutenticadorService } from 'src/app/common/service/autenticador.service';
@@ -11,6 +13,7 @@ import { CampoItemProgramaFidelidade } from 'src/app/programasFidelidade/shared/
 import { TotalPontosClienteProgramaFidelidadeService } from '../shared/services/total-pontos-cliente-programa-fidelidade.service';
 import { PontosClienteProgramaFidelidade } from '../shared/models/pontos-cliente-programa-fidelidade';
 import { TotalPontosClienteProgramaFidelidade } from '../shared/models/total-pontos-cliente-programa-fidelidade';
+
 
 @Component({
   selector: 'app-pontos-cliente-resgatar',
@@ -30,7 +33,8 @@ export class PontosClienteResgatarComponent implements OnInit {
     private estabelecimentoService: EstabelecimentoService, 
     private programaFidelidadeService: ProgramaFidelidadeService,
     private totalPontosClienteProgramaFidelidadeService: TotalPontosClienteProgramaFidelidadeService,
-    private alertSrv: AlertaService) { }
+    private alertSrv: AlertaService,
+    private navController: NavController) { }
 
   ngOnInit() {
     this.usuarioLogado = AutenticadorService.UsuarioLogado;
@@ -39,27 +43,27 @@ export class PontosClienteResgatarComponent implements OnInit {
   }
 
   private montarCamposTela() {
-    this.formulario = this.formBuilder.group({
-      email: [null,Validators.required],
-      clienteId: [null, Validators.required],
-      programaFidelidadeId: [null, Validators.required], 
+    this.formulario = this.formBuilder.group({    
+      clienteId: [null, Validators.required],      
       campoItemProgramaFidelidadeId: [null, Validators.required]
     });
   }
-
-  public get email() {return this.formulario.get('email')}
-  public get clienteId() {return this.formulario.get('clienteId')}
-  public get programaFidelidadeId() {return this.formulario.get('programaFidelidadeId')}
+  
+  public get clienteId() {return this.formulario.get('clienteId')}  
   public get campoItemProgramaFidelidadeId() {return this.formulario.get('campoItemProgramaFidelidadeId')}
  
 
-  async pesquisarUsuario(): Promise<void> {
+  async pesquisarUsuario(event: any): Promise<void> {
     try {
-      let estabelecimentoId: number = Number(this.estabelecimentos[0].id);
-      let usuariosEstabelecimentoResultado = await this.estabelecimentoService.buscarPorIdEstabelecimentoEEmail(estabelecimentoId, this.formulario.get("email").value);
-      if (usuariosEstabelecimentoResultado.success) {
-        this.usuarios = <Array<Usuario>>usuariosEstabelecimentoResultado.data.usuarios;
+      const email = event.target.value.trim();
+      if (!email) {
+        return;
       }
+      let estabelecimentoId: number = Number(this.estabelecimentos[0].id);
+      let usuariosEstabelecimentoResultado = await this.estabelecimentoService.buscarPorIdEstabelecimentoEEmail(estabelecimentoId, email);
+      if (usuariosEstabelecimentoResultado.success && usuariosEstabelecimentoResultado.data != null) {
+        this.usuarios = <Array<Usuario>>usuariosEstabelecimentoResultado.data.usuarios;
+      }     
     }
     catch (error) {
       console.log('Erro ao carregar os tipos de estabelecimentos', error);
@@ -69,9 +73,10 @@ export class PontosClienteResgatarComponent implements OnInit {
   async carregarListaEstabelecimento(): Promise<void> {
     try {
       let estabelecimentoResultado = await this.estabelecimentoService.buscarPorIdUsuario(this.usuarioLogado[0].id);
-      if (estabelecimentoResultado.success) {
+      if (estabelecimentoResultado.success && estabelecimentoResultado.data != null) {
         this.estabelecimentos = <Array<Estabelecimento>>estabelecimentoResultado.data;
-        this.carregarListaProgramaFidelidade(this.estabelecimentos);
+        await this.carregarListaProgramaFidelidade(this.estabelecimentos);
+        await this.carregarCamposItensProgramaFidelidade();
       }
     }
     catch (error) {
@@ -79,8 +84,8 @@ export class PontosClienteResgatarComponent implements OnInit {
     }
   }
   
-  async carregarCamposItensProgramaFidelidade(event): Promise<void> {
-    const programaFidelidadeId =  this.formulario.get("programaFidelidadeId").value;
+  async carregarCamposItensProgramaFidelidade(): Promise<void> {    
+    const programaFidelidadeId : number = Number(this.programasFidelidade[0].id);
     this.programasFidelidade.forEach(element => {
       if (element.id == programaFidelidadeId){
         this.campoItemProgramaFidelidades = element.CampoItemProgramaFidelidades;
@@ -103,11 +108,11 @@ export class PontosClienteResgatarComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    // Código precisa de um refactory!!!
+    // Código precisa de um refactory!!! Regra de negócio deve ir para o service
     try { 
       const clienteId = this.formulario.get("clienteId").value;
-      const programaFidelidadeId =  this.formulario.get("programaFidelidadeId").value;
-      const campoItemProgramaFidelidadeId = this.formulario.get("campoItemProgramaFidelidadeId").value;
+      const programaFidelidadeId : number = Number(this.programasFidelidade[0].id);
+      const campoItemProgramaFidelidadeId : number = Number(this.formulario.get("campoItemProgramaFidelidadeId").value);      
       let totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.getUsuarioIdProgramaFidelidadeIdAtivo(clienteId,programaFidelidadeId);
       if (totalPontosClieteProgramaFidelidadeResultado.data != null){
         const totalPontos = totalPontosClieteProgramaFidelidadeResultado.data.totalPontos;
@@ -117,7 +122,7 @@ export class PontosClienteResgatarComponent implements OnInit {
           if (element.id == campoItemProgramaFidelidadeId){
             quantidadePontos = element.quantidadePontos; 
             if (element.quantidadePontos > totalPontos){
-              pontosSuficiente = false;
+              pontosSuficiente = false;              
               this.alertSrv.alert('Pontuação Insuficiente',
               `O Cliente não possue pontos para esse item. Total pontos do cliente: ${totalPontos}`);
             } 
@@ -137,12 +142,13 @@ export class PontosClienteResgatarComponent implements OnInit {
             listaPontosClienteProgramaFidelidade.push(PontosClientesProgramaFidelidades);
             totalPontosClienteProgramaFidelidade.PontosClienteProgramaFidelidades = listaPontosClienteProgramaFidelidade;  
             totalPontosClienteProgramaFidelidade.usuarioId = clienteId;
-            totalPontosClienteProgramaFidelidade.programaFidelidadeId = this.formulario.get("programaFidelidadeId").value;
+            totalPontosClienteProgramaFidelidade.programaFidelidadeId = programaFidelidadeId;
             totalPontosClienteProgramaFidelidade.totalPontos = diferencaPontos;
             await this.totalPontosClienteProgramaFidelidadeService.salvar(totalPontosClienteProgramaFidelidade);
           }          
           totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.atualizar(totalPontosClieteProgramaFidelidadeResultado.data.id, totalPontosClieteProgramaFidelidadeResultado.data);
-          if (totalPontosClieteProgramaFidelidadeResultado.success) {        
+          if (totalPontosClieteProgramaFidelidadeResultado.success) {     
+            this.navController.navigateRoot('/principal');               
             this.alertSrv.toast('Resgate realizado com sucesso!');
           }
         }
