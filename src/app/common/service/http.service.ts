@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AutenticadorService } from './autenticador.service';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class HttpService {
   constructor(
     private http: HttpClient,
     private networkSrv: NetworkService,
-    private spinner: NgxSpinnerService,
+    private spinner: SpinnerService,
     private alertSrv: AlertaService
 
   ) { }
