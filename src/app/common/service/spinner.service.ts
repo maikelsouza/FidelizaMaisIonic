@@ -16,20 +16,20 @@ export class SpinnerService {
   
 
   async show() {
-    if (this.spinner == null){
+  /*   if (this.spinner == null){
       this.spinner = await this.loading.create({
         message: 'Carregando...'
        // duration: 1000
       });
       await this.spinner.present();
-    }    
+    }     */
   }
 
   async hide()  {
-    if (this.spinner != null){
+   /*  if (this.spinner != null){
       await this.spinner.dismiss();
       this.spinner = null;
-    }
+    } */
   }
 
 }
