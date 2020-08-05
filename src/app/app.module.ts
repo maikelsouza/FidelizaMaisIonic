@@ -32,6 +32,8 @@ import { EstabelecimentoDetalhePage } from './estabelecimentos/estabelecimento-d
 import { EstabelecimentoService } from './estabelecimentos/shared/services/estabelecimento.service';
 import { LogoffComponent } from './login/logoff/logoff.component';
 import { EstabelecimentoVisualizarComponent } from './estabelecimentos/estabelecimento-visualizar/estabelecimento-visualizar.component';
+import { HttpService } from './common/service/http.service';
+import { SpinnerService } from './common/service/spinner.service';
 
 
 @NgModule({
@@ -75,6 +77,8 @@ import { EstabelecimentoVisualizarComponent } from './estabelecimentos/estabelec
     EstabelecimentoService,
     StatusBar,
     SplashScreen,
+    HttpService,
+    SpinnerService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   
