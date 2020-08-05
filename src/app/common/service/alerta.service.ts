@@ -6,7 +6,7 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class AlertaService {
 
-  // Rever esse service. Ver possibilidade de crirar um para Alert e um para Toast bem como rever o uso desses.
+  // Rever esse service. Ver possibilidade de criar um para Alert e um para Toast bem como rever o uso desses.
   // Verificar também os CSS dos botões
   constructor( private alertCtrl: AlertController,
                private toastCtrl: ToastController) { }
