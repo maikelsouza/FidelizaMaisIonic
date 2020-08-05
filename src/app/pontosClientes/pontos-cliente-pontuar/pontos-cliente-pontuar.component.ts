@@ -62,6 +62,8 @@ export class PontosClientePontuarComponent implements OnInit {
       let usuariosEstabelecimentoResultado = await this.estabelecimentoService.buscarPorIdEstabelecimentoEEmail(estabelecimentoId, email);      
       if (usuariosEstabelecimentoResultado.success && usuariosEstabelecimentoResultado.data != null) {
         this.usuarios = <Array<Usuario>>usuariosEstabelecimentoResultado.data.usuarios;
+      }else{
+        this.alertSrv.alert("Cliente não encontrado ",`O cliente ${email} não foi encontrado!`);
       }
     }
     catch (error) {
