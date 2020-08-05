@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { LoginService } from './login/shared/services/login.service';
 import { Usuario } from './usuarios/shared/models/usuario';
-
-
+import { UsuarioService } from './usuarios/shared/services/usuario.service';
 
 
 @Component({
@@ -24,7 +23,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private navController: NavController
     
     
   ) {
@@ -36,6 +36,11 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  logoff(){
+    UsuarioService.RemoverLogin();
+    this.navController.navigateRoot('/');      
   }
 
   ngOnInit(){
