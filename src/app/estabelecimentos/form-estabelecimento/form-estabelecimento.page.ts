@@ -1,18 +1,19 @@
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+
 import { AlertaService } from './../../common/service/alerta.service';
 import { MidiaSocial } from './../shared/models/midia-social';
-import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { EnderecoEstabelecimento } from '../shared/models/endereco-estabelecimento';
 import { TipoEstabelecimentoService } from '../../tipoEstabelecimento/shared/services/tipo-estabelecimento.service';
 import { Estabelecimento } from '../shared/models/estabelecimento';
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { EstabelecimentoService } from '../shared/services/estabelecimento.service';
 import { TipoEstabelecimento } from 'src/app/tipoEstabelecimento/shared/models/tipo-estabelecimento';
 import { Telefone } from '../shared/models/telefone';
-import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioService } from 'src/app/usuarios/shared/services/usuario.service';
 import { Usuario } from 'src/app/usuarios/shared/models/usuario';
-import { Subscription } from 'rxjs';
 import { AutenticadorService } from 'src/app/common/service/autenticador.service';
 
 @Component({
@@ -40,8 +41,7 @@ export class FormEstabelecimentoPage implements OnInit {
 
   private midiaSocialStr : string = 'MidiaSocials'; 
   private telefoneStr : string = 'Telefones'; 
-
-  
+   
 
   constructor(public navCtrl: NavController,
     private estabelecimentoSrv: EstabelecimentoService,
@@ -71,19 +71,24 @@ export class FormEstabelecimentoPage implements OnInit {
       }else if (this.validarObrigatoriedadeMidiaSocial()){
         this.alertSrv.alert('Campo Obrigatório','O campo mídia social é obrigatório');
       }else{
-        // Ver como resolver os casos onde um objeto associado não foi preenchido. Se tem como resolver no sequelize ou com o angular
+        // Ver como resolver os casos onde um objeto associado não foi preenchido. Se tem como resolver no sequelize ou com o angular        
         if (this.verificaMidiaSocialvazia()){
           this.formulario.removeControl(this.midiaSocialStr);
         }
         if (this.verificaTelefonevazio()){
           this.formulario.removeControl(this.telefoneStr);
         }
-        
-        let resultado = await this.estabelecimentoSrv.salvar(this.formulario.value);          
+        let resultado = await this.estabelecimentoSrv.salvar(this.formulario.value);                  
         if (resultado.success){
             this.alertSrv.toast('Estabelecimento salvo com sucesso!');
             await this.estabelecimentoSrv.notificarListaEstabelecimento();            
             this.router.navigate(['/estabelecimento/lista'],{ queryParams: { tipoUsuario: this.usuarioLogado[0].GrupoUsuario.nome } });                      
+          }else{
+            // Ver como resolver os casos onde um objeto associado não foi preenchido. Se tem como resolver no sequelize ou com o angular
+            this.Telefones = this.formBuilder.array([this.criarItemTelefone()]);
+            this.formulario.addControl(this.telefoneStr,this.Telefones);
+            this.MidiaSocials = this.formBuilder.array([this.criarItemMidiaSocial()]);
+            this.formulario.addControl(this.midiaSocialStr,this.MidiaSocials);          
           }
       }    
     } catch (error) {
@@ -130,7 +135,7 @@ export class FormEstabelecimentoPage implements OnInit {
       }),           
      Telefones : this.formBuilder.array([this.criarItemTelefone()]),
      MidiaSocials : this.formBuilder.array([this.criarItemMidiaSocial()])
-    });    
+    });        
   } 
 
   validarObrigatoriedadeTelefones(): boolean{
@@ -172,7 +177,7 @@ export class FormEstabelecimentoPage implements OnInit {
   }
 
   verificaMidiaSocialvazia(): boolean{
-    const midiaSocials = <Array<MidiaSocial>>this.formulario.get(this.midiaSocialStr).value;
+    const midiaSocials = <Array<MidiaSocial>>this.formulario.get(this.midiaSocialStr).value;        
     let resultado : boolean = false; 
       if (midiaSocials){
          midiaSocials.forEach(element => {
@@ -185,7 +190,7 @@ export class FormEstabelecimentoPage implements OnInit {
   }
 
   verificaTelefonevazio(): boolean{
-    const telefones = <Array<Telefone>>this.formulario.get(this.telefoneStr).value;
+    const telefones = <Array<Telefone>>this.formulario.get(this.telefoneStr).value;    
     let resultado : boolean = false; 
       if (telefones){
          telefones.forEach(element => {
@@ -193,7 +198,7 @@ export class FormEstabelecimentoPage implements OnInit {
             resultado = true;
           }          
         });
-      }
+      }      
       return resultado; 
   } 
 
@@ -210,7 +215,7 @@ export class FormEstabelecimentoPage implements OnInit {
   public get ativo() {return this.formulario.get('ativo')}
   public get usuarioId() {return this.formulario.get('usuarioId')}  
 
-ngOnInit() {
+ngOnInit() {  
   this.usuarioLogado = AutenticadorService.UsuarioLogado;      
   this.inscricao = this.route.queryParams.subscribe(
     (queryParams: any) => {
