@@ -88,7 +88,7 @@
         <ion-item  *ngIf="tipoEstabelecimentoId.invalid && (tipoEstabelecimentoId.dirty || tipoEstabelecimentoId.touched)" >                
           <ion-label color="danger" *ngIf="tipoEstabelecimentoId.errors.required">Campo obrigatório.</ion-label>                   
         </ion-item>     
-        <div *ngIf="formulario.get('MidiaSocials')">                                  
+        <div *ngIf="formulario.get('Telefones')">                                  
          <div formArrayName="Telefones" *ngFor="let item of formulario.get('Telefones').controls; let i = index;">
             <div [formGroupName]="i" >
               <ion-item>
