@@ -135,7 +135,9 @@ export class PontosClienteResgatarComponent implements OnInit {
           totalPontosClieteProgramaFidelidadeResultado.data.totalPontos = diferencaPontos;
           totalPontosClieteProgramaFidelidadeResultado.data.dataResgate = new Date();
           totalPontosClieteProgramaFidelidadeResultado.data.ativo = false;
-          if (diferencaPontos > 0){
+          // Caso seja maior que zero, significa que o cliente ainda tem pontos sobrando, logo ele cria um novo total de pontos
+          // e um novo pontos cliente, sendo que ambos terão o restanto dos pontos.
+          if (diferencaPontos > 0){ 
             let totalPontosClienteProgramaFidelidade: TotalPontosClienteProgramaFidelidade = new TotalPontosClienteProgramaFidelidade();
             let PontosClientesProgramaFidelidades: PontosClienteProgramaFidelidade = new PontosClienteProgramaFidelidade();
             let listaPontosClienteProgramaFidelidade = new Array<PontosClienteProgramaFidelidade>();
@@ -147,8 +149,12 @@ export class PontosClienteResgatarComponent implements OnInit {
             totalPontosClienteProgramaFidelidade.programaFidelidadeId = programaFidelidadeId;
             totalPontosClienteProgramaFidelidade.totalPontos = diferencaPontos;
             await this.totalPontosClienteProgramaFidelidadeService.salvar(totalPontosClienteProgramaFidelidade);
-          }          
-          totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.atualizar(totalPontosClieteProgramaFidelidadeResultado.data.id, totalPontosClieteProgramaFidelidadeResultado.data);
+          }        
+          
+          totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.
+              atualizarEEnviarEmailResgatarPontos(totalPontosClieteProgramaFidelidadeResultado.data.id, 
+                totalPontosClieteProgramaFidelidadeResultado.data,this.pegarUsuario(clienteId),
+                this.estabelecimentos[0],this.programasFidelidade[0],quantidadePontos,diferencaPontos);
           if (totalPontosClieteProgramaFidelidadeResultado.success) {     
             this.navController.navigateRoot('/principal');               
             this.alertSrv.toast('Resgate realizado com sucesso!');
@@ -164,6 +170,16 @@ export class PontosClienteResgatarComponent implements OnInit {
       console.log('Erro ao pontuar um cliente', error);
     }
 
+  }
+
+  private pegarUsuario(id : number): Usuario{
+    let usuario : Usuario;
+    this.usuarios.forEach(element => {
+      if (element.id == id){
+        usuario = element
+      }
+    });
+    return usuario;
   }
 
 }

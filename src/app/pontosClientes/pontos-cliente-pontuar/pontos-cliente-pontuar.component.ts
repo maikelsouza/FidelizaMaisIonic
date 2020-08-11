@@ -32,7 +32,8 @@ export class PontosClientePontuarComponent implements OnInit {
      private pontosClienteProgramaFidelidadeService: PontosClienteProgramaFidelidadeService,
      private totalPontosClienteProgramaFidelidadeService: TotalPontosClienteProgramaFidelidadeService,
      private alertSrv: AlertaService,     
-     private navController: NavController) { }
+     private navController: NavController
+     ) { }
 
   ngOnInit() {    
     this.usuarioLogado = AutenticadorService.UsuarioLogado;
@@ -97,7 +98,9 @@ export class PontosClientePontuarComponent implements OnInit {
   async onSubmit(): Promise<void> {
     try { // Colocar essas regras no service
       const valorGasto = this.formulario.get("valorGasto").value;
-      const regra = this.programasFidelidade[0].regra;
+      const programaFilidade : ProgramaFidelidade = this.programasFidelidade[0];
+      //const regra = this.programasFidelidade[0].regra;
+      const regra = programaFilidade.regra;
       if (!this.verificarValorGastoMaiorIgualRegra(valorGasto,regra)){
         this.alertSrv.alert('Valor Mínimo Não Alcançado!',`O valor gasto dever ser maior ou igual a R$ ${regra},00`); 
       }else{        
@@ -116,7 +119,9 @@ export class PontosClientePontuarComponent implements OnInit {
           let listaPontosClienteProgramaFidelidade = new Array<PontosClienteProgramaFidelidade>();
           listaPontosClienteProgramaFidelidade.push(PontosClientesProgramaFidelidades);
           totalPontosClienteProgramaFidelidade.PontosClienteProgramaFidelidades = listaPontosClienteProgramaFidelidade;
-          totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.salvar(totalPontosClienteProgramaFidelidade);
+          totalPontosClieteProgramaFidelidadeResultado = await 
+          this.totalPontosClienteProgramaFidelidadeService.salvarEEnviarEmailPontuarCliente(totalPontosClienteProgramaFidelidade,
+            this.pegarUsuario(clienteId),this.estabelecimentos[0],programaFilidade,quantidadePontos);
         }
         else { // Caso exista um regristo de pontos então atualiza a pontuação total
           let totalPontosClienteProgramaFidelidadeId = totalPontosClieteProgramaFidelidadeResultado.data.id;
@@ -124,11 +129,15 @@ export class PontosClientePontuarComponent implements OnInit {
           await this.pontosClienteProgramaFidelidadeService.salvar(PontosClientesProgramaFidelidades);
           let somatorioPontosProgramaFidelidadeResultado = await this.pontosClienteProgramaFidelidadeService.buscarSomatorioPontosProgramaFidelidade(totalPontosClienteProgramaFidelidadeId);
           totalPontosClienteProgramaFidelidade.totalPontos = somatorioPontosProgramaFidelidadeResultado.data.pontos;
-          totalPontosClieteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.atualizar(totalPontosClienteProgramaFidelidadeId, totalPontosClienteProgramaFidelidade);
+          totalPontosClieteProgramaFidelidadeResultado = await 
+            this.totalPontosClienteProgramaFidelidadeService.atualizarEEnviarEmailPontuarCliente(totalPontosClienteProgramaFidelidadeId,
+               totalPontosClienteProgramaFidelidade,this.pegarUsuario(clienteId),this.estabelecimentos[0],
+               programaFilidade,quantidadePontos);
         }
         if (totalPontosClieteProgramaFidelidadeResultado.success) {
           this.navController.navigateRoot('/principal');
-          // colocar regra para envio de email após pontuar      
+          // colocar regra para envio de email após pontuar     
+
           this.alertSrv.toast('Pontuação realizada com sucesso!');
         }
       }
@@ -149,5 +158,15 @@ export class PontosClientePontuarComponent implements OnInit {
     const valorGastoSemDecimais = valorGasto.substr(0, posicaoVirgura);
     const valorGastoSemDecimaisEPontos = valorGastoSemDecimais.replace(/\D+/g, '');
     return valorGastoSemDecimaisEPontos >= regra;
+  }
+
+  private pegarUsuario(id : number): Usuario{
+    let usuario : Usuario;
+    this.usuarios.forEach(element => {
+      if (element.id == id){
+        usuario = element
+      }
+    });
+    return usuario;
   }
 }
