@@ -39,7 +39,7 @@ export class HttpService {
     const header = this.createHeader();    
     return new Promise(async (resolve) => {
       if (this.networkSrv.IsOnline) {
-        this.spinner.show();
+        await this.spinner.show();
         this.http.get(url, { headers: header })
           .subscribe(res => {
             this.spinner.hide();            
@@ -79,7 +79,7 @@ export class HttpService {
                 });
                 this.alertSrv.alert(err.error.message, msg);
             } else if (err.status == 404) {                             
-                console.table({Erro: '404', Mensagem: err.error.message, Data: dataHora.toLocaleDateString(),Hora: dataHora.toLocaleTimeString()});              
+                console.table({Erro: '404', Url: url, Mensagem: err.error.message, Data: dataHora.toLocaleDateString(),Hora: dataHora.toLocaleTimeString()});              
                 this.alertSrv.alert('Informação', err.error.message);
             } else { 
               console.error(`Erro possível problema de processamento - Possível problema de conexão ${new Date()}`);                           
@@ -109,7 +109,7 @@ export class HttpService {
             let dataHora : Date = new Date();        
             if (err.status == 400) {
               let msg = '';
-              console.table({Erro: '400', Mensagem: err.error.message, Data: dataHora.toLocaleDateString(),Hora: dataHora.toLocaleTimeString()});              
+              console.table({Erro: '400', Url: url, Mensagem: err.error.message, Data: dataHora.toLocaleDateString(),Hora: dataHora.toLocaleTimeString()});              
               err.error.validation.forEach(err => {
                 msg += `<li>${err.message}</li>`;
               });
