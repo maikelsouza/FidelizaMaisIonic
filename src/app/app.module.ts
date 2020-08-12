@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrMaskerModule } from 'br-mask';
+
 import { LoginService } from './login/shared/services/login.service';
 import { LoginComponent } from './login/login/login.component';
 import { CartaoFidelidadeService } from './cartoesFidelidade/shared/services/cartao-fidelidade.service';
@@ -30,10 +31,10 @@ import { FormEstabelecimentoPage } from './estabelecimentos/form-estabelecimento
 import { ListaEstabelecimentoPage } from './estabelecimentos/lista-estabelecimento/lista-estabelecimento.page';
 import { EstabelecimentoDetalhePage } from './estabelecimentos/estabelecimento-detalhe/estabelecimento-detalhe.page';
 import { EstabelecimentoService } from './estabelecimentos/shared/services/estabelecimento.service';
-import { LogoffComponent } from './login/logoff/logoff.component';
 import { EstabelecimentoVisualizarComponent } from './estabelecimentos/estabelecimento-visualizar/estabelecimento-visualizar.component';
 import { HttpService } from './common/service/http.service';
 import { SpinnerService } from './common/service/spinner.service';
+import { EmailService } from './common/service/email.service';
 
 
 @NgModule({
@@ -53,8 +54,7 @@ import { SpinnerService } from './common/service/spinner.service';
     FormEstabelecimentoPage,
     ListaEstabelecimentoPage,
     EstabelecimentoDetalhePage,      
-    EstabelecimentoVisualizarComponent,
-    LogoffComponent    
+    EstabelecimentoVisualizarComponent    
   ],
   entryComponents: [],
   imports: [
@@ -79,6 +79,7 @@ import { SpinnerService } from './common/service/spinner.service';
     SplashScreen,
     HttpService,
     SpinnerService,
+    EmailService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   

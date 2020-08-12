@@ -14,7 +14,6 @@ import { EsqueciMinhaSenhaCadastroComponent } from './esqueciMinhaSenha/esqueci-
 import { ListaEstabelecimentoPage } from './estabelecimentos/lista-estabelecimento/lista-estabelecimento.page';
 import { FormEstabelecimentoPage } from './estabelecimentos/form-estabelecimento/form-estabelecimento.page';
 import { EstabelecimentoDetalhePage } from './estabelecimentos/estabelecimento-detalhe/estabelecimento-detalhe.page';
-import { LogoffComponent } from './login/logoff/logoff.component';
 import { EstabelecimentoVisualizarComponent } from './estabelecimentos/estabelecimento-visualizar/estabelecimento-visualizar.component';
 
 const routes: Routes = [
@@ -41,8 +40,6 @@ const routes: Routes = [
   { path: 'pontosClienteResgatar', component: PontosClienteResgatarComponent },      
   
   { path: 'principal', loadChildren: './principal/principal.module#PrincipalPageModule'},  
- // { path: 'principal', component: PrincipalPage},  
-  { path: 'sair', component: LogoffComponent },      
   { path: '', redirectTo: 'login', pathMatch: 'full'},
 ];
 
