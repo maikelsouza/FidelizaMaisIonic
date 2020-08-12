@@ -35,14 +35,14 @@ export class HttpService {
     return header;
   }
 
-  public get(url: string): Promise<HttpResultModel> {
+  public  get(url: string): Promise<HttpResultModel> {
     const header = this.createHeader();    
-    return new Promise(async (resolve) => {
+    return new Promise((resolve) => {
       if (this.networkSrv.IsOnline) {
-        await this.spinner.show();
+         this.spinner.show();
         this.http.get(url, { headers: header })
-          .subscribe(res => {
-            this.spinner.hide();            
+          .subscribe( res => {
+             this.spinner.hide();            
             resolve({ success: true, data: res, err: undefined });
           }, err => {
             let dataHora : Date = new Date();        
