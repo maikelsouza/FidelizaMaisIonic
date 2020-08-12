@@ -10,6 +10,8 @@ import { Usuario } from 'src/app/usuarios/shared/models/usuario';
 import { ClienteEstabelecimentoService } from '../shared/services/cliente-estabelecimento.service';
 import { AlertaService } from 'src/app/common/service/alerta.service';
 import { EstabelecimentoVO } from '../shared/vos/estabelecimento-vo';
+import { TotalPontosClienteProgramaFidelidadeService } from 'src/app/pontosClientes/shared/services/total-pontos-cliente-programa-fidelidade.service';
+import { TotalPontosClienteProgramaFidelidade } from 'src/app/pontosClientes/shared/models/total-pontos-cliente-programa-fidelidade';
 
 @Component({
   selector: 'app-lista-estabelecimento',
@@ -21,6 +23,7 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
   estabelecimentos: Array<Estabelecimento> = new Array<Estabelecimento>(); 
   estabelecimentoVos: Array<EstabelecimentoVO> = new Array<EstabelecimentoVO>(); 
   clienteEstabelecimento: Array<ClienteEstabelecimento> = new Array<ClienteEstabelecimento>(); 
+  totalPontosClienteProgramaFidelidade: Array<TotalPontosClienteProgramaFidelidade> = new Array<TotalPontosClienteProgramaFidelidade>(); 
   tipoUsuario : string;
   inscricao: Subscription;
   inscricaoCarregarListaEstabelecimentos: Subscription;
@@ -28,7 +31,8 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
   
   constructor(
       private estabelecimentoSrv: EstabelecimentoService,
-      private clienteEstabelecimentoService: ClienteEstabelecimentoService,      
+      private clienteEstabelecimentoService: ClienteEstabelecimentoService,  
+      private totalPontosClienteProgramaFidelidadeService: TotalPontosClienteProgramaFidelidadeService,    
       private route: ActivatedRoute,
       private alertSrv: AlertaService,
       private router: Router
@@ -59,8 +63,10 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
     try {      
       let estabelecimentoResultado = undefined;     
       let clienteEstabelecimentoResultado;  
+      let totalPontosClienteProgramaFidelidadeResultado;
+      const idUsuario = this.usuarioLogado[0].id;
       if (this.tipoUsuario == "ESTABELECIMENTOS"){
-        estabelecimentoResultado = await this.estabelecimentoSrv.buscarPorIdUsuario(this.usuarioLogado[0].id);           
+        estabelecimentoResultado = await this.estabelecimentoSrv.buscarPorIdUsuario(idUsuario);           
         if (estabelecimentoResultado.success) {
           this.estabelecimentos = <Array<Estabelecimento>>estabelecimentoResultado.data;                  
         }
@@ -68,8 +74,12 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
           estabelecimentoResultado = await this.estabelecimentoSrv.buscarComProgramaFidelidadeOuCartaoFidelidade();
           if(estabelecimentoResultado.success){            
             this.estabelecimentoVos =  <Array<EstabelecimentoVO>>estabelecimentoResultado.data;                 
-            clienteEstabelecimentoResultado = await this.clienteEstabelecimentoService.buscarPorIdUsuario(this.usuarioLogado[0].id);            
+            clienteEstabelecimentoResultado = await this.clienteEstabelecimentoService.buscarPorIdUsuario(idUsuario);            
             this.clienteEstabelecimento = <Array<ClienteEstabelecimento>>clienteEstabelecimentoResultado.data;        
+            clienteEstabelecimentoResultado = await this.clienteEstabelecimentoService.buscarPorIdUsuario(idUsuario);            
+            totalPontosClienteProgramaFidelidadeResultado = await this.totalPontosClienteProgramaFidelidadeService.buscarPorIdUsuarioEAtivo(idUsuario,true);
+            this.totalPontosClienteProgramaFidelidade = <Array<TotalPontosClienteProgramaFidelidade>>totalPontosClienteProgramaFidelidadeResultado.data;        
+            this.descobrirPontuacaoClientes();
             this.descobrirClientesAssociadosEstabelecimentos();
             this.popularTelefoneCelular();
             this.popularMidiaSocial();
@@ -126,12 +136,23 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
     }
   }
 
-  async descobrirClientesAssociadosEstabelecimentos(){
+  descobrirClientesAssociadosEstabelecimentos(){
     this.estabelecimentoVos.forEach(estabelecimentoVo => {
       estabelecimentoVo.usuarioEstahAssociado = false;
       this.clienteEstabelecimento.forEach(clienteEstabelecimento => {
-        if (estabelecimentoVo.id == clienteEstabelecimento.estabelecimentoId){
+        if (estabelecimentoVo.programaFidelidadeAlias[0].id == clienteEstabelecimento.estabelecimentoId){
           estabelecimentoVo.usuarioEstahAssociado = true;                                     
+        }        
+      });      
+    });    
+  }
+
+  descobrirPontuacaoClientes(){
+    this.estabelecimentoVos.forEach(estabelecimentoVo => {
+      estabelecimentoVo.usuarioEstahAssociado = false;
+      this.totalPontosClienteProgramaFidelidade.forEach(totalPontosClienteProgramaFidelidade => {
+        if (estabelecimentoVo.programaFidelidadeAlias[0].id == totalPontosClienteProgramaFidelidade.programaFidelidadeId){
+          estabelecimentoVo.totalPontosCliente = totalPontosClienteProgramaFidelidade.totalPontos;
         }        
       });      
     });    
