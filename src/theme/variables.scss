@@ -66,3 +66,101 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 }
+
+.toolbar-background {
+  --background: linear-gradient(to bottom, #02072F , #091361);
+  --border-width: 0px !important;
+   border: 0 !important;
+}
+ion-title {
+  color: white;
+  font-family: 'Amaranth', sans-serif;
+}
+.btn_large{
+  height: 50px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.border_1px{
+  border: 1px solid #b3aeae;
+  border-radius: 10px;
+}
+.btn_editar{
+  margin-left: 20%;
+  margin-right: 20%;
+}
+.line-input {
+  margin-bottom: 0!important;
+  ion-item {
+      --border-color: transparent!important;
+      --highlight-height: 0;
+      border: 1px solid #dedede;
+      border-radius: 4px;
+      margin: 10px;
+      box-shadow: 1px 1px teal;
+
+      &.item-has-focus {
+          border: 1px solid var(--ion-color-primary);
+      }
+      &.item-has-focus.ion-invalid {
+          border: 1px solid red;
+      }
+      &.item-danger{
+        border: none;
+        box-shadow: none;
+        margin-top: -10px;
+        margin-bottom: -15px;
+        color: red;
+      }
+      ion-button{
+        
+        ion-label {
+           color: #fff !important;
+           font-family: 'Amaranth', sans-serif !important;
+           font-size: 12px !important;
+        }
+      }
+
+
+      ion-label {
+          color: #807e7e!important;
+          font-weight: 300;
+          font-size: 1rem!important;
+          &.ion-color-danger{
+           color: red !important;
+           font-weight: 600;
+           
+        }   
+     }     
+      
+  }
+ 
+}
+
+ion-button{
+  font-family: 'Amaranth', sans-serif;
+}
+ion-toolbar.sc-ion-searchbar-md-h, ion-toolbar .sc-ion-searchbar-md-h {
+  padding-left: unset;
+  padding-right: unset;
+  -webkit-padding-start: 0px; 
+  padding-inline-start: 0px;
+  -webkit-padding-end: 0px; 
+  padding-inline-end: 0px; 
+}
+
+.perfil_img{
+  margin: auto;
+  width: 100px !important;
+  border-radius: 113px;
+  box-shadow: 3px 3px #ccc;
+  border: 2px solid #755f5f;
+}
+.perfil_65_img{
+  margin: auto;
+  width: 65px !important;
+  border-radius: 113px;
+  box-shadow: 3px 3px #ccc;
+  border: 2px solid #755f5f;
+  height: 65px;
+}

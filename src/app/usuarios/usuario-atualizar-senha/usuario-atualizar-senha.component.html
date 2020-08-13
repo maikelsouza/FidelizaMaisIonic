@@ -8,23 +8,23 @@
 </ion-header>
 <ion-content>
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <ion-list no-lines>    
+    <ion-list class="line-input" no-lines>    
         <ion-item>        
           <ion-label position="floating">Senha <em class="campo-obrigatorio">*</em></ion-label>
           <ion-input formControlName="senha" type="password"></ion-input>
        </ion-item>
-       <ion-item  *ngIf="senha.invalid && (senha.dirty || senha.touched)" >      
+       <ion-item class="item-danger"  *ngIf="senha.invalid && (senha.dirty || senha.touched)" >      
         <ion-label color="danger" *ngIf="senha.errors.required">Campo obrigatório.</ion-label>                   
        </ion-item>       
        <ion-item>
          <ion-label for="confirmarSenha" position="floating">Confirmar Senha <em class="campo-obrigatorio">*</em></ion-label>         
          <ion-input formControlName="confirmarSenha" type="password" ></ion-input>
        </ion-item>  
-       <ion-item  *ngIf="confirmarSenha.invalid && (confirmarSenha.dirty || confirmarSenha.touched)" >      
+       <ion-item  class="item-danger" *ngIf="confirmarSenha.invalid && (confirmarSenha.dirty || confirmarSenha.touched)" >      
            <ion-label color="danger" *ngIf="confirmarSenha.errors.required">Campo obrigatório.</ion-label>                   
        </ion-item>
     </ion-list>   
-    <ion-button color="primary" type="submit" [disabled]="!formulario.valid" expand="block">
+    <ion-button color="success" class="btn_large" type="submit" [disabled]="!formulario.valid" expand="block">
       <ion-label>Atualizar</ion-label>
     </ion-button>
 </form>

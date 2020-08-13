@@ -6,13 +6,13 @@
     <ion-title>Pontuar Cliente</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar type="text" placeholder="Email Cliente" (ionChange)="pesquisarUsuario($event)" debounce="500">
+    <ion-searchbar type="text" placeholder="Email Clientes" (ionChange)="pesquisarUsuario($event)" debounce="500">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <ion-list no-lines>
+    <ion-list class="line-input" no-lines>
       <ion-radio-group formControlName="clienteId">
         <ion-item *ngFor="let item of usuarios">
           <ion-label>{{item.nome}} - {{item.email}} </ion-label>          
@@ -24,7 +24,7 @@
         <ion-input type="text" formControlName="valorGasto"
             [brmasker]="{money: true, thousand: '.', type: 'num', decimalCaracter: ','}" maxlength="9"></ion-input>
       </ion-item>
-      <ion-item *ngIf="valorGasto.invalid && (valorGasto.dirty || valorGasto.touched)">
+      <ion-item class="item-danger" *ngIf="valorGasto.invalid && (valorGasto.dirty || valorGasto.touched)">
         <ion-label color="danger" *ngIf="valorGasto.errors.required">Campo obrigatório.</ion-label>
       </ion-item>
     </ion-list>

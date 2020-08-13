@@ -1,52 +1,50 @@
-   <ion-header>
-    <ion-toolbar color="primary">
-        <ion-title>Login</ion-title>
-    </ion-toolbar>
-  </ion-header>  
-  <ion-content class="ion-padding">    
-    <div style="text-align: center">      
-      <img src="/assets/images/logo.png" alt="logo Fideliza Mais" width="100" height="100">
-    </div>
-    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-      <ion-list no-lines>            
-        <ion-item>        
-            <ion-label position="floating">Login <em class="campo-obrigatorio">*</em></ion-label>            
-            <ion-input clearInput formControlName="login" type="email" ></ion-input>
-         </ion-item>
-         <ion-item  *ngIf="login.invalid && (login.dirty || login.touched)" >      
-            <ion-label color="danger" *ngIf="login.errors.required">Campo obrigatório.</ion-label>           
-            <ion-label color="danger" *ngIf="login.errors.email">Formato de e-mail inválido.</ion-label>
-        </ion-item>       
-         <ion-item>
-            <ion-label position="floating">Senha <em class="campo-obrigatorio">*</em></ion-label>         
-            <ion-input clearInput formControlName="senha" type="password"></ion-input>
-         </ion-item>
-         <ion-item  *ngIf="senha.invalid && (senha.dirty || senha.touched)" >
-          <ion-label color="danger" *ngIf="senha.errors.required">Campo obrigatório</ion-label>           
-        </ion-item>        
-      </ion-list>    
-      <ion-button  color="primary" type="submit" expand="block" [disabled]="!formulario.valid">
-        <ion-label>Acessar</ion-label>
-      </ion-button>        
-    </form>
-    <ion-grid class="ion-text-center" > 
-        <ion-row>
-          <ion-col>
-            <ion-router-link color="primary" [routerLink]="['/esqueciMinhaSenha']">
-              <ion-label>Esqueci Minha Senha</ion-label>              
-            </ion-router-link>                
-          </ion-col>        
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-router-link color="primary" [routerLink]="['/usuarios/novo']" [queryParams]="{tipoUsuario:3}">              
-              <ion-label>Não Tenho Cadastro</ion-label>              
-            </ion-router-link>                
-          </ion-col>        
-        </ion-row>
-     </ion-grid>
-    </ion-content>
+<ion-header>
+  <ion-toolbar >      
+      <img class="img_fideliza" src="/assets/images/background4.png" >
+  </ion-toolbar>
+</ion-header>  
+<ion-content class="" style="margin-top: -30px;">    
+  
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <ion-list no-lines>            
+      <ion-item>        
+          <ion-label position="floating">Login <em class="campo-obrigatorio">*</em></ion-label>            
+          <ion-input clearInput formControlName="login" type="email" ></ion-input>
+       </ion-item>
+       <ion-item  *ngIf="login.invalid && (login.dirty || login.touched)" >      
+          <ion-label color="danger" *ngIf="login.errors.required">Campo obrigatório.</ion-label>           
+          <ion-label color="danger" *ngIf="login.errors.email">Formato de e-mail inválido.</ion-label>
+      </ion-item>       
+       <ion-item>
+          <ion-label position="floating">Senha <em class="campo-obrigatorio">*</em></ion-label>         
+          <ion-input clearInput formControlName="senha" type="password"></ion-input>
+       </ion-item>
+       <ion-item class="item-danger" *ngIf="senha.invalid && (senha.dirty || senha.touched)" >
+        <ion-label color="danger" *ngIf="senha.errors.required">Campo obrigatório</ion-label>           
+      </ion-item>        
+    </ion-list>    
+    <ion-button  color="primary" type="submit" expand="block" [disabled]="!formulario.valid">
+      <ion-label>Acessar</ion-label>
+    </ion-button>        
+  </form>
+  <ion-grid class="ion-text-center" > 
+      <ion-row>
+        <ion-col>
+          <ion-router-link color="primary" [routerLink]="['/esqueciMinhaSenha']">
+            <ion-label style="font-size: 15px; margin-right: 20px;">Esqueci Minha Senha</ion-label>              
+          </ion-router-link>    
+          <ion-router-link color="primary" [routerLink]="['/usuarios/novo']" [queryParams]="{tipoUsuario:3}">              
+             <ion-label style="font-size: 15px;">Não Tenho Cadastro</ion-label>              
+           </ion-router-link>              
+        </ion-col>        
+      </ion-row>
+      <ion-row>
+        <ion-col>
+                       
+        </ion-col>        
+      </ion-row>
+   </ion-grid>
+  </ion-content>
 
 
-  
-  
+

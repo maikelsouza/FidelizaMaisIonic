@@ -7,8 +7,14 @@
 ion-grid{
   ion-row{
     ion-col{      	
-      border: 1px solid blue;
-      margin: 1px;
+      border: 1px solid #C4C4C4;
+      margin: 10px 45px 10px 45px;
+      background: #ccc;
+      border-radius: 15px;
+      font-family: 'Amaranth', sans-serif;
+      padding-top: 7px;
+      font-weight: 300;
+      box-shadow: 1px 3px #f9e3e3;
     }
   }
 } 
@@ -17,3 +23,52 @@ ion-grid{
   --ion-grid-padding: 180;
   --ion-grid-column-padding: 180;
 } 
+
+ion-content{
+   padding: 0;
+}
+
+
+.perfil{
+   background: #FD7028 !important;
+   color: white !important;
+}
+.fideliza{
+   font-size: 60px;
+   color: white;
+   font-family: 'Lobster', cursive;
+}
+.logout{
+   color: red !important;
+   font-weight: 900;
+}
+
+.cabecalho{
+   margin-top: -20px;
+   background: linear-gradient(to bottom right, #091361 , #091361);
+   
+
+}
+.grid{
+   background: #0e2160;
+}
+.content{
+   background: white;
+   border-top-left-radius: 15px;
+   border-top-right-radius: 15px;
+}
+
+
+
+.header-md:after {
+    left: 0;
+    background-image: none;
+    background-repeat: unset;
+    content: "";
+}
+
+ion-label{
+   color: white;
+   font-size:20px;
+   font-family: 'Lily Script One', cursive;
+}

@@ -6,16 +6,16 @@
     <ion-title>Regatar Pontos Cliente</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar type="text" placeholder="Pesquisar Clientes" (ionChange)="pesquisarUsuario($event)" debounce="500">
+    <ion-searchbar type="text" placeholder="Email Clientes" (ionChange)="pesquisarUsuario($event)" debounce="500">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <ion-list no-lines>       
+    <ion-list class="line-input" no-lines>       
       </ion-list>
       <ion-radio-group formControlName="clienteId">                
-        <ion-item *ngFor="let item of usuarios" >          
+        <ion-item class="lista-nomes" *ngFor="let item of usuarios" >          
           <ion-label>{{item.nome}}</ion-label>
           <ion-radio slot="start"  value={{item.id}}></ion-radio>
         </ion-item> 
@@ -23,7 +23,7 @@
       <ion-list>      
         <ion-radio-group formControlName="campoItemProgramaFidelidadeId">
           <ion-grid>
-            <ion-row  class="ion-text-center">
+            <ion-row  class="ion-text-center titulos">
               <ion-col>
                 <ion-label>Selecione</ion-label>
               </ion-col>
@@ -38,7 +38,7 @@
               <ion-col class="ion-text-center">
                 <ion-radio value={{campoItemProgramaFidelidade.id}}></ion-radio>
               </ion-col>
-              <ion-col>
+              <ion-col class="ion-text-center">
                 <ion-label>{{campoItemProgramaFidelidade.nome}}</ion-label>
               </ion-col>
               <ion-col class="ion-text-center">

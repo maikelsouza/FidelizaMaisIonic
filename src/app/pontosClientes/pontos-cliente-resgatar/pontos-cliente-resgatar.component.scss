@@ -3,3 +3,18 @@ ion-grid{
         border-style: groove;
     }
 }
+
+.titulos{
+   background: #ccc;
+   border: 1px solid blue ;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   font-size: 18px;
+   font-family: 'Amaranth', sans-serif;
+}
+
+.lista-nomes{
+border: 1px solid #ead5d5;
+margin-right: -3px;
+margin-left: -3px;
+}
