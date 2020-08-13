@@ -136,8 +136,6 @@ export class PontosClientePontuarComponent implements OnInit {
         }
         if (totalPontosClieteProgramaFidelidadeResultado.success) {
           this.navController.navigateRoot('/principal');
-          // colocar regra para envio de email após pontuar     
-
           this.alertSrv.toast('Pontuação realizada com sucesso!');
         }
       }
