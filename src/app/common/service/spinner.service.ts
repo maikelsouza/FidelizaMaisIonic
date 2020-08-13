@@ -20,8 +20,8 @@ export class SpinnerService {
     return await carregando.present();
   }
 
-  async hide()  {
-     return await this.loading.dismiss();
+   hide()  {
+     return  this.loading.dismiss();
  }
 
  

@@ -37,16 +37,16 @@ export class HttpService {
 
   public  get(url: string): Promise<HttpResultModel> {
     const header = this.createHeader();    
-    return new Promise((resolve) => {
+    return new Promise( (resolve) => {
       if (this.networkSrv.IsOnline) {
-         this.spinner.show();
+      //  await this.spinner.show();
         this.http.get(url, { headers: header })
           .subscribe( res => {
-             this.spinner.hide();            
+          //   this.spinner.hide();            
             resolve({ success: true, data: res, err: undefined });
           }, err => {
             let dataHora : Date = new Date();        
-            this.spinner.hide();
+        //    this.spinner.hide();
             console.table({Erro: 'Erro ao consultar os dados', Mensagem: err.error.message, Data: dataHora.toLocaleDateString(),Hora: dataHora.toLocaleTimeString()});                                    
             this.alertSrv.toast('Não foi possível consultar os dados, verifique sua conexão e tente novamente');
             resolve({ success: false, data: undefined, err });
