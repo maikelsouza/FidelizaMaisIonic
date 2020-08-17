@@ -1,10 +1,11 @@
 import { Router } from '@angular/router';
-import { UsuarioService } from './../../usuarios/shared/services/usuario.service';
 import { Component, OnInit } from '@angular/core';
-
-import { LoginService } from './../shared/services/login.service';
-import { AlertaService } from './../../common/service/alerta.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NavController } from '@ionic/angular';
+
+import { UsuarioService } from './../../usuarios/shared/services/usuario.service';
+import { LoginService } from './../shared/services/login.service';
+
 
 
 @Component({
@@ -18,8 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService,
-    private alertService: AlertaService,    
+    private loginService: LoginService,        
+    private navController: NavController,
     private route: Router
   ) { }
  
@@ -50,7 +51,8 @@ export class LoginComponent implements OnInit {
           if (resultado.data.usuario[0].GrupoUsuario.nome === clientes){            
             this.route.navigate(['/estabelecimento/lista'], { queryParams: { tipoUsuario: clientes } });          
           }else{
-            this.route.navigate(['/principal']);          
+         //   this.route.navigate(['/principal']);          
+            this.navController.navigateRoot('/principal'); 
           }
         }      
     } catch (error) {
