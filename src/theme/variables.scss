@@ -3,19 +3,19 @@
 
 /** Ionic CSS Variables **/
 :root {
-  --ion-color-primary: #004E89;
-  --ion-color-primary-rgb: 0,78,137;
+  --ion-color-primary: #127475;
+  --ion-color-primary-rgb: 18,116,117;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255,255,255;
-  --ion-color-primary-shade: #004579;
-  --ion-color-primary-tint: #1a6095;
+  --ion-color-primary-shade: #106667;
+  --ion-color-primary-tint: #2a8283;
 
-  --ion-color-secondary: #3dc2ff;
-  --ion-color-secondary-rgb: 61,194,255;
+  --ion-color-secondary: #F2542D;
+  --ion-color-secondary-rgb: 242,84,45;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255,255,255;
-  --ion-color-secondary-shade: #36abe0;
-  --ion-color-secondary-tint: #50c8ff;
+  --ion-color-secondary-shade: #d54a28;
+  --ion-color-secondary-tint: #f36542;
 
   --ion-color-tertiary: #5260ff;
   --ion-color-tertiary-rgb: 82,96,255;
@@ -68,7 +68,7 @@
 }
 
 .toolbar-background {
-  --background: linear-gradient(to bottom, #02072F , #091361);
+  --background: linear-gradient(to bottom, #127475 , #127475);
   --border-width: 0px !important;
    border: 0 !important;
 }
