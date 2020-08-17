@@ -38,7 +38,7 @@ export class PontosClientePontuarComponent implements OnInit {
   ngOnInit() {    
     this.usuarioLogado = AutenticadorService.UsuarioLogado;
     this.montarCamposTela();
-    this.carregarListaEstabelecimento();
+    this.carregarListaEstabelecimento();    
   }
   
   private montarCamposTela() {
@@ -71,19 +71,37 @@ export class PontosClientePontuarComponent implements OnInit {
       console.log('Erro ao carregar os tipos de estabelecimentos', error);
     }
   }
-  async carregarListaEstabelecimento(): Promise<void> {
-    try {
-      let estabelecimentoResultado = await this.estabelecimentoService.buscarPorIdUsuario(this.usuarioLogado[0].id);
-      if (estabelecimentoResultado.success) {
-        this.estabelecimentos = <Array<Estabelecimento>>estabelecimentoResultado.data;
-        this.carregarListaProgramaFidelidade(this.estabelecimentos);
+
+  async carregarListaClienteAssociadosEstabelecimento(IdEstabelecimento: number) {
+    try {      
+      let usuariosEstabelecimentoResultado = await this.estabelecimentoService.buscarClientesAssociadosPorIdEstabelecimento(IdEstabelecimento);
+      if (usuariosEstabelecimentoResultado.success && usuariosEstabelecimentoResultado.data != null) {
+        this.usuarios = <Array<Usuario>>usuariosEstabelecimentoResultado.data.usuarios;
+      }else{
+        this.alertSrv.alert("Cliente não encontrado ",`Não exite cliente associados para pontuar!`);
       }
     }
     catch (error) {
       console.log('Erro ao carregar os estabelecimentos', error);
     }
   }
-  async carregarListaProgramaFidelidade(estabelecimentos: Array<Estabelecimento>): Promise<void> {
+
+
+  private async carregarListaEstabelecimento(){
+    try {
+      let estabelecimentoResultado = await this.estabelecimentoService.buscarPorIdUsuario(this.usuarioLogado[0].id);
+      if (estabelecimentoResultado.success) {
+        this.estabelecimentos = <Array<Estabelecimento>>estabelecimentoResultado.data;
+        const IdEstabelecimento: number = Number(this.estabelecimentos[0].id);
+        this.carregarListaProgramaFidelidade(this.estabelecimentos);
+     //   this.carregarListaClienteAssociadosEstabelecimento(IdEstabelecimento);
+      }
+    }
+    catch (error) {
+      console.log('Erro ao carregar os estabelecimentos', error);
+    }
+  }
+  private async carregarListaProgramaFidelidade(estabelecimentos: Array<Estabelecimento>) {
     try {
       let estabelecimentoId: number = Number(estabelecimentos[0].id);
       let programaFidelidadeResultado = await this.programaFidelidadeService.buscarPorIdEstabelecimentoEAtivo(estabelecimentoId);
