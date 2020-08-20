@@ -24,9 +24,11 @@ export class PontosClientePontuarComponent implements OnInit {
   private usuarioLogado: Usuario;
   estabelecimentos: Array<Estabelecimento> = new Array<Estabelecimento>();
   usuarios: Array<Usuario> = new Array<Usuario>();
+  todosUsuarios: Array<Usuario> = new Array<Usuario>();
   programasFidelidade: Array<ProgramaFidelidade> = new Array<ProgramaFidelidade>();
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+     private formBuilder: FormBuilder,
      private estabelecimentoService: EstabelecimentoService, 
      private programaFidelidadeService: ProgramaFidelidadeService,
      private pontosClienteProgramaFidelidadeService: PontosClienteProgramaFidelidadeService,
@@ -72,11 +74,23 @@ export class PontosClientePontuarComponent implements OnInit {
     }
   }
 
+   /*pesquisarUsuario(event: any) {   
+      
+      const nome :string = event.target.value;
+      this.usuarios = this.todosUsuarios;
+      if (nome && nome.trim() != ''){        
+        this.usuarios = this.usuarios.filter(usuario => {
+          return (usuario.nome.toLowerCase().indexOf(nome.toLowerCase()) > -1);
+        })
+      }      
+    }*/
+
   async carregarListaClienteAssociadosEstabelecimento(IdEstabelecimento: number) {
     try {      
       let usuariosEstabelecimentoResultado = await this.estabelecimentoService.buscarClientesAssociadosPorIdEstabelecimento(IdEstabelecimento);
       if (usuariosEstabelecimentoResultado.success && usuariosEstabelecimentoResultado.data != null) {
         this.usuarios = <Array<Usuario>>usuariosEstabelecimentoResultado.data.usuarios;
+        this.todosUsuarios = this.usuarios;
       }else{
         this.alertSrv.alert("Cliente não encontrado ",`Não exite cliente associados para pontuar!`);
       }

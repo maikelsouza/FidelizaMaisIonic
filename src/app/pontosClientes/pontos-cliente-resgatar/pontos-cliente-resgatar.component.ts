@@ -28,8 +28,11 @@ export class PontosClienteResgatarComponent implements OnInit {
   estabelecimentos: Array<Estabelecimento> = new Array<Estabelecimento>();
   campoItemProgramaFidelidades: Array<CampoItemProgramaFidelidade> = new Array<CampoItemProgramaFidelidade>();
   usuarios: Array<Usuario> = new Array<Usuario>();
+  todosUsuarios: Array<Usuario> = new Array<Usuario>();
+  
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private estabelecimentoService: EstabelecimentoService, 
     private programaFidelidadeService: ProgramaFidelidadeService,
     private totalPontosClienteProgramaFidelidadeService: TotalPontosClienteProgramaFidelidadeService,
@@ -53,7 +56,7 @@ export class PontosClienteResgatarComponent implements OnInit {
   public get campoItemProgramaFidelidadeId() {return this.formulario.get('campoItemProgramaFidelidadeId')}
  
 
-  async pesquisarUsuario(event: any): Promise<void> {
+ /* async pesquisarUsuario(event: any): Promise<void> {
     try {
       const email = event.target.value.trim();
       if (!email) {
@@ -70,6 +73,17 @@ export class PontosClienteResgatarComponent implements OnInit {
     catch (error) {
       console.log('Erro ao carregar os tipos de estabelecimentos', error);
     }
+  } */
+
+  pesquisarUsuario(event: any) {   
+      
+    const nome :string = event.target.value;
+    this.usuarios = this.todosUsuarios;
+    if (nome && nome.trim() != ''){        
+      this.usuarios = this.usuarios.filter(usuario => {
+        return (usuario.nome.toLowerCase().indexOf(nome.toLowerCase()) > -1);
+      })
+    }      
   }
 
   async carregarListaEstabelecimento(): Promise<void> {
@@ -77,8 +91,10 @@ export class PontosClienteResgatarComponent implements OnInit {
       let estabelecimentoResultado = await this.estabelecimentoService.buscarPorIdUsuario(this.usuarioLogado[0].id);
       if (estabelecimentoResultado.success && estabelecimentoResultado.data != null) {
         this.estabelecimentos = <Array<Estabelecimento>>estabelecimentoResultado.data;
+        const IdEstabelecimento: number = Number(this.estabelecimentos[0].id);
         await this.carregarListaProgramaFidelidade(this.estabelecimentos);
         await this.carregarCamposItensProgramaFidelidade();
+        await this.carregarListaClienteAssociadosEstabelecimento(IdEstabelecimento);
       }
     }
     catch (error) {
@@ -106,6 +122,21 @@ export class PontosClienteResgatarComponent implements OnInit {
     }
     catch (error) {
       console.log('Erro ao carregar os programas fidelidade', error);
+    }
+  }
+
+  async carregarListaClienteAssociadosEstabelecimento(IdEstabelecimento: number) {
+    try {      
+      let usuariosEstabelecimentoResultado = await this.estabelecimentoService.buscarClientesAssociadosPorIdEstabelecimento(IdEstabelecimento);
+      if (usuariosEstabelecimentoResultado.success && usuariosEstabelecimentoResultado.data != null) {
+        this.usuarios = <Array<Usuario>>usuariosEstabelecimentoResultado.data.usuarios;
+        this.todosUsuarios = this.usuarios;
+      }else{
+        this.alertSrv.alert("Cliente não encontrado ",`Não exite cliente associados para pontuar!`);
+      }
+    }
+    catch (error) {
+      console.log('Erro ao carregar os estabelecimentos', error);
     }
   }
 

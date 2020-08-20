@@ -6,7 +6,7 @@
     <ion-title>Pontuar Cliente</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar type="text" placeholder="Email Clientes" (ionChange)="pesquisarUsuario($event)" debounce="500">
+    <ion-searchbar type="text" placeholder="Pesquisar nome cliente" (ionChange)="pesquisarUsuario($event)" debounce="500">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -20,7 +20,10 @@
       </ion-item>
       <ion-radio-group formControlName="clienteId">
         <ion-item *ngFor="let item of usuarios">
-          <ion-label>{{item.nome}} - {{item.email}} </ion-label>          
+          <ion-label>
+            <h2>{{ item.nome }}</h2>
+            <p>{{ item.email }}</p> 
+          </ion-label>
           <ion-radio slot="start" value={{item.id}}></ion-radio>
         </ion-item>
       </ion-radio-group>      
