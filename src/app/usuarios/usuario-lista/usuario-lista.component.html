@@ -13,13 +13,22 @@
       <ion-grid class="ion-text-center">
         <ion-row>
           <ion-col>
-            <img src="/assets/images/logo.png" class="perfil_65_img" alt="logo Fideliza Mais" width="100" height="100">   
-            <ion-label> {{item.nome}} </ion-label>
+            <ion-item>
+               <ion-avatar slot="start">
+                  <img src="/assets/images/logo.png"  alt="logo Fideliza Mais" width="100" height="100">   
+               </ion-avatar>
+               <ion-label>
+                  <h2> {{item.nome}} </h2>
+                  <p>
+                     {{item.email}}
+                  </p>
+               </ion-label>
+            </ion-item>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button expand="block" color="secondary" class="btn_editar" [routerLink]="['/usuarios',item.id]">
+            <ion-button  expand="block" color="secondary" class="btn_editar" [routerLink]="['/usuarios',item.id]">
               <ion-icon slot="start" name="create"></ion-icon>
               <ion-label>Editar</ion-label>
             </ion-button>
