@@ -35,30 +35,37 @@
     <ion-item *ngFor="let item of estabelecimentoVos">
       <ion-grid class="ion-text-center">
         <ion-row>
-          <ion-card>
+          <ion-card style="width: 100%; background: #fff">
+
+            <ion-item>
+               <ion-avatar slot="start">
+                  <img src="/assets/images/logo.png" class="perfil_img" alt="logo Fideliza Mais" width="200" height="200">   
+               </ion-avatar>
+               <ion-label>
+                 <h1>{{item.nome}}</h1>
+                 <p>
+                     <ion-icon class="icone" name="home"></ion-icon> 
+                     <span class="ion-text-wrap">{{item.site}}</span>
+                 </p>
+                 <p>
+                     <ion-icon class="icone" name="logo-whatsapp"></ion-icon> 
+                     <span class="ion-text-wrap">{{item.teleneCelular}}</span>
+                 </p>
+                 <p>
+                     <ion-icon class="icone" name="logo-instagram"></ion-icon> 
+                     <span class="ion-text-wrap">{{item.urlMidiaSocial}}</span>
+                 </p>
+                 <p>
+                     <ion-icon class="icone" name="mail"></ion-icon> 
+                     <span class="ion-text-wrap">{{item.email}}</span>
+                 </p>
+               </ion-label>
+             </ion-item>
             
-            <ion-card-header>                
-               <img src="/assets/images/logo.png" class="perfil_img" alt="logo Fideliza Mais" width="100" height="100">   
-              <ion-card-title>{{item.nome}}</ion-card-title>
-            </ion-card-header>                
+            
             <ion-card-content>
-              <ion-item>
-                <ion-icon slot="start" name="home"></ion-icon>
-                <ion-label>{{item.site}}</ion-label>
-              </ion-item>
-              <ion-item >
-                <ion-icon slot="start" name="logo-whatsapp"></ion-icon>
-                <ion-label>{{item.teleneCelular}}</ion-label>                
-              </ion-item>
-              <ion-item>
-                <ion-icon slot="start" name="logo-instagram"></ion-icon>
-                <ion-label>{{item.urlMidiaSocial}}</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-icon slot="start" name="mail"></ion-icon>
-                <ion-label>{{item.email}}</ion-label>
-              </ion-item>
-              <ion-item  style="margin-left: 50px">
+            
+              <ion-item  style="margin-top: -20px">
                <ion-button  size="small" expand="block" color="tertiary" (click)="visualizarDetalhesEstabelecimento(item)"  >
                   
                  <ion-label size="small" >Detalhes</ion-label>
