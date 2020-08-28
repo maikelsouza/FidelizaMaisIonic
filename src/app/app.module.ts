@@ -35,6 +35,13 @@ import { EstabelecimentoVisualizarComponent } from './estabelecimentos/estabelec
 import { HttpService } from './common/service/http.service';
 import { SpinnerService } from './common/service/spinner.service';
 import { EmailService } from './common/service/email.service';
+import { UsuarioListaComponent } from './usuarios/usuario-lista/usuario-lista.component';
+import { UsuarioDetalheComponent } from './usuarios/usuario-detalhe/usuario-detalhe.component';
+import { UsuarioCadastroComponent } from './usuarios/usuario-cadastro/usuario-cadastro.component';
+import { UsuarioMeuPerfilComponent } from './usuarios/usuario-meu-perfil/usuario-meu-perfil.component';
+import { UsuarioAtualizarSenhaComponent } from './usuarios/usuario-atualizar-senha/usuario-atualizar-senha.component';
+
+
 
 
 @NgModule({
@@ -54,7 +61,12 @@ import { EmailService } from './common/service/email.service';
     FormEstabelecimentoPage,
     ListaEstabelecimentoPage,
     EstabelecimentoDetalhePage,      
-    EstabelecimentoVisualizarComponent    
+    EstabelecimentoVisualizarComponent,
+    UsuarioCadastroComponent,
+    UsuarioListaComponent,
+    UsuarioDetalheComponent,
+    UsuarioMeuPerfilComponent,
+    UsuarioAtualizarSenhaComponent     
   ],
   entryComponents: [],
   imports: [

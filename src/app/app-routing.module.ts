@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+
 import { LoginComponent } from './login/login/login.component';
 import { CartaoFidelidadeListaUsuarioComponent } from './cartoesFidelidade/cartao-fidelidade-lista-usuario/cartao-fidelidade-lista-usuario.component';
 import { CartaoFidelidadeListaEstabelecimentoComponent } from './cartoesFidelidade/cartao-fidelidade-lista-estabelecimento/cartao-fidelidade-lista-estabelecimento.component';
@@ -15,9 +16,21 @@ import { ListaEstabelecimentoPage } from './estabelecimentos/lista-estabelecimen
 import { FormEstabelecimentoPage } from './estabelecimentos/form-estabelecimento/form-estabelecimento.page';
 import { EstabelecimentoDetalhePage } from './estabelecimentos/estabelecimento-detalhe/estabelecimento-detalhe.page';
 import { EstabelecimentoVisualizarComponent } from './estabelecimentos/estabelecimento-visualizar/estabelecimento-visualizar.component';
+import { UsuarioListaComponent } from './usuarios/usuario-lista/usuario-lista.component';
+import { UsuarioCadastroComponent } from './usuarios/usuario-cadastro/usuario-cadastro.component';
+import { UsuarioAtualizarSenhaComponent } from './usuarios/usuario-atualizar-senha/usuario-atualizar-senha.component';
+import { UsuarioMeuPerfilComponent } from './usuarios/usuario-meu-perfil/usuario-meu-perfil.component';
+import { UsuarioDetalheComponent } from './usuarios/usuario-detalhe/usuario-detalhe.component';
 
 const routes: Routes = [
-  { path: 'usuarios', loadChildren: './usuarios/usuarios.module#UsuariosModule'},    
+
+  // usuários
+  { path: 'usuarios', component: UsuarioListaComponent},
+  { path: 'usuarios/novo', component: UsuarioCadastroComponent },
+  { path: 'usuarios/meuPerfil', component: UsuarioMeuPerfilComponent },
+  { path: 'usuarios/atualizarSenha', component: UsuarioAtualizarSenhaComponent },
+  { path: 'usuarios/:id', component: UsuarioDetalheComponent },  
+  // login
   { path: 'login', component: LoginComponent},    
   { path: 'esqueciMinhaSenha', component: EsqueciMinhaSenhaCadastroComponent},     
   // estabelecimentos  
