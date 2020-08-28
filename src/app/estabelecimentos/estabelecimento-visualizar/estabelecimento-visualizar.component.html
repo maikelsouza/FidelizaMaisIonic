@@ -45,6 +45,18 @@
       <ion-item>
         <ion-label class="ion-text-wrap">{{estabelecimentoVO.EnderecoEstabelecimento.uf}}</ion-label>
       </ion-item>
+      <ion-item *ngIf="estabelecimentoVO.usuarioEstahAssociado == true">
+        <ion-button size="small" expand="block" color="danger" (click)="desassociarClienteEstabelecimento(estabelecimentoVO.id)">
+          <ion-label>Sair Progr. Fidelidade</ion-label>
+          <ion-icon slot="start" name="exit"></ion-icon>
+        </ion-button>        
+      </ion-item>
+      <ion-item *ngIf="estabelecimentoVO.usuarioEstahAssociado == false">
+        <ion-button size="small" expand="block" color="success" (click)="associarClienteEstabelecimento(estabelecimentoVO.id)">
+          <ion-label size="small" >Entrar Progr. Fidelidade</ion-label>
+          <ion-icon slot="start" name="send"></ion-icon>
+        </ion-button>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>
