@@ -108,7 +108,7 @@ export class PontosClientePontuarComponent implements OnInit {
         this.estabelecimentos = <Array<Estabelecimento>>estabelecimentoResultado.data;
         const IdEstabelecimento: number = Number(this.estabelecimentos[0].id);
         this.carregarListaProgramaFidelidade(this.estabelecimentos);
-     //   this.carregarListaClienteAssociadosEstabelecimento(IdEstabelecimento);
+        this.carregarListaClienteAssociadosEstabelecimento(IdEstabelecimento);
       }
     }
     catch (error) {
