@@ -1,40 +1,24 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar class="toolbar-background">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button  color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Usuários</ion-title>
+    <ion-title color="light">Usuários</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of usuarios">
-      <ion-grid class="ion-text-center">
-        <ion-row>
-          <ion-col>
-            <ion-item>
-               <ion-avatar slot="start">
-                  <img src="/assets/images/logo.png"  alt="logo Fideliza Mais" width="100" height="100">   
-               </ion-avatar>
-               <ion-label>
-                  <h2> {{item.nome}} </h2>
-                  <p>
-                     {{item.email}}
-                  </p>
-               </ion-label>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-button  expand="block" color="secondary" class="btn_editar" [routerLink]="['/usuarios',item.id]">
-              <ion-icon slot="start" name="create"></ion-icon>
-              <ion-label>Editar</ion-label>
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+    <ion-item *ngFor="let item of usuarios" lines="none" [routerLink]="['/usuarios',item.id]" >
+      <ion-thumbnail slot="start">
+        <ion-img src="/assets/images/logo.png" class="perfil_65_img" alt="logo Fideliza Mais" width="100" height="100"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2> {{item.nome}} </h2>
+        <p>
+           {{item.email}}
+        </p>
+     </ion-label>
     </ion-item>
   </ion-list>
   <!-- Necessário realizar um refactory para colocar não o ID da tabela de grupousuario, mas sim um código referente ao grupo e depois realizar a consulta -->
@@ -44,5 +28,5 @@
     </ion-fab-button>
   </ion-fab>
 
-<router-outlet></router-outlet>
+
 </ion-content>
