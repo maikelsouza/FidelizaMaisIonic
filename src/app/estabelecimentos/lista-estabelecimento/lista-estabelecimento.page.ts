@@ -153,6 +153,8 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
       this.totalPontosClienteProgramaFidelidade.forEach(totalPontosClienteProgramaFidelidade => {
         if (estabelecimentoVo.programaFidelidadeAlias[0].id == totalPontosClienteProgramaFidelidade.programaFidelidadeId){
           estabelecimentoVo.totalPontosCliente = totalPontosClienteProgramaFidelidade.totalPontos;
+        }else{
+          estabelecimentoVo.totalPontosCliente = 0;
         }        
       });      
     });    
