@@ -1,59 +1,57 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Regatar Pontos Cliente</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar type="text" placeholder="Pesquisar nome cliente" (ionChange)="pesquisarUsuario($event)" debounce="500">
+    <ion-searchbar type="text" placeholder="Pesquisar nome cliente" (ionChange)="pesquisarUsuario($event)"
+      debounce="500">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <ion-list class="line-input" no-lines>       
-      </ion-list>
-      <ion-radio-group formControlName="clienteId">                
-        <ion-item class="lista-nomes" *ngFor="let item of usuarios" >          
-          <ion-label>
-            <h2>{{ item.nome }}</h2>
-            <p>{{ item.email }}</p>
-          </ion-label>  
-          <ion-radio slot="start"  value={{item.id}}></ion-radio>
-        </ion-item> 
-      </ion-radio-group>     
-      <ion-list>      
-        <ion-radio-group formControlName="campoItemProgramaFidelidadeId">
-          <ion-grid>
-            <ion-row  class="ion-text-center titulos">
-              <ion-col>
-                <ion-label>Selecione</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-label>Nome</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-label>Pontos</ion-label>
-              </ion-col>
-            </ion-row>
-            <ion-row *ngFor="let campoItemProgramaFidelidade of campoItemProgramaFidelidades">
-              <ion-col class="ion-text-center">
-                <ion-radio value={{campoItemProgramaFidelidade.id}}></ion-radio>
-              </ion-col>
-              <ion-col class="ion-text-center">
-                <ion-label>{{campoItemProgramaFidelidade.nome}}</ion-label>
-              </ion-col>
-              <ion-col class="ion-text-center">
-                <ion-label>{{campoItemProgramaFidelidade.quantidadePontos}}</ion-label>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-radio-group>
-    </ion-list>
-
-    <ion-button  color="secondary" expand="block" type="submit" [disabled]="!formulario.valid" >      
+    <ion-button color="secondary" expand="block" type="submit" [disabled]="!formulario.valid">
       <ion-label>Resgatar</ion-label>
     </ion-button>
-</form>
+    <ion-list>
+      <ion-radio-group formControlName="campoItemProgramaFidelidadeId">
+        <ion-grid>
+          <ion-row class="ion-text-center titulos">
+            <ion-col>
+              <ion-label>Selecione</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Nome</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Pontos</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let campoItemProgramaFidelidade of campoItemProgramaFidelidades">
+            <ion-col class="ion-text-center">
+              <ion-radio value={{campoItemProgramaFidelidade.id}}></ion-radio>
+            </ion-col>
+            <ion-col class="ion-text-center">
+              <ion-label>{{campoItemProgramaFidelidade.nome}}</ion-label>
+            </ion-col>
+            <ion-col class="ion-text-center">
+              <ion-label>{{campoItemProgramaFidelidade.quantidadePontos}}</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-radio-group>
+    </ion-list>
+    <ion-radio-group formControlName="clienteId">
+      <ion-item class="lista-nomes" *ngFor="let item of usuarios">
+        <ion-label>
+          <h2>{{ item.nome }}</h2>
+          <p>{{ item.email }}</p>
+        </ion-label>
+        <ion-radio slot="start" value={{item.id}}></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </form>
 </ion-content>

@@ -6,35 +6,36 @@
     <ion-title>Pontuar Cliente</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar type="text" placeholder="Pesquisar nome cliente" (ionChange)="pesquisarUsuario($event)" debounce="500">
+    <ion-searchbar type="text" placeholder="Pesquisar nome cliente" (ionChange)="pesquisarUsuario($event)"
+      debounce="500">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <ion-button type="submit" color="secondary" expand="block" [disabled]="!formulario.valid">
+      <ion-label>Pontuar</ion-label>
+    </ion-button>
     <ion-list class="line-input" no-lines>
       <ion-item>
         <ion-label position="floating">Valor Gasto <em class="campo-obrigatorio">*</em></ion-label>
         <ion-input type="text" formControlName="valorGasto"
-            [brmasker]="{money: true, thousand: '.', type: 'num', decimalCaracter: ','}" maxlength="9"></ion-input>
+          [brmasker]="{money: true, thousand: '.', type: 'num', decimalCaracter: ','}" maxlength="9"></ion-input>
       </ion-item>
-      <ion-radio-group formControlName="clienteId">
-        <ion-item *ngFor="let item of usuarios">
-          <ion-label>
-            <h2>{{ item.nome }}</h2>
-            <p>{{ item.email }}</p> 
-          </ion-label>
-          <ion-radio slot="start" value={{item.id}}></ion-radio>
-        </ion-item>
-      </ion-radio-group>      
-      
       <ion-item class="item-danger" *ngIf="valorGasto.invalid && (valorGasto.dirty || valorGasto.touched)">
         <ion-label color="danger" *ngIf="valorGasto.errors.required">Campo obrigatório.</ion-label>
       </ion-item>
     </ion-list>
 
-    <ion-button type="submit" color="secondary" expand="block" [disabled]="!formulario.valid">
-      <ion-label>Pontuar</ion-label>
-    </ion-button>
+    <ion-radio-group formControlName="clienteId">
+      <ion-item *ngFor="let item of usuarios">
+        <ion-label>
+          <h2>{{ item.nome }}</h2>
+          <p>{{ item.email }}</p>
+        </ion-label>
+        <ion-radio slot="start" value={{item.id}}></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    
   </form>
 </ion-content>

@@ -54,7 +54,7 @@ export class PontosClientePontuarComponent implements OnInit {
   public get clienteId() {return this.formulario.get('clienteId')} 
  
 
-  async pesquisarUsuario(event: any): Promise<void> {
+  /*async pesquisarUsuario(event: any): Promise<void> {
     try {            
       this.usuarios = new Array<Usuario>();
       const email = event.target.value.trim();
@@ -73,8 +73,9 @@ export class PontosClientePontuarComponent implements OnInit {
       console.log('Erro ao carregar os tipos de estabelecimentos', error);
     }
   }
+  */
 
-   /*pesquisarUsuario(event: any) {   
+   pesquisarUsuario(event: any) {   
       
       const nome :string = event.target.value;
       this.usuarios = this.todosUsuarios;
@@ -83,7 +84,7 @@ export class PontosClientePontuarComponent implements OnInit {
           return (usuario.nome.toLowerCase().indexOf(nome.toLowerCase()) > -1);
         })
       }      
-    }*/
+    }
 
   async carregarListaClienteAssociadosEstabelecimento(IdEstabelecimento: number) {
     try {      
