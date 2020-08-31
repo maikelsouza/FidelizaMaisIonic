@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Programa Fidelidade</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>                
+      <ion-card-title class="ion-text-center">{{ programaFidelidade.nome }}</ion-card-title>
+    </ion-card-header>    
+
+    <ion-card-content>      
+      <p style="color: black;"><strong>Descrição:</strong></p>
+      <ion-item>
+        <ion-label class="ion-text-wrap">{{ programaFidelidade.descricao == null ? 'Não informada' : programaFidelidade.descricao  }}</ion-label>
+      </ion-item>
+
+      <p style="color: black;"><strong>Mínimo necessário para ganhar um ponto:</strong></p>
+      <ion-item>
+        <ion-label class="ion-text-wrap">{{ programaFidelidade.regra | currency:'BRL':true }}</ion-label>
+      </ion-item>
+
+      <p style="color: black;"><strong>Data expirar:</strong></p>
+      <ion-item>
+        <ion-label class="ion-text-wrap">{{ programaFidelidade.dataExpiracao == null ? 'Não informada' : programaFidelidade.dataExpiracao | date:'dd/M/yyyy' }}</ion-label>
+      </ion-item>
+  </ion-card-content>
+</ion-card>
+  <ion-grid>
+    <ion-row class="ion-text-center titulos">      
+      <ion-col>
+        <ion-label>Nome</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>Pontos</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let campoItemProgramaFidelidade of campoItemProgramaFidelidades">
+      <ion-col class="ion-text-center">
+        <ion-label>{{campoItemProgramaFidelidade.nome}}</ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-label>{{campoItemProgramaFidelidade.quantidadePontos}}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
