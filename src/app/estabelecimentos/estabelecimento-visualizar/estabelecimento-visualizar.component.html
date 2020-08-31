@@ -56,7 +56,11 @@
           <ion-label size="small" >Entrar Progr. Fidelidade</ion-label>
           <ion-icon slot="start" name="send"></ion-icon>
         </ion-button>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+      </ion-item>     
+
+</ion-card-content>
+</ion-card>
+     <ion-button size="small" class="btn_large" expand="block" color="primary" [routerLink]="['/programaFidelidade/visualizar/',estabelecimentoVO.id]">
+       <ion-label size="small" >Programa Fidelidade</ion-label>          
+     </ion-button>
 </ion-content>
