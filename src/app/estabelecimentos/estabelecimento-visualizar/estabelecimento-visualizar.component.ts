@@ -20,6 +20,7 @@ export class EstabelecimentoVisualizarComponent implements OnInit {
   estabelecimentoVO : EstabelecimentoVO;
   usuarioLogado: Usuario;
   
+  
   constructor(    
     private router: Router,
     private clienteEstabelecimentoService: ClienteEstabelecimentoService,  
