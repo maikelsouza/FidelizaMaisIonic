@@ -1,4 +1,4 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrMaskerModule } from 'br-mask';
+import ptBr from '@angular/common/locales/pt'; 
+import { registerLocaleData } from '@angular/common'; 
+registerLocaleData(ptBr);
 
 import { LoginService } from './login/shared/services/login.service';
 import { LoginComponent } from './login/login/login.component';
@@ -40,8 +43,7 @@ import { UsuarioDetalheComponent } from './usuarios/usuario-detalhe/usuario-deta
 import { UsuarioCadastroComponent } from './usuarios/usuario-cadastro/usuario-cadastro.component';
 import { UsuarioMeuPerfilComponent } from './usuarios/usuario-meu-perfil/usuario-meu-perfil.component';
 import { UsuarioAtualizarSenhaComponent } from './usuarios/usuario-atualizar-senha/usuario-atualizar-senha.component';
-
-
+import { ProgramaFidelidadeVisualizarPage } from './programasFidelidade/programa-fidelidade-visualizar/programa-fidelidade-visualizar.page';
 
 
 @NgModule({
@@ -55,6 +57,7 @@ import { UsuarioAtualizarSenhaComponent } from './usuarios/usuario-atualizar-sen
     ProgramaFidelidadeListaUsuarioComponent,    
     ProgramaFidelidadeCadastroComponent,
     ProgramaFidelidadeListaEstabelecimentoComponent,
+    ProgramaFidelidadeVisualizarPage,
     PontosClientePontuarComponent,
     PontosClienteResgatarComponent,
     EsqueciMinhaSenhaCadastroComponent,
@@ -66,7 +69,8 @@ import { UsuarioAtualizarSenhaComponent } from './usuarios/usuario-atualizar-sen
     UsuarioListaComponent,
     UsuarioDetalheComponent,
     UsuarioMeuPerfilComponent,
-    UsuarioAtualizarSenhaComponent     
+    UsuarioAtualizarSenhaComponent
+
   ],
   entryComponents: [],
   imports: [
@@ -92,7 +96,9 @@ import { UsuarioAtualizarSenhaComponent } from './usuarios/usuario-atualizar-sen
     HttpService,
     SpinnerService,
     EmailService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+   
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+    { provide: LOCALE_ID, useValue: 'pt' } 
   ],
   
   

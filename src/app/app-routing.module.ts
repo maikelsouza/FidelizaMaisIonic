@@ -21,6 +21,7 @@ import { UsuarioCadastroComponent } from './usuarios/usuario-cadastro/usuario-ca
 import { UsuarioAtualizarSenhaComponent } from './usuarios/usuario-atualizar-senha/usuario-atualizar-senha.component';
 import { UsuarioMeuPerfilComponent } from './usuarios/usuario-meu-perfil/usuario-meu-perfil.component';
 import { UsuarioDetalheComponent } from './usuarios/usuario-detalhe/usuario-detalhe.component';
+import { ProgramaFidelidadeVisualizarPage } from './programasFidelidade/programa-fidelidade-visualizar/programa-fidelidade-visualizar.page';
 
 const routes: Routes = [
 
@@ -48,12 +49,15 @@ const routes: Routes = [
   { path: 'programaFidelidade/listaEstabelecimento/:id', component: ProgramaFidelidadeListaEstabelecimentoComponent },   
   { path: 'programaFidelidade/novo/:idEstabelecimento', component: ProgramaFidelidadeCadastroComponent }, 
   { path: 'programaFidelidade/editar/:id', component: ProgramaFidelidadeCadastroComponent },  
+  { path: 'programaFidelidade/visualizar/:id', component: ProgramaFidelidadeVisualizarPage },  
   // Pontos Clientes    
   { path: 'pontosClientePontuar', component: PontosClientePontuarComponent }, 
   { path: 'pontosClienteResgatar', component: PontosClienteResgatarComponent },      
   
   { path: 'principal', loadChildren: './principal/principal.module#PrincipalPageModule'},  
   { path: '', redirectTo: 'login', pathMatch: 'full'},
+  
+
 ];
 
 @NgModule({
