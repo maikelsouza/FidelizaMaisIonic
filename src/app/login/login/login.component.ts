@@ -50,9 +50,8 @@ export class LoginComponent implements OnInit {
           const clientes = 'CLIENTES';    
           if (resultado.data.usuario[0].GrupoUsuario.nome === clientes){            
             this.route.navigate(['/estabelecimento/lista'], { queryParams: { tipoUsuario: clientes } });          
-          }else{
-         //   this.route.navigate(['/principal']);          
-            this.navController.navigateRoot('/principal'); 
+          }else{         
+            this.navController.navigateForward('/principal'); 
           }
         }      
     } catch (error) {
