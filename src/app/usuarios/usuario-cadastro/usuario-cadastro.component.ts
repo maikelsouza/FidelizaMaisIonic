@@ -64,6 +64,10 @@ export class UsuarioCadastroComponent implements OnInit {
     this.montarCamposTela();
   }
 
+  ngOnDestroy(){         
+    this.inscricao.unsubscribe();    
+  }
+
   async onSubmit(): Promise<void>{
     try { 
       if (this.validarSenha()){
@@ -94,7 +98,7 @@ export class UsuarioCadastroComponent implements OnInit {
   }
 
   private async salvarUsuarioCliente(){
-     const resultado = await this.usuarioService.salvarNovoCliente(this.formulario.value);      
+     const resultado = await this.usuarioService.salvarNovoCliente(this.formulario.value);           
     if (resultado.success){
       this.alertService.toast('Usuário salvo com sucesso!');          
       this.router.navigate(['/login']);         
