@@ -37,6 +37,10 @@
               <ion-icon slot="start" name="remove"></ion-icon>
               <ion-label>Resgatar Pontos</ion-label>
             </ion-item>
+            <ion-item  *ngIf="usuarioLogado.usuario[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'"  [routerLink]="'/usuarios/novoEstabelecimento'"  lines="none" >         
+              <ion-icon slot="start" name="person-add"></ion-icon>
+              <ion-label>Cadastar Cliente</ion-label>
+            </ion-item>
             <ion-item  (click)="logoff()" lines="none" >       
               <ion-icon slot="start" name="exit"></ion-icon>                                                                                                          
               <ion-label>Sair</ion-label>
