@@ -20,6 +20,10 @@ export class ClienteEstabelecimentoService extends ServiceBase<ClienteEstabeleci
     return this.httpService.get(`${this.url}/buscarPorUsuario/${id}`);        
   }
 
+  async buscarPorUsuarioIdEEstabelecimentoId(usuarioId :number, estabelecimentoId :number): Promise<HttpResultModel> {        
+    return this.httpService.get(`${this.url}/buscarPorUsuarioIdEEstabelecimentoId/${usuarioId}/${estabelecimentoId}`);        
+  }
+
   async salvar(clienteEstabelecimento: ClienteEstabelecimento): Promise<HttpResultModel> {          
     return this.httpService.post(`${this.url}`,clienteEstabelecimento);    
   } 

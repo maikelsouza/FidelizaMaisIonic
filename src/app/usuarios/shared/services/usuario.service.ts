@@ -6,6 +6,14 @@ import { ServiceBase } from 'src/app/base/serviceBase';
 import { HttpResultModel } from './../../../common/model/HttpResultModel';
 import { HttpService } from './../../../common/service/http.service';
 import { EmailModel } from 'src/app/common/model/EmailModel';
+import { ClienteEstabelecimento } from 'src/app/estabelecimentos/shared/models/cliente-estabelecimento';
+import { EstabelecimentoService } from 'src/app/estabelecimentos/shared/services/estabelecimento.service';
+import { AutenticadorService } from 'src/app/common/service/autenticador.service';
+import { ClienteEstabelecimentoService } from 'src/app/estabelecimentos/shared/services/cliente-estabelecimento.service';
+import { EmailService } from 'src/app/common/service/email.service';
+import { ProgramaFidelidadeService } from 'src/app/programasFidelidade/shared/services/programa-fidelidade.service';
+import { Estabelecimento } from 'src/app/estabelecimentos/shared/models/estabelecimento';
+import { ProgramaFidelidade } from 'src/app/programasFidelidade/shared/models/programa-fidelidade';
 
 
 @Injectable({
@@ -17,7 +25,12 @@ export class UsuarioService extends ServiceBase<Usuario> {
 
   emitirUsuarioCriado = new EventEmitter();
 
-  constructor(public httpService: HttpService) {
+  constructor(public httpService: HttpService,
+    public estabelecimentoService : EstabelecimentoService,
+    public clienteEstabelecimentoService : ClienteEstabelecimentoService,
+    private emailService: EmailService,
+    private programaFidelidadeService: ProgramaFidelidadeService,
+    ) {
     super(`${ConfigHelper.Url}usuario`, httpService);
    }
 
@@ -27,6 +40,41 @@ export class UsuarioService extends ServiceBase<Usuario> {
   
   async salvarNovoCliente(usuario: Usuario): Promise<HttpResultModel> {       
     return this.httpService.post(`${this.url}/novoCliente`,usuario);    
+  }
+
+  
+  async salvarNovoClienteEstabelecimento(usuario: Usuario): Promise<HttpResultModel> {    
+    
+    let estabelecimentos: Array<Estabelecimento> = new Array<Estabelecimento>(); 
+    let listaProgramaFidelidade: Array<ProgramaFidelidade> = new Array<ProgramaFidelidade>(); 
+    let usuarioBanco =  await this.buscarPorEmail(usuario.email);
+    let estabelecimentosResultado = await this.estabelecimentoService.buscarPorIdUsuario(AutenticadorService.UsuarioLogado[0].id);
+    estabelecimentos = <Array<Estabelecimento>>estabelecimentosResultado.data;
+    const estabelecimentoId : number = Number(estabelecimentos[0].id);    
+    let programaFidelidadeResultado = await this.programaFidelidadeService.buscarPorIdEstabelecimentoEAtivo(estabelecimentoId);
+    listaProgramaFidelidade = <Array<ProgramaFidelidade>>programaFidelidadeResultado.data;
+    if (usuarioBanco.data === null){   // Caso onde não existe o usuário na aplicação    
+      usuario.senha = this.gerarSenha();
+      usuarioBanco = await this.salvar(usuario);  // Cria ele      
+      await this.clienteEstabelecimentoService.salvar(this.pupularClienteEstabelecimento(estabelecimentoId,usuarioBanco.data.id));
+     // this.emailService.enviarEmailNovoClienteEstabelecimento(usuarioBanco.data,usuario.senha,estabelecimentos[0],listaProgramaFidelidade[0]);   
+    }else{ // Caso já exista o usário
+      let clienteEstabelecimento = await this.clienteEstabelecimentoService.buscarPorUsuarioIdEEstabelecimentoId(usuarioBanco.data.id,estabelecimentoId);
+      if ( clienteEstabelecimento.data === null){ // Não está associado ao estabelecimento  
+        await this.clienteEstabelecimentoService.salvar(this.pupularClienteEstabelecimento(estabelecimentoId,usuarioBanco.data.id));                
+       // this.emailService.enviarEmailAssociandoClienteEstabelecimento(usuarioBanco.data,usuario.senha, estabelecimentos[0],listaProgramaFidelidade[0]);   
+      }
+    }
+   return  usuarioBanco;
+  }
+  
+
+  private pupularClienteEstabelecimento(estabelecimentoId: number, usuarioId: number) : ClienteEstabelecimento{
+    let clienteEstabelecimento : ClienteEstabelecimento = new ClienteEstabelecimento(); 
+    clienteEstabelecimento.dataCriacao = new Date();
+    clienteEstabelecimento.estabelecimentoId = estabelecimentoId;
+    clienteEstabelecimento.usuarioId = usuarioId;
+    return clienteEstabelecimento;    
   }
 
   async buscarTodos(): Promise<HttpResultModel> {        
@@ -81,5 +129,14 @@ export class UsuarioService extends ServiceBase<Usuario> {
   async notificarUsuarioSalvo(){    
     this.emitirUsuarioCriado.emit();
   }
+
+  private gerarSenha() : string {
+    let senha = '';
+    let numeros = [];
+    for (let index = 0; index < 6; index++) {
+      numeros.push(Math.floor(Math.random() * 10));
+    }
+    return senha.concat(numeros[0], numeros[1], numeros[2], numeros[3], numeros[4], numeros[5]);
+  };
 
 }
