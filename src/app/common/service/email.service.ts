@@ -15,8 +15,7 @@ import { CampoItemProgramaFidelidade } from 'src/app/programasFidelidade/shared/
 export class EmailService extends ServiceBase<EmailModel>{
 
   
-    url: string = `${ConfigHelper.Url}email`;
-  
+    url: string = `${ConfigHelper.Url}email`;  
     
     constructor(public httpService: HttpService) {
       super(`${ConfigHelper.Url}email`, httpService);    
@@ -40,8 +39,27 @@ export class EmailService extends ServiceBase<EmailModel>{
       pontosGanhos,totalPontos, programasFidelidade.CampoItemProgramaFidelidades);
     const titulo = 'Fideliza Mais - Pontos Resgatados'
     let emailModel : EmailModel = this.criarEmailModel('maikel.souza@gmail.com',titulo,undefined ,msgHtml);    
-    this.httpService.post(`${this.url}/enviarEmail`,emailModel);  
-    
+    this.httpService.post(`${this.url}/enviarEmail`,emailModel);
+  }
+
+  public async enviarEmailNovoClienteEstabelecimento(usuario: Usuario, senha: string, estabelecimento: Estabelecimento,
+    programasFidelidade: ProgramaFidelidade) {
+
+    let msgHtml = this.msgHtmlNovoClienteEstabelecimento(usuario.nome, usuario.email,
+      senha, estabelecimento.nome, programasFidelidade.CampoItemProgramaFidelidades);
+    const titulo = 'Fideliza Mais - Cadastro Realizado com Sucesso'
+    let emailModel: EmailModel = this.criarEmailModel('maikel.souza@gmail.com', titulo, undefined, msgHtml);
+    this.httpService.post(`${this.url}/enviarEmail`, emailModel);
+  }
+
+  public async enviarEmailAssociandoClienteEstabelecimento(usuario: Usuario, senha: string, estabelecimento: Estabelecimento,
+    programasFidelidade: ProgramaFidelidade) {
+
+    let msgHtml = this.msgHtmlNovoClienteEstabelecimento(usuario.nome, usuario.email,
+      senha, estabelecimento.nome, programasFidelidade.CampoItemProgramaFidelidades);
+    const titulo = 'Fideliza Mais - Cadastro Realizado com Sucesso'
+    let emailModel: EmailModel = this.criarEmailModel('maikel.souza@gmail.com', titulo, undefined, msgHtml);
+    this.httpService.post(`${this.url}/enviarEmail`, emailModel);
   }
 
 
@@ -118,6 +136,51 @@ export class EmailService extends ServiceBase<EmailModel>{
            textoHtmlFim = `</tbody></table></br></br></br><div><p><strong>FIDELIZA MAIS</strong></p></div></html>`;             
    return textoHtmlInicio.concat(textoHtmlLinhasTabela,textoHtmlFim);
  }
+
+ private msgHtmlNovoClienteEstabelecimento(nomeCliente: string, email: string, senha: string,
+  nomeEstabelecimento: string, campoItemProgramaFidelidades: Array<CampoItemProgramaFidelidade> ) : string{     
+  let textoHtmlInicio : string = '';
+  let textoHtmlLinhasTabela : string = '';
+  let textoHtmlFim : string = '';
+  textoHtmlInicio = `
+       <html>
+         <h3>Olá <strong>${nomeCliente},</strong></h3>
+         <div>
+             <p>Você foi cadastrado(a) no aplicativo <strong>FIDELIZA MAIS</strong> pelo estabelecimento </strong>com o(a) <strong>${nomeEstabelecimento}.</strong>
+             </p>
+             <p>Login: ${email}</p>
+             <p>Senha: ${senha}</p>
+         </div>
+         <div>
+           <p>Veja abaixo os benefícios do(a) <strong>${nomeEstabelecimento}</strong>.</p>
+         </div>
+         <table border="1">
+           <thead>
+             <tr>
+                 <th>Nome</th>
+                 <th>Descrição</th>
+                 <th>Qtd Pontos</th>
+             </tr>
+           </thead>
+         <tbody>`                
+         campoItemProgramaFidelidades.forEach(element => {
+           textoHtmlLinhasTabela+= 
+                   `<tr>
+                       <td>${element.nome}</td>
+                       <td>${element.descricao || ''}</td>
+                     <td style="text-align:center">${element.quantidadePontos}</td>
+                   </tr>`;  
+         });                            
+         textoHtmlFim = `</tbody></table></br></br></br><div><p><strong>FIDELIZA MAIS</strong></p></div></html>`;             
+    return textoHtmlInicio.concat(textoHtmlLinhasTabela,textoHtmlFim);
+  }
+
+  private construirRodapeHtml(): string{
+
+    const msgRodapHtml : string = "<footer> </footer>" ; 
+
+    return msgRodapHtml;
+  }
 
   
   private criarEmailModel(to: string, subject: string,
