@@ -22,12 +22,14 @@ import { UsuarioAtualizarSenhaComponent } from './usuarios/usuario-atualizar-sen
 import { UsuarioMeuPerfilComponent } from './usuarios/usuario-meu-perfil/usuario-meu-perfil.component';
 import { UsuarioDetalheComponent } from './usuarios/usuario-detalhe/usuario-detalhe.component';
 import { ProgramaFidelidadeVisualizarPage } from './programasFidelidade/programa-fidelidade-visualizar/programa-fidelidade-visualizar.page';
+import { UsuarioCadastroEstabelecimentoPage } from './usuarios/usuario-cadastro-estabelecimento/usuario-cadastro-estabelecimento.page';
 
 const routes: Routes = [
 
   // usuários
   { path: 'usuarios', component: UsuarioListaComponent},
   { path: 'usuarios/novo', component: UsuarioCadastroComponent },
+  { path: 'usuarios/novoEstabelecimento', component: UsuarioCadastroEstabelecimentoPage },
   { path: 'usuarios/meuPerfil', component: UsuarioMeuPerfilComponent },
   { path: 'usuarios/atualizarSenha', component: UsuarioAtualizarSenhaComponent },
   { path: 'usuarios/:id', component: UsuarioDetalheComponent },  
@@ -55,8 +57,7 @@ const routes: Routes = [
   { path: 'pontosClienteResgatar', component: PontosClienteResgatarComponent },      
   
   { path: 'principal', loadChildren: './principal/principal.module#PrincipalPageModule'},  
-  { path: '', redirectTo: 'login', pathMatch: 'full'},
-  
+  { path: '', redirectTo: 'login', pathMatch: 'full'}  
 
 ];
 

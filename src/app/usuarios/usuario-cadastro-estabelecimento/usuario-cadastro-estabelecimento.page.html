@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Novo Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <ion-list class="line-input" no-lines>
+      <ion-item>
+        <ion-label position="floating">Nome <em class="campo-obrigatorio">*</em></ion-label>
+        <ion-input formControlName="nome" type="text"></ion-input>
+      </ion-item>
+      <ion-item class="item-danger" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+        <ion-label color="danger" *ngIf="nome.errors.required">Campo obrigatório.</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">E-mail <em class="campo-obrigatorio">*</em></ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-item class="item-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+        <ion-label color="danger" *ngIf="email.errors.required">Campo obrigatório.</ion-label>
+        <ion-label color="danger" *ngIf="email.errors.email">Formato de e-mail inválido.</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" for="sexo">Sexo <em class="campo-obrigatorio">*</em></ion-label>
+        <ion-select formControlName="sexo" okText="OK" cancelText="Cancelar">
+          <ion-select-option [value]="masculino">Masculino</ion-select-option>
+          <ion-select-option [value]="feminino">Feminino</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="item-danger" *ngIf="sexo.invalid && (sexo.dirty || sexo.touched)">
+        <ion-label color="danger" *ngIf="sexo.errors.required">Campo obrigatório.</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label for="dataNascimento" position="floating">Data de Nascimento</ion-label>
+        <ion-datetime doneText="OK" cancelText="Cancelar" displayFormat="DD/MM/YYYY" formControlName="dataNascimento"
+          placeholder="Selecione uma data"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label for="cpf" position="floating">CPF</ion-label>
+        <ion-input formControlName="cpf" type="number"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button color="secondary" type="submit" [disabled]="!formulario.valid" expand="block">
+      <ion-label>Salvar</ion-label>
+    </ion-button>
+  </form>
+</ion-content>
