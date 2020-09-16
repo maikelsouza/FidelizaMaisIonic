@@ -20,7 +20,12 @@ export class PrincipalPage  implements OnInit {
 
 
 ngOnInit(){  
+  console.info("ngOnInit - principal");
    this.usuarioLogado = AutenticadorService.UsuarioLogado;     
+}
+
+ngOnDestroy(){         
+  console.info("ngOnDestroy - principal");  
 }
 
 logoff(){

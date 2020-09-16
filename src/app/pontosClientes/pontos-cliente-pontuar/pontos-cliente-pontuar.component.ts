@@ -38,14 +38,14 @@ export class PontosClientePontuarComponent implements OnInit {
      ) { }
 
   ngOnInit() {    
-    console.log("ngOnInit - Pontos cliente");
+    console.info("ngOnInit - Pontos cliente");    
     this.usuarioLogado = AutenticadorService.UsuarioLogado;
     this.montarCamposTela();
     this.carregarListaEstabelecimento();    
   }
 
   ngOnDestroy(){         
-    console.log("ngOnDestroy - Pontos cliente");
+    console.info("ngOnDestroy - Pontos cliente");
   }
   
   private montarCamposTela() {

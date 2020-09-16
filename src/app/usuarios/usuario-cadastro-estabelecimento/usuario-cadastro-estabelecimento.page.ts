@@ -23,12 +23,12 @@ export class UsuarioCadastroEstabelecimentoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("ngOnInit - usuário cadastrado estabelecimento");
+    console.info("ngOnInit - usuário cadastrado estabelecimento");
     this.montarCamposTela();
   }
 
   ngOnDestroy(){         
-    console.log("ngOnDestroy - usuário cadastrado estabelecimento");    
+    console.info("ngOnDestroy - usuário cadastrado estabelecimento");    
   }
 
   public get nome() {return this.formulario.get('nome')}

@@ -40,7 +40,7 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
       { }
 
   ngOnInit() {    
-    console.log("ngOnInit - lista estabelecimento");
+    console.info("ngOnInit - lista estabelecimento");
     this.usuarioLogado = AutenticadorService.UsuarioLogado;      
     this.inscricao = this.route.queryParams.subscribe(
       (queryParams: any) => {
@@ -56,7 +56,7 @@ export class ListaEstabelecimentoPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){         
-    console.log("ngOnDestroy - lista estabelecimento");
+    console.info("ngOnDestroy - lista estabelecimento");
     this.inscricao.unsubscribe();
     this.inscricaoCarregarListaEstabelecimentos.unsubscribe();
   }

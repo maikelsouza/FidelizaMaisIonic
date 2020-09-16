@@ -40,9 +40,14 @@ export class PontosClienteResgatarComponent implements OnInit {
     private navController: NavController) { }
 
   ngOnInit() {
+    console.info("ngOnInit - Pontos cliente Resgatar");    
     this.usuarioLogado = AutenticadorService.UsuarioLogado;
     this.montarCamposTela();
     this.carregarListaEstabelecimento();
+  }
+
+  ngOnDestroy(){         
+    console.info("ngOnDestroy - Pontos cliente Resgatar");
   }
 
   private montarCamposTela() {
@@ -55,25 +60,6 @@ export class PontosClienteResgatarComponent implements OnInit {
   public get clienteId() {return this.formulario.get('clienteId')}  
   public get campoItemProgramaFidelidadeId() {return this.formulario.get('campoItemProgramaFidelidadeId')}
  
-
- /* async pesquisarUsuario(event: any): Promise<void> {
-    try {
-      const email = event.target.value.trim();
-      if (!email) {
-        return;
-      }
-      let estabelecimentoId: number = Number(this.estabelecimentos[0].id);
-      let usuariosEstabelecimentoResultado = await this.estabelecimentoService.buscarPorIdEstabelecimentoEEmail(estabelecimentoId, email);
-      if (usuariosEstabelecimentoResultado.success && usuariosEstabelecimentoResultado.data != null) {
-        this.usuarios = <Array<Usuario>>usuariosEstabelecimentoResultado.data.usuarios;
-      }else{
-        this.alertSrv.alert("Cliente não encontrado ",`O cliente ${email} não foi encontrado!`);
-      }     
-    }
-    catch (error) {
-      console.log('Erro ao carregar os tipos de estabelecimentos', error);
-    }
-  } */
 
   pesquisarUsuario(event: any) {   
       

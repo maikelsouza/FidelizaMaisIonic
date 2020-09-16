@@ -25,7 +25,12 @@ export class LoginComponent implements OnInit {
   ) { }
  
   ngOnInit() {
+    console.info("ngOnInit - Login");   
     this.montarCamposTela();   
+  }
+
+  ngOnDestroy(){         
+    console.info("ngOnDestroy - Login");
   }
 
   private montarCamposTela() {
