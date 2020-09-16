@@ -23,7 +23,12 @@ export class UsuarioCadastroEstabelecimentoPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("ngOnInit - usuário cadastrado estabelecimento");
     this.montarCamposTela();
+  }
+
+  ngOnDestroy(){         
+    console.log("ngOnDestroy - usuário cadastrado estabelecimento");    
   }
 
   public get nome() {return this.formulario.get('nome')}
@@ -47,7 +52,7 @@ export class UsuarioCadastroEstabelecimentoPage implements OnInit {
       const resultado = await this.usuarioService.salvarNovoClienteEstabelecimento(this.formulario.value);
       if (resultado.success) {
         this.alertService.toast('Cliente cadastrado com sucesso!');
-        this.navController.navigateRoot(['/pontosClientePontuar']);
+        this.navController.navigateForward(['/pontosClientePontuar']);
       }      
     } catch (error) {
       console.log('Erro ao cadastrar um cliente', error);
