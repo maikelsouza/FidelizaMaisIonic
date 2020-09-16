@@ -61,6 +61,17 @@
             </div>
             </ion-col>
          </ion-row>
+         <ion-row  *ngIf="usuarioLogado[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'" >
+            <ion-col [routerLink]="'/usuarios/novoEstabelecimento'">
+            <div style="text-align: center">    
+               <h4>
+                  <ion-icon style="vertical-align: bottom;" slot="start" name="person-add"></ion-icon>
+                  Cadastar Cliente
+               </h4>
+               <br>
+            </div>
+            </ion-col>
+         </ion-row>
          <ion-row>
             <ion-col  (click)="logoff()" class="logout">
             <div style="text-align: center">      
