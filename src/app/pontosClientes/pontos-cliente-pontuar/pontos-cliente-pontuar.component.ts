@@ -38,9 +38,14 @@ export class PontosClientePontuarComponent implements OnInit {
      ) { }
 
   ngOnInit() {    
+    console.log("ngOnInit - Pontos cliente");
     this.usuarioLogado = AutenticadorService.UsuarioLogado;
     this.montarCamposTela();
     this.carregarListaEstabelecimento();    
+  }
+
+  ngOnDestroy(){         
+    console.log("ngOnDestroy - Pontos cliente");
   }
   
   private montarCamposTela() {
@@ -52,31 +57,8 @@ export class PontosClientePontuarComponent implements OnInit {
 
   public get valorGasto() {return this.formulario.get('valorGasto')}
   public get clienteId() {return this.formulario.get('clienteId')} 
- 
 
-  /*async pesquisarUsuario(event: any): Promise<void> {
-    try {            
-      this.usuarios = new Array<Usuario>();
-      const email = event.target.value.trim();
-      if (!email) {
-        return;
-      }
-      let estabelecimentoId: number = Number(this.estabelecimentos[0].id);
-      let usuariosEstabelecimentoResultado = await this.estabelecimentoService.buscarPorIdEstabelecimentoEEmail(estabelecimentoId, email);      
-      if (usuariosEstabelecimentoResultado.success && usuariosEstabelecimentoResultado.data != null) {
-        this.usuarios = <Array<Usuario>>usuariosEstabelecimentoResultado.data.usuarios;
-      }else{
-        this.alertSrv.alert("Cliente não encontrado ",`O cliente ${email} não foi encontrado!`);
-      }
-    }
-    catch (error) {
-      console.log('Erro ao carregar os tipos de estabelecimentos', error);
-    }
-  }
-  */
-
-   pesquisarUsuario(event: any) {   
-      
+   pesquisarUsuario(event: any) {         
       const nome :string = event.target.value;
       this.usuarios = this.todosUsuarios;
       if (nome && nome.trim() != ''){        
