@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProgramaFidelidadeListaEstabelecimentoComponent implements OnInit, OnDestroy {
   
  
-  private programasFidelidade: Array<ProgramaFidelidade> = new Array<ProgramaFidelidade>(); 
+  programasFidelidade: Array<ProgramaFidelidade> = new Array<ProgramaFidelidade>(); 
   private id : number;
   private inscricao : Subscription;
   public exibeBotaoNovo: boolean = true; 

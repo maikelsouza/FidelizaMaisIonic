@@ -11,7 +11,7 @@ import { Usuario } from './../shared/models/usuario';
 })
 export class UsuarioListaComponent implements OnInit{
 
-  private usuarios: Array<Usuario> = new Array<Usuario>(); 
+  usuarios: Array<Usuario> = new Array<Usuario>(); 
   private inscricaoCarregarListaUsuarios : Subscription;
 
   constructor(private usuarioService: UsuarioService) { }

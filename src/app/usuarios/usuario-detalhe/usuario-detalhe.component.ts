@@ -14,10 +14,11 @@ import { UsuarioService } from './../shared/services/usuario.service';
 })
 export class UsuarioDetalheComponent implements OnInit {
 
-  private formulario : FormGroup;  
+  formulario : FormGroup;  
   private id : number;
   private inscricao : Subscription;
   private usuario : Usuario = new Usuario();
+  tiposSexo = ['Masculino', 'Feminino']; 
 
   constructor(private alertService: AlertaService,
     private route: ActivatedRoute,

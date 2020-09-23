@@ -48,7 +48,7 @@
         <ion-icon slot="start" name="add"></ion-icon>
       </ion-button>
     </ion-item>
-      <div formArrayName="CampoItemProgramaFidelidades" *ngFor="let item of formulario.get('CampoItemProgramaFidelidades').controls; let i = index;">
+      <div formArrayName="CampoItemProgramaFidelidades" *ngFor="let item of formulario.get('CampoItemProgramaFidelidades')['controls']; let i = index;">
         <div [formGroupName]="i" >
             <ion-item>
                 <ion-label for="nome" position="floating">Nome  <em class="campo-obrigatorio">*</em></ion-label>

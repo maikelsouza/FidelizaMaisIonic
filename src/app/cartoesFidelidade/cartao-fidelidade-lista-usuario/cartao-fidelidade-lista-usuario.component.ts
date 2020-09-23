@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartaoFidelidadeListaUsuarioComponent implements OnInit {
 
-  private cartoesFidelidade: Array<CartaoFidelidade> = new Array<CartaoFidelidade>(); 
+  cartoesFidelidade: Array<CartaoFidelidade> = new Array<CartaoFidelidade>(); 
 
   constructor(private cartaoFidelidadeService : CartaoFidelidadeService) { }
 

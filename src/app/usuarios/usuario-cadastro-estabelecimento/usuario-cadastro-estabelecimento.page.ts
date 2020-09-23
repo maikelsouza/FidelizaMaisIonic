@@ -13,7 +13,8 @@ import { NavController } from '@ionic/angular';
 export class UsuarioCadastroEstabelecimentoPage implements OnInit {
 
 
-  private formulario : FormGroup;  
+   formulario : FormGroup;  
+   tiposSexo = ['Masculino', 'Feminino']; 
 
   constructor(
     private formBuilder: FormBuilder,

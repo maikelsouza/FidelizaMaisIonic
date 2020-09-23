@@ -48,7 +48,7 @@
        </ion-item>
          
      <div formArrayName="CampoRegistroCartaoFidelidades"  
-      *ngFor="let item of formulario.get('CampoRegistroCartaoFidelidades').controls; let i = index">
+      *ngFor="let item of formulario.get('CampoRegistroCartaoFidelidades')['controls']; let i = index">
        <div [formGroupName]="i">                                                             
           <ion-label  position="stacked">Marcado</ion-label>      
           <input type="checkbox" formControlName="marcado"> 

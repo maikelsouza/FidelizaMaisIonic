@@ -14,7 +14,7 @@ import { UsuarioService } from '../shared/services/usuario.service';
 })
 export class UsuarioAtualizarSenhaComponent implements OnInit {
 
-  private formulario : FormGroup;  
+  formulario : FormGroup;  
 
   constructor(
     private formBuilder: FormBuilder,

@@ -21,13 +21,13 @@ import { Telefone } from '../shared/models/telefone';
 })
 export class EstabelecimentoDetalhePage implements OnInit {
 
-  private id: number;
+  id: number;
   private tipoUsuario: string;
   private inscricao: Subscription;
   private estabelecimento: Estabelecimento = new Estabelecimento();
-  private formulario: FormGroup;
-  private tipoEstabelecimentos: Array<TipoEstabelecimento> = new Array<TipoEstabelecimento>();
-  private tiposTelefone = ['Celular', 'Fixo'];
+  formulario: FormGroup;
+  tipoEstabelecimentos: Array<TipoEstabelecimento> = new Array<TipoEstabelecimento>();
+  tiposTelefone = ['Celular', 'Fixo'];
   usuarioLogado: Usuario;
   private midiaSocialStr: string = 'midiaSocial';
   private telefoneStr: string = 'telefone';

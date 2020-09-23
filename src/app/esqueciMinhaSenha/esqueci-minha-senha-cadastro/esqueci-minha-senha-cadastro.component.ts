@@ -14,7 +14,7 @@ import { getMaxListeners } from 'process';
 })
 export class EsqueciMinhaSenhaCadastroComponent implements OnInit {
 
-  private formulario : FormGroup;  
+  formulario : FormGroup;  
   
   constructor(
     private formBuilder: FormBuilder,

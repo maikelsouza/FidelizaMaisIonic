@@ -22,7 +22,7 @@ import { TotalPontosClienteProgramaFidelidade } from '../shared/models/total-pon
 })
 export class PontosClienteResgatarComponent implements OnInit {
 
-  private formulario: FormGroup;
+  formulario: FormGroup;
   private usuarioLogado: Usuario;
   programasFidelidade: Array<ProgramaFidelidade> = new Array<ProgramaFidelidade>();
   estabelecimentos: Array<Estabelecimento> = new Array<Estabelecimento>();

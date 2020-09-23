@@ -16,7 +16,7 @@ import { CampoItemProgramaFidelidade } from '../shared/models/campo-item-program
 })
 export class ProgramaFidelidadeCadastroComponent implements OnInit, OnDestroy{
 
-  private formulario : FormGroup;  
+  formulario : FormGroup;  
   private inscricao: Subscription;
   private estabelecimentoId : number;
   private programaFidelidade : ProgramaFidelidade;

@@ -26,7 +26,7 @@ import { AutenticadorService } from 'src/app/common/service/autenticador.service
 
 export class FormEstabelecimentoPage implements OnInit {
 
-  private formulario : FormGroup;  
+  formulario : FormGroup;  
   private inscricao: Subscription;
   enderecoEstabelecimento: EnderecoEstabelecimento = new EnderecoEstabelecimento();
   estabelecimento: Estabelecimento = new Estabelecimento();  

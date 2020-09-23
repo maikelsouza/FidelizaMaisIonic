@@ -13,8 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 export class CartaoFidelidadeListaEstabelecimentoComponent implements  OnInit, OnDestroy {
   
   
-  private cartoesFidelidade: Array<CartaoFidelidade> = new Array<CartaoFidelidade>(); 
-  private id : number;
+  cartoesFidelidade: Array<CartaoFidelidade> = new Array<CartaoFidelidade>(); 
+  id : number;
   private inscricao : Subscription;
 
   constructor(

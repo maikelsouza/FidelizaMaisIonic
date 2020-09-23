@@ -15,10 +15,10 @@ import { CampoRegistroCartaoFidelidade } from '../shared/models/campo-registro-c
 })
 export class CartaoFidelidadeEditarComponent implements OnInit, OnDestroy {
 
-  private formulario: FormGroup;
+  formulario: FormGroup;
   private id: number;
   private inscricao: Subscription;
-  private cartaoFidelidade: CartaoFidelidade = new CartaoFidelidade();
+  cartaoFidelidade: CartaoFidelidade = new CartaoFidelidade();
   public CampoRegistroCartaoFidelidades: FormArray;
   
   constructor(
@@ -95,6 +95,7 @@ export class CartaoFidelidadeEditarComponent implements OnInit, OnDestroy {
   public get ativo() {return this.formulario.get('ativo')}
   public get quantidadeMarcacao() {return this.formulario.get('quantidadeMarcacao')}
   public get premio() {return this.formulario.get('premio')}
+  
 
   async onSubmit(): Promise<void> {
     try {

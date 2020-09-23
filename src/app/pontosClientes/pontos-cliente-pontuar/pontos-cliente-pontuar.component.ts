@@ -20,7 +20,7 @@ import { TotalPontosClienteProgramaFidelidade } from '../shared/models/total-pon
   styleUrls: ['./pontos-cliente-pontuar.component.scss'],
 })
 export class PontosClientePontuarComponent implements OnInit {
-  private formulario: FormGroup;
+  formulario: FormGroup;
   private usuarioLogado: Usuario;
   estabelecimentos: Array<Estabelecimento> = new Array<Estabelecimento>();
   usuarios: Array<Usuario> = new Array<Usuario>();

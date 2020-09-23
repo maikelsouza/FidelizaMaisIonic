@@ -13,10 +13,12 @@ import { UsuarioService } from './../shared/services/usuario.service';
 })
 export class UsuarioCadastroComponent implements OnInit {
 
-  private formulario : FormGroup;  
-  private tipoUsuario : string;
+  formulario : FormGroup;  
+  private tipoUsuario : string;  
   inscricao: Subscription;
-  private textoConfirmarSenha : String = "NaoSeraEnviadaServidor";
+  private textoConfirmarSenha : String = "NaoSeraEnviadaServidor";  
+  tiposSexo = ['Masculino', 'Feminino']; 
+  
   
 
   constructor(
@@ -56,6 +58,7 @@ export class UsuarioCadastroComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.info("ngOnInit - Usuario Cadastro");    
     this.inscricao = this.route.queryParams.subscribe(
       (queryParams: any) => {
         this.tipoUsuario = queryParams['tipoUsuario'];
@@ -64,7 +67,8 @@ export class UsuarioCadastroComponent implements OnInit {
     this.montarCamposTela();
   }
 
-  ngOnDestroy(){         
+  ngOnDestroy(){      
+    console.info("ngOnDestroy - Usuario Cadastro");       
     this.inscricao.unsubscribe();    
   }
 

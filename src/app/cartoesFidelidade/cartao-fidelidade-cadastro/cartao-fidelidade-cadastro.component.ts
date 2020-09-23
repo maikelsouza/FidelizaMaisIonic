@@ -16,7 +16,7 @@ import { AlertaService } from './../../common/service/alerta.service';
 export class CartaoFidelidadeCadastroComponent implements OnInit, OnDestroy {
 
 
-  private formulario : FormGroup;  
+  formulario : FormGroup;  
   private inscricao: Subscription;
   private CampoRegistroCartaoFidelidades : FormArray;
   private estabelecimentoId : number;

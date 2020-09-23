@@ -14,7 +14,9 @@ import { LoginService } from 'src/app/login/shared/services/login.service';
 })
 export class UsuarioMeuPerfilComponent implements OnInit {
 
-  private formulario : FormGroup;  
+  formulario : FormGroup;  
+  tiposSexo = ['Masculino', 'Feminino']; 
+  
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private alertService: AlertaService,
@@ -53,12 +55,7 @@ export class UsuarioMeuPerfilComponent implements OnInit {
     }
   }
 
-  private montarCamposTela2() {
-    this.formulario = this.formBuilder.group({
-      id : [null], senha: [null], confirmarSenha: [null]
-    });
-  }
-
+ 
   private validarSenha(): Boolean{
     if (this.formulario.get("senha").value == this.formulario.get("confirmarSenha").value){
       return true;
@@ -80,21 +77,5 @@ export class UsuarioMeuPerfilComponent implements OnInit {
   } 
   
   
-  async onSubmit2(): Promise<void>{
-    try { 
-      if (this.validarSenha()){
-        let usuario : Usuario = new Usuario();
-        usuario.senha = this.formulario.get("senha").value;
-        console.log(this.formulario.get("id").value);
-        let resultado = await this.usuarioService.atualizar(this.formulario.get("id").value,usuario);  
-        if (resultado.success){
-          this.alertService.toast('Senha atualizada com sucesso!');
-        }
-      }else{
-        this.alertService.toast('O campo senha e confirmar senha estão diferentes');
-      }
-    } catch (error) {
-        console.log('Erro ao atualizar a senha', error);    
-    }
-  }   
+ 
 }

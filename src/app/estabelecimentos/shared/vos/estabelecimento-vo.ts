@@ -1,6 +1,7 @@
 import { Telefone } from '../models/telefone';
 import { MidiaSocial } from '../models/midia-social';
 import { ProgramaFidelidade } from 'src/app/programasFidelidade/shared/models/programa-fidelidade';
+import { EnderecoEstabelecimento } from '../models/endereco-estabelecimento';
 
 export class EstabelecimentoVO {
     id: number;
@@ -15,5 +16,6 @@ export class EstabelecimentoVO {
     Telefones: Array<Telefone>;
     MidiaSocials: Array<MidiaSocial>;
     programaFidelidadeAlias: Array<ProgramaFidelidade>;
+    EnderecoEstabelecimento : EnderecoEstabelecimento;
 
 }

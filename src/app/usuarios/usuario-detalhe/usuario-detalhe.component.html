@@ -37,8 +37,7 @@
        <ion-item>
         <ion-label  position="floating" for="sexo">Sexo<em class="campo-obrigatorio">*</em></ion-label>
         <ion-select  formControlName="sexo"  okText="OK" cancelText="Cancelar">
-          <ion-select-option [value]="masculino">Masculino</ion-select-option>
-          <ion-select-option [value]="feminino">Feminino</ion-select-option>
+          <ion-select-option [value]="tipoSexo" *ngFor="let tipoSexo of tiposSexo">{{tipoSexo}}</ion-select-option>                         
         </ion-select>
        </ion-item>   
        <ion-item  class="item-danger" *ngIf="sexo.invalid && (sexo.dirty || sexo.touched)" >      

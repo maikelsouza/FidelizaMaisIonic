@@ -11,7 +11,7 @@ import { ProgramaFidelidade } from '../shared/models/programa-fidelidade';
 })
 export class ProgramaFidelidadeListaUsuarioComponent implements OnInit {
 
-  private programasFidelidade: Array<ProgramaFidelidade> = new Array<ProgramaFidelidade>(); 
+   programasFidelidade: Array<ProgramaFidelidade> = new Array<ProgramaFidelidade>(); 
 
   constructor(
     private formBuilder: FormBuilder,

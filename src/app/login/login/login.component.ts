@@ -15,7 +15,7 @@ import { LoginService } from './../shared/services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  private formulario : FormGroup;  
+  formulario : FormGroup;  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   
   public get login() {return this.formulario.get('login')}
-  public get senha() {return this.formulario.get('senha')}
+  public get senha() {return this.formulario.get('senha')}  
   
 
   async onSubmit(): Promise<void>{
