@@ -57,12 +57,12 @@ export class UsuarioService extends ServiceBase<Usuario> {
       usuario.senha = this.gerarSenha();
       usuarioBanco = await this.salvar(usuario);  // Cria ele      
       await this.clienteEstabelecimentoService.salvar(this.pupularClienteEstabelecimento(estabelecimentoId,usuarioBanco.data.id));
-     // this.emailService.enviarEmailNovoClienteEstabelecimento(usuarioBanco.data,usuario.senha,estabelecimentos[0],listaProgramaFidelidade[0]);   
-    }else{ // Caso já exista o usário
+      this.emailService.enviarEmailNovoClienteEstabelecimento(usuarioBanco.data,usuario.senha,estabelecimentos[0],listaProgramaFidelidade[0]);   
+    }else{ // Caso onde já exista o usuário na aplicação
       let clienteEstabelecimento = await this.clienteEstabelecimentoService.buscarPorUsuarioIdEEstabelecimentoId(usuarioBanco.data.id,estabelecimentoId);
       if ( clienteEstabelecimento.data === null){ // Não está associado ao estabelecimento  
         await this.clienteEstabelecimentoService.salvar(this.pupularClienteEstabelecimento(estabelecimentoId,usuarioBanco.data.id));                
-       // this.emailService.enviarEmailAssociandoClienteEstabelecimento(usuarioBanco.data,usuario.senha, estabelecimentos[0],listaProgramaFidelidade[0]);   
+        this.emailService.enviarEmailAssociandoClienteEstabelecimento(usuarioBanco.data,usuario.senha, estabelecimentos[0],listaProgramaFidelidade[0]);   
       }
     }
    return  usuarioBanco;

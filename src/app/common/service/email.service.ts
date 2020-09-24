@@ -48,17 +48,17 @@ export class EmailService extends ServiceBase<EmailModel>{
     let msgHtml = this.msgHtmlNovoClienteEstabelecimento(usuario.nome, usuario.email,
       senha, estabelecimento.nome, programasFidelidade.CampoItemProgramaFidelidades);
     const titulo = 'Fideliza Mais - Cadastro Realizado com Sucesso'
-    let emailModel: EmailModel = this.criarEmailModel('maikel.souza@gmail.com', titulo, undefined, msgHtml);
+    let emailModel: EmailModel = this.criarEmailModel(usuario.email, titulo, undefined, msgHtml);
     this.httpService.post(`${this.url}/enviarEmail`, emailModel);
   }
 
   public async enviarEmailAssociandoClienteEstabelecimento(usuario: Usuario, senha: string, estabelecimento: Estabelecimento,
     programasFidelidade: ProgramaFidelidade) {
 
-    let msgHtml = this.msgHtmlNovoClienteEstabelecimento(usuario.nome, usuario.email,
-      senha, estabelecimento.nome, programasFidelidade.CampoItemProgramaFidelidades);
-    const titulo = 'Fideliza Mais - Cadastro Realizado com Sucesso'
-    let emailModel: EmailModel = this.criarEmailModel('maikel.souza@gmail.com', titulo, undefined, msgHtml);
+    let msgHtml = this.msgHtmlAssociarClienteEstabelecimento(usuario.nome,
+       estabelecimento.nome, programasFidelidade.CampoItemProgramaFidelidades);
+    const titulo = 'Fideliza Mais - Adesão ao Programa de Fidelizada Realizada com Sucesso'
+    let emailModel: EmailModel = this.criarEmailModel(usuario.email, titulo, undefined, msgHtml);
     this.httpService.post(`${this.url}/enviarEmail`, emailModel);
   }
 
@@ -146,7 +146,7 @@ export class EmailService extends ServiceBase<EmailModel>{
        <html>
          <h3>Olá <strong>${nomeCliente},</strong></h3>
          <div>
-             <p>Você foi cadastrado(a) no aplicativo <strong>FIDELIZA MAIS</strong> pelo estabelecimento </strong>com o(a) <strong>${nomeEstabelecimento}.</strong>
+             <p>Você foi cadastrado(a) no aplicativo <strong>Fideliza Mais</strong> pelo estabelecimento <strong>${nomeEstabelecimento}.</strong>
              </p>
              <p>Login: ${email}</p>
              <p>Senha: ${senha}</p>
@@ -174,6 +174,42 @@ export class EmailService extends ServiceBase<EmailModel>{
          textoHtmlFim = `</tbody></table></br></br></br><div><p><strong>FIDELIZA MAIS</strong></p></div></html>`;             
     return textoHtmlInicio.concat(textoHtmlLinhasTabela,textoHtmlFim);
   }
+
+  private msgHtmlAssociarClienteEstabelecimento(nomeCliente: string,
+    nomeEstabelecimento: string, campoItemProgramaFidelidades: Array<CampoItemProgramaFidelidade> ) : string{     
+    let textoHtmlInicio : string = '';
+    let textoHtmlLinhasTabela : string = '';
+    let textoHtmlFim : string = '';
+    textoHtmlInicio = `
+         <html>
+           <h3>Olá <strong>${nomeCliente},</strong></h3>
+           <div>
+               <p>Você aderiu ao programa de fidelidade do estabelecimento <strong>${nomeEstabelecimento}.</strong>
+               </p>                       
+           </div>
+           <div>
+             <p>Veja abaixo os benefícios do(a) <strong>${nomeEstabelecimento}</strong>.</p>
+           </div>
+           <table border="1">
+             <thead>
+               <tr>
+                   <th>Nome</th>
+                   <th>Descrição</th>
+                   <th>Qtd Pontos</th>
+               </tr>
+             </thead>
+           <tbody>`                
+           campoItemProgramaFidelidades.forEach(element => {
+             textoHtmlLinhasTabela+= 
+                     `<tr>
+                         <td>${element.nome}</td>
+                         <td>${element.descricao || ''}</td>
+                       <td style="text-align:center">${element.quantidadePontos}</td>
+                     </tr>`;  
+           });                            
+           textoHtmlFim = `</tbody></table></br></br></br><div><p><strong>FIDELIZA MAIS</strong></p></div></html>`;             
+      return textoHtmlInicio.concat(textoHtmlLinhasTabela,textoHtmlFim);
+    }
 
   private construirRodapeHtml(): string{
 
