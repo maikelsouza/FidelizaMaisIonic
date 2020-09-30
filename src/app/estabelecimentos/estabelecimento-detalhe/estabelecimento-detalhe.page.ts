@@ -41,6 +41,7 @@ export class EstabelecimentoDetalhePage implements OnInit {
     private alertSrv: AlertaService) { }
 
   ngOnInit() {
+    console.info("ngOnInit - Editar Estabelecimento");   
     this.usuarioLogado = AutenticadorService.UsuarioLogado;
     this.montarCamposTela();
     this.inscricao = this.route.params.subscribe(
@@ -80,6 +81,7 @@ export class EstabelecimentoDetalhePage implements OnInit {
   }
 
   ngOnDestroy() {
+    console.info("ngOnDestroy - Editar Estabelecimento");   
     this.inscricao.unsubscribe;
   }
 
