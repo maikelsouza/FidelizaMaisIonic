@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="br.com.fidelizamais" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="br.com.fidelizamais" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Fideliza Mais</name>
     <description>App de Programa de Fidelidade - Fideliza Mais</description>
     <author email="maikel.souza@gmail.com.br" href="http://www.fidelizamais.com.br/">Maikel Souza</author>
