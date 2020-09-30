@@ -30,6 +30,7 @@ ngOnDestroy(){
 
 logoff(){
   UsuarioService.RemoverLogin();
+  UsuarioService.RemoverMantermeConectado();
   this.navController.navigateRoot('/');      
 }
 

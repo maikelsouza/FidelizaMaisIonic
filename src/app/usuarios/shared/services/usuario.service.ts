@@ -107,7 +107,7 @@ export class UsuarioService extends ServiceBase<Usuario> {
   static RegistrarLogin(result: any) {
     localStorage.setItem(ConfigHelper.storageKeys.token, result.token);
     localStorage.setItem(ConfigHelper.storageKeys.usuario, JSON.stringify(result.usuario));
-  }
+  } 
 
   static get GetTokenAccess(): string {
     return localStorage.getItem(ConfigHelper.storageKeys.token);
@@ -122,9 +122,32 @@ export class UsuarioService extends ServiceBase<Usuario> {
     localStorage.removeItem(ConfigHelper.storageKeys.usuario);
   }
 
+  static RegistrarMantermeConectado(email: string, senha: string) {
+    localStorage.setItem(ConfigHelper.storageKeys.usuarioEmail, email);
+    localStorage.setItem(ConfigHelper.storageKeys.usuarioSenha, senha);
+  }
+
+  static  RemoverMantermeConectado()  {
+    localStorage.removeItem(ConfigHelper.storageKeys.usuarioEmail);
+    localStorage.removeItem(ConfigHelper.storageKeys.usuarioSenha);
+  }
+
+  static get IsMantermeConectado(): boolean {
+    return (localStorage.getItem(ConfigHelper.storageKeys.usuarioEmail) != undefined
+    && localStorage.getItem(ConfigHelper.storageKeys.usuarioSenha) != undefined);    
+  }
+
+  static get getManterMeConectado(): any {
+    return {
+      email: localStorage.getItem(ConfigHelper.storageKeys.usuarioEmail),
+      senha: localStorage.getItem(ConfigHelper.storageKeys.usuarioSenha)
+    }
+  }
+
+
   async gerarNovaSenha (id :number, emailModel: EmailModel){    
     return this.httpService.put(`${this.url}/gerarNovaSenha/${id}`,emailModel);      
-  }
+  }  
 
   async notificarUsuarioSalvo(){    
     this.emitirUsuarioCriado.emit();

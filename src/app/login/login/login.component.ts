@@ -34,9 +34,10 @@ export class LoginComponent implements OnInit {
   }
 
   private montarCamposTela() {
+    const { email, senha } = UsuarioService.getManterMeConectado
     this.formulario = this.formBuilder.group({
-      login: [null, [Validators.required, Validators.email]], 
-      senha: [null, Validators.required]
+      login: [email, [Validators.required, Validators.email]], 
+      senha: [senha, Validators.required], mantermeConectado: [UsuarioService.IsMantermeConectado]
     });
   }
 
@@ -46,12 +47,16 @@ export class LoginComponent implements OnInit {
   
 
   async onSubmit(): Promise<void>{
-    try {       
+    try {             
         let login = this.formulario.get("login").value;
         let senha = this.formulario.get("senha").value;
+        let mantermeConectado = this.formulario.get("mantermeConectado").value;
         let resultado = await this.loginService.autenticar(login,senha);          
         if (resultado.success){
           UsuarioService.RegistrarLogin(resultado.data);
+          if (mantermeConectado){
+            UsuarioService.RegistrarMantermeConectado(login,senha)
+          }
           const clientes = 'CLIENTES';    
           if (resultado.data.usuario[0].GrupoUsuario.nome === clientes){            
             this.route.navigate(['/estabelecimento/lista'], { queryParams: { tipoUsuario: clientes } });          
@@ -62,7 +67,15 @@ export class LoginComponent implements OnInit {
     } catch (error) {
         console.log('Erro ao logar um Usuário', error);    
     }
-  }   
+  }  
+
+
+  onClickCheckBox(event: any){
+    const checked :boolean = event.target.checked;
+    if (checked){
+      UsuarioService.RemoverMantermeConectado();
+    }
+  } 
 
 
 }

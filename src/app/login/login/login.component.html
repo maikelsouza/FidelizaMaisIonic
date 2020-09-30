@@ -12,7 +12,7 @@
     <ion-list no-lines>            
       <ion-item>        
           <ion-label position="floating">Login <em class="campo-obrigatorio">*</em></ion-label>            
-          <ion-input clearInput formControlName="login" type="email" placeholder="e-mail"></ion-input>
+          <ion-input clearInput formControlName="login" type="email" placeholder="nome@email.com"></ion-input>
        </ion-item>
        <ion-item  *ngIf="login.invalid && (login.dirty || login.touched)" >      
           <ion-label color="danger" *ngIf="login.errors.required">Campo obrigatório.</ion-label>           
@@ -20,12 +20,16 @@
       </ion-item>       
        <ion-item>
           <ion-label position="floating">Senha <em class="campo-obrigatorio">*</em></ion-label>         
-          <ion-input clearInput formControlName="senha" type="password"></ion-input>
+          <ion-input clearInput formControlName="senha" type="password"  placeholder="senha"></ion-input>
        </ion-item>
        <ion-item class="item-danger" *ngIf="senha.invalid && (senha.dirty || senha.touched)" >
         <ion-label color="danger" *ngIf="senha.errors.required">Campo obrigatório</ion-label>           
-      </ion-item>        
-    </ion-list>    
+      </ion-item> 
+      <ion-item >
+          <ion-checkbox formControlName="mantermeConectado" (click)="onClickCheckBox($event)"></ion-checkbox> &nbsp;&nbsp;
+          <ion-label >Manter-me conectado</ion-label>         
+      </ion-item>
+    </ion-list>      
     <ion-button  color="secondary" type="submit" expand="block" [disabled]="!formulario.valid">
       <ion-label>Acessar</ion-label>
     </ion-button>        

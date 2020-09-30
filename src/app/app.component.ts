@@ -45,6 +45,7 @@ export class AppComponent {
 
   logoff(){
     UsuarioService.RemoverLogin();
+    UsuarioService.RemoverMantermeConectado();
     this.navController.navigateRoot('/');      
   }
 
@@ -62,7 +63,11 @@ export class AppComponent {
       if (this.router.url === '/login'){
         navigator['app'].exitApp();
       }      
-    });   
+    });  
+    
+    if (UsuarioService.IsMantermeConectado){
+      this.realizarLogin();
+    }
     
   }
 
@@ -70,6 +75,20 @@ export class AppComponent {
     this.backButtonSubscription.unsubscribe();
     this.mostrarMenuSubscription.unsubscribe();
     this.usuarioLogadoSubscription.unsubscribe();
+  }
+
+  private async realizarLogin(){
+    const { email, senha } = UsuarioService.getManterMeConectado
+    let resultado = await this.loginService.autenticar(email,senha);     
+    if (resultado.success){
+      UsuarioService.RegistrarLogin(resultado.data);      
+      const clientes = 'CLIENTES';    
+      if (resultado.data.usuario[0].GrupoUsuario.nome === clientes){                    
+        this.navController.navigateRoot(['/estabelecimento/lista'], { queryParams: { tipoUsuario: clientes } });         
+      }else{         
+        this.navController.navigateForward('/principal'); 
+      }
+    }       
   }
 
 
