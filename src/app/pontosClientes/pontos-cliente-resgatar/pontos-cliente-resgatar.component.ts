@@ -118,7 +118,7 @@ export class PontosClienteResgatarComponent implements OnInit {
         this.usuarios = <Array<Usuario>>usuariosEstabelecimentoResultado.data.usuarios;
         this.todosUsuarios = this.usuarios;
       }else{
-        this.alertSrv.alert("Cliente não encontrado ",`Não exite cliente associados para pontuar!`);
+        this.alertSrv.alert("Cliente não encontrado ",`Não exite cliente para resgate de pontos!`);
       }
     }
     catch (error) {
