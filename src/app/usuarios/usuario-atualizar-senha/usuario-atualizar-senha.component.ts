@@ -34,6 +34,7 @@ export class UsuarioAtualizarSenhaComponent implements OnInit {
   public get confirmarSenha() {return this.formulario.get('confirmarSenha')}
 
   ngOnInit() {
+    console.info("ngOnInit - usuario-atualizar-senha");   
     this.montarCamposTela();
   }
 
@@ -60,6 +61,10 @@ export class UsuarioAtualizarSenhaComponent implements OnInit {
     } catch (error) {
         console.log('Erro ao atualizar a senha', error);    
     }
-  }   
+  } 
+  
+  ngOnDestroy(){         
+    console.info("ngOnDestroy - usuario-atualizar-senha");
+  }
 
 }

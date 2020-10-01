@@ -24,6 +24,7 @@ export class UsuarioMeuPerfilComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    console.info("ngOnInit - usuario-meu-perfil");
     this.montarCamposTela();
     this.carregarDadosUsuario();
   }
@@ -55,14 +56,12 @@ export class UsuarioMeuPerfilComponent implements OnInit {
     }
   }
 
- 
-  private validarSenha(): Boolean{
-    if (this.formulario.get("senha").value == this.formulario.get("confirmarSenha").value){
-      return true;
-    }else{
-      return false;
-    }
+  
+  ngOnDestroy(): void {    
+    console.info("ngOnDestroy - usuario-meu-perfil");
   }
+ 
+
 
   async onSubmit(): Promise<void>{
     try {        
