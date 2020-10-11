@@ -18,6 +18,7 @@ export class UsuarioListaComponent implements OnInit{
  
 
   ngOnInit() {    
+    console.info("ngOnInit - usuario-lista");
     this.inscricaoCarregarListaUsuarios = this.usuarioService.emitirUsuarioCriado.subscribe(
         () => {
           this.carregarListaUsuarios();
@@ -28,6 +29,7 @@ export class UsuarioListaComponent implements OnInit{
   }  
 
   ngOnDestroy(): void {    
+    console.info("ngOnDestroy - usuario-lista");
     this.inscricaoCarregarListaUsuarios.unsubscribe();
   }
 
