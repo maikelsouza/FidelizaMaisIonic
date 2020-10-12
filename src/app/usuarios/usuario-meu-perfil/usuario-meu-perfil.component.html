@@ -23,7 +23,11 @@
         <ion-item  class="item-danger" *ngIf="email.invalid && (email.dirty || email.touched)" >      
            <ion-label color="danger" *ngIf="email.errors.required">Campo obrigatório.</ion-label>           
            <ion-label color="danger" *ngIf="email.errors.email">Formato de e-mail inválido.</ion-label>
-       </ion-item>  
+       </ion-item>
+       <ion-item>
+         <ion-label position="floating">Telefone</ion-label>
+         <ion-input formControlName="telefone" type="tel"></ion-input>
+       </ion-item>    
         <ion-item>
           <ion-label position="floating" for="sexo">Sexo <em class="campo-obrigatorio">*</em></ion-label>
           <ion-select  formControlName="sexo"  okText="OK" cancelText="Cancelar">

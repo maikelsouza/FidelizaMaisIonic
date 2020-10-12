@@ -33,6 +33,7 @@ export class UsuarioMeuPerfilComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       id : [null], nome: [null, Validators.required], 
       cpf: [null], email: [null,[Validators.required, Validators.email]],
+      telefone: [null],
       sexo: [null,Validators.required],
       dataNascimento: [null]
     });
@@ -48,8 +49,8 @@ export class UsuarioMeuPerfilComponent implements OnInit {
         let usuarioLogado = resultado.data;
         this.formulario = this.formBuilder.group({
           id : [usuarioLogado.id], nome: [usuarioLogado.nome, Validators.required], cpf: [usuarioLogado.cpf], 
-          email: [usuarioLogado.email,[Validators.required, Validators.email]],
-           sexo: [usuarioLogado.sexo, Validators.required], dataNascimento: [usuarioLogado.dataNascimento]
+          email: [usuarioLogado.email,[Validators.required, Validators.email]], telefone: [usuarioLogado.telefone],
+          sexo: [usuarioLogado.sexo, Validators.required], dataNascimento: [usuarioLogado.dataNascimento]
         });
     } catch (error) {
       console.log('Erro ao carregar os dados do usuário logado', error);

@@ -40,8 +40,8 @@ export class UsuarioCadastroEstabelecimentoPage implements OnInit {
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
       id : [null], 
-      nome: [null, Validators.required], ativo: [true], 
-      cpf: [null], email: [null, [Validators.required, Validators.email]],
+      nome: [null, Validators.required], ativo: [true], telefone: [null],
+      cpf: [null], email: [null, Validators.email],
       sexo: [null, Validators.required],
       dataNascimento: [null], 
       grupoUsuarioId: [3]
@@ -49,15 +49,28 @@ export class UsuarioCadastroEstabelecimentoPage implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    try {
-      const resultado = await this.usuarioService.salvarNovoClienteEstabelecimento(this.formulario.value);
-      if (resultado.success) {
-        this.alertService.toast('Cliente cadastrado com sucesso!');
-        this.navController.navigateForward(['/pontosClientePontuar']);
-      }      
+    try {      
+      if (!this.validarTelefoneOuEmailObrigatorio()){
+        this.alertService.alert('Campo Obrigatório', 'O campo telefone ou e-mail é obrigatório');
+      }else{
+        const resultado = await this.usuarioService.salvarNovoClienteEstabelecimento(this.formulario.value);
+        if (resultado.success) {
+          this.alertService.toast('Cliente cadastrado com sucesso!');
+          this.navController.navigateForward(['/pontosClientePontuar']);
+        }      
+      }  
     } catch (error) {
       console.log('Erro ao cadastrar um cliente', error);
     }
+  }
+
+  private validarTelefoneOuEmailObrigatorio() : boolean{
+    const telefone = this.formulario.get('telefone').value;
+    const email = this.formulario.get('email').value;
+    if ((telefone == null || telefone.trim() == '') && (email == null || email.trim() == '')) {
+      return false
+    }
+    return true;
   }
 
 }

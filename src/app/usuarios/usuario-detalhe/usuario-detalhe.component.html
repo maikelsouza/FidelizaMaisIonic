@@ -17,12 +17,15 @@
           <ion-label color="danger" *ngIf="nome.errors.required">Campo obrigatório.</ion-label>                   
        </ion-item>  
        <ion-item>
-          <ion-label position="floating">E-mail  <em class="campo-obrigatorio">*</em></ion-label>         
+          <ion-label position="floating">E-mail</ion-label>         
           <ion-input formControlName="email" type="email" ></ion-input>
        </ion-item>
-       <ion-item  class="item-danger" *ngIf="email.invalid && (email.dirty || email.touched)" >      
-        <ion-label color="danger" *ngIf="email.errors.required">Campo obrigatório.</ion-label>           
+       <ion-item  class="item-danger" *ngIf="email.invalid && (email.dirty || email.touched)" >              
         <ion-label color="danger" *ngIf="email.errors.email">Formato de e-mail inválido.</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Telefone</ion-label>
+        <ion-input formControlName="telefone" type="tel"></ion-input>
       </ion-item>  
        <ion-item>
         <ion-label position="floating">Ativo  <em class="campo-obrigatorio">*</em></ion-label>  

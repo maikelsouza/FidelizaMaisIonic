@@ -7,5 +7,6 @@ export class Usuario {
     senha: string;
     cpf: string;
     ativo: boolean;
+    telefone: string;
     grupoUsuarioId: number;
 }

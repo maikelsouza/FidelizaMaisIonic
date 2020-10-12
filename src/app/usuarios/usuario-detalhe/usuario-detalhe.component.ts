@@ -48,7 +48,8 @@ export class UsuarioDetalheComponent implements OnInit {
           id: [this.usuario.id],
           nome: [this.usuario.nome,Validators.required],
           cpf: [this.usuario.cpf],
-          email: [this.usuario.email,[Validators.required, Validators.email]],       
+          email: [this.usuario.email, Validators.email],       
+          telefone: [this.usuario.telefone],       
           ativo: [this.usuario.ativo,Validators.required],  
           sexo: [this.usuario.sexo,Validators.required],  
           dataNascimento: [this.usuario.dataNascimento],  
@@ -65,12 +66,16 @@ export class UsuarioDetalheComponent implements OnInit {
 
   async  onSubmit():  Promise<void> {     
     try {    
-       let resultado = await this.usuarioService.atualizar(this.formulario.get("id").value,this.formulario.value);
-       if (resultado.success){
-          await this.usuarioService.notificarUsuarioSalvo();                
-          this.alertService.toast('Usuário atualizado com sucesso!');        
-          this.router.navigate(['/usuarios']);         
-       }
+      if (!this.validarTelefoneOuEmailObrigatorio()){
+        this.alertService.alert('Campo Obrigatório', 'O campo telefone ou e-mail é obrigatório');
+      }else{
+        let resultado = await this.usuarioService.atualizar(this.formulario.get("id").value,this.formulario.value);
+        if (resultado.success){
+           await this.usuarioService.notificarUsuarioSalvo();                
+           this.alertService.toast('Usuário atualizado com sucesso!');        
+           this.router.navigate(['/usuarios']);         
+        }
+      }  
     } catch (error) {
       console.log('Erro ao atualizar o estabelecimento', error);
     }
@@ -80,10 +85,19 @@ export class UsuarioDetalheComponent implements OnInit {
     this.inscricao.unsubscribe;
   }
 
+  private validarTelefoneOuEmailObrigatorio() : boolean{
+    const telefone = this.formulario.get('telefone').value;
+    const email = this.formulario.get('email').value;
+    if ((telefone == null || telefone.trim() == '') && (email == null || email.trim() == '')) {
+      return false
+    }
+    return true;
+  }
+
 
   private montarCamposTela() {
     this.formulario = this.formBuilder.group({
-        id : [null], nome: [null], ativo: [null], cpf: [null],
+        id : [null], nome: [null], ativo: [null], cpf: [null], telefone: [null], 
          email: [null],sexo: [null],dataNascimento: [null]
     });
   }

@@ -35,7 +35,7 @@ export class UsuarioCadastroComponent implements OnInit {
       id : [null], 
       nome: [null, Validators.required], ativo: [true], 
       cpf: [null], email: [null, [Validators.required, Validators.email]],
-      sexo: [null, Validators.required],
+      sexo: [null, Validators.required], telefone: [null], 
       dataNascimento: [null], 
       senha: [null,Validators.required], 
       confirmarSenha: [null, Validators.required], 
