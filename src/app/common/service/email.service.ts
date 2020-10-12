@@ -27,7 +27,7 @@ export class EmailService extends ServiceBase<EmailModel>{
     let msgHtml = this.msgHtmlPontuarCliente(usuario.nome,estabelecimento.nome, 
       pontosGanhos,totalPontos, programasFidelidade.CampoItemProgramaFidelidades);
     const titulo = 'Fideliza Mais - Pontos Recebidos'
-    let emailModel : EmailModel = this.criarEmailModel('maikel.souza@gmail.com',titulo,undefined ,msgHtml);    
+    let emailModel : EmailModel = this.criarEmailModel(usuario.email,titulo,undefined ,msgHtml);    
     this.httpService.post(`${this.url}/enviarEmail`,emailModel);  
     
   }
@@ -38,7 +38,7 @@ export class EmailService extends ServiceBase<EmailModel>{
     let msgHtml = this.msgHtmlResgatarPontosCliente(usuario.nome,estabelecimento.nome, 
       pontosGanhos,totalPontos, programasFidelidade.CampoItemProgramaFidelidades);
     const titulo = 'Fideliza Mais - Pontos Resgatados'
-    let emailModel : EmailModel = this.criarEmailModel('maikel.souza@gmail.com',titulo,undefined ,msgHtml);    
+    let emailModel : EmailModel = this.criarEmailModel(usuario.email,titulo,undefined ,msgHtml);    
     this.httpService.post(`${this.url}/enviarEmail`,emailModel);
   }
 
