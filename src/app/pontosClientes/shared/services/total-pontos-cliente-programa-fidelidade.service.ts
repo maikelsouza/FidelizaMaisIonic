@@ -27,10 +27,9 @@ export class TotalPontosClienteProgramaFidelidadeService extends ServiceBase<Tot
     programasFidelidade: ProgramaFidelidade, pontosGanhos : number): Promise<HttpResultModel> {                  
     let httpResultModel: Promise<HttpResultModel>;  
     httpResultModel = this.httpService.post(`${this.url}`,totalPontosClienteProgramaFidelidade);  
-    
+
     // No caso do método salvar, onde ainda não existe pontuação para o cliente, os pontos ganhos são iguais ao total de pontos
-    this.emailService.enviarEmailPontuarCliente(usuario,estabelecimento,
-      programasFidelidade,pontosGanhos,pontosGanhos);  
+    this.notificarUsuario(true,usuario,estabelecimento,programasFidelidade,pontosGanhos,pontosGanhos)
     return httpResultModel;  
   } 
 
@@ -43,8 +42,10 @@ export class TotalPontosClienteProgramaFidelidadeService extends ServiceBase<Tot
      programasFidelidade: ProgramaFidelidade, pontosGanhos : number): Promise<HttpResultModel> {                  
       let httpResultModel: Promise<HttpResultModel>;  
       httpResultModel = this.httpService.put(`${this.url}/${id}`,totalPontosClienteProgramaFidelidade);
-      this.emailService.enviarEmailPontuarCliente(usuario,estabelecimento,
-        programasFidelidade,pontosGanhos,totalPontosClienteProgramaFidelidade.totalPontos);  
+
+      this.notificarUsuario(true,usuario,estabelecimento,programasFidelidade,pontosGanhos,
+        totalPontosClienteProgramaFidelidade.totalPontos);
+
       return httpResultModel;  
   }
   
@@ -53,8 +54,9 @@ export class TotalPontosClienteProgramaFidelidadeService extends ServiceBase<Tot
     programasFidelidade: ProgramaFidelidade, pontosGanhos : number, totalPontos : number): Promise<HttpResultModel> {                  
      let httpResultModel: Promise<HttpResultModel>;  
      httpResultModel = this.httpService.put(`${this.url}/${id}`,totalPontosClienteProgramaFidelidade);
-     this.emailService.enviarEmailResgatarPontosCliente(usuario,estabelecimento,
-       programasFidelidade,pontosGanhos,totalPontos);  
+     
+     this.notificarUsuario(false,usuario,estabelecimento,programasFidelidade,pontosGanhos,totalPontos)
+
      return httpResultModel;  
  }
 
@@ -65,6 +67,25 @@ export class TotalPontosClienteProgramaFidelidadeService extends ServiceBase<Tot
   async buscarPorIdUsuarioEAtivo(usuarioId: number, ativo: boolean): Promise<HttpResultModel> {                  
     return this.httpService.get(`${this.url}/buscarPorIdUsuarioEAtivo/${usuarioId}/${ativo}`);                                                 
   } 
+
+  private notificarUsuario(pontuarCliente : boolean,usuario : Usuario, estabelecimento : Estabelecimento, 
+     programasFidelidade: ProgramaFidelidade, pontosGanhos : number, totalPontos: number){
+    if(pontuarCliente){
+      if (usuario.email != null && usuario.email.trim() != ''){        
+        this.emailService.enviarEmailPontuarCliente(usuario,estabelecimento,
+          programasFidelidade,pontosGanhos,totalPontos);  
+      }else{
+        // chamada para enviar via sms
+      }
+    }else{
+      if (usuario.email != null && usuario.email.trim() != ''){
+        this.emailService.enviarEmailResgatarPontosCliente(usuario,estabelecimento,
+          programasFidelidade,pontosGanhos,totalPontos);  
+      }else{
+        // chamada para enviar via sms
+      }
+    }
+  }
 
   
 

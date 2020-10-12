@@ -43,8 +43,7 @@ export class UsuarioService extends ServiceBase<Usuario> {
   }
 
   
-  async salvarNovoClienteEstabelecimento(usuario: Usuario): Promise<HttpResultModel> {    
-    
+  async salvarNovoClienteEstabelecimento(usuario: Usuario): Promise<HttpResultModel> {  
     let estabelecimentos: Array<Estabelecimento> = new Array<Estabelecimento>(); 
     let listaProgramaFidelidade: Array<ProgramaFidelidade> = new Array<ProgramaFidelidade>(); 
     let usuarioBanco =  await this.buscarPorEmail(usuario.email);
@@ -57,15 +56,34 @@ export class UsuarioService extends ServiceBase<Usuario> {
       usuario.senha = this.gerarSenha();
       usuarioBanco = await this.salvar(usuario);  // Cria ele      
       await this.clienteEstabelecimentoService.salvar(this.pupularClienteEstabelecimento(estabelecimentoId,usuarioBanco.data.id));
-      this.emailService.enviarEmailNovoClienteEstabelecimento(usuarioBanco.data,usuario.senha,estabelecimentos[0],listaProgramaFidelidade[0]);   
+      this.notificarUsuario(true,usuarioBanco,usuario,estabelecimentos,listaProgramaFidelidade);
+   // this.emailService.enviarEmailNovoClienteEstabelecimento(usuarioBanco.data,usuario.senha,estabelecimentos[0],listaProgramaFidelidade[0]);   
     }else{ // Caso onde já exista o usuário na aplicação
       let clienteEstabelecimento = await this.clienteEstabelecimentoService.buscarPorUsuarioIdEEstabelecimentoId(usuarioBanco.data.id,estabelecimentoId);
       if ( clienteEstabelecimento.data === null){ // Não está associado ao estabelecimento  
         await this.clienteEstabelecimentoService.salvar(this.pupularClienteEstabelecimento(estabelecimentoId,usuarioBanco.data.id));                
-        this.emailService.enviarEmailAssociandoClienteEstabelecimento(usuarioBanco.data,usuario.senha, estabelecimentos[0],listaProgramaFidelidade[0]);   
+        this.notificarUsuario(false,usuarioBanco,usuario,estabelecimentos,listaProgramaFidelidade);
+        //this.emailService.enviarEmailAssociandoClienteEstabelecimento(usuarioBanco.data,usuario.senha, estabelecimentos[0],listaProgramaFidelidade[0]);   
       }
     }
    return  usuarioBanco;
+  }
+
+  private notificarUsuario(novoUsuario : boolean, usuarioBanco : HttpResultModel, 
+    usuario : Usuario,estabelecimentos: Array<Estabelecimento>, listaProgramaFidelidade: Array<ProgramaFidelidade>  ){
+    if(novoUsuario){
+      if (usuario.email != null && usuario.email.trim() != ''){
+        this.emailService.enviarEmailNovoClienteEstabelecimento(usuarioBanco.data,usuario.senha,estabelecimentos[0],listaProgramaFidelidade[0]);   
+      }else{
+        // chamada para enviar via sms
+      }
+    }else{
+      if (usuario.email != null && usuario.email.trim() != ''){
+        this.emailService.enviarEmailAssociandoClienteEstabelecimento(usuarioBanco.data,usuario.senha, estabelecimentos[0],listaProgramaFidelidade[0]);   
+      }else{
+        // chamada para enviar via sms
+      }
+    }
   }
   
 
