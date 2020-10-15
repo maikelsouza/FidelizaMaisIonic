@@ -1,6 +1,6 @@
 {
   "name": "fidelizamais",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Maikel Joel de Souza",
   "homepage": "https://appfidalizamais.com.br",
   "scripts": {
@@ -27,7 +27,6 @@
     "@ionic/angular": "^4.11.10",
     "@ionic/pro": "2.0.4",
     "br-mask": "0.0.10",
-    "cordova-android": "^9.0.0",
     "cordova-ios": "5.0.1",
     "cordova-plugin-network-information": "2.0.1",
     "core-js": "^2.6.11",
@@ -52,6 +51,7 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^12.0.12",
     "codelyzer": "~4.5.0",
+    "cordova-android": "^9.0.0",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.1.3",
