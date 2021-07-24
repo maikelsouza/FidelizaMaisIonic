@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
-
-import { Usuario } from '../usuarios/shared/models/usuario';
-import { AutenticadorService } from '../common/service/autenticador.service';
 import { NavController } from '@ionic/angular';
-import { UsuarioService } from '../usuarios/shared/services/usuario.service';
+
+import { Usuario } from '../../usuarios/shared/models/usuario';
+import { AutenticadorService } from '../../common/service/autenticador.service';
+import { UsuarioService } from '../../usuarios/shared/services/usuario.service';
 
 @Component({
   selector: 'app-principal',

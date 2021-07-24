@@ -14,32 +14,13 @@
    <div class="ion-text-center">
       <h1 class="fideliza">Fideliza +</h1>
       <ion-label>Olá! {{ usuarioLogado[0].nome }}</ion-label>
-   </div>
-   <!-- <div class="ion-text-center">
-      <ion-label>seja bem-vindo ao <strong>Fideliza Mais</strong></ion-label>
-   </div>   -->
+   </div>  
    <br><br>
  </div>
  
   <ion-grid class="grid">    
-     <div class="content">
-         <ion-row style="padding-top: 30px;" >
-            <ion-col [routerLink]="'/estabelecimento/lista'" [queryParams]="{tipoUsuario:usuarioLogado[0].GrupoUsuario.nome}">
-            <div style="text-align: center">      
-               <h3>Estabelecimentos</h3>
-               <br>
-            </div>
-            </ion-col>
-         </ion-row> 
-         <ion-row >
-            <ion-col [routerLink]="'/usuarios/meuPerfil'">
-            <div style="text-align: center">      
-               <h3>Meu perfil</h3>
-               <br>
-            </div>
-            </ion-col>
-         </ion-row>   
-         <ion-row  *ngIf="usuarioLogado[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'" >
+     <div class="content">         
+         <ion-row style="padding-top: 30px;"  *ngIf="usuarioLogado[0].GrupoUsuario.nome === 'ESTABELECIMENTOS'" >
             <ion-col [routerLink]="'/pontosClientePontuar'">
             <div style="text-align: center">                
                <h3>
@@ -72,6 +53,22 @@
             </div>
             </ion-col>
          </ion-row>
+         <ion-row>
+            <ion-col [routerLink]="'/estabelecimento/lista'" [queryParams]="{tipoUsuario:usuarioLogado[0].GrupoUsuario.nome}">
+            <div style="text-align: center">      
+               <h3>Estabelecimentos</h3>
+               <br>
+            </div>
+            </ion-col>
+         </ion-row>          
+         <ion-row>
+            <ion-col [routerLink]="'/usuarios/meuPerfil'">
+            <div style="text-align: center">      
+               <h3>Meu perfil</h3>
+               <br>
+            </div>
+            </ion-col>
+         </ion-row>   
          <ion-row>
             <ion-col  (click)="logoff()" class="logout">
             <div style="text-align: center">      

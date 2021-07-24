@@ -79,7 +79,7 @@ export class PontosClientePontuarComponent implements OnInit {
       }
     }
     catch (error) {
-      console.log('Erro ao carregar os estabelecimentos', error);
+      console.log('Erro ao carregar os clientes', error);
     }
   }
 

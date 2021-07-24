@@ -1,9 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>meus-clientes-lista</ion-title>
+  <ion-toolbar class="toolbar-background">
+    <ion-buttons slot="start">
+      <ion-menu-button  color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">Meus Clientes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let cliente of clientes"  [routerLink]="['/clientes',cliente.id]" >
+      <ion-label>
+        <h2> {{ cliente.nome }} </h2>
+        <p>{{ cliente.email }}</p>
+        <p>{{ cliente.telefone }}</p>
+     </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

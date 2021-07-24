@@ -23,6 +23,7 @@ import { UsuarioMeuPerfilComponent } from './usuarios/usuario-meu-perfil/usuario
 import { UsuarioDetalheComponent } from './usuarios/usuario-detalhe/usuario-detalhe.component';
 import { ProgramaFidelidadeVisualizarPage } from './programasFidelidade/programa-fidelidade-visualizar/programa-fidelidade-visualizar.page';
 import { UsuarioCadastroEstabelecimentoPage } from './usuarios/usuario-cadastro-estabelecimento/usuario-cadastro-estabelecimento.page';
+import { MeusClientesListaPage } from './pages/meus-clientes/meus-clientes-lista/meus-clientes-lista.page';
 
 const routes: Routes = [
 
@@ -54,9 +55,11 @@ const routes: Routes = [
   { path: 'programaFidelidade/visualizar/:id', component: ProgramaFidelidadeVisualizarPage },  
   // Pontos Clientes    
   { path: 'pontosClientePontuar', component: PontosClientePontuarComponent }, 
-  { path: 'pontosClienteResgatar', component: PontosClienteResgatarComponent },      
+  { path: 'pontosClienteResgatar', component: PontosClienteResgatarComponent },        
+  // Meus Clientes    
+  { path: 'meusClientes/lista', component: MeusClientesListaPage },        
   
-  { path: 'principal', loadChildren: './principal/principal.module#PrincipalPageModule'},  
+  { path: 'principal', loadChildren: './pages/principal/principal.module#PrincipalPageModule'},  
   { path: '', redirectTo: 'login', pathMatch: 'full'}  
 
 ];

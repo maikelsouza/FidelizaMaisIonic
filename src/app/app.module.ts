@@ -45,6 +45,7 @@ import { UsuarioMeuPerfilComponent } from './usuarios/usuario-meu-perfil/usuario
 import { UsuarioAtualizarSenhaComponent } from './usuarios/usuario-atualizar-senha/usuario-atualizar-senha.component';
 import { ProgramaFidelidadeVisualizarPage } from './programasFidelidade/programa-fidelidade-visualizar/programa-fidelidade-visualizar.page';
 import { UsuarioCadastroEstabelecimentoPage } from './usuarios/usuario-cadastro-estabelecimento/usuario-cadastro-estabelecimento.page';
+import { MeusClientesListaPage } from './pages/meus-clientes/meus-clientes-lista/meus-clientes-lista.page';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { UsuarioCadastroEstabelecimentoPage } from './usuarios/usuario-cadastro-
     UsuarioDetalheComponent,
     UsuarioMeuPerfilComponent,
     UsuarioAtualizarSenhaComponent,
-    UsuarioCadastroEstabelecimentoPage    
+    UsuarioCadastroEstabelecimentoPage,
+    MeusClientesListaPage    
 
   ],
   entryComponents: [],
